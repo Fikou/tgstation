@@ -16,7 +16,7 @@
 /datum/techweb_node/mmi
 	id = "mmi"
 	starting_node = TRUE
-	display_name = "Man Machine Interface"
+	display_name = "Man-Machine Interface"
 	description = "A slightly Frankensteinian device that allows human brains to interface natively with software APIs."
 	design_ids = list("mmi")
 
@@ -302,6 +302,15 @@
 	prereq_ids = list("neural_programming")
 	design_ids = list("mmi_posi")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	export_price = 5000
+
+/datum/techweb_node/mami
+	id = "mami"
+	display_name = "Machine-Man Interface"
+	description = "A synthetic brain interface intended to give silicon-based minds control of organic tissue."
+	prereq_ids = list("posibrain", "cyber_organs_upgraded")
+	design_ids = list("mami")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 	export_price = 5000
 
 /datum/techweb_node/cyborg_upg_util
