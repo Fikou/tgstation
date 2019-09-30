@@ -24,6 +24,17 @@
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
 
+/datum/design/mami
+	name = "Machine-Man Interface"
+	desc = "A complex socket-system of electrodes and neurons intended to give silicon-based minds control of organic tissue."
+	id = "mami"
+	build_type = PROTOLATHE | MECHFAB
+	materials = list(/datum/material/iron = 3500, /datum/material/glass = 1500, /datum/material/gold = 1000, /datum/material/silver = 1000, /datum/material/plasma = 1000)
+	construction_time = 75
+	build_path = /obj/item/organ/brain/mami
+	category = list("Misc", "Medical Designs")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
+
 /datum/design/bluespacebeaker
 	name = "Bluespace Beaker"
 	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
