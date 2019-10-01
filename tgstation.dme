@@ -2058,6 +2058,7 @@
 #include "code\modules\mob\living\brain\death.dm"
 #include "code\modules\mob\living\brain\emote.dm"
 #include "code\modules\mob\living\brain\life.dm"
+#include "code\modules\mob\living\brain\mami.dm"
 #include "code\modules\mob\living\brain\MMI.dm"
 #include "code\modules\mob\living\brain\posibrain.dm"
 #include "code\modules\mob\living\brain\say.dm"

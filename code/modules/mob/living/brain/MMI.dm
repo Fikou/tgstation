@@ -37,7 +37,7 @@
 
 /obj/item/mmi/attackby(obj/item/O, mob/user, params)
 	user.changeNext_move(CLICK_CD_MELEE)
-	if(istype(O, /obj/item/organ/brain)) //Time to stick a brain in it --NEO
+	if(istype(O, /obj/item/organ/brain) && !istype(O, /obj/item/organ/brain/mami)) //Time to stick a brain in it --NEO
 		var/obj/item/organ/brain/newbrain = O
 		if(brain)
 			to_chat(user, "<span class='warning'>There's already a brain in the MMI!</span>")
