@@ -47,7 +47,11 @@
 
 		name = "[initial(name)]: [brainmob.real_name]"
 		update_icon()
-
+		
+		to_chat(brainmob, <b>You are a positronic brain in control of an organ, brought into existence aboard Space Station 13.\n\
+		As a synthetic intelligence, you answer to all crewmembers and the AI.\n\
+		Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>)
+		
 		log_game("[key_name(user)] has put the posibrain of [key_name(brainmob)] into a MaMI at [AREACOORD(src)]")
 
 	else if(brainmob)
@@ -55,8 +59,11 @@
 	else
 		return ..()
 
-/obj/item/organ/brain/mami/prepare_eat()
-	return
+/obj/item/organ/brain/mami/transfer_identity(mob/living/L)
+	..()
+	brainmob.name = initial(brainmob.name)
+	brainmob.real_name = initial(brainmob.real_name)
+	name = "[initial(name)]: [brainmob.real_name]"
 
 /obj/item/organ/brain/mami/attack_self(mob/user)
 	if(!brane)
