@@ -1,7 +1,7 @@
 {
     "map_name": "NeoStation",
     "map_path": "map_files/NeoStation",
-    "map_file": ["NeoStation.dmm","NeoStation_LVL2.dmm"],
+    "map_file": ["NeoStation_LVL1.dmm","NeoStation_LVL2.dmm"],
     "shuttles": {
         "cargo": "cargo_box",
         "ferry": "ferry_fancy",
