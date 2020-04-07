@@ -301,6 +301,12 @@
 	credit_cost = 5000
 	description = "A fully functional shuttle including a complete infirmary, storage facilties and regular amenities."
 
+/datum/map_template/shuttle/emergency/neo
+	suffix = "neo"
+	name = "NeoStation Emergency Shuttle"
+	credit_cost = 3000
+	description = "An equipped mid-sized shuttle, not really special, but it has a RADICAL name."
+
 /datum/map_template/shuttle/emergency/mini
 	suffix = "mini"
 	name = "Ministation emergency shuttle"
@@ -441,6 +447,10 @@
 	suffix = "delta"
 	name = "NT Frigate"
 
+/datum/map_template/shuttle/whiteship/neo
+	suffix = "neo"
+	name = "Federation \"Zephyr\""
+
 /datum/map_template/shuttle/whiteship/pod
 	suffix = "whiteship_pod"
 	name = "Salvage Pod"
@@ -561,6 +571,10 @@
 /datum/map_template/shuttle/arrival/omega
 	suffix = "omega"
 	name = "arrival shuttle (Omega)"
+
+/datum/map_template/shuttle/arrival/box
+	suffix = "neo"
+	name = "arrival shuttle (Neo)"
 
 /datum/map_template/shuttle/aux_base/default
 	suffix = "default"

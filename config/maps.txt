@@ -44,6 +44,11 @@ map kilostation
 	votable
 endmap
 
+map neostation
+	minplayers 25
+	votable
+endmap
+
 map runtimestation
 endmap
 
