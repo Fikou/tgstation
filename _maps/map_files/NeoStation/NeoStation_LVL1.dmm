@@ -1,4 +1,21 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aC" = (
+/obj/structure/railing/corner,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"aI" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"aJ" = (
+/obj/structure/stairs/west,
+/turf/open/floor/plasteel/stairs{
+	dir = 4
+	},
+/area/bridge)
 "aU" = (
 /obj/structure/table/glass,
 /obj/item/folder/blue,
@@ -28,6 +45,13 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"cF" = (
+/obj/structure/lattice,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/open/space/basic,
+/area/asteroid/nearstation)
 "cI" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -44,6 +68,10 @@
 /obj/structure/table/glass,
 /obj/item/storage/toolbox/mechanical,
 /obj/item/multitool,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"dG" = (
+/obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "ej" = (
@@ -99,6 +127,7 @@
 	},
 /obj/structure/table/glass,
 /obj/item/storage/fancy/donut_box,
+/obj/machinery/camera/autoname,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "is" = (
@@ -173,6 +202,25 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"mb" = (
+/obj/structure/lattice,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/space/basic,
+/area/asteroid/nearstation)
+"mA" = (
+/obj/effect/turf_decal/tile/green{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/green{
+	dir = 1
+	},
+/obj/machinery/camera/autoname{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
 "mT" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
@@ -200,6 +248,25 @@
 "nZ" = (
 /turf/open/floor/carpet/royalblack,
 /area/bridge)
+"oA" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"pn" = (
+/obj/structure/lattice,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/space/basic,
+/area/asteroid/nearstation)
 "qM" = (
 /obj/machinery/light,
 /obj/machinery/firealarm{
@@ -266,6 +333,9 @@
 /obj/structure/fireaxecabinet{
 	pixel_y = -32
 	},
+/obj/machinery/camera/autoname{
+	dir = 1
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "tP" = (
@@ -273,6 +343,12 @@
 	dir = 1
 	},
 /obj/effect/landmark/start/head_of_security,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"ux" = (
+/obj/structure/railing/corner{
+	dir = 8
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "uz" = (
@@ -451,6 +527,16 @@
 /obj/item/stock_parts/cell/high/plus,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Gi" = (
+/obj/structure/lattice,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/open/space/basic,
+/area/asteroid/nearstation)
 "GE" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
@@ -490,13 +576,10 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
-/obj/machinery/power/apc/highcap/ten_k{
-	areastring = "/area/bridge";
-	dir = 8;
-	name = "Bridge APC";
-	pixel_x = -25
-	},
 /obj/structure/cable,
+/obj/machinery/power/apc/auto_name/west{
+	cell_type = /obj/item/stock_parts/cell/high/plus
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Ii" = (
@@ -507,6 +590,10 @@
 /obj/machinery/modular_computer/console/preset/command{
 	dir = 1
 	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"Ip" = (
+/obj/structure/railing,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "JF" = (
@@ -741,6 +828,7 @@
 /obj/structure/table/glass,
 /obj/item/storage/firstaid,
 /obj/structure/cable,
+/obj/machinery/camera/autoname,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Vk" = (
@@ -793,6 +881,10 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Xy" = (
+/obj/machinery/door/airlock/command/glass,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
 "XR" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -804,6 +896,13 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"YC" = (
+/obj/structure/lattice,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/open/space/basic,
+/area/asteroid/nearstation)
 "YF" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
@@ -819,6 +918,12 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
+/area/bridge)
+"ZN" = (
+/obj/structure/stairs/east,
+/turf/open/floor/plasteel/stairs{
+	dir = 8
+	},
 /area/bridge)
 
 (1,1,1) = {"
@@ -31020,11 +31125,11 @@ Kl
 Hw
 Xb
 xF
-ka
-ka
-ka
-ka
-ka
+xF
+xF
+xF
+xF
+xF
 ka
 ka
 ka
@@ -31276,12 +31381,12 @@ ym
 ym
 ym
 ym
-ym
-ka
-ka
-ka
-ka
-ka
+Xy
+aI
+aI
+aI
+aI
+Xy
 ka
 ka
 ka
@@ -31534,11 +31639,11 @@ ym
 ym
 At
 xF
-ka
-ka
-ka
-ka
-ka
+ym
+ym
+aI
+aI
+Xy
 ka
 ka
 ka
@@ -31791,11 +31896,11 @@ ym
 UC
 qM
 xF
-ka
-ka
-ka
-ka
-ka
+dG
+ym
+aC
+aI
+xF
 ka
 ka
 ka
@@ -32050,9 +32155,9 @@ xF
 xF
 xF
 xF
-ka
-ka
-ka
+Ip
+aI
+xF
 ka
 ka
 ka
@@ -32308,8 +32413,8 @@ rG
 rG
 xF
 xF
-ka
-ka
+ZN
+xF
 ka
 ka
 ka
@@ -32560,13 +32665,13 @@ QD
 ym
 ta
 xF
-rG
-rG
+cF
+cF
 rG
 rG
 xF
 xF
-ka
+xF
 ka
 ka
 ka
@@ -32819,7 +32924,7 @@ yw
 VJ
 Rr
 FI
-rG
+Gi
 rG
 rG
 su
@@ -33077,7 +33182,7 @@ iB
 nZ
 nZ
 Ii
-rG
+YC
 rG
 su
 ka
@@ -33334,7 +33439,7 @@ OG
 nZ
 AS
 AD
-rG
+YC
 rG
 su
 ka
@@ -33591,7 +33696,7 @@ iB
 nZ
 nZ
 QT
-rG
+YC
 rG
 su
 ka
@@ -33847,7 +33952,7 @@ Nu
 ww
 Rf
 Ks
-rG
+pn
 rG
 rG
 su
@@ -34100,15 +34205,15 @@ Rw
 ym
 Bc
 qT
-Nu
+mA
 xF
-rG
-rG
+mb
+mb
 rG
 rG
 xF
 xF
-ka
+xF
 ka
 ka
 ka
@@ -34364,8 +34469,8 @@ rG
 rG
 xF
 xF
-ka
-ka
+aJ
+xF
 ka
 ka
 ka
@@ -34620,9 +34725,9 @@ xF
 xF
 xF
 xF
-ka
-ka
-ka
+Ip
+oA
+xF
 ka
 ka
 ka
@@ -34875,11 +34980,11 @@ ym
 cI
 vx
 xF
-ka
-ka
-ka
-ka
-ka
+dG
+ym
+ux
+oA
+xF
 ka
 ka
 ka
@@ -35132,11 +35237,11 @@ ym
 ym
 At
 xF
-ka
-ka
-ka
-ka
-ka
+ym
+ym
+oA
+oA
+Xy
 ka
 ka
 ka
@@ -35388,12 +35493,12 @@ ym
 ym
 ym
 ym
-ym
-ka
-ka
-ka
-ka
-ka
+Xy
+oA
+oA
+oA
+oA
+Xy
 ka
 ka
 ka
@@ -35646,11 +35751,11 @@ Hh
 LM
 eU
 xF
-ka
-ka
-ka
-ka
-ka
+xF
+xF
+xF
+xF
+xF
 ka
 ka
 ka
