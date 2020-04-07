@@ -1,0 +1,12 @@
+{
+    "map_name": "NeoStation",
+    "map_path": "map_files/NeoStation",
+    "map_file": ["NeoStation.dmm","NeoStation_LVL2.dmm"],
+    "shuttles": {
+        "cargo": "cargo_box",
+        "ferry": "ferry_fancy",
+        "whiteship": "whiteship_neo",
+        "emergency": "emergency_neo"
+    },
+    "traits": [{"Up" : 1, "Linkage" : "Cross"}, {"Down" : -1, "Baseturf" : "/turf/open/openspace", "Linkage" : "Cross"}]
+}

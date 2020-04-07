@@ -14,6 +14,8 @@
 		#include "map_files\BoxStation\BoxStation.dmm"
 		#include "map_files\Donutstation\Donutstation.dmm"
 		#include "map_files\Donutstation\Donutstation_LVL2.dmm"
+		#include "map_files\NeoStation\NeoStation_LVL1.dmm"
+		#include "map_files\NeoStation\NeoStation_LVL2.dmm"
 
 		#ifdef TRAVISBUILDING
 			#include "templates.dm"
