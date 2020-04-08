@@ -1,8 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aD" = (
+/turf/open/floor/engine/hull/reinforced,
+/area/space)
 "bN" = (
 /obj/machinery/suit_storage_unit/standard_unit,
 /turf/open/floor/plasteel/dark,
-/area/bridge)
+/area/bridge/meeting_room)
 "bU" = (
 /turf/open/openspace/airless,
 /area/space)
@@ -36,6 +39,9 @@
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
+"fe" = (
+/turf/open/floor/carpet/royalblack,
+/area/bridge/meeting_room)
 "fO" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -63,7 +69,7 @@
 /obj/machinery/door/airlock/command,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "jf" = (
 /obj/machinery/door/airlock/command,
 /obj/structure/cable,
@@ -75,7 +81,7 @@
 	},
 /obj/effect/landmark/start/head_of_security,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "jK" = (
 /obj/structure/table/wood,
 /obj/item/paper_bin,
@@ -97,7 +103,7 @@
 /obj/structure/table/reinforced,
 /obj/item/megaphone/command,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "lz" = (
 /obj/structure/bed,
 /obj/item/bedsheet/ce,
@@ -118,6 +124,10 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hor)
+"lK" = (
+/obj/item/kirbyplants/photosynthetic,
+/turf/open/floor/plasteel/dark,
+/area/bridge/meeting_room)
 "lR" = (
 /obj/structure/chair/comfy/black{
 	dir = 1
@@ -131,12 +141,15 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hos)
+"mo" = (
+/turf/open/floor/plasteel/dark,
+/area/bridge/meeting_room)
 "mH" = (
 /obj/structure/table/reinforced,
 /obj/item/lighter,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "nt" = (
 /obj/machinery/power/apc/auto_name/east,
 /obj/structure/cable,
@@ -172,7 +185,7 @@
 /obj/structure/table/reinforced,
 /obj/item/crowbar,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "pS" = (
 /obj/machinery/photocopier,
 /turf/open/floor/wood,
@@ -186,7 +199,7 @@
 /obj/structure/table/reinforced,
 /obj/item/storage/secure/briefcase,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "qU" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/donut_box,
@@ -197,7 +210,7 @@
 "rh" = (
 /obj/machinery/vending/coffee,
 /turf/open/floor/plasteel/dark,
-/area/bridge)
+/area/bridge/meeting_room)
 "ri" = (
 /obj/structure/cable,
 /turf/open/floor/wood,
@@ -234,7 +247,7 @@
 "um" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/open/floor/plasteel/dark,
-/area/bridge)
+/area/bridge/meeting_room)
 "vd" = (
 /obj/structure/table/wood,
 /obj/machinery/cell_charger,
@@ -257,7 +270,7 @@
 "xZ" = (
 /obj/machinery/photocopier,
 /turf/open/floor/plasteel/dark,
-/area/bridge)
+/area/bridge/meeting_room)
 "yo" = (
 /obj/structure/table/wood,
 /obj/machinery/recharger,
@@ -317,7 +330,7 @@
 	},
 /obj/effect/landmark/start/chief_medical_officer,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "Di" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -336,7 +349,7 @@
 	},
 /obj/effect/landmark/start/chief_engineer,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "Fk" = (
 /turf/open/floor/carpet/red,
 /area/crew_quarters/heads/hos)
@@ -358,6 +371,10 @@
 "GE" = (
 /turf/open/floor/carpet/orange,
 /area/crew_quarters/heads/chief)
+"GK" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/bridge/meeting_room)
 "Hd" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp/green,
@@ -379,17 +396,20 @@
 "Ip" = (
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/chief)
+"IB" = (
+/turf/closed/wall/r_wall,
+/area/bridge/meeting_room)
 "II" = (
 /obj/structure/chair/comfy/black{
 	dir = 4
 	},
 /obj/effect/landmark/start/research_director,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "Jh" = (
 /obj/machinery/vending/cigarette,
 /turf/open/floor/plasteel/dark,
-/area/bridge)
+/area/bridge/meeting_room)
 "Jj" = (
 /obj/structure/filingcabinet/security,
 /turf/open/floor/wood,
@@ -411,7 +431,7 @@
 /obj/machinery/recharger,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "Lm" = (
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
@@ -447,15 +467,16 @@
 "MM" = (
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "MZ" = (
 /obj/structure/cable,
 /turf/open/floor/carpet/blue,
 /area/crew_quarters/heads/cmo)
 "OS" = (
 /obj/structure/table/reinforced,
+/obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "Pt" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
@@ -473,12 +494,22 @@
 "QD" = (
 /obj/machinery/door/airlock/command/glass,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
+"QE" = (
+/obj/structure/cable,
+/turf/open/floor/plasteel/dark,
+/area/bridge/meeting_room)
 "Rt" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/fancy/donut_box,
 /turf/open/floor/plasteel/dark,
-/area/bridge)
+/area/bridge/meeting_room)
+"RB" = (
+/obj/item/kirbyplants/photosynthetic,
+/obj/machinery/power/apc/auto_name/north,
+/obj/structure/cable,
+/turf/open/floor/plasteel/dark,
+/area/bridge/meeting_room)
 "RE" = (
 /obj/machinery/door/airlock/command,
 /obj/structure/cable,
@@ -501,7 +532,7 @@
 /obj/effect/landmark/start/head_of_personnel,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "US" = (
 /obj/structure/table/wood,
 /obj/item/storage/secure/briefcase{
@@ -530,6 +561,10 @@
 "Xp" = (
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/cmo)
+"XI" = (
+/obj/machinery/jukebox/bridge,
+/turf/open/floor/plasteel/dark,
+/area/bridge/meeting_room)
 "XJ" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp,
@@ -539,7 +574,7 @@
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "Yo" = (
 /obj/structure/table/wood,
 /obj/item/paper_bin,
@@ -567,7 +602,7 @@
 /obj/effect/landmark/start/captain,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "YY" = (
 /obj/machinery/power/apc/auto_name/west,
 /obj/structure/cable,
@@ -577,7 +612,7 @@
 /obj/machinery/holopad,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
-/area/bridge)
+/area/bridge/meeting_room)
 "ZB" = (
 /obj/structure/filingcabinet/chestdrawer,
 /obj/structure/cable,
@@ -30519,7 +30554,7 @@ za
 Ip
 bU
 bU
-bU
+aD
 fO
 TL
 df
@@ -30776,18 +30811,18 @@ PA
 Di
 bU
 bU
-bU
+aD
 fO
 eF
 vA
 vA
 xu
 fO
-bU
-bU
-bU
-bU
-bU
+aD
+aD
+aD
+aD
+aD
 bU
 bU
 bU
@@ -31031,20 +31066,20 @@ lR
 HD
 vd
 Di
-bU
-bU
-bU
+aD
+aD
+aD
 fO
 pS
 vA
 vA
 yW
 fO
-bU
-bU
-bU
-bU
-bU
+aD
+aD
+aD
+aD
+aD
 bU
 bU
 bU
@@ -31288,20 +31323,20 @@ HD
 GE
 Xm
 Di
-bU
-bU
-bU
+aD
+aD
+aD
 fO
 Mu
 BJ
 Bg
 rV
 fO
-bU
-bU
-bU
-bU
-bU
+aD
+aD
+aD
+aD
+aD
 bU
 bU
 bU
@@ -31545,17 +31580,17 @@ dS
 nt
 lz
 Di
-bU
-bU
-bU
+aD
+aD
+aD
 fO
 Vd
 oJ
 jK
 JU
 fO
-bU
-bU
+aD
+aD
 Gf
 Gf
 Gf
@@ -31802,17 +31837,17 @@ dS
 Ip
 Ip
 Ip
-MG
-MG
-MG
+IB
+IB
+IB
 cY
 cY
 oJ
 MJ
 gD
 cY
-bU
-bU
+aD
+aD
 Gf
 hz
 Gf
@@ -32060,16 +32095,16 @@ Ip
 um
 Rt
 xZ
-MG
+IB
 bN
 bN
-MG
+IB
 RE
 cY
 cY
 cY
 bU
-bU
+aD
 Gf
 sJ
 Gf
@@ -32311,20 +32346,20 @@ bU
 bU
 bU
 bU
-MG
+IB
 MM
 MM
 MM
 MM
-Dk
-Dk
-sq
-sq
-MG
+fe
+fe
+mo
+mo
+IB
 MM
-sq
-hz
-Gf
+mo
+lK
+GK
 bU
 bU
 Gf
@@ -32568,20 +32603,20 @@ bU
 bU
 bU
 bU
-MG
-Dk
-Dk
+IB
+fe
+fe
 Ei
 Ut
 II
-Dk
-Dk
-sq
-MG
+fe
+fe
+mo
+IB
 MM
-sq
-sq
-Gf
+mo
+mo
+GK
 bU
 bU
 Gf
@@ -32825,20 +32860,20 @@ bU
 bU
 bU
 bU
-MG
-sq
-Dk
+IB
+mo
+fe
 Ym
 Lj
 ly
-Dk
-Dk
-hz
-MG
+fe
+fe
+lK
+IB
 MM
-Dk
-sq
-MG
+fe
+mo
+IB
 Gf
 Gf
 MG
@@ -33082,9 +33117,9 @@ bU
 bU
 bU
 bU
-MG
-hz
-sq
+IB
+RB
+QE
 OS
 Zb
 MM
@@ -33093,8 +33128,8 @@ MM
 MM
 iI
 MM
-Dk
-Dk
+fe
+fe
 QD
 Dk
 Dk
@@ -33339,20 +33374,20 @@ bU
 bU
 bU
 bU
-MG
-sq
-Dk
+IB
+mo
+fe
 pK
 mH
 qA
-Dk
-Dk
-hz
-MG
+fe
+fe
+lK
+IB
 MM
-Dk
-sq
-MG
+fe
+mo
+IB
 Gf
 Gf
 MG
@@ -33596,20 +33631,20 @@ bU
 bU
 bU
 bU
-MG
-Dk
-Dk
+IB
+fe
+fe
 js
 YU
 CC
-Dk
-Dk
-sq
-MG
+fe
+fe
+mo
+IB
 MM
-sq
-sq
-Gf
+mo
+mo
+GK
 bU
 bU
 Gf
@@ -33853,20 +33888,20 @@ bU
 bU
 bU
 bU
-MG
+IB
 MM
 MM
 MM
 MM
-Dk
-Dk
-sq
-sq
-MG
+fe
+fe
+mo
+mo
+IB
 MM
-sq
-hz
-Gf
+mo
+lK
+GK
 bU
 bU
 Gf
@@ -34113,10 +34148,10 @@ Qb
 Qb
 zv
 Qb
-sq
+XI
 rh
 Jh
-MG
+IB
 bN
 bN
 Xp
@@ -34125,7 +34160,7 @@ Xp
 Xp
 Xp
 bU
-bU
+aD
 Gf
 sJ
 Gf
@@ -34372,17 +34407,17 @@ Yu
 Qb
 Qb
 Qb
-MG
-MG
-MG
+IB
+IB
+IB
 Xp
 Xp
 ri
 qa
 tm
 Xp
-bU
-bU
+aD
+aD
 Gf
 hz
 Gf
@@ -34629,17 +34664,17 @@ Yu
 YY
 Lm
 YP
-bU
-bU
-bU
+aD
+aD
+aD
 ul
 fb
 ri
 rC
 Mj
 ul
-bU
-bU
+aD
+aD
 Gf
 Gf
 Gf
@@ -34886,20 +34921,20 @@ YL
 Fk
 Mb
 YP
-bU
-bU
-bU
+aD
+aD
+aD
 ul
 ZB
 MZ
 MZ
 oV
 ul
-bU
-bU
-bU
-bU
-bU
+aD
+aD
+aD
+aD
+aD
 bU
 bU
 bU
@@ -35143,20 +35178,20 @@ YL
 YL
 qU
 YP
-bU
-bU
-bU
+aD
+aD
+aD
 ul
 BA
 de
 de
 Gp
 ul
-bU
-bU
-bU
-bU
-bU
+aD
+aD
+aD
+aD
+aD
 bU
 bU
 bU
@@ -35402,18 +35437,18 @@ pI
 YP
 bU
 bU
-bU
+aD
 ul
 kk
 de
 Se
 WY
 ul
-bU
-bU
-bU
-bU
-bU
+aD
+aD
+aD
+aD
+aD
 bU
 bU
 bU
@@ -35659,7 +35694,7 @@ LW
 Qb
 bU
 bU
-bU
+aD
 ul
 vX
 Ad

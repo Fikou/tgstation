@@ -338,6 +338,9 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"tT" = (
+/turf/closed/indestructible/riveted,
+/area/ruin/powered)
 "ux" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -588,6 +591,10 @@
 /obj/structure/railing,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"IM" = (
+/obj/machinery/gravity_generator/main/station/admin,
+/turf/open/floor/plasteel/dark,
+/area/ruin/powered)
 "JF" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -631,6 +638,9 @@
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"MZ" = (
+/turf/open/floor/plasteel/dark,
+/area/ruin/powered)
 "Nu" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
@@ -32904,11 +32914,11 @@ Gi
 rG
 rG
 su
-ka
-ka
-ka
-ka
-ka
+tT
+tT
+tT
+tT
+tT
 ka
 ka
 ka
@@ -33161,11 +33171,11 @@ Ii
 YC
 rG
 su
-ka
-ka
-ka
-ka
-ka
+tT
+MZ
+MZ
+MZ
+tT
 ka
 ka
 ka
@@ -33418,11 +33428,11 @@ AD
 YC
 rG
 su
-ka
-ka
-ka
-ka
-ka
+tT
+MZ
+MZ
+IM
+tT
 ka
 ka
 ka
@@ -33675,11 +33685,11 @@ QT
 YC
 rG
 su
-ka
-ka
-ka
-ka
-ka
+tT
+MZ
+MZ
+MZ
+tT
 ka
 ka
 ka
@@ -33932,11 +33942,11 @@ pn
 rG
 rG
 su
-ka
-ka
-ka
-ka
-ka
+tT
+tT
+tT
+tT
+tT
 ka
 ka
 ka
