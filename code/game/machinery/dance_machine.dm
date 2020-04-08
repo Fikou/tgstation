@@ -12,6 +12,9 @@
 	var/list/songs = list()
 	var/datum/track/selection = null
 
+/obj/machinery/jukebox/bridge
+	req_access = list(ACCESS_HEADS)
+
 /obj/machinery/jukebox/disco
 	name = "radiant dance machine mark IV"
 	desc = "The first three prototypes were discontinued after mass casualty incidents."

@@ -338,13 +338,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
-"tP" = (
-/obj/structure/chair/office{
-	dir = 1
-	},
-/obj/effect/landmark/start/head_of_security,
-/turf/open/floor/plasteel/dark,
-/area/bridge)
 "ux" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -480,7 +473,6 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "AS" = (
-/obj/effect/landmark/start/captain,
 /obj/structure/chair/comfy/shuttle{
 	desc = "A comfortable, secure seat. You feel like the king.";
 	name = "The Chair"
@@ -648,13 +640,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
-"Os" = (
-/obj/structure/chair/office{
-	dir = 1
-	},
-/obj/effect/landmark/start/head_of_personnel,
-/turf/open/floor/plasteel/dark,
-/area/bridge)
 "OG" = (
 /obj/machinery/door/window/brigdoor{
 	dir = 1;
@@ -682,7 +667,6 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
-/obj/effect/landmark/start/chief_engineer,
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -755,7 +739,6 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/obj/effect/landmark/start/research_director,
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -775,13 +758,6 @@
 /obj/effect/turf_decal/tile/green{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark,
-/area/bridge)
-"Uv" = (
-/obj/structure/chair/office{
-	dir = 1
-	},
-/obj/effect/landmark/start/chief_medical_officer,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "UB" = (
@@ -31889,7 +31865,7 @@ ka
 ka
 Fa
 XR
-Uv
+Rw
 ym
 ym
 ym
@@ -33430,7 +33406,7 @@ ka
 ka
 Fa
 is
-tP
+Rw
 UD
 ry
 yf
@@ -34973,7 +34949,7 @@ ka
 ka
 Fa
 GE
-Os
+Rw
 ym
 ym
 ym
