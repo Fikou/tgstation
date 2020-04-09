@@ -1,4 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ap" = (
+/turf/closed/indestructible/riveted,
+/area/ruin/powered)
 "aC" = (
 /obj/structure/railing/corner,
 /turf/open/floor/plasteel/dark,
@@ -7,7 +10,9 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
-/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "aJ" = (
@@ -95,6 +100,16 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"eX" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/arrows/white{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
 "fK" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -130,6 +145,9 @@
 /obj/machinery/camera/autoname,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"hl" = (
+/turf/closed/wall/r_wall,
+/area/space)
 "is" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -145,6 +163,10 @@
 	dir = 1
 	},
 /obj/item/kirbyplants/photosynthetic,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "iN" = (
@@ -209,6 +231,12 @@
 	},
 /turf/open/space/basic,
 /area/asteroid/nearstation)
+"mh" = (
+/obj/machinery/ticket_machine{
+	pixel_y = 32
+	},
+/turf/open/space/basic,
+/area/space)
 "mA" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
@@ -249,11 +277,9 @@
 /turf/open/floor/carpet/royalblack,
 /area/bridge)
 "oA" = (
+/obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
-	},
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -267,6 +293,10 @@
 	},
 /turf/open/space/basic,
 /area/asteroid/nearstation)
+"qB" = (
+/obj/machinery/vending/coffee,
+/turf/open/floor/plasteel,
+/area/space)
 "qM" = (
 /obj/machinery/light,
 /obj/machinery/firealarm{
@@ -298,6 +328,9 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"qW" = (
+/turf/open/floor/plasteel/dark,
+/area/ruin/powered)
 "ry" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -316,8 +349,9 @@
 /turf/open/space/basic,
 /area/asteroid/nearstation)
 "su" = (
-/obj/effect/spawner/structure/window/reinforced,
-/turf/open/floor/plating,
+/obj/effect/turf_decal/tile/blue,
+/obj/item/kirbyplants/photosynthetic,
+/turf/open/floor/plasteel/dark,
 /area/bridge)
 "sF" = (
 /obj/effect/turf_decal/tile/red{
@@ -339,8 +373,12 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "tT" = (
-/turf/closed/indestructible/riveted,
-/area/ruin/powered)
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/item/kirbyplants/photosynthetic,
+/turf/open/floor/plasteel/dark,
+/area/bridge)
 "ux" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -409,8 +447,18 @@
 	dir = 1
 	},
 /obj/machinery/vending/snack/random,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"xe" = (
+/turf/open/floor/plasteel,
+/area/space)
 "xF" = (
 /turf/closed/wall/r_wall,
 /area/bridge)
@@ -433,6 +481,22 @@
 "yw" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"zm" = (
+/obj/machinery/gravity_generator/main/station/admin,
+/turf/open/floor/plasteel/dark,
+/area/ruin/powered)
+"zE" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/arrows/white{
+	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -495,6 +559,11 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Et" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/space)
 "EY" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -520,6 +589,12 @@
 /obj/structure/table/glass,
 /obj/machinery/cell_charger,
 /obj/item/stock_parts/cell/high/plus,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Gi" = (
@@ -592,9 +667,8 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "IM" = (
-/obj/machinery/gravity_generator/main/station/admin,
-/turf/open/floor/plasteel/dark,
-/area/ruin/powered)
+/turf/closed/wall,
+/area/bridge)
 "JF" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -629,6 +703,10 @@
 /obj/structure/table/glass,
 /obj/item/paper_bin,
 /obj/item/pen/fountain,
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "LM" = (
@@ -639,14 +717,54 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "MZ" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
 /turf/open/floor/plasteel/dark,
-/area/ruin/powered)
+/area/bridge)
 "Nu" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/green{
 	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"Om" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/window/brigdoor{
+	base_state = "rightsecure";
+	dir = 1;
+	icon_state = "rightsecure";
+	name = "Head of Personnel's Desk";
+	req_access_txt = "57"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/door/window/northleft{
+	dir = 2;
+	name = "Reception Window"
+	},
+/obj/machinery/door/poddoor/preopen{
+	id = "hop";
+	name = "privacy shutters"
+	},
+/obj/structure/cable,
+/turf/open/floor/plasteel,
+/area/space)
+"Oo" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/arrows/white{
+	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -670,6 +788,10 @@
 /obj/item/export_scanner,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Qa" = (
+/obj/structure/table/reinforced,
+/turf/open/floor/plasteel,
+/area/space)
 "Qm" = (
 /obj/structure/chair/office{
 	dir = 8
@@ -713,6 +835,10 @@
 	},
 /obj/structure/table/glass,
 /obj/item/folder/blue,
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Rr" = (
@@ -722,6 +848,12 @@
 /obj/structure/table/glass,
 /obj/machinery/recharger,
 /obj/item/restraints/handcuffs,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Rw" = (
@@ -753,8 +885,13 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "SM" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
 /obj/effect/turf_decal/tile/blue,
-/obj/item/kirbyplants/photosynthetic,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Un" = (
@@ -818,12 +955,15 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "Vk" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
+/obj/structure/table/wood,
+/obj/machinery/button/ticket_machine{
+	pixel_x = 32
 	},
-/obj/item/kirbyplants/photosynthetic,
-/turf/open/floor/plasteel/dark,
-/area/bridge)
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/item/stamp/hop,
+/turf/open/floor/wood,
+/area/space)
 "VJ" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -832,6 +972,15 @@
 	dir = 1
 	},
 /obj/machinery/vending/cola/random,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "WC" = (
@@ -844,6 +993,19 @@
 	},
 /obj/effect/turf_decal/tile/green{
 	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
+"WL" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/kirbyplants/photosynthetic,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -29059,9 +29221,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+hl
+hl
+hl
 ka
 ka
 ka
@@ -29316,9 +29478,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+hl
+qB
+Et
 ka
 ka
 ka
@@ -29573,9 +29735,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+Et
+xe
+xe
 ka
 ka
 ka
@@ -29830,10 +29992,10 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
+Et
+xe
+Et
+mh
 ka
 ka
 ka
@@ -30087,9 +30249,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+hl
+xe
+Et
 ka
 ka
 ka
@@ -30344,9 +30506,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+hl
+xe
+Et
 ka
 ka
 ka
@@ -30601,9 +30763,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+Et
+xe
+Et
 ka
 ka
 ka
@@ -30858,9 +31020,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+Om
+xe
+xe
 ka
 ka
 ka
@@ -31112,12 +31274,12 @@ Hw
 Xb
 xF
 xF
+Xy
 xF
-xF
-xF
-xF
-ka
-ka
+Vk
+hl
+Qa
+hl
 ka
 ka
 ka
@@ -31369,12 +31531,12 @@ ym
 ym
 Xy
 aI
-aI
-aI
-aI
-Xy
-ka
-ka
+MZ
+xF
+xF
+xF
+xF
+hl
 ka
 ka
 ka
@@ -31624,13 +31786,13 @@ ym
 ym
 ym
 At
-xF
+IM
 ym
-ym
+cI
+aI
 aI
 aI
 Xy
-ka
 ka
 ka
 ka
@@ -31881,13 +32043,13 @@ ym
 ym
 UC
 qM
-xF
+IM
 dG
 ym
 aC
-aI
-xF
-ka
+ym
+ym
+Xy
 ka
 ka
 ka
@@ -32135,16 +32297,16 @@ lB
 ym
 ym
 ym
-UC
+su
 JF
 xF
 xF
 xF
 xF
 Ip
-aI
+eX
+eX
 xF
-ka
 ka
 ka
 ka
@@ -32392,7 +32554,7 @@ Qm
 ym
 ym
 ym
-Vk
+cI
 xF
 xF
 rG
@@ -32400,8 +32562,8 @@ rG
 xF
 xF
 ZN
+ZN
 xF
-ka
 ka
 ka
 ka
@@ -32658,7 +32820,7 @@ rG
 xF
 xF
 xF
-ka
+xF
 ka
 ka
 ka
@@ -32913,12 +33075,7 @@ FI
 Gi
 rG
 rG
-su
-tT
-tT
-tT
-tT
-tT
+Fa
 ka
 ka
 ka
@@ -32927,6 +33084,11 @@ ka
 ka
 ka
 ka
+ap
+ap
+ap
+ap
+ap
 ka
 ka
 ka
@@ -33170,12 +33332,7 @@ nZ
 Ii
 YC
 rG
-su
-tT
-MZ
-MZ
-MZ
-tT
+Fa
 ka
 ka
 ka
@@ -33184,6 +33341,11 @@ ka
 ka
 ka
 ka
+ap
+qW
+qW
+qW
+ap
 ka
 ka
 ka
@@ -33427,12 +33589,7 @@ AS
 AD
 YC
 rG
-su
-tT
-MZ
-MZ
-IM
-tT
+Fa
 ka
 ka
 ka
@@ -33441,6 +33598,11 @@ ka
 ka
 ka
 ka
+ap
+qW
+qW
+zm
+ap
 ka
 ka
 ka
@@ -33678,18 +33840,13 @@ WC
 iN
 iN
 Nu
-iB
+WL
 nZ
 nZ
 QT
 YC
 rG
-su
-tT
-MZ
-MZ
-MZ
-tT
+Fa
 ka
 ka
 ka
@@ -33698,6 +33855,11 @@ ka
 ka
 ka
 ka
+ap
+qW
+qW
+qW
+ap
 ka
 ka
 ka
@@ -33941,12 +34103,7 @@ Ks
 pn
 rG
 rG
-su
-tT
-tT
-tT
-tT
-tT
+Fa
 ka
 ka
 ka
@@ -33955,6 +34112,11 @@ ka
 ka
 ka
 ka
+ap
+ap
+ap
+ap
+ap
 ka
 ka
 ka
@@ -34200,7 +34362,7 @@ rG
 xF
 xF
 xF
-ka
+xF
 ka
 ka
 ka
@@ -34448,7 +34610,7 @@ RT
 ym
 ym
 ym
-SM
+UC
 xF
 xF
 rG
@@ -34456,8 +34618,8 @@ rG
 xF
 xF
 aJ
+aJ
 xF
-ka
 ka
 ka
 ka
@@ -34705,16 +34867,16 @@ vX
 ym
 ym
 ym
-cI
+tT
 UB
 xF
 xF
 xF
 xF
 Ip
-oA
+zE
+Oo
 xF
-ka
 ka
 ka
 ka
@@ -34965,13 +35127,13 @@ ym
 ym
 cI
 vx
-xF
+IM
 dG
 ym
 ux
-oA
-xF
-ka
+ym
+ym
+Xy
 ka
 ka
 ka
@@ -35222,13 +35384,13 @@ ym
 ym
 ym
 At
-xF
+IM
 ym
-ym
+UC
+oA
 oA
 oA
 Xy
-ka
 ka
 ka
 ka
@@ -35481,11 +35643,11 @@ ym
 ym
 Xy
 oA
-oA
-oA
-oA
-Xy
-ka
+SM
+xF
+xF
+xF
+xF
 ka
 ka
 ka
@@ -35740,8 +35902,8 @@ xF
 xF
 xF
 xF
-xF
-xF
+ka
+ka
 ka
 ka
 ka
