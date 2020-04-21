@@ -299,7 +299,7 @@
 		if(L.incapacitated())
 			close_machine(target)
 	else
-		user.visible_message("<b>[user]</b> starts shoving [target] inside [src].", "<span class='notice'>You start shoving [target] inside [src].</span>")
+		user.visible_message("<span class='notice'>[user] starts shoving [target] inside [src].</span>", "<span class='notice'>You start shoving [target] inside [src].</span>")
 		if (do_after(user, 25, target=target))
 			close_machine(target)
 
@@ -333,7 +333,7 @@
 																	datum/tgui/master_ui = null, datum/ui_state/state = GLOB.notcontained_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "cryo", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, ui_key, "Cryo", name, ui_x, ui_y, master_ui, state)
 		ui.open()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/ui_data()
@@ -413,6 +413,20 @@
 					usr.put_in_hands(beaker)
 				beaker = null
 				. = TRUE
+
+/obj/machinery/atmospherics/components/unary/cryo_cell/CtrlClick(mob/user)
+	if(can_interact(user) && !state_open)
+		on = !on
+		update_icon()
+	return ..()
+
+/obj/machinery/atmospherics/components/unary/cryo_cell/AltClick(mob/user)
+	if(can_interact(user))
+		if(state_open)
+			close_machine()
+		else
+			open_machine()
+	return ..()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/update_remote_sight(mob/living/user)
 	return // we don't see the pipe network while inside cryo.

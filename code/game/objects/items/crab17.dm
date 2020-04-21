@@ -24,15 +24,14 @@
 		dumped = TRUE
 
 /obj/structure/checkoutmachine
-	name = "Nanotrasen Space-Coin Market"
+	name = "\improper Nanotrasen Space-Coin Market"
 	desc = "This is good for spacecoin because"
 	icon = 'icons/obj/money_machine.dmi'
 	icon_state = "bogdanoff"
-	layer = TABLE_LAYER //So that the crate inside doesn't appear underneath
+	layer = LARGE_MOB_LAYER
 	armor = list("melee" = 80, "bullet" = 30, "laser" = 30, "energy" = 60, "bomb" = 90, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 80)
 	density = TRUE
 	pixel_z = -8
-	layer = LARGE_MOB_LAYER
 	max_integrity = 5000
 	var/list/accounts_to_rob
 	var/mob/living/carbon/human/bogdanoff
@@ -211,7 +210,7 @@
 	bogdanoff = user
 	addtimer(CALLBACK(src, .proc/startLaunch), 100)
 	sound_to_playing_players('sound/items/dump_it.ogg', 20)
-	deadchat_broadcast("Protocol CRAB-17 has been activated. A space-coin market has been launched at the station!", turf_target = get_turf(src))
+	deadchat_broadcast("Protocol CRAB-17 has been activated. A space-coin market has been launched at the station!", turf_target = get_turf(src), message_type=DEADCHAT_ANNOUNCEMENT)
 
 /obj/effect/dumpeetTarget/proc/startLaunch()
 	DF = new /obj/effect/dumpeetFall(drop_location())

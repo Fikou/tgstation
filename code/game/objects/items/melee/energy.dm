@@ -99,7 +99,7 @@
 	throw_speed = 3
 	throw_range = 5
 	sharpness = IS_SHARP
-	embedding = list("embed_chance" = 75, "embedded_impact_pain_multiplier" = 10)
+	embedding = list("embed_chance" = 75, "impact_pain_mult" = 10)
 	armour_penetration = 35
 	block_chance = 50
 
@@ -117,7 +117,7 @@
 	sword_color = "red"
 	var/hitcost = 50
 
-/obj/item/melee/transforming/energy/sword/cyborg/attack(mob/M, var/mob/living/silicon/robot/R)
+/obj/item/melee/transforming/energy/sword/cyborg/attack(mob/M, mob/living/silicon/robot/R)
 	if(R.cell)
 		var/obj/item/stock_parts/cell/C = R.cell
 		if(active && !(C.use(hitcost)))
@@ -140,6 +140,8 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	sharpness = IS_SHARP
 	light_color = "#40ceff"
+	tool_behaviour = TOOL_SAW
+	toolspeed = 0.7 //faster as a saw
 
 /obj/item/melee/transforming/energy/sword/cyborg/saw/cyborg_unequip(mob/user)
 	if(!active)

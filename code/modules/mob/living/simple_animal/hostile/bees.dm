@@ -22,16 +22,20 @@
 	turns_per_move = 0
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	attacktext = "stings"
-	response_help  = "shoos"
-	response_disarm = "swats away"
-	response_harm   = "squashes"
+	attack_verb_continuous = "stings"
+	attack_verb_simple = "sting"
+	response_help_continuous = "shoos"
+	response_help_simple = "shoo"
+	response_disarm_continuous = "swats away"
+	response_disarm_simple = "swat away"
+	response_harm_continuous = "squashes"
+	response_harm_simple = "squash"
 	maxHealth = 10
 	health = 10
-	spacewalk = TRUE
 	faction = list("hostile")
 	move_to_delay = 0
 	obj_damage = 0
+	ventcrawler = VENTCRAWLER_ALWAYS
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
@@ -39,7 +43,7 @@
 	mob_size = MOB_SIZE_TINY
 	mob_biotypes = MOB_ORGANIC|MOB_BUG
 	movement_type = FLYING
-	gold_core_spawnable = HOSTILE_SPAWN
+	gold_core_spawnable = FRIENDLY_SPAWN
 	search_objects = 1 //have to find those plant trays!
 
 	//Spaceborn beings don't get hurt by space
@@ -57,6 +61,7 @@
 
 /mob/living/simple_animal/hostile/poison/bees/Initialize()
 	. = ..()
+	ADD_TRAIT(src, TRAIT_SPACEWALK, INNATE_TRAIT)
 	generate_bee_visuals()
 	AddComponent(/datum/component/swarming)
 
@@ -82,6 +87,16 @@
 	if(!beehome)
 		. += "<span class='warning'>This bee is homeless!</span>"
 
+/mob/living/simple_animal/hostile/poison/bees/ListTargets() // Bee processing is expessive, so we override them finding targets here.
+	if(!search_objects) //In case we want to have purely hostile bees
+		return ..()
+	else
+		. = list() // The following code is only very slightly slower than just returning oview(vision_range, targets_from), but it saves us much more work down the line
+		var/list/searched_for = oview(vision_range, targets_from)
+		for(var/obj/A in searched_for)
+			. += A
+		for(var/mob/A in searched_for)
+			. += A
 
 /mob/living/simple_animal/hostile/poison/bees/proc/generate_bee_visuals()
 	cut_overlays()
@@ -144,6 +159,10 @@
 				beegent.reaction_mob(L, INJECT)
 				L.reagents.add_reagent(beegent.type, rand(1,5))
 
+/mob/living/simple_animal/hostile/poison/bees/inject_poison(mob/living/L)
+	if(beegent && istype(L) && L.reagents)
+		beegent.reaction_mob(L, INJECT)
+		L.reagents.add_reagent(beegent.type, rand(1,5))
 
 /mob/living/simple_animal/hostile/poison/bees/proc/assign_reagent(datum/reagent/R)
 	if(istype(R))

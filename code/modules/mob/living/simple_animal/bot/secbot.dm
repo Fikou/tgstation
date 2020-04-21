@@ -44,15 +44,17 @@
 	var/payment_department = ACCOUNT_SEC
 
 /mob/living/simple_animal/bot/secbot/beepsky
-	name = "Officer Beep O'sky"
-	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
+	name = "Commander Beep O'sky"
+	desc = "It's Commander Beep O'sky! Officially the superior officer of all bots on station, Beepsky remains as humble and dedicated to the law as the day he was first fabricated."
 	idcheck = FALSE
 	weaponscheck = FALSE
 	auto_patrol = TRUE
+	commissioned = TRUE
 
 /mob/living/simple_animal/bot/secbot/beepsky/jr
 	name = "Officer Pipsqueak"
-	desc = "It's Officer Beep O'sky's smaller, just-as aggressive cousin, Pipsqueak."
+	desc = "It's Commander Beep O'sky's smaller, just-as aggressive cousin, Pipsqueak."
+	commissioned = FALSE
 
 /mob/living/simple_animal/bot/secbot/beepsky/jr/Initialize()
 	. = ..()
@@ -107,7 +109,7 @@
 	walk_to(src,0)
 	last_found = world.time
 
-/mob/living/simple_animal/bot/secbot/electrocute_act(shock_damage, source, siemens_coeff = 1, safety = FALSE, override = FALSE, tesla_shock = FALSE, illusion = FALSE, stun = TRUE)//shocks only make him angry
+/mob/living/simple_animal/bot/secbot/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)//shocks only make him angry
 	if(base_speed < initial(base_speed) + 3)
 		base_speed += 3
 		addtimer(VARSET_CALLBACK(src, base_speed, base_speed - 3), 60)
@@ -222,8 +224,8 @@ Auto Patrol: []"},
 		declare_arrests = FALSE
 		update_icon()
 
-/mob/living/simple_animal/bot/secbot/bullet_act(obj/item/projectile/Proj)
-	if(istype(Proj , /obj/item/projectile/beam)||istype(Proj, /obj/item/projectile/bullet))
+/mob/living/simple_animal/bot/secbot/bullet_act(obj/projectile/Proj)
+	if(istype(Proj , /obj/projectile/beam)||istype(Proj, /obj/projectile/bullet))
 		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
 			if(!Proj.nodamage && Proj.damage < src.health && ishuman(Proj.firer))
 				retaliate(Proj.firer)
@@ -268,11 +270,11 @@ Auto Patrol: []"},
 		playsound(src, "law", 50, FALSE)
 		back_to_idle()
 
-/mob/living/simple_animal/bot/secbot/proc/stun_attack(mob/living/carbon/C, var/harm = FALSE)
+/mob/living/simple_animal/bot/secbot/proc/stun_attack(mob/living/carbon/C, harm = FALSE)
 	var/judgement_criteria = judgement_criteria()
 	playsound(src, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
 	icon_state = "[initial(icon_state)]-c"
-	addtimer(CALLBACK(src, .proc/update_icon), 2)
+	addtimer(CALLBACK(src, /atom/.proc/update_icon), 2)
 	var/threat = 5
 
 	if(harm)
@@ -291,8 +293,8 @@ Auto Patrol: []"},
 	if(declare_arrests)
 		var/area/location = get_area(src)
 		speak("[arrest_type ? "Detaining" : "Arresting"] level [threat] scumbag <b>[C]</b> in [location].", radio_channel)
-	C.visible_message("<span class='danger'>[src] has stunned [C]!</span>",\
-							"<span class='userdanger'>[src] has stunned you!</span>")
+	C.visible_message("<span class='danger'>[src] stuns [C]!</span>",\
+							"<span class='userdanger'>[src] stuns you!</span>")
 
 /mob/living/simple_animal/bot/secbot/handle_automated_action()
 	if(!..())

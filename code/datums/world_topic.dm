@@ -27,11 +27,16 @@
 
 /datum/world_topic/proc/TryRun(list/input)
 	key_valid = config && (CONFIG_GET(string/comms_key) == input["key"])
-	if(require_comms_key && !key_valid)
-		return "Bad Key"
 	input -= "key"
-	. = Run(input)
-	if(islist(.))
+	if(require_comms_key && !key_valid)
+		. = "Bad Key"
+		if (input["format"] == "json")
+			. = list("error" = .)
+	else
+		. = Run(input)
+	if (input["format"] == "json")
+		. = json_encode(.)
+	else if(islist(.))
 		. = list2params(.)
 
 /datum/world_topic/proc/Run(list/input)
@@ -112,7 +117,7 @@
 	require_comms_key = TRUE
 
 /datum/world_topic/adminmsg/Run(list/input)
-	return IrcPm(input[keyword], input["msg"], input["sender"])
+	return TgsPm(input[keyword], input["msg"], input["sender"])
 
 /datum/world_topic/namecheck
 	keyword = "namecheck"
@@ -131,7 +136,7 @@
 	require_comms_key = TRUE
 
 /datum/world_topic/adminwho/Run(list/input)
-	return ircadminwho()
+	return tgsadminwho()
 
 /datum/world_topic/status
 	keyword = "status"

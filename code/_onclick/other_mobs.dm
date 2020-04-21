@@ -22,7 +22,7 @@
 	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity)
 	A.attack_hand(src)
 
-//Return TRUE to cancel other attack hand effects that respect it.
+/// Return TRUE to cancel other attack hand effects that respect it.
 /atom/proc/attack_hand(mob/user)
 	. = FALSE
 	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
@@ -72,7 +72,7 @@
 	return FALSE
 
 /*
-/mob/living/carbon/human/RestrainedClickOn(var/atom/A) ---carbons will handle this
+/mob/living/carbon/human/RestrainedClickOn(atom/A) ---carbons will handle this
 	return
 */
 
@@ -97,7 +97,7 @@
 	A.attack_animal(src)
 
 /atom/proc/attack_animal(mob/user)
-	return
+	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, user)
 
 /mob/living/RestrainedClickOn(atom/A)
 	return
