@@ -38,7 +38,7 @@
 	desc = "A complex socket-system of electrodes and neurons intended to give silicon-based minds control of organic tissue."
 	id = "mami"
 	build_type = PROTOLATHE | MECHFAB
-	materials = list(/datum/material/iron = 3500, /datum/material/glass = 1500, /datum/material/gold = 1000, /datum/material/silver = 1000, /datum/material/plasma = 1000)
+	materials = list(/datum/material/iron=15000,/datum/material/gold=5000,/datum/material/plasma=10000,/datum/material/silver=5000) //lots of materials, because SWAG
 	construction_time = 75
 	build_path = /obj/item/organ/brain/mami
 	category = list("Misc", "Medical Designs")

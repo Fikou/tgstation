@@ -1,6 +1,6 @@
 /obj/item/organ/brain/mami
 	name = "\improper Machine-Man Interface"
-	desc = "A piece of juicy machinery found in a person's head. Positronic brain not included."
+	desc = "A piece of juicy machinery found in a person's head."
 	icon_state = "mami"
 	organ_flags = ORGAN_SYNTHETIC
 	w_class = WEIGHT_CLASS_NORMAL
@@ -75,8 +75,8 @@
 		eject_brain()
 	qdel(src)
 
-/obj/item/organ/brain/mami/speshal_message()
-	. += "<span class='notice'>There is a switch to toggle the radio system [radio.on ? "off" : "on"].[brane ? " It is currently being covered by [brane]." : null]</span>"
+/obj/item/organ/brain/mami/special_message()
+	. += "<span class='notice'>[brane ? " It is currently being covered by [brane]." : " There is a switch to toggle the radio system [radio.on ? "off" : "on"]."]</span>"
 	if(brainmob)
 		var/mob/living/brain/B = brainmob
 		if(!B.key || !B.mind || B.stat == DEAD)
