@@ -363,7 +363,8 @@
 		/obj/item/holosign_creator/cyborg,
 		/obj/item/borg/cyborghug/peacekeeper,
 		/obj/item/extinguisher,
-		/obj/item/borg/projectile_dampen)
+		/obj/item/borg/projectile_dampen,
+		/obj/item/gun/energy/printer/shotgun)
 	emag_modules = list(/obj/item/reagent_containers/borghypo/peace/hacked)
 	cyborg_base_icon = "peace"
 	moduleselect_icon = "standard"

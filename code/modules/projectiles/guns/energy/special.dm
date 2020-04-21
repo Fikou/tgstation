@@ -300,6 +300,12 @@
 /obj/item/gun/energy/printer/emp_act()
 	return
 
+/obj/item/gun/energy/printer/shotgun
+	name = "cyborg shotgun"
+	desc = "A self defense shotgun"
+	icon_state = "shotgun"
+	ammo_type = list(/obj/item/ammo_casing/energy/shotgun)
+
 /obj/item/gun/energy/temperature
 	name = "temperature gun"
 	icon_state = "freezegun"
