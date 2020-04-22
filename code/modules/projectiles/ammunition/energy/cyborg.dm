@@ -5,11 +5,9 @@
 	e_cost = 20
 	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect
 
-/obj/item/ammo_casing/energy/shotgun
+/obj/item/ammo_casing/energy/c3dbullet/shotgun
 	projectile_type = /obj/projectile/bullet/pellet/shotgun_buckshot
-	select_name = "shotgun"
+	select_name = "buckshot"
 	fire_sound = 'sound/weapons/gun/shotgun/shot.ogg'
-	e_cost = 20
-	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect
 	pellets = 6
 	variance = 25

@@ -304,7 +304,7 @@
 	name = "cyborg shotgun"
 	desc = "A self defense shotgun"
 	icon_state = "shotgun"
-	ammo_type = list(/obj/item/ammo_casing/energy/shotgun)
+	ammo_type = list(/obj/item/ammo_casing/energy/c3dbullet/shotgun)
 
 /obj/item/gun/energy/temperature
 	name = "temperature gun"
