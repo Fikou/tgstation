@@ -1,4 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aj" = (
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "ap" = (
 /turf/closed/indestructible/riveted,
 /area/ruin/powered)
@@ -31,6 +35,10 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"bn" = (
+/obj/structure/closet/firecloset,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "bG" = (
 /obj/machinery/computer/cargo/request,
 /turf/open/floor/wood,
@@ -53,6 +61,12 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"cr" = (
+/obj/structure/table,
+/obj/item/storage/toolbox/emergency,
+/obj/item/beacon,
+/turf/open/floor/plating,
+/area/teleporter)
 "cu" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -85,6 +99,17 @@
 /obj/item/multitool,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"cX" = (
+/obj/structure/reagent_dispensers/watertank,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
+"dC" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "dG" = (
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel/dark,
@@ -162,9 +187,15 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"gJ" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/plating,
+/area/crew_quarters/heads/hop)
 "hf" = (
 /obj/item/bedsheet/hop,
 /obj/structure/bed,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/carpet/blue,
 /area/crew_quarters/heads/hop)
 "hl" = (
@@ -174,9 +205,19 @@
 /obj/machinery/computer/bounty,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"if" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "ih" = (
 /obj/structure/cable,
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/stripes{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
 /area/teleporter)
 "is" = (
 /obj/effect/turf_decal/tile/red{
@@ -265,6 +306,11 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"lV" = (
+/turf/open/floor/plating{
+	icon_state = "platingdmg3"
+	},
+/area/crew_quarters/heads/hop)
 "mb" = (
 /obj/structure/lattice,
 /obj/structure/window/reinforced{
@@ -290,6 +336,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"mO" = (
+/obj/item/radio,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "mT" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
@@ -301,6 +351,10 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"mX" = (
+/obj/structure/cable,
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "nG" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -321,6 +375,13 @@
 "nZ" = (
 /turf/open/floor/carpet/royalblack,
 /area/bridge)
+"ol" = (
+/obj/structure/table/wood,
+/obj/item/toy/talking/owl{
+	pixel_y = 10
+	},
+/turf/open/floor/plating,
+/area/crew_quarters/heads/hop)
 "om" = (
 /obj/structure/cable,
 /turf/open/floor/wood,
@@ -332,6 +393,12 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"oR" = (
+/obj/item/flashlight,
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/north,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "pn" = (
 /obj/structure/lattice,
 /obj/structure/window/reinforced{
@@ -347,6 +414,12 @@
 	dir = 1
 	},
 /turf/open/floor/wood,
+/area/crew_quarters/heads/hop)
+"qw" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/plating{
+	icon_state = "panelscorched"
+	},
 /area/crew_quarters/heads/hop)
 "qB" = (
 /obj/machinery/vending/coffee,
@@ -387,6 +460,9 @@
 /turf/open/floor/plasteel/dark,
 /area/ruin/powered)
 "rr" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/command)
 "ry" = (
@@ -409,6 +485,25 @@
 "rR" = (
 /obj/machinery/door/airlock/command/glass,
 /turf/open/floor/plasteel/dark,
+/area/crew_quarters/heads/hop)
+"sa" = (
+/obj/structure/rack,
+/obj/item/restraints/handcuffs,
+/obj/item/restraints/handcuffs{
+	pixel_y = 3
+	},
+/obj/item/reagent_containers/spray/pepper,
+/obj/effect/decal/cleanable/cobweb/cobweb2,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/plating,
 /area/crew_quarters/heads/hop)
 "su" = (
 /obj/effect/turf_decal/tile/blue,
@@ -439,12 +534,43 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"tr" = (
+/obj/effect/turf_decal/stripes,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "ts" = (
 /turf/closed/wall/r_wall,
 /area/hallway/secondary/command)
+"tw" = (
+/obj/structure/falsewall/reinforced,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/plating,
+/area/crew_quarters/heads/hop)
 "tF" = (
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"tG" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/structure/closet/crate,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/electrical{
+	pixel_x = -1;
+	pixel_y = 4
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "tT" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -502,8 +628,15 @@
 "we" = (
 /obj/structure/table/wood,
 /obj/machinery/recharger,
+/obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"wo" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "wp" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -542,6 +675,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"wA" = (
+/obj/effect/turf_decal/tile/neutral,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "xc" = (
 /obj/machinery/door/window/westleft{
 	name = "Bridge Deliveries";
@@ -552,12 +689,32 @@
 	name = "bridge blast door"
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/plasteel,
-/area/bridge)
-"xe" = (
 /obj/structure/cable,
 /turf/open/floor/plasteel,
+/area/bridge)
+"xd" = (
+/obj/effect/turf_decal/stripes{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
+"xe" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
 /area/hallway/secondary/command)
+"xi" = (
+/obj/structure/closet/emcloset,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "xr" = (
 /obj/machinery/door/poddoor/shutters{
 	id = "teleshutter";
@@ -582,6 +739,15 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"yl" = (
+/obj/structure/sign/poster/contraband/the_griffin{
+	pixel_x = -32
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/table,
+/obj/machinery/cell_charger,
+/turf/open/floor/plating,
+/area/crew_quarters/heads/hop)
 "ym" = (
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -598,10 +764,54 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"yM" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/item/hand_tele,
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
+"yR" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/machinery/bluespace_beacon,
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
+"yX" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "zm" = (
 /obj/machinery/gravity_generator/main/station/admin,
 /turf/open/floor/plasteel/dark,
 /area/ruin/powered)
+"zo" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/structure/table,
+/obj/machinery/cell_charger{
+	pixel_y = 3
+	},
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "zE" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -653,6 +863,11 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"AJ" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/tile/neutral,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "AK" = (
 /obj/machinery/requests_console{
 	announcementConsole = 1;
@@ -679,6 +894,9 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Bw" = (
+/turf/closed/wall/r_wall,
+/area/maintenance/department/bridge)
 "CK" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -708,6 +926,22 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/bridge)
+"Fy" = (
+/obj/item/clothing/mask/gas,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
+"FB" = (
+/obj/structure/table/wood,
+/obj/item/toy/talking/griffin{
+	pixel_y = 10
+	},
+/turf/open/floor/plating{
+	icon_state = "platingdmg3"
+	},
+/area/crew_quarters/heads/hop)
 "FI" = (
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
@@ -735,7 +969,8 @@
 /turf/open/space/basic,
 /area/asteroid/nearstation)
 "Gy" = (
-/turf/open/floor/plasteel,
+/obj/machinery/computer/teleporter,
+/turf/open/floor/plating,
 /area/teleporter)
 "GA" = (
 /obj/item/hand_labeler,
@@ -756,6 +991,9 @@
 /obj/machinery/computer/cargo/request,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"GI" = (
+/turf/open/floor/plating,
+/area/crew_quarters/heads/hop)
 "GY" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -778,6 +1016,11 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Hk" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "Hw" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -794,6 +1037,18 @@
 "HL" = (
 /turf/closed/wall/r_wall,
 /area/space)
+"HZ" = (
+/obj/effect/turf_decal/stripes{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "Ii" = (
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
@@ -808,6 +1063,20 @@
 /obj/structure/railing,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Iy" = (
+/obj/machinery/power/shieldwallgen,
+/turf/open/floor/plating,
+/area/teleporter)
+"IF" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "IM" = (
 /turf/closed/wall,
 /area/bridge)
@@ -861,9 +1130,40 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"KU" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/teleporter)
 "Le" = (
 /obj/effect/mapping_helpers/ianbirthday,
 /turf/open/floor/carpet/blue,
+/area/crew_quarters/heads/hop)
+"Ln" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/plating{
+	icon_state = "panelscorched"
+	},
+/area/crew_quarters/heads/hop)
+"Lw" = (
+/obj/structure/rack,
+/obj/item/clothing/shoes/galoshes,
+/obj/item/grenade/chem_grenade/smart_metal_foam,
+/obj/item/grenade/chem_grenade/smart_metal_foam{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/plating,
 /area/crew_quarters/heads/hop)
 "LM" = (
 /obj/effect/turf_decal/tile/blue{
@@ -873,6 +1173,23 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"LN" = (
+/obj/structure/rack,
+/obj/item/melee/baton/cattleprod,
+/obj/item/stock_parts/cell/high/plus,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/plating{
+	icon_state = "platingdmg3"
+	},
+/area/crew_quarters/heads/hop)
 "Mm" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -881,12 +1198,27 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"MJ" = (
+/obj/structure/table,
+/obj/machinery/recharger,
+/obj/structure/sign/poster/official/the_owl{
+	pixel_y = 32
+	},
+/obj/structure/sign/poster/ripped{
+	pixel_x = -32
+	},
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/plating{
+	icon_state = "panelscorched"
+	},
+/area/crew_quarters/heads/hop)
 "MM" = (
 /obj/machinery/door/window{
 	name = "HoP's Desk";
 	req_access_txt = "57"
 	},
 /obj/machinery/holopad,
+/obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
 "MZ" = (
@@ -933,8 +1265,46 @@
 	},
 /obj/structure/plasticflaps/opaque,
 /obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/stripes,
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/structure/cable,
 /turf/open/floor/plasteel,
-/area/space)
+/area/maintenance/department/bridge)
+"NO" = (
+/obj/structure/rack,
+/obj/item/clothing/suit/toggle/owlwings,
+/obj/item/clothing/under/costume/owl,
+/obj/item/clothing/mask/gas/owl_mask,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/open/floor/plating{
+	icon_state = "platingdmg1"
+	},
+/area/crew_quarters/heads/hop)
+"NP" = (
+/obj/effect/turf_decal/stripes{
+	dir = 9
+	},
+/obj/structure/closet/crate,
+/obj/item/tank/internals/oxygen,
+/obj/item/tank/internals/oxygen,
+/obj/item/radio,
+/obj/item/radio,
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "NZ" = (
 /turf/closed/wall/r_wall,
 /area/teleporter)
@@ -971,6 +1341,9 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Oq" = (
+/turf/closed/wall/r_wall/rust,
+/area/crew_quarters/heads/hop)
 "OG" = (
 /obj/machinery/door/window/brigdoor{
 	dir = 1;
@@ -994,6 +1367,9 @@
 /area/bridge)
 "Qa" = (
 /obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/command)
 "Qm" = (
@@ -1098,6 +1474,9 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Se" = (
+/turf/closed/wall/r_wall/rust,
+/area/bridge)
 "Sn" = (
 /obj/structure/bed/dogbed/ian,
 /mob/living/simple_animal/pet/dog/corgi/Ian,
@@ -1108,10 +1487,13 @@
 /area/crew_quarters/heads/hop)
 "Sr" = (
 /obj/structure/closet/secure_closet/hop,
-/obj/structure/cable,
 /obj/structure/window/reinforced,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"Su" = (
+/obj/machinery/teleport/hub,
+/turf/open/floor/plating,
+/area/teleporter)
 "SM" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -1189,6 +1571,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"UK" = (
+/obj/machinery/teleport/station,
+/turf/open/floor/plating,
+/area/teleporter)
 "UL" = (
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
@@ -1206,6 +1592,14 @@
 /obj/machinery/camera/autoname,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Va" = (
+/obj/structure/window/reinforced,
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/maintenance/department/bridge)
 "Vk" = (
 /obj/structure/table/wood,
 /obj/machinery/button/ticket_machine{
@@ -1290,6 +1684,13 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Xf" = (
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_y = 28
+	},
+/obj/machinery/computer/arcade,
+/turf/open/floor/plating,
+/area/crew_quarters/heads/hop)
 "Xy" = (
 /obj/machinery/door/airlock/command/glass,
 /turf/open/floor/plasteel/dark,
@@ -1305,6 +1706,12 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Yv" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/plating{
+	icon_state = "platingdmg1"
+	},
+/area/crew_quarters/heads/hop)
 "YC" = (
 /obj/structure/lattice,
 /obj/structure/window/reinforced{
@@ -1331,7 +1738,14 @@
 "ZD" = (
 /obj/machinery/power/apc/auto_name/east,
 /obj/structure/cable,
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/stripes{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
 /area/teleporter)
 "ZN" = (
 /obj/structure/stairs/east,
@@ -29478,9 +29892,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+hl
+Oq
+hl
 hl
 Et
 Et
@@ -29735,10 +30149,10 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
 hl
+MJ
+yl
+Oq
 we
 Sr
 wu
@@ -29991,11 +30405,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
 hl
+hl
+Xf
+qw
+tw
 hf
 MM
 jO
@@ -30003,7 +30417,7 @@ jO
 GA
 Et
 xe
-xe
+AJ
 HL
 ka
 ka
@@ -30248,11 +30662,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-hl
+Oq
+LN
+lV
+GI
+Oq
 Sn
 TR
 jO
@@ -30505,10 +30919,10 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
+Oq
+Lw
+lV
+gJ
 hl
 hl
 ht
@@ -30762,12 +31176,12 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-hl
+Oq
+NO
+Ln
+GI
+FB
+Oq
 bG
 jO
 Le
@@ -31019,12 +31433,12 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
 hl
+sa
+lV
+Yv
+ol
+Oq
 AK
 jO
 jO
@@ -31277,10 +31691,10 @@ ka
 ka
 xF
 xF
-xF
-xF
-xF
-xF
+Se
+Se
+Se
+Se
 xF
 VS
 om
@@ -31288,7 +31702,7 @@ tF
 ei
 Om
 rr
-rr
+wA
 HL
 ka
 ka
@@ -36168,7 +36582,7 @@ xF
 xF
 sR
 xF
-Gy
+Iy
 NZ
 ka
 ka
@@ -36422,10 +36836,10 @@ xF
 xc
 xF
 xF
-Gy
+NP
 ih
-Gy
-Gy
+xd
+Iy
 NZ
 ka
 ka
@@ -36673,16 +37087,16 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+Bw
+yX
+Va
 NH
-ka
+if
 NZ
-Gy
-ih
-Gy
-Gy
+tG
+mX
+tr
+Iy
 NZ
 ka
 ka
@@ -36930,17 +37344,17 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
+Bw
+cX
+wo
+aj
+mO
 NZ
-Gy
-ih
-Gy
-Gy
-xr
+zo
+mX
+tr
+Iy
+NZ
 ka
 ka
 ka
@@ -37187,16 +37601,16 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
+Bw
+bn
+wo
+aj
 NZ
 NZ
-Gy
-ih
-Gy
-Gy
+yM
+mX
+tr
+KU
 xr
 ka
 ka
@@ -37444,16 +37858,16 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
+Bw
+xi
+wo
+aj
 NZ
 Gy
-Gy
-ih
-Gy
-Gy
+IF
+mX
+tr
+KU
 xr
 ka
 ka
@@ -37701,16 +38115,16 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
+Bw
+Bw
+Fy
+aj
 NZ
-Gy
-Gy
-ih
-Gy
-Gy
+UK
+yR
+mX
+tr
+KU
 Ng
 ka
 ka
@@ -37959,15 +38373,15 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+Bw
+oR
+aj
 NZ
-Gy
+Su
 ZD
-ih
-Gy
-Gy
+dC
+HZ
+cr
 NZ
 ka
 ka
@@ -38216,9 +38630,9 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
+Bw
+Bw
+Hk
 NZ
 NZ
 NZ

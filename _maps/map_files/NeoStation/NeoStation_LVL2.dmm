@@ -378,7 +378,10 @@
 /turf/open/openspace,
 /area/bridge)
 "tk" = (
-/obj/machinery/holopad,
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/obj/effect/landmark/start/head_of_personnel,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
@@ -889,8 +892,15 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
+"OH" = (
+/obj/machinery/status_display/evac{
+	pixel_x = 32
+	},
+/turf/open/floor/carpet/royalblack,
+/area/bridge/meeting_room)
 "OS" = (
-/obj/structure/table/reinforced,
+/obj/structure/chair/comfy/black,
+/obj/effect/landmark/start/captain,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
@@ -1031,11 +1041,9 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/chief)
 "Ut" = (
-/obj/structure/chair/comfy/black{
-	dir = 4
+/obj/machinery/status_display/evac{
+	pixel_x = -32
 	},
-/obj/effect/landmark/start/head_of_personnel,
-/obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
 "UK" = (
@@ -1151,10 +1159,7 @@
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hos)
 "YU" = (
-/obj/structure/chair/comfy/black{
-	dir = 8
-	},
-/obj/effect/landmark/start/captain,
+/obj/machinery/holopad,
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
@@ -1169,7 +1174,10 @@
 /area/crew_quarters/heads/captain/private)
 "Zb" = (
 /obj/structure/cable,
-/obj/structure/statue/diamond/ai2,
+/obj/structure/table/reinforced,
+/obj/structure/statue/diamond/ai1{
+	pixel_y = 8
+	},
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
 "Zy" = (
@@ -29328,9 +29336,9 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
+FB
+FB
+FB
 FB
 FB
 FB
@@ -29585,9 +29593,9 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
+FB
+FB
+FB
 FB
 FB
 FB
@@ -29841,10 +29849,10 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -30098,10 +30106,10 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -30355,10 +30363,10 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -30612,11 +30620,11 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -32923,7 +32931,7 @@ MM
 MM
 MM
 Dk
-Dk
+Ut
 sq
 sq
 LH
@@ -33178,7 +33186,7 @@ yz
 Dk
 Dk
 Ei
-Ut
+MM
 II
 Dk
 Dk
@@ -33694,7 +33702,7 @@ hz
 OS
 Zb
 tk
-MM
+YU
 MM
 MM
 iI
@@ -34206,7 +34214,7 @@ yz
 Dk
 Dk
 js
-YU
+MM
 CC
 Dk
 Dk
@@ -34465,7 +34473,7 @@ MM
 MM
 MM
 Dk
-Dk
+OH
 sq
 sq
 LH
@@ -36780,12 +36788,12 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -37037,11 +37045,11 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -37294,11 +37302,11 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -37551,11 +37559,11 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -37809,10 +37817,10 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
 FB
 FB
 FB
@@ -38066,10 +38074,10 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
+FB
+FB
+FB
+FB
 FB
 FB
 FB
