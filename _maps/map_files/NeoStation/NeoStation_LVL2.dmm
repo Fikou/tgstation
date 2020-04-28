@@ -108,19 +108,13 @@
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
-"fx" = (
-/obj/machinery/door/airlock/command,
-/obj/structure/cable,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
 "fO" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hor)
 "fP" = (
-/obj/item/bedsheet/captain,
-/obj/structure/bed,
+/obj/structure/dresser,
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain/private)
 "go" = (
@@ -178,10 +172,6 @@
 /obj/item/bedsheet/cmo,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
-"ko" = (
-/obj/machinery/disposal/bin,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
 "ks" = (
 /turf/closed/wall,
 /area/crew_quarters/heads/hos)
@@ -240,12 +230,22 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hos)
-"ms" = (
-/obj/machinery/vending/cigarette,
+"mr" = (
+/obj/structure/table/wood,
+/obj/structure/window/reinforced,
+/obj/machinery/light_switch{
+	pixel_x = -28
+	},
+/obj/item/storage/secure/briefcase{
+	pixel_x = -2;
+	pixel_y = 4
+	},
+/obj/item/storage/lockbox/medal,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "mz" = (
-/turf/closed/wall/r_wall,
+/obj/machinery/disposal/bin,
+/turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "mH" = (
 /obj/structure/table/reinforced,
@@ -261,24 +261,33 @@
 /area/ai_monitored/turret_protected/ai_upload_foyer)
 "nb" = (
 /obj/structure/cable,
-/obj/structure/table/wood,
-/obj/structure/window/reinforced,
-/obj/item/paper_bin,
-/obj/item/pen/fountain/captain,
-/obj/item/stamp/captain,
-/turf/open/floor/wood,
+/obj/machinery/holopad,
+/turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "nt" = (
 /obj/machinery/power/apc/auto_name/east,
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/chief)
+"nF" = (
+/obj/item/soap/deluxe,
+/obj/machinery/shower{
+	pixel_y = 12
+	},
+/obj/structure/curtain,
+/obj/structure/mirror{
+	pixel_x = 28
+	},
+/turf/open/floor/plasteel/white,
+/area/crew_quarters/heads/captain/private)
 "nG" = (
+/obj/machinery/door/airlock/command,
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "oy" = (
-/turf/closed/wall,
+/obj/machinery/door/airlock/silver,
+/turf/open/floor/plasteel/white,
 /area/crew_quarters/heads/captain/private)
 "oC" = (
 /obj/structure/cable,
@@ -354,12 +363,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
 "rA" = (
-/obj/structure/table/wood,
-/obj/machinery/recharger{
-	pixel_y = 4
-	},
-/obj/item/restraints/handcuffs/cable/zipties,
-/turf/open/floor/carpet/royalblue,
+/turf/closed/wall/r_wall,
 /area/crew_quarters/heads/captain/private)
 "rC" = (
 /turf/open/floor/wood,
@@ -415,6 +419,9 @@
 /obj/structure/cable,
 /turf/open/floor/circuit,
 /area/ai_monitored/turret_protected/ai_upload)
+"uT" = (
+/turf/open/floor/plasteel/white,
+/area/crew_quarters/heads/captain/private)
 "vd" = (
 /obj/structure/table/wood,
 /obj/machinery/cell_charger,
@@ -422,6 +429,10 @@
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/chief)
+"vk" = (
+/obj/structure/displaycase/captain,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain/private)
 "vo" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/north,
@@ -448,13 +459,13 @@
 /turf/open/openspace/airless,
 /area/space/nearstation)
 "xh" = (
-/obj/machinery/door/window{
-	name = "Captain's Desk";
-	req_access_txt = "20"
+/obj/structure/table/wood,
+/obj/machinery/recharger{
+	pixel_y = 4
 	},
-/obj/structure/cable,
+/obj/item/restraints/handcuffs/cable/zipties,
 /turf/open/floor/wood,
-/area/crew_quarters/heads/captain)
+/area/crew_quarters/heads/captain/private)
 "xu" = (
 /obj/structure/displaycase/labcage,
 /turf/open/floor/wood,
@@ -473,10 +484,6 @@
 "ye" = (
 /turf/closed/wall,
 /area/crew_quarters/heads/chief)
-"ym" = (
-/obj/machinery/door/airlock/silver,
-/turf/open/floor/plasteel/white,
-/area/crew_quarters/heads/captain/private)
 "yo" = (
 /obj/structure/table/wood,
 /obj/machinery/recharger,
@@ -486,6 +493,15 @@
 /area/crew_quarters/heads/hos)
 "yz" = (
 /turf/closed/wall/r_wall,
+/area/crew_quarters/heads/captain)
+"yC" = (
+/obj/structure/cable,
+/obj/structure/table/wood,
+/obj/structure/window/reinforced,
+/obj/item/paper_bin,
+/obj/item/pen/fountain/captain,
+/obj/item/stamp/captain,
+/turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "yW" = (
 /obj/machinery/disposal/bin,
@@ -540,23 +556,24 @@
 /area/ai_monitored/turret_protected/ai_upload)
 "Ao" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/wiki/security_space_law,
-/obj/item/paper/fluff/gateway,
-/obj/item/coin/plasma,
-/obj/item/melee/chainofcommand,
-/obj/structure/cable,
-/obj/structure/window/reinforced,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain)
+/obj/item/razor{
+	pixel_x = -4;
+	pixel_y = 2
+	},
+/obj/item/clothing/mask/cigarette/cigar,
+/obj/item/reagent_containers/food/drinks/flask/gold,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain/private)
 "AB" = (
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain/private)
 "Bf" = (
 /obj/structure/table/wood,
+/obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/storage/fancy/donut_box,
+/obj/item/hand_tele,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "Bg" = (
@@ -564,10 +581,26 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/purple,
 /area/crew_quarters/heads/hor)
-"Bu" = (
-/obj/structure/filingcabinet,
+"Bo" = (
+/obj/structure/table/wood,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/item/storage/fancy/donut_box,
 /turf/open/floor/wood,
-/area/crew_quarters/heads/captain)
+/area/crew_quarters/heads/captain/private)
+"Bu" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp/green{
+	pixel_x = 1;
+	pixel_y = 5
+	},
+/obj/item/bikehorn/rubberducky,
+/obj/machinery/light_switch{
+	pixel_x = -28
+	},
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain/private)
 "BA" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/donut_box,
@@ -582,9 +615,15 @@
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "BX" = (
+/obj/machinery/door/window{
+	name = "Captain's Desk";
+	req_access_txt = "20"
+	},
+/obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "Cl" = (
+/obj/structure/window/reinforced,
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
@@ -595,6 +634,10 @@
 /obj/effect/landmark/start/chief_medical_officer,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
+"CI" = (
+/obj/structure/filingcabinet,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain)
 "CL" = (
 /turf/closed/wall/r_wall,
 /area/ai_monitored/turret_protected/ai_upload)
@@ -640,9 +683,6 @@
 /turf/closed/wall,
 /area/crew_quarters/heads/hor)
 "DW" = (
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
-"DX" = (
 /obj/machinery/holopad,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
@@ -658,20 +698,23 @@
 /obj/structure/cable,
 /turf/open/floor/mech_bay_recharge_floor,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
+"Ex" = (
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/west,
+/obj/structure/mecha_wreckage/seraph{
+	color = "#527daf";
+	desc = "Reminds you of the HUUUGE debt the Captain has for losing this mech on the battlefield.";
+	name = "\improper Overlord wreckage"
+	},
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain/private)
 "Fk" = (
 /turf/open/floor/carpet/red,
 /area/crew_quarters/heads/hos)
-"Fl" = (
-/obj/item/soap/deluxe,
-/obj/machinery/shower{
-	pixel_y = 12
-	},
-/obj/structure/curtain,
-/obj/structure/mirror{
-	pixel_x = 28
-	},
-/turf/open/floor/plasteel/white,
-/area/crew_quarters/heads/captain/private)
+"Fz" = (
+/obj/item/kirbyplants/random,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "FB" = (
 /turf/open/floor/engine/hull,
 /area/space/nearstation)
@@ -748,18 +791,10 @@
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/chief)
 "Iw" = (
-/obj/structure/table/wood,
-/obj/structure/window/reinforced,
-/obj/machinery/light_switch{
-	pixel_x = -28
-	},
-/obj/item/storage/secure/briefcase{
-	pixel_x = -2;
-	pixel_y = 4
-	},
-/obj/item/storage/lockbox/medal,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain)
+/obj/item/bedsheet/captain,
+/obj/structure/bed,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain/private)
 "II" = (
 /obj/structure/chair/comfy/black{
 	dir = 4
@@ -767,16 +802,6 @@
 /obj/effect/landmark/start/research_director,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
-"IO" = (
-/obj/structure/cable,
-/obj/machinery/power/apc/auto_name/west,
-/obj/structure/mecha_wreckage/seraph{
-	color = "#527daf";
-	desc = "Reminds you of the HUUUGE debt the Captain has for losing this mech on the battlefield.";
-	name = "\improper Overlord wreckage"
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
 "Jh" = (
 /obj/machinery/vending/cigarette,
 /turf/open/floor/plasteel/dark,
@@ -819,6 +844,16 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
+"Kr" = (
+/obj/structure/toilet{
+	pixel_y = 13
+	},
+/obj/structure/sink{
+	dir = 1;
+	pixel_y = -5
+	},
+/turf/open/floor/plasteel/white,
+/area/crew_quarters/heads/captain/private)
 "KZ" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
@@ -833,6 +868,10 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
+"Ll" = (
+/obj/machinery/suit_storage_unit/captain,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain/private)
 "Lm" = (
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
@@ -863,6 +902,10 @@
 "MG" = (
 /turf/closed/wall,
 /area/bridge)
+"MH" = (
+/obj/machinery/vending/boozeomat,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain/private)
 "MJ" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/east,
@@ -876,22 +919,14 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/cyan,
 /area/crew_quarters/heads/cmo)
+"Np" = (
+/obj/machinery/vending/cigarette,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain/private)
 "NL" = (
 /obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
-"OC" = (
-/obj/structure/table/wood,
-/obj/item/flashlight/lamp/green{
-	pixel_x = 1;
-	pixel_y = 5
-	},
-/obj/item/bikehorn/rubberducky,
-/obj/machinery/light_switch{
-	pixel_x = -28
-	},
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
 "OH" = (
 /obj/machinery/status_display/evac{
 	pixel_x = 32
@@ -906,13 +941,9 @@
 /area/bridge/meeting_room)
 "Pi" = (
 /obj/structure/table/wood,
-/obj/item/razor{
-	pixel_x = -4;
-	pixel_y = 2
-	},
-/obj/item/clothing/mask/cigarette/cigar,
-/obj/item/reagent_containers/food/drinks/flask/gold,
-/turf/open/floor/carpet/royalblue,
+/obj/item/pinpointer/nuke,
+/obj/item/disk/nuclear,
+/turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "Pt" = (
 /obj/item/kirbyplants/random,
@@ -929,14 +960,9 @@
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/hos)
 "Qi" = (
-/obj/structure/table/wood,
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/item/hand_tele,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain)
+/obj/structure/closet/secure_closet/captains,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain/private)
 "Qk" = (
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
@@ -966,20 +992,6 @@
 /obj/structure/cable,
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
-"QN" = (
-/obj/structure/closet/secure_closet/captains,
-/turf/open/floor/carpet/royalblue,
-/area/crew_quarters/heads/captain/private)
-"QR" = (
-/obj/structure/toilet{
-	pixel_y = 13
-	},
-/obj/structure/sink{
-	dir = 1;
-	pixel_y = -5
-	},
-/turf/open/floor/plasteel/white,
-/area/crew_quarters/heads/captain/private)
 "Rt" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/fancy/donut_box,
@@ -998,16 +1010,12 @@
 /turf/open/floor/carpet/cyan,
 /area/crew_quarters/heads/cmo)
 "Sh" = (
-/obj/machinery/vending/boozeomat,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "Sr" = (
 /turf/open/floor/engine/hull/reinforced,
 /area/space/nearstation)
 "SO" = (
-/obj/structure/table/wood,
-/obj/item/pinpointer/nuke,
-/obj/item/disk/nuclear,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "Tv" = (
@@ -1047,10 +1055,10 @@
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
 "UK" = (
-/obj/structure/cable,
-/obj/machinery/holopad,
+/obj/structure/table/wood,
+/obj/machinery/computer/security/wooden_tv,
 /turf/open/floor/carpet/royalblue,
-/area/crew_quarters/heads/captain)
+/area/crew_quarters/heads/captain/private)
 "US" = (
 /obj/structure/table/wood,
 /obj/item/storage/secure/briefcase{
@@ -1107,12 +1115,14 @@
 "Xp" = (
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/cmo)
-"Xq" = (
-/obj/structure/dresser,
-/turf/open/floor/carpet/royalblue,
-/area/crew_quarters/heads/captain/private)
 "XG" = (
-/obj/structure/displaycase/captain,
+/obj/structure/table/wood,
+/obj/item/book/manual/wiki/security_space_law,
+/obj/item/paper/fluff/gateway,
+/obj/item/coin/plasma,
+/obj/item/melee/chainofcommand,
+/obj/structure/cable,
+/obj/structure/window/reinforced,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "XJ" = (
@@ -1169,13 +1179,14 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hos)
 "YZ" = (
-/obj/machinery/suit_storage_unit/captain,
+/obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "Zb" = (
 /obj/structure/cable,
 /obj/structure/table/reinforced,
 /obj/structure/statue/diamond/ai1{
+	anchored = 1;
 	pixel_y = 8
 	},
 /turf/open/floor/carpet/royalblack,
@@ -1193,9 +1204,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
 "ZR" = (
-/obj/structure/table/wood,
-/obj/machinery/computer/security/wooden_tv,
-/turf/open/floor/carpet/royalblue,
+/turf/closed/wall,
 /area/crew_quarters/heads/captain/private)
 
 (1,1,1) = {"
@@ -32405,11 +32414,11 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
+rA
+rA
+yz
+yz
+yz
 Ip
 hL
 dS
@@ -32657,16 +32666,16 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
-bU
-mz
-yz
-yz
-yz
+rA
+rA
+rA
+rA
+rA
+rA
+vk
+mr
+CI
+Sh
 Ip
 Ip
 HX
@@ -32913,17 +32922,17 @@ bU
 bU
 bU
 bU
-bU
-bU
-mz
-mz
-mz
-mz
-mz
-mz
-XG
-Iw
+rA
+rA
 Bu
+Pi
+Ll
+Ex
+ZR
+YZ
+XG
+BO
+BO
 KZ
 yz
 MM
@@ -33170,16 +33179,16 @@ bU
 bU
 bU
 bU
-bU
+rA
 mz
-mz
-OC
+SO
+SO
 SO
 YZ
-IO
-oy
+ZR
+SO
 Cl
-Ao
+BO
 BO
 BO
 yz
@@ -33427,16 +33436,16 @@ bU
 bU
 bU
 bU
-bU
-mz
-ko
-DW
-DX
-DW
-nG
-fx
-BX
+rA
 xh
+SO
+DW
+SO
+YZ
+nG
+YZ
+BX
+BO
 BO
 kN
 yz
@@ -33684,17 +33693,17 @@ bU
 bU
 bU
 bU
-bU
-mz
 rA
+Ao
 AB
-QN
+AB
+ZR
 oy
-ym
-oy
-BX
+ZR
+SO
+yC
 nb
-UK
+oC
 oC
 XM
 hz
@@ -33941,16 +33950,16 @@ bU
 bU
 bU
 bU
-bU
-mz
-Pi
+rA
 AB
-Xq
-oy
-QR
-oy
-Bf
+AB
 Qi
+ZR
+Kr
+ZR
+Bo
+Bf
+BO
 BO
 JG
 yz
@@ -34198,16 +34207,16 @@ bU
 bU
 bU
 bU
-bU
-mz
-mz
+rA
+AB
+AB
 fP
 ZR
-oy
-Fl
-oy
-ms
-BX
+uT
+ZR
+SO
+Sh
+BO
 BO
 BO
 yz
@@ -34455,18 +34464,18 @@ bU
 bU
 bU
 bU
-bU
-bU
-mz
-mz
-mz
-mz
-mz
-mz
+rA
+rA
+Iw
+UK
+ZR
+nF
+ZR
+Np
 Sh
-BX
-BX
-KZ
+BO
+BO
+Fz
 yz
 MM
 MM
@@ -34713,16 +34722,16 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
-bU
-mz
-yz
-yz
-yz
+rA
+rA
+rA
+rA
+rA
+rA
+MH
+Sh
+Sh
+Sh
 Qb
 Qb
 zv
@@ -34975,11 +34984,11 @@ bU
 bU
 bU
 bU
-bU
-bU
-bU
-bU
-bU
+rA
+rA
+yz
+yz
+yz
 Qb
 Pt
 Yu
