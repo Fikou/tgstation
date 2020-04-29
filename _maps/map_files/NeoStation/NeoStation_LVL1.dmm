@@ -45,6 +45,7 @@
 /area/crew_quarters/heads/hop)
 "bJ" = (
 /obj/machinery/door/airlock/command,
+/obj/machinery/door/firedoor,
 /turf/open/floor/plasteel,
 /area/teleporter)
 "ca" = (
@@ -108,7 +109,7 @@
 /obj/effect/turf_decal/stripes{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark,
+/turf/open/floor/plasteel/bluespace,
 /area/teleporter)
 "dG" = (
 /obj/item/kirbyplants/photosynthetic,
@@ -217,8 +218,12 @@
 /obj/effect/turf_decal/stripes{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark,
+/turf/open/floor/plasteel/bluespace,
 /area/teleporter)
+"in" = (
+/obj/item/kirbyplants/random,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "is" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -322,8 +327,8 @@
 /obj/machinery/ticket_machine{
 	pixel_y = 32
 	},
-/turf/closed/wall/r_wall,
-/area/space)
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "mA" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 4
@@ -353,7 +358,7 @@
 /area/bridge)
 "mX" = (
 /obj/structure/cable,
-/turf/open/floor/plasteel/dark,
+/turf/open/floor/plasteel/bluespace,
 /area/teleporter)
 "nG" = (
 /obj/effect/turf_decal/tile/blue{
@@ -484,6 +489,7 @@
 /area/asteroid/nearstation)
 "rR" = (
 /obj/machinery/door/airlock/command/glass,
+/obj/machinery/door/firedoor,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hop)
 "sa" = (
@@ -523,6 +529,7 @@
 "sR" = (
 /obj/machinery/door/airlock/command/glass,
 /obj/structure/cable,
+/obj/machinery/door/firedoor,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "ta" = (
@@ -1019,6 +1026,7 @@
 "Hk" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/structure/cable,
+/obj/machinery/door/firedoor,
 /turf/open/floor/plating,
 /area/maintenance/department/bridge)
 "Hw" = (
@@ -1035,8 +1043,8 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "HL" = (
-/turf/closed/wall/r_wall,
-/area/space)
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "HZ" = (
 /obj/effect/turf_decal/stripes{
 	dir = 6
@@ -1063,6 +1071,9 @@
 /obj/structure/railing,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Ir" = (
+/turf/open/floor/plasteel,
+/area/space)
 "Iy" = (
 /obj/machinery/power/shieldwallgen,
 /turf/open/floor/plating,
@@ -1693,6 +1704,7 @@
 /area/crew_quarters/heads/hop)
 "Xy" = (
 /obj/machinery/door/airlock/command/glass,
+/obj/machinery/door/firedoor,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "XR" = (
@@ -29121,20 +29133,20 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 ka
 ka
 ka
@@ -29378,20 +29390,20 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 ka
 ka
 ka
@@ -29635,20 +29647,20 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 ka
 ka
 ka
@@ -29904,8 +29916,8 @@ hl
 hl
 ts
 ts
-ka
-ka
+HL
+Ir
 ka
 ka
 ka
@@ -30162,7 +30174,7 @@ hl
 qB
 TQ
 HL
-ka
+Ir
 ka
 ka
 ka
@@ -30419,7 +30431,7 @@ Et
 xe
 AJ
 HL
-ka
+Ir
 ka
 ka
 ka
@@ -30676,7 +30688,7 @@ Et
 rr
 TQ
 mh
-ka
+Ir
 ka
 ka
 ka
@@ -30932,8 +30944,8 @@ Tg
 hl
 rr
 TQ
-ka
-ka
+HL
+Ir
 ka
 ka
 ka
@@ -31189,8 +31201,8 @@ qt
 hl
 rr
 TQ
-ka
-ka
+HL
+Ir
 ka
 ka
 ka
@@ -31447,7 +31459,7 @@ Et
 xe
 TQ
 HL
-ka
+Ir
 ka
 ka
 ka
@@ -31704,7 +31716,7 @@ Om
 rr
 wA
 HL
-ka
+Ir
 ka
 ka
 ka
@@ -31961,7 +31973,7 @@ hl
 Qa
 ts
 HL
-ka
+Ir
 ka
 ka
 ka
@@ -32217,8 +32229,8 @@ xF
 xF
 xF
 ts
-ka
-ka
+HL
+Ir
 ka
 ka
 ka
@@ -32473,9 +32485,9 @@ aI
 aI
 aI
 Xy
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -32730,9 +32742,9 @@ aC
 ym
 ym
 Xy
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -32987,9 +32999,9 @@ Ip
 eX
 eX
 xF
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -33244,9 +33256,9 @@ xF
 ZN
 ZN
 xF
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -33501,9 +33513,9 @@ xF
 xF
 xF
 xF
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -33756,11 +33768,11 @@ Gi
 rG
 rG
 Fa
-ka
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -34013,11 +34025,11 @@ Ii
 YC
 rG
 Fa
-ka
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -34270,11 +34282,11 @@ AD
 YC
 rG
 Fa
-ka
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -34527,11 +34539,11 @@ QT
 YC
 rG
 Fa
-ka
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -34784,11 +34796,11 @@ pn
 rG
 rG
 Fa
-ka
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -35043,9 +35055,9 @@ xF
 xF
 xF
 xF
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -35300,9 +35312,9 @@ xF
 aJ
 aJ
 xF
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -35557,9 +35569,9 @@ Ip
 zE
 Oo
 xF
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -35814,9 +35826,9 @@ ux
 ym
 ym
 Xy
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -36071,9 +36083,9 @@ oA
 oA
 oA
 Xy
-ka
-ka
-ka
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -36328,9 +36340,9 @@ xF
 xF
 xF
 xF
-ka
-ka
-ka
+ts
+HL
+Ir
 ka
 ka
 ka
@@ -36584,10 +36596,10 @@ sR
 xF
 Iy
 NZ
-ka
-ka
-ka
-ka
+in
+ts
+HL
+Ir
 ka
 ka
 ka
@@ -36841,10 +36853,10 @@ ih
 xd
 Iy
 NZ
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -37098,10 +37110,10 @@ mX
 tr
 Iy
 NZ
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -37355,10 +37367,10 @@ mX
 tr
 Iy
 NZ
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -37612,10 +37624,10 @@ mX
 tr
 KU
 xr
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -37869,10 +37881,10 @@ mX
 tr
 KU
 xr
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -38126,10 +38138,10 @@ mX
 tr
 KU
 Ng
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -38383,10 +38395,10 @@ dC
 HZ
 cr
 NZ
-ka
-ka
-ka
-ka
+HL
+HL
+HL
+Ir
 ka
 ka
 ka
@@ -38640,10 +38652,10 @@ bJ
 NZ
 NZ
 NZ
-ka
-ka
-ka
-ka
+ts
+ts
+HL
+Ir
 ka
 ka
 ka
@@ -38887,20 +38899,20 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 ka
 ka
 ka
@@ -39144,20 +39156,20 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 ka
 ka
 ka
@@ -39401,20 +39413,20 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
+Ir
 ka
 ka
 ka
