@@ -24,6 +24,12 @@
 	},
 /turf/open/openspace/airless,
 /area/bridge)
+"bt" = (
+/obj/structure/chair/sofa/left{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/crew_quarters/heads/captain)
 "bB" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable,
@@ -113,6 +119,11 @@
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
+"fu" = (
+/obj/structure/cable,
+/obj/machinery/holopad,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain)
 "fO" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -145,6 +156,12 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/chief)
+"ie" = (
+/obj/structure/chair/sofa/right{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/crew_quarters/heads/captain)
 "im" = (
 /turf/closed/wall,
 /area/crew_quarters/heads/cmo)
@@ -225,10 +242,10 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hor)
 "lR" = (
-/obj/structure/chair/comfy/black{
+/obj/structure/cable,
+/obj/structure/chair/comfy/brown{
 	dir = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/carpet/orange,
 /area/crew_quarters/heads/chief)
 "mh" = (
@@ -238,25 +255,14 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hos)
 "mr" = (
-/obj/structure/table/wood,
-/obj/structure/window/reinforced,
-/obj/machinery/light_switch{
-	pixel_x = -28
+/obj/machinery/computer/communications{
+	dir = 4
 	},
-/obj/item/storage/secure/briefcase{
-	pixel_x = -2;
-	pixel_y = 4
-	},
-/obj/item/storage/lockbox/medal,
-/turf/open/floor/wood,
+/turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "mz" = (
 /obj/structure/table/wood,
-/obj/item/hand_tele,
-/obj/item/pen/blue{
-	pixel_x = -4;
-	pixel_y = 6
-	},
+/obj/item/flashlight/lamp,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "mH" = (
@@ -277,6 +283,11 @@
 /area/crew_quarters/heads/captain/private)
 "nm" = (
 /obj/structure/table/wood,
+/obj/structure/window/reinforced,
+/obj/item/hand_tele{
+	pixel_y = 3;
+	pixel_x = -3
+	},
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "nt" = (
@@ -301,12 +312,20 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
+"on" = (
+/obj/structure/cable,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "oy" = (
 /obj/machinery/door/airlock/silver,
 /turf/open/floor/plasteel/white,
 /area/crew_quarters/heads/captain/private)
 "oC" = (
 /obj/structure/cable,
+/obj/machinery/door/window{
+	name = "Captain's Desk";
+	req_access_txt = "20"
+	},
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "oJ" = (
@@ -333,6 +352,19 @@
 /obj/machinery/porta_turret/ai,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload)
+"pw" = (
+/obj/structure/table/wood,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/item/storage/secure/briefcase{
+	pixel_x = -2;
+	pixel_y = 4
+	},
+/obj/item/storage/lockbox/medal,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "pI" = (
 /obj/structure/table/wood,
 /obj/item/taperecorder,
@@ -442,6 +474,9 @@
 /turf/open/floor/circuit,
 /area/ai_monitored/turret_protected/ai_upload)
 "uT" = (
+/obj/structure/sink{
+	pixel_y = 22
+	},
 /turf/open/floor/plasteel/white,
 /area/crew_quarters/heads/captain/private)
 "vd" = (
@@ -452,9 +487,11 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/chief)
 "vk" = (
-/obj/structure/displaycase/captain,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
+/obj/machinery/computer/card{
+	dir = 4
+	},
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "vo" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/north,
@@ -482,17 +519,18 @@
 /area/space/nearstation)
 "xh" = (
 /obj/structure/table/wood,
+/obj/item/folder/blue,
+/obj/item/lighter,
+/turf/open/floor/carpet,
+/area/crew_quarters/heads/captain/private)
+"xl" = (
+/obj/structure/table/wood,
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
 /obj/item/restraints/handcuffs/cable/zipties,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
-"xl" = (
-/obj/structure/table/wood,
-/obj/item/storage/fancy/donut_box,
 /turf/open/floor/carpet/royalblue,
-/area/crew_quarters/heads/captain)
+/area/crew_quarters/heads/captain/private)
 "xu" = (
 /obj/structure/displaycase/labcage,
 /turf/open/floor/wood,
@@ -522,13 +560,7 @@
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/captain)
 "yC" = (
-/obj/structure/cable,
-/obj/structure/table/wood,
-/obj/structure/window/reinforced,
-/obj/item/paper_bin,
-/obj/item/pen/fountain/captain,
-/obj/item/stamp/captain,
-/turf/open/floor/wood,
+/turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "yW" = (
 /obj/machinery/disposal/bin,
@@ -597,26 +629,26 @@
 /area/crew_quarters/heads/captain/private)
 "Bf" = (
 /obj/structure/table/wood,
-/obj/structure/window/reinforced,
+/obj/item/book/manual/wiki/security_space_law,
+/obj/item/paper/fluff/gateway,
+/obj/item/melee/chainofcommand,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/hand_tele,
-/turf/open/floor/wood,
+/turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "Bg" = (
-/obj/structure/chair/comfy/black,
 /obj/structure/cable,
+/obj/structure/chair/comfy/beige,
 /turf/open/floor/carpet/purple,
 /area/crew_quarters/heads/hor)
 "Bo" = (
-/obj/structure/table/wood,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/storage/fancy/donut_box,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
+/obj/structure/displaycase/captain,
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "Bu" = (
 /obj/structure/table/wood,
 /obj/item/storage/photo_album{
@@ -636,7 +668,7 @@
 "BA" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/donut_box,
-/obj/item/folder/blue,
+/obj/item/folder/white,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
 "BJ" = (
@@ -644,20 +676,20 @@
 /turf/open/floor/carpet/purple,
 /area/crew_quarters/heads/hor)
 "BO" = (
+/obj/structure/table/wood,
+/obj/item/paper_bin,
+/obj/item/pen/fountain/captain,
+/obj/item/stamp/captain,
+/obj/structure/window/reinforced,
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "BX" = (
-/obj/machinery/door/window{
-	name = "Captain's Desk";
-	req_access_txt = "20"
-	},
 /obj/structure/cable,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "Cl" = (
-/obj/structure/window/reinforced,
-/obj/structure/cable,
-/turf/open/floor/wood,
+/obj/structure/chair/sofa/right,
+/turf/open/floor/carpet/royalblack,
 /area/crew_quarters/heads/captain)
 "CC" = (
 /obj/structure/chair/comfy/black{
@@ -668,7 +700,7 @@
 /area/bridge/meeting_room)
 "CI" = (
 /obj/structure/table/wood,
-/obj/item/flashlight/lamp,
+/obj/item/coin/adamantine,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/captain/private)
 "CL" = (
@@ -685,7 +717,7 @@
 "Dp" = (
 /obj/structure/filingcabinet,
 /turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
+/area/crew_quarters/heads/captain)
 "DB" = (
 /obj/structure/table,
 /obj/machinery/door/window{
@@ -708,6 +740,15 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload)
+"DH" = (
+/obj/structure/table/wood,
+/obj/structure/window/reinforced,
+/obj/machinery/recharger,
+/obj/machinery/light_switch{
+	pixel_x = -28
+	},
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "DL" = (
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel,
@@ -745,8 +786,8 @@
 /turf/open/floor/carpet/red,
 /area/crew_quarters/heads/hos)
 "Fz" = (
-/obj/item/kirbyplants/random,
-/turf/open/floor/carpet/royalblue,
+/obj/structure/chair/sofa/left,
+/turf/open/floor/carpet/royalblack,
 /area/crew_quarters/heads/captain)
 "FB" = (
 /turf/open/floor/engine/hull,
@@ -780,6 +821,11 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
+"Gw" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/food/drinks/shaker,
+/turf/open/floor/carpet/royalblack,
+/area/crew_quarters/heads/captain)
 "GE" = (
 /turf/open/floor/carpet/orange,
 /area/crew_quarters/heads/chief)
@@ -788,6 +834,18 @@
 /obj/item/flashlight/lamp/green,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
+"He" = (
+/obj/structure/table/wood,
+/obj/structure/window/reinforced,
+/obj/item/clothing/mask/cigarette/cigar/cohiba{
+	pixel_x = 6
+	},
+/obj/item/clothing/mask/cigarette/cigar,
+/obj/item/clothing/mask/cigarette/cigar/havana{
+	pixel_x = -3
+	},
+/turf/open/floor/carpet/royalblue,
+/area/crew_quarters/heads/captain)
 "Hy" = (
 /obj/structure/closet/crate/secure/engineering,
 /obj/item/clothing/under/costume/jabroni,
@@ -862,7 +920,7 @@
 "JG" = (
 /obj/machinery/power/apc/auto_name/south,
 /obj/structure/cable,
-/turf/open/floor/carpet/royalblue,
+/turf/open/floor/wood,
 /area/crew_quarters/heads/captain)
 "JM" = (
 /obj/effect/turf_decal/tile/neutral,
@@ -892,10 +950,6 @@
 "Kr" = (
 /obj/structure/toilet{
 	pixel_y = 13
-	},
-/obj/structure/sink{
-	dir = 1;
-	pixel_y = -5
 	},
 /turf/open/floor/plasteel/white,
 /area/crew_quarters/heads/captain/private)
@@ -950,7 +1004,7 @@
 "MH" = (
 /obj/machinery/vending/boozeomat,
 /turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
+/area/crew_quarters/heads/captain)
 "MJ" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/east,
@@ -967,7 +1021,7 @@
 "Np" = (
 /obj/machinery/vending/cigarette,
 /turf/open/floor/wood,
-/area/crew_quarters/heads/captain/private)
+/area/crew_quarters/heads/captain)
 "NL" = (
 /obj/structure/cable,
 /turf/open/floor/plasteel,
@@ -1053,7 +1107,7 @@
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hor)
 "Se" = (
-/obj/structure/chair/comfy/black,
+/obj/structure/chair/comfy/teal,
 /turf/open/floor/carpet/cyan,
 /area/crew_quarters/heads/cmo)
 "Sh" = (
@@ -1088,7 +1142,7 @@
 "TL" = (
 /obj/structure/table/wood,
 /obj/item/storage/box/donkpockets,
-/obj/item/folder/white,
+/obj/item/folder,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hor)
 "Ul" = (
@@ -1103,8 +1157,11 @@
 /turf/open/floor/carpet/royalblack,
 /area/bridge/meeting_room)
 "UK" = (
-/obj/structure/table/wood,
-/obj/machinery/computer/security/wooden_tv,
+/obj/machinery/computer/security/wooden_tv{
+	pixel_x = 1;
+	pixel_y = 6
+	},
+/obj/structure/table/wood/fancy/royalblue,
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain/private)
 "US" = (
@@ -1164,14 +1221,11 @@
 /turf/closed/wall/r_wall,
 /area/crew_quarters/heads/cmo)
 "XG" = (
-/obj/structure/table/wood,
-/obj/item/book/manual/wiki/security_space_law,
-/obj/item/paper/fluff/gateway,
-/obj/item/coin/plasma,
-/obj/item/melee/chainofcommand,
-/obj/structure/cable,
-/obj/structure/window/reinforced,
-/turf/open/floor/wood,
+/obj/structure/chair/comfy/shuttle{
+	dir = 8;
+	name = "titanium seat"
+	},
+/turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "XJ" = (
 /obj/structure/table/wood,
@@ -1189,8 +1243,9 @@
 /turf/open/floor/circuit,
 /area/ai_monitored/turret_protected/ai_upload)
 "Yb" = (
-/obj/machinery/holopad,
-/turf/open/floor/carpet/royalblue,
+/obj/structure/table/wood,
+/obj/item/storage/fancy/donut_box,
+/turf/open/floor/carpet/royalblack,
 /area/crew_quarters/heads/captain)
 "Ym" = (
 /obj/structure/table/reinforced,
@@ -1243,6 +1298,7 @@
 /obj/structure/table/reinforced,
 /obj/structure/statue/diamond/ai1{
 	anchored = 1;
+	layer = 4.1;
 	pixel_y = 8
 	},
 /turf/open/floor/carpet/royalblack,
@@ -32470,8 +32526,8 @@ bU
 bU
 bU
 bU
-rA
-rA
+yz
+yz
 yz
 yz
 yz
@@ -32730,7 +32786,7 @@ rA
 rA
 vk
 mr
-Sh
+DH
 Sh
 yz
 yz
@@ -32985,10 +33041,10 @@ Pi
 Ll
 Ex
 ZR
-YZ
+kN
 XG
 BO
-BO
+Sh
 KZ
 yz
 MM
@@ -33242,11 +33298,11 @@ SO
 SO
 YZ
 ZR
-SO
-Cl
+yC
+yC
 nm
-xl
-BO
+Sh
+Sh
 yz
 Dk
 Dk
@@ -33499,11 +33555,11 @@ DW
 SO
 YZ
 nG
-YZ
-BX
-nm
-nm
-kN
+on
+on
+He
+Sh
+Sh
 yz
 sq
 Dk
@@ -33756,11 +33812,11 @@ AB
 ZR
 oy
 ZR
-SO
+yC
 yC
 oC
-oC
-oC
+fu
+BX
 XM
 hz
 hz
@@ -34007,7 +34063,7 @@ bU
 bU
 bU
 rA
-AB
+xl
 AB
 Qi
 ZR
@@ -34015,8 +34071,8 @@ Kr
 ZR
 Bo
 Bf
-BO
-BO
+pw
+Sh
 JG
 yz
 sq
@@ -34272,9 +34328,9 @@ uT
 ZR
 Dp
 Sh
-BO
-BO
-BO
+Sh
+Sh
+Sh
 yz
 Dk
 Dk
@@ -34528,10 +34584,10 @@ ZR
 nF
 ZR
 Np
-Sh
+Cl
 Yb
-BO
-Fz
+ie
+KZ
 yz
 MM
 MM
@@ -34785,9 +34841,9 @@ rA
 rA
 rA
 MH
-Sh
-Sh
-Sh
+Fz
+Gw
+bt
 yz
 yz
 zv
@@ -35040,8 +35096,8 @@ bU
 bU
 bU
 bU
-rA
-rA
+yz
+yz
 yz
 yz
 yz

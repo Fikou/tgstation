@@ -3,9 +3,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/maintenance/department/bridge)
-"ap" = (
-/turf/closed/indestructible/riveted,
-/area/ruin/powered)
 "aC" = (
 /obj/structure/railing/corner,
 /turf/open/floor/plasteel/dark,
@@ -48,6 +45,15 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/plasteel,
 /area/teleporter)
+"bY" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/poddoor/shutters{
+	id = "evashutter";
+	name = "E.V.A. Storage Shutter"
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/plasteel,
+/area/storage/eva)
 "ca" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -66,6 +72,9 @@
 /obj/structure/table,
 /obj/item/storage/toolbox/emergency,
 /obj/item/beacon,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 8
+	},
 /turf/open/floor/plating,
 /area/teleporter)
 "cu" = (
@@ -116,7 +125,7 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "ei" = (
-/obj/structure/chair/office/light,
+/obj/structure/chair/comfy/lime,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
 "ej" = (
@@ -165,6 +174,12 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"fN" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "fQ" = (
 /obj/effect/turf_decal/tile/green,
 /obj/effect/turf_decal/tile/green{
@@ -206,6 +221,10 @@
 /obj/machinery/computer/bounty,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"hF" = (
+/obj/machinery/gravity_generator/main/station/admin,
+/turf/open/floor/plasteel/dark,
+/area/ruin/powered)
 "if" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -222,6 +241,9 @@
 /area/teleporter)
 "in" = (
 /obj/item/kirbyplants/random,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/command)
 "is" = (
@@ -261,6 +283,12 @@
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"jb" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "jA" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -294,6 +322,10 @@
 "ka" = (
 /turf/open/space/basic,
 /area/space)
+"kJ" = (
+/obj/structure/showcase/mecha/ripley,
+/turf/open/floor/wood,
+/area/bridge/showroom/corporate)
 "ln" = (
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
@@ -326,6 +358,9 @@
 "mh" = (
 /obj/machinery/ticket_machine{
 	pixel_y = 32
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/command)
@@ -360,6 +395,10 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/bluespace,
 /area/teleporter)
+"nq" = (
+/obj/structure/showcase/mecha/marauder,
+/turf/open/floor/wood,
+/area/bridge/showroom/corporate)
 "nG" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -375,6 +414,7 @@
 /area/bridge)
 "nW" = (
 /obj/machinery/holopad,
+/obj/item/beacon,
 /turf/open/floor/carpet/royalblack,
 /area/bridge)
 "nZ" = (
@@ -414,6 +454,13 @@
 	},
 /turf/open/space/basic,
 /area/asteroid/nearstation)
+"pL" = (
+/obj/machinery/door/airlock/public/glass{
+	name = "Command Hallway"
+	},
+/obj/machinery/door/firedoor,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "qt" = (
 /obj/machinery/computer/secure_data{
 	dir = 1
@@ -461,9 +508,15 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
-"qW" = (
-/turf/open/floor/plasteel/dark,
-/area/ruin/powered)
+"rp" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/poddoor/shutters{
+	id = "gateshutter";
+	name = "Gateway Access Shutter"
+	},
+/obj/effect/turf_decal/delivery,
+/turf/open/floor/plasteel,
+/area/gateway)
 "rr" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -511,6 +564,15 @@
 	},
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hop)
+"sf" = (
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "su" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/item/kirbyplants/photosynthetic,
@@ -532,6 +594,15 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"sY" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "corporate_privacy";
+	name = "showroom shutters"
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/bridge/showroom/corporate)
 "ta" = (
 /obj/structure/fireaxecabinet{
 	pixel_y = -32
@@ -552,13 +623,18 @@
 /turf/open/floor/plasteel/dark,
 /area/teleporter)
 "ts" = (
-/turf/closed/wall/r_wall,
+/turf/closed/wall,
 /area/hallway/secondary/command)
 "tw" = (
 /obj/structure/falsewall/reinforced,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hop)
+"tz" = (
+/obj/machinery/power/shieldwallgen,
+/obj/effect/turf_decal/stripes/corner,
+/turf/open/floor/plating,
+/area/teleporter)
 "tF" = (
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
@@ -585,6 +661,13 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"uj" = (
+/obj/item/kirbyplants/photosynthetic,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "ux" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -601,6 +684,16 @@
 /obj/machinery/computer/secure_data,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"uQ" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/hallway/secondary/command)
 "vx" = (
 /obj/structure/rack,
 /obj/item/aicard,
@@ -683,9 +776,11 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge)
 "wA" = (
-/obj/effect/turf_decal/tile/neutral,
-/turf/open/floor/plasteel,
-/area/hallway/secondary/command)
+/turf/closed/indestructible/riveted,
+/area/ruin/powered)
+"xb" = (
+/turf/closed/wall/r_wall,
+/area/storage/eva)
 "xc" = (
 /obj/machinery/door/window/westleft{
 	name = "Bridge Deliveries";
@@ -728,7 +823,7 @@
 	name = "Teleporter Access Shutter"
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/plasteel,
+/turf/open/floor/plating,
 /area/teleporter)
 "xF" = (
 /turf/closed/wall/r_wall,
@@ -799,9 +894,8 @@
 /turf/open/floor/plating,
 /area/maintenance/department/bridge)
 "zm" = (
-/obj/machinery/gravity_generator/main/station/admin,
-/turf/open/floor/plasteel/dark,
-/area/ruin/powered)
+/turf/open/floor/wood,
+/area/bridge/showroom/corporate)
 "zo" = (
 /obj/effect/turf_decal/stripes{
 	dir = 1
@@ -872,7 +966,6 @@
 /area/bridge)
 "AJ" = (
 /obj/structure/cable,
-/obj/effect/turf_decal/tile/neutral,
 /turf/open/floor/plasteel,
 /area/hallway/secondary/command)
 "AK" = (
@@ -888,6 +981,16 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"AQ" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/stripes,
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "AS" = (
 /obj/structure/chair/comfy/shuttle{
 	desc = "A comfortable, secure seat. You feel like the king.";
@@ -895,12 +998,28 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/bridge)
+"AW" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel/dark,
+/area/hallway/secondary/command)
 "Bc" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Be" = (
+/turf/closed/wall,
+/area/bridge/showroom/corporate)
 "Bw" = (
 /turf/closed/wall/r_wall,
 /area/maintenance/department/bridge)
@@ -933,6 +1052,15 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/bridge)
+"Ft" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "Fy" = (
 /obj/item/clothing/mask/gas,
 /obj/effect/turf_decal/stripes/corner{
@@ -1078,6 +1206,9 @@
 /obj/machinery/power/shieldwallgen,
 /turf/open/floor/plating,
 /area/teleporter)
+"IB" = (
+/turf/closed/wall/r_wall,
+/area/gateway)
 "IF" = (
 /obj/effect/turf_decal/stripes{
 	dir = 1
@@ -1145,7 +1276,14 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes,
+/turf/open/floor/plasteel/dark,
 /area/teleporter)
 "Le" = (
 /obj/effect/mapping_helpers/ianbirthday,
@@ -1176,6 +1314,10 @@
 	},
 /turf/open/floor/plating,
 /area/crew_quarters/heads/hop)
+"LG" = (
+/obj/machinery/door/airlock/command,
+/turf/open/floor/plasteel,
+/area/storage/eva)
 "LM" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -1256,7 +1398,7 @@
 	req_access_txt = "19"
 	},
 /obj/effect/turf_decal/delivery,
-/turf/open/floor/plasteel,
+/turf/open/floor/plating,
 /area/teleporter)
 "Nu" = (
 /obj/effect/turf_decal/tile/green{
@@ -1376,6 +1518,9 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Pe" = (
+/turf/open/floor/plasteel,
+/area/gateway)
 "Qa" = (
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/tile/neutral{
@@ -1505,6 +1650,16 @@
 /obj/machinery/teleport/hub,
 /turf/open/floor/plating,
 /area/teleporter)
+"SG" = (
+/obj/machinery/vending/cola/random,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "SM" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
@@ -1522,6 +1677,17 @@
 	},
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"TC" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/stripes,
+/turf/open/floor/plasteel/dark,
+/area/teleporter)
 "TQ" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -1548,6 +1714,22 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Uo" = (
+/turf/open/floor/plasteel,
+/area/storage/eva)
+"UA" = (
+/obj/effect/turf_decal/stripes{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/plasteel/dark,
+/area/hallway/secondary/command)
 "UB" = (
 /obj/item/radio/intercom{
 	pixel_y = -29
@@ -1590,6 +1772,10 @@
 /obj/machinery/disposal/bin,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"UQ" = (
+/obj/machinery/door/airlock/command,
+/turf/open/floor/plasteel,
+/area/gateway)
 "UX" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
@@ -1621,6 +1807,9 @@
 /obj/item/stamp/hop,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/hop)
+"Vr" = (
+/turf/open/floor/plasteel/dark,
+/area/ruin/powered)
 "VJ" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -1684,6 +1873,10 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"WY" = (
+/obj/machinery/vending/snack/random,
+/turf/open/floor/plasteel,
+/area/hallway/secondary/command)
 "Xb" = (
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
@@ -1747,6 +1940,10 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
+"Zv" = (
+/obj/machinery/door/airlock/command/glass,
+/turf/open/floor/wood,
+/area/bridge/showroom/corporate)
 "ZD" = (
 /obj/machinery/power/apc/auto_name/east,
 /obj/structure/cable,
@@ -29916,9 +30113,9 @@ hl
 hl
 ts
 ts
-HL
-Ir
-ka
+pL
+pL
+IB
 ka
 ka
 ka
@@ -30173,17 +30370,17 @@ UL
 hl
 qB
 TQ
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+IB
+IB
+IB
+IB
+IB
+IB
+IB
+IB
+IB
 ka
 ka
 ka
@@ -30431,16 +30628,16 @@ Et
 xe
 AJ
 HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+Pe
+Pe
+rp
 ka
 ka
 ka
@@ -30688,16 +30885,16 @@ Et
 rr
 TQ
 mh
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+Pe
+Pe
+rp
 ka
 ka
 ka
@@ -30944,17 +31141,17 @@ Tg
 hl
 rr
 TQ
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+Pe
+Pe
+IB
 ka
 ka
 ka
@@ -31201,17 +31398,17 @@ qt
 hl
 rr
 TQ
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+IB
+IB
+IB
 ka
 ka
 ka
@@ -31458,15 +31655,15 @@ yp
 Et
 xe
 TQ
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+IB
 ka
 ka
 ka
@@ -31714,16 +31911,16 @@ tF
 ei
 Om
 rr
-wA
 HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+HL
+fN
+UQ
+Pe
+Pe
+Pe
+Pe
+Pe
+IB
 ka
 ka
 ka
@@ -31972,15 +32169,15 @@ Vk
 hl
 Qa
 ts
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+IB
 ka
 ka
 ka
@@ -32229,15 +32426,15 @@ xF
 xF
 xF
 ts
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+IB
+Pe
+Pe
+Pe
+Pe
+Pe
+IB
 ka
 ka
 ka
@@ -32485,16 +32682,16 @@ aI
 aI
 aI
 Xy
+rr
 HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+fN
+Be
+Be
+Be
+Be
+Be
+Be
+Be
 ka
 ka
 ka
@@ -32742,16 +32939,16 @@ aC
 ym
 ym
 Xy
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+Be
+sY
+Be
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -32999,16 +33196,16 @@ Ip
 eX
 eX
 xF
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+sY
+kJ
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -33256,16 +33453,16 @@ xF
 ZN
 ZN
 xF
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+Be
+Be
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -33513,16 +33710,16 @@ xF
 xF
 xF
 xF
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+sY
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -33748,11 +33945,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
+wA
+wA
+wA
+wA
+wA
 ka
 Fa
 cQ
@@ -33768,19 +33965,19 @@ Gi
 rG
 rG
 Fa
+uj
+jb
 HL
-HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ap
-ap
-ap
-ap
-ap
+fN
+sY
+zm
+zm
+zm
+zm
+zm
+zm
+Be
+Be
 ka
 ka
 ka
@@ -34005,11 +34202,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
+wA
+Vr
+Vr
+Vr
+wA
 ka
 Fa
 uz
@@ -34025,19 +34222,19 @@ Ii
 YC
 rG
 Fa
-HL
-HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ap
-qW
-qW
-qW
-ap
+Ft
+jb
+jb
+fN
+Be
+zm
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -34262,11 +34459,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
+wA
+Vr
+Vr
+hF
+wA
 ka
 Fa
 is
@@ -34282,19 +34479,19 @@ AD
 YC
 rG
 Fa
-HL
-HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ap
-qW
-qW
+Ft
+jb
+jb
+fN
+Zv
 zm
-ap
+zm
+zm
+zm
+zm
+zm
+zm
+Zv
 ka
 ka
 ka
@@ -34519,11 +34716,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
+wA
+Vr
+Vr
+Vr
+wA
 ka
 Fa
 sF
@@ -34539,19 +34736,19 @@ QT
 YC
 rG
 Fa
-HL
-HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ap
-qW
-qW
-qW
-ap
+Ft
+jb
+jb
+fN
+Be
+zm
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -34776,11 +34973,11 @@ ka
 ka
 ka
 ka
-ka
-ka
-ka
-ka
-ka
+wA
+wA
+wA
+wA
+wA
 ka
 Fa
 GY
@@ -34796,19 +34993,19 @@ pn
 rG
 rG
 Fa
+uj
+jb
 HL
-HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ap
-ap
-ap
-ap
-ap
+fN
+sY
+zm
+zm
+zm
+zm
+zm
+zm
+Be
+Be
 ka
 ka
 ka
@@ -35055,16 +35252,16 @@ xF
 xF
 xF
 xF
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+sY
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -35312,16 +35509,16 @@ xF
 aJ
 aJ
 xF
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+Be
+Be
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -35569,16 +35766,16 @@ Ip
 zE
 Oo
 xF
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+sY
+nq
+zm
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -35826,16 +36023,16 @@ ux
 ym
 ym
 Xy
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+Be
+sY
+Be
+zm
+zm
+zm
+zm
+zm
+sY
 ka
 ka
 ka
@@ -36083,16 +36280,16 @@ oA
 oA
 oA
 Xy
+rr
 HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+fN
+Be
+Be
+Be
+Be
+Be
+Be
+Be
 ka
 ka
 ka
@@ -36341,15 +36538,15 @@ xF
 xF
 xF
 ts
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+xb
 ka
 ka
 ka
@@ -36598,15 +36795,15 @@ Iy
 NZ
 in
 ts
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+xb
 ka
 ka
 ka
@@ -36853,17 +37050,17 @@ ih
 xd
 Iy
 NZ
+rr
 HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+LG
+Uo
+Uo
+Uo
+Uo
+Uo
+xb
 ka
 ka
 ka
@@ -37110,17 +37307,17 @@ mX
 tr
 Iy
 NZ
+rr
 HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+xb
 ka
 ka
 ka
@@ -37365,21 +37562,21 @@ NZ
 zo
 mX
 tr
-Iy
+tz
 NZ
+sf
 HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+xb
+xb
+xb
 ka
 ka
 ka
@@ -37624,19 +37821,19 @@ mX
 tr
 KU
 xr
+AW
 HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+Uo
+Uo
+xb
 ka
 ka
 ka
@@ -37879,21 +38076,21 @@ Gy
 IF
 mX
 tr
-KU
+AQ
 xr
+uQ
 HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+Uo
+Uo
+bY
 ka
 ka
 ka
@@ -38136,21 +38333,21 @@ UK
 yR
 mX
 tr
-KU
+TC
 Ng
+UA
 HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+rr
+fN
+xb
+Uo
+Uo
+Uo
+Uo
+Uo
+Uo
+Uo
+bY
 ka
 ka
 ka
@@ -38395,19 +38592,19 @@ dC
 HZ
 cr
 NZ
-HL
-HL
-HL
-Ir
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
-ka
+SG
+WY
+rr
+fN
+xb
+xb
+xb
+xb
+xb
+xb
+xb
+xb
+xb
 ka
 ka
 ka
@@ -38654,9 +38851,9 @@ NZ
 NZ
 ts
 ts
-HL
-Ir
-ka
+pL
+pL
+xb
 ka
 ka
 ka
