@@ -10,7 +10,7 @@
 	sounds.start()
 
 /datum/looping_sound/catroomba
-	mid_length = 115
+	mid_length = 114
 	mid_sounds = list('sound/effects/catroomba.ogg')
 	volume = 100
 	vary = TRUE
