@@ -1,5 +1,5 @@
 /obj/effect/catroomba
-	icon = '/icons/effects/catroomba.dmi'
+	icon = 'icons/effects/catroomba.dmi'
 	name = "cat roomba video"
 	desc = "holy shit"
 	var/datum/looping_sound/catroomba/sounds
