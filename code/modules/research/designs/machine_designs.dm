@@ -187,9 +187,8 @@
 
 /datum/design/board/dnascanner
 	name = "Machine Design (DNA Scanner)"
-	desc = "Allows for the construction of circuit boards used to build a Cloning Scanner."
+	desc = "Allows for the construction of circuit boards used to build a DNA Scanner."
 	id = "dnascanner"
-	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 	build_path = /obj/item/circuitboard/machine/dnascanner
 	category = list("Medical Machinery")
 
