@@ -130,10 +130,6 @@
 /area/shuttle/mining
 	name = "Mining Shuttle"
 
-/area/shuttle/mining/large
-	name = "Mining Shuttle"
-	requires_power = TRUE
-
 /area/shuttle/labor
 	name = "Labor Camp Shuttle"
 

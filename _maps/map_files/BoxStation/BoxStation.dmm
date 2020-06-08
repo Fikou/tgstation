@@ -27099,7 +27099,6 @@
 	},
 /area/science/research)
 "bBG" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer3,
 /turf/open/floor/plasteel,
@@ -27751,7 +27750,6 @@
 /turf/open/floor/plasteel/white,
 /area/science/research)
 "bDo" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer3{
 	dir = 1
@@ -28880,7 +28878,6 @@
 /turf/open/floor/plasteel,
 /area/science/mixing)
 "bGM" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer1{
 	dir = 4
 	},
@@ -29759,7 +29756,6 @@
 	req_access_txt = "48";
 	shuttledocked = 1
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/quartermaster/miningdock)
 "bJc" = (
@@ -29782,7 +29778,6 @@
 	name = "Mining Dock";
 	req_access_txt = "48"
 	},
-/obj/structure/cable,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "bJe" = (
@@ -43118,10 +43113,6 @@
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai)
-"dUO" = (
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/quartermaster/miningdock)
 "dVs" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/toy/beach_ball/holoball,
@@ -43906,7 +43897,6 @@
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "fnG" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
 	dir = 9
 	},
@@ -48359,16 +48349,6 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/genetics)
-"nXT" = (
-/obj/effect/turf_decal/tile/brown{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/brown{
-	dir = 8
-	},
-/obj/structure/cable,
-/turf/open/floor/plasteel,
-/area/quartermaster/miningdock)
 "nYU" = (
 /obj/machinery/door/window/northleft{
 	dir = 4;
@@ -53280,7 +53260,6 @@
 /turf/open/floor/plasteel,
 /area/security/prison)
 "xPy" = (
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
@@ -74523,7 +74502,7 @@ aaf
 aaf
 bGi
 bHz
-dUO
+byE
 bKk
 bGi
 aoV
@@ -74780,7 +74759,7 @@ aaa
 aaa
 bGi
 bHy
-dUO
+byE
 bKj
 bGi
 aoV
@@ -75294,7 +75273,7 @@ bxy
 bxy
 ahw
 bHA
-nXT
+bHA
 bKl
 bxy
 aaH
@@ -75551,7 +75530,7 @@ bDk
 agv
 byE
 byE
-dUO
+byE
 byE
 bGi
 aaf
