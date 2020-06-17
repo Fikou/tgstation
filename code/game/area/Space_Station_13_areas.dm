@@ -955,11 +955,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "cargo_delivery"
 
 /area/quartermaster/warehouse
-	name = "Warehouse"
+	name = "Biodome"
 	icon_state = "cargo_warehouse"
 
 /area/quartermaster/warehouse/upper
-	name = "Upper Warehouse"
+	name = "Biodome Caves"
 
 /area/quartermaster/office
 	name = "Cargo Office"
