@@ -169,6 +169,8 @@
 		icon_state = "basalt[rand(0, 12)]"
 		set_basalt_light(src)
 
+/turf/open/floor/grass/fakebasalt/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
+	return
 
 /turf/open/floor/carpet
 	name = "carpet"
