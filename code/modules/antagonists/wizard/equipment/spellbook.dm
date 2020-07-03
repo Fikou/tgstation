@@ -1,3 +1,5 @@
+GLOBAL_LIST_INIT(spellbook_entry, subtypesof(/datum/spellbook_entry) - /datum/spellbook_entry/item - /datum/spellbook_entry/summon)
+
 /datum/spellbook_entry
 	var/name = "Entry Name"
 
@@ -8,7 +10,6 @@
 	var/refundable = TRUE
 	var/surplus = -1 // -1 for infinite, not used by anything atm
 	var/obj/effect/proc_holder/spell/S = null //Since spellbooks can be used by only one person anyway we can track the actual spell
-	var/buy_word = "Learn"
 	var/limit //used to prevent a spellbook_entry from being bought more than X times with one wizard spellbook
 	var/list/no_coexistance_typecache //Used so you can't have specific spells together
 
@@ -16,11 +17,11 @@
 	..()
 	no_coexistance_typecache = typecacheof(no_coexistance_typecache)
 
-/datum/spellbook_entry/proc/IsAvailible() // For config prefs / gamemode restrictions - these are round applied
+/datum/spellbook_entry/proc/IsAvailable() // For config prefs / gamemode restrictions - these are round applied
 	return TRUE
 
 /datum/spellbook_entry/proc/CanBuy(mob/living/carbon/human/user,obj/item/spellbook/book) // Specific circumstances
-	if(book.uses<cost || limit == 0)
+	if(book.points<cost || limit == 0)
 		return FALSE
 	for(var/spell in user.mind.spell_list)
 		if(is_type_in_typecache(spell, no_coexistance_typecache))
@@ -94,12 +95,17 @@
 	if(!S)
 		S = new spell_type()
 	var/dat =""
-	dat += "<b>[initial(S.name)]</b>"
-	if(S.charge_type == "recharge")
-		dat += " Cooldown:[S.charge_max/10]"
-	dat += " Cost:[cost]<br>"
-	dat += "<i>[S.desc][desc]</i><br>"
-	dat += "[S.clothes_req?"Requires wizard garb.":"Can be cast without wizard garb."]<br>"
+	dat += "[S.desc][desc]"
+	dat += " [S.clothes_req?"Requires wizard garb.":"Can be cast without wizard garb."]"
+	return dat
+
+/datum/spellbook_entry/proc/GetCooldown()
+	var/dat =""
+	if(spell_type)
+		if(!S)
+			S = new spell_type()
+		if(S.charge_type == "recharge")
+			dat += "Cooldown: [S.charge_max/10]"
 	return dat
 
 /datum/spellbook_entry/fireball
@@ -273,7 +279,6 @@
 /datum/spellbook_entry/item
 	name = "Buy Item"
 	refundable = FALSE
-	buy_word = "Summon"
 	var/item_path= null
 
 
@@ -284,11 +289,9 @@
 
 /datum/spellbook_entry/item/GetInfo()
 	var/dat =""
-	dat += "<b>[name]</b>"
-	dat += " Cost:[cost]<br>"
-	dat += "<i>[desc]</i><br>"
+	dat += "[desc]"
 	if(surplus>=0)
-		dat += "[surplus] left.<br>"
+		dat += " [surplus] left."
 	return dat
 
 /datum/spellbook_entry/item/staffchange
@@ -455,7 +458,6 @@
 	name = "Summon Stuff"
 	category = "Rituals"
 	refundable = FALSE
-	buy_word = "Cast"
 	var/active = FALSE
 
 /datum/spellbook_entry/summon/CanBuy(mob/living/carbon/human/user,obj/item/spellbook/book)
@@ -463,14 +465,9 @@
 
 /datum/spellbook_entry/summon/GetInfo()
 	var/dat =""
-	dat += "<b>[name]</b>"
-	if(cost>0)
-		dat += " Cost:[cost]<br>"
-	else
-		dat += " No Cost<br>"
-	dat += "<i>[desc]</i><br>"
+	dat += "[desc]"
 	if(active)
-		dat += "<b>Already cast!</b><br>"
+		dat += " Already cast!"
 	return dat
 
 /datum/spellbook_entry/summon/ghosts
@@ -478,7 +475,7 @@
 	desc = "Spook the crew out by making them see dead people. Be warned, ghosts are capricious and occasionally vindicative, and some will use their incredibly minor abilities to frustrate you."
 	cost = 0
 
-/datum/spellbook_entry/summon/ghosts/IsAvailible()
+/datum/spellbook_entry/summon/ghosts/IsAvailable()
 	if(!SSticker.mode)
 		return FALSE
 	else
@@ -496,7 +493,7 @@
 	name = "Summon Guns"
 	desc = "Nothing could possibly go wrong with arming a crew of lunatics just itching for an excuse to kill you. There is a good chance that they will shoot each other first."
 
-/datum/spellbook_entry/summon/guns/IsAvailible()
+/datum/spellbook_entry/summon/guns/IsAvailable()
 	if(!SSticker.mode) // In case spellbook is placed on map
 		return FALSE
 	if(istype(SSticker.mode, /datum/game_mode/dynamic)) // Disable events on dynamic
@@ -515,7 +512,7 @@
 	name = "Summon Magic"
 	desc = "Share the wonders of magic with the crew and show them why they aren't to be trusted with it at the same time."
 
-/datum/spellbook_entry/summon/magic/IsAvailible()
+/datum/spellbook_entry/summon/magic/IsAvailable()
 	if(!SSticker.mode) // In case spellbook is placed on map
 		return FALSE
 	if(istype(SSticker.mode, /datum/game_mode/dynamic)) // Disable events on dynamic
@@ -533,11 +530,11 @@
 /datum/spellbook_entry/summon/events
 	name = "Summon Events"
 	desc = "Give Murphy's law a little push and replace all events with special wizard ones that will confound and confuse everyone. Multiple castings increase the rate of these events."
-	cost = 2 
+	cost = 2
 	limit = 1
 	var/times = 0
 
-/datum/spellbook_entry/summon/events/IsAvailible()
+/datum/spellbook_entry/summon/events/IsAvailable()
 	if(!SSticker.mode) // In case spellbook is placed on map
 		return FALSE
 	if(istype(SSticker.mode, /datum/game_mode/dynamic)) // Disable events on dynamic
@@ -555,7 +552,7 @@
 /datum/spellbook_entry/summon/events/GetInfo()
 	. = ..()
 	if(times>0)
-		. += "You cast it [times] times.<br>"
+		. += " You cast it [times] times."
 	return .
 
 /datum/spellbook_entry/summon/curse_of_madness
@@ -582,12 +579,13 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = WEIGHT_CLASS_TINY
-	var/uses = 10
-	var/temp = null
-	var/tab = null
 	var/mob/living/carbon/human/owner
-	var/list/datum/spellbook_entry/entries = list()
-	var/list/categories = list()
+	var/points = 10
+	var/selected_cat
+	var/list/possible_spells
+	var/compact_mode = FALSE
+	var/ui_x = 700
+	var/ui_y = 500
 
 /obj/item/spellbook/examine(mob/user)
 	. = ..()
@@ -595,97 +593,6 @@
 		. += {"There is a small signature on the front cover: "[owner]"."}
 	else
 		. += "It appears to have no author."
-
-/obj/item/spellbook/Initialize()
-	. = ..()
-	prepare_spells()
-
-/obj/item/spellbook/proc/prepare_spells()
-	var/entry_types = subtypesof(/datum/spellbook_entry) - /datum/spellbook_entry/item - /datum/spellbook_entry/summon
-	for(var/T in entry_types)
-		var/datum/spellbook_entry/E = new T
-		if(E.IsAvailible())
-			entries |= E
-			categories |= E.category
-		else
-			qdel(E)
-	tab = categories[1]
-
-/obj/item/spellbook/attackby(obj/item/O, mob/user, params)
-	if(istype(O, /obj/item/antag_spawner/contract))
-		var/obj/item/antag_spawner/contract/contract = O
-		if(contract.used)
-			to_chat(user, "<span class='warning'>The contract has been used, you can't get your points back now!</span>")
-		else
-			to_chat(user, "<span class='notice'>You feed the contract back into the spellbook, refunding your points.</span>")
-			uses += 2
-			for(var/datum/spellbook_entry/item/contract/CT in entries)
-				if(!isnull(CT.limit))
-					CT.limit++
-			qdel(O)
-	else if(istype(O, /obj/item/antag_spawner/slaughter_demon))
-		to_chat(user, "<span class='notice'>On second thought, maybe summoning a demon is a bad idea. You refund your points.</span>")
-		if(istype(O, /obj/item/antag_spawner/slaughter_demon/laughter))
-			uses += 1
-			for(var/datum/spellbook_entry/item/hugbottle/HB in entries)
-				if(!isnull(HB.limit))
-					HB.limit++
-		else
-			uses += 2
-			for(var/datum/spellbook_entry/item/bloodbottle/BB in entries)
-				if(!isnull(BB.limit))
-					BB.limit++
-		qdel(O)
-
-/obj/item/spellbook/proc/GetCategoryHeader(category)
-	var/dat = ""
-	switch(category)
-		if("Offensive")
-			dat += "Spells and items geared towards debilitating and destroying.<BR><BR>"
-			dat += "Items are not bound to you and can be stolen. Additionally they cannot typically be returned once purchased.<BR>"
-			dat += "For spells: the number after the spell name is the cooldown time.<BR>"
-			dat += "You can reduce this number by spending more points on the spell.<BR>"
-		if("Defensive")
-			dat += "Spells and items geared towards improving your survivability or reducing foes' ability to attack.<BR><BR>"
-			dat += "Items are not bound to you and can be stolen. Additionally they cannot typically be returned once purchased.<BR>"
-			dat += "For spells: the number after the spell name is the cooldown time.<BR>"
-			dat += "You can reduce this number by spending more points on the spell.<BR>"
-		if("Mobility")
-			dat += "Spells and items geared towards improving your ability to move. It is a good idea to take at least one.<BR><BR>"
-			dat += "Items are not bound to you and can be stolen. Additionally they cannot typically be returned once purchased.<BR>"
-			dat += "For spells: the number after the spell name is the cooldown time.<BR>"
-			dat += "You can reduce this number by spending more points on the spell.<BR>"
-		if("Assistance")
-			dat += "Spells and items geared towards bringing in outside forces to aid you or improving upon your other items and abilities.<BR><BR>"
-			dat += "Items are not bound to you and can be stolen. Additionally they cannot typically be returned once purchased.<BR>"
-			dat += "For spells: the number after the spell name is the cooldown time.<BR>"
-			dat += "You can reduce this number by spending more points on the spell.<BR>"
-		if("Challenges")
-			dat += "The Wizard Federation typically has hard limits on the potency and number of spells brought to the station based on risk.<BR>"
-			dat += "Arming the station against you will increases the risk, but will grant you one more charge for your spellbook.<BR>"
-		if("Rituals")
-			dat += "These powerful spells change the very fabric of reality. Not always in your favour.<BR>"
-	return dat
-
-/obj/item/spellbook/proc/wrap(content)
-	var/dat = ""
-	dat +="<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>Spellbook</title></head>"
-	dat += {"
-	<head>
-		<style type="text/css">
-      		body { font-size: 80%; font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif; }
-      		ul#tabs { list-style-type: none; margin: 30px 0 0 0; padding: 0 0 0.3em 0; }
-      		ul#tabs li { display: inline; }
-      		ul#tabs li a { color: #42454a; background-color: #dedbde; border: 1px solid #c9c3ba; border-bottom: none; padding: 0.3em; text-decoration: none; }
-      		ul#tabs li a:hover { background-color: #f1f0ee; }
-      		ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
-      		div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
-      		div.tabContent.hide { display: none; }
-    	</style>
-  	</head>
-	"}
-	dat += {"[content]</body></html>"}
-	return dat
 
 /obj/item/spellbook/attack_self(mob/user)
 	if(!owner)
@@ -696,74 +603,130 @@
 		to_chat(user, "<span class='warning'>The [name] does not recognize you as its owner and refuses to open!</span>")
 		return
 	user.set_machine(src)
-	var/dat = ""
+	ui_interact(user)
 
-	dat += "<ul id=\"tabs\">"
-	var/list/cat_dat = list()
-	for(var/category in categories)
-		cat_dat[category] = "<hr>"
-		dat += "<li><a [tab==category?"class=selected":""] href='byond://?src=[REF(src)];page=[category]'>[category]</a></li>"
+/obj/item/spellbook/Initialize()
+	. = ..()
+	possible_spells = get_spells()
 
-	dat += "<li><a><b>Points remaining : [uses]</b></a></li>"
-	dat += "</ul>"
+/obj/item/spellbook/proc/get_spells()
+	var/list/filtered_modules = list()
+	for(var/path in GLOB.spellbook_entry)
+		var/datum/spellbook_entry/SE = new path
+		if(!(SE.IsAvailable()))
+			continue
+		if(!filtered_modules[SE.category])
+			filtered_modules[SE.category] = list()
+		filtered_modules[SE.category][SE] = SE
+	return filtered_modules
 
-	var/datum/spellbook_entry/E
-	for(var/i=1,i<=entries.len,i++)
-		var/spell_info = ""
-		E = entries[i]
-		spell_info += E.GetInfo()
-		if(E.CanBuy(user,src))
-			spell_info+= "<a href='byond://?src=[REF(src)];buy=[i]'>[E.buy_word]</A><br>"
+/obj/item/spellbook/attackby(obj/item/O, mob/user, params)
+	if(istype(O, /obj/item/antag_spawner/contract))
+		var/obj/item/antag_spawner/contract/contract = O
+		if(contract.used)
+			to_chat(user, "<span class='warning'>The contract has been used, you can't get your points back now!</span>")
 		else
-			spell_info+= "<span>Can't [E.buy_word]</span><br>"
-		if(E.CanRefund(user,src))
-			spell_info+= "<a href='byond://?src=[REF(src)];refund=[i]'>Refund</A><br>"
-		spell_info += "<hr>"
-		if(cat_dat[E.category])
-			cat_dat[E.category] += spell_info
+			to_chat(user, "<span class='notice'>You feed the contract back into the spellbook, refunding your points.</span>")
+			points += 2
+			for(var/datum/spellbook_entry/item/contract/CT in possible_spells)
+				if(!isnull(CT.limit))
+					CT.limit++
+			qdel(O)
+	else if(istype(O, /obj/item/antag_spawner/slaughter_demon))
+		to_chat(user, "<span class='notice'>On second thought, maybe summoning a demon is a bad idea. You refund your points.</span>")
+		if(istype(O, /obj/item/antag_spawner/slaughter_demon/laughter))
+			points += 1
+			for(var/datum/spellbook_entry/item/hugbottle/HB in possible_spells)
+				if(!isnull(HB.limit))
+					HB.limit++
+		else
+			points += 2
+			for(var/datum/spellbook_entry/item/bloodbottle/BB in possible_spells)
+				if(!isnull(BB.limit))
+					BB.limit++
+		qdel(O)
+	else if(istype(O, /obj/item/guardiancreator/choose/wizard))
+		var/obj/item/guardiancreator/choose/wizard/stand = O
+		if(stand.used)
+			to_chat(user, "<span class='warning'>The cards have been used, you can't get your points back now!</span>")
+		else
+			to_chat(user, "<span class='notice'>You put the cards back into the spellbook, refunding your points.</span>")
+			points += 2
+			for(var/datum/spellbook_entry/item/guardian/GS in possible_spells)
+				if(!isnull(GS.limit))
+					GS.limit++
+			qdel(O)
 
-	for(var/category in categories)
-		dat += "<div class=\"[tab==category?"tabContent":"tabContent hide"]\" id=\"[category]\">"
-		dat += GetCategoryHeader(category)
-		dat += cat_dat[category]
-		dat += "</div>"
+/obj/item/spellbook/ui_status(mob/user)
+	if((user != owner)  && !isobserver(user))
+		return UI_CLOSE
+	return ..()
 
-	user << browse(wrap(dat), "window=spellbook;size=700x500")
-	onclose(user, "spellbook")
-	return
+/obj/item/spellbook/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
+									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "Spellbook", name, ui_x, ui_y, master_ui, state)
+		ui.open()
 
-/obj/item/spellbook/Topic(href, href_list)
-	..()
+/obj/item/spellbook/ui_data(mob/user)
+	var/list/data = list()
+	data["points"] = points
+	data["compactMode"] = compact_mode
+	return data
+
+/obj/item/spellbook/ui_static_data(mob/user)
+	var/list/data = list()
+	data["categories"] = list()
+	for(var/category in possible_spells)
+		var/list/cat = list(
+			"name" = category,
+			"items" = (category == selected_cat ? list() : null))
+		for(var/spell in possible_spells[category])
+			var/datum/spellbook_entry/SE = possible_spells[category][spell]
+			cat["items"] += list(list(
+				"name" = SE.name,
+				"cost" = SE.cost,
+				"cooldown" = SE.GetCooldown(),
+				"desc" = SE.GetInfo(),
+				"refundable" = SE.CanRefund(user,src),
+				"buyable" = SE.CanBuy(user,src)
+			))
+		data["categories"] += list(cat)
+	return data
+
+/obj/item/spellbook/ui_act(action, list/params)
+	if(..())
+		return
 	var/mob/living/carbon/human/H = usr
-
-	if(H.stat || H.restrained())
-		return
-	if(!ishuman(H))
-		return TRUE
-
-	if(H.mind.special_role == "apprentice")
-		temp = "If you got caught sneaking a peek from your teacher's spellbook, you'd likely be expelled from the Wizard Academy. Better not."
-		return
-
-	var/datum/spellbook_entry/E = null
-	if(loc == H || (in_range(src, H) && isturf(loc)))
-		H.set_machine(src)
-		if(href_list["buy"])
-			E = entries[text2num(href_list["buy"])]
-			if(E && E.CanBuy(H,src))
-				if(E.Buy(H,src))
-					if(E.limit)
-						E.limit--
-					uses -= E.cost
-		else if(href_list["refund"])
-			E = entries[text2num(href_list["refund"])]
-			if(E && E.refundable)
-				var/result = E.Refund(H,src)
+	switch(action)
+		if("buy")
+			var/spell_name = params["name"]
+			var/list/buyable_spells = list()
+			for(var/category in possible_spells)
+				buyable_spells += possible_spells[category]
+			for(var/key in buyable_spells)
+				var/datum/spellbook_entry/SE = buyable_spells[key]
+				if(SE.name == spell_name)
+					if(SE.Buy(H,src))
+						if(SE.limit)
+							SE.limit--
+						points -= SE.cost
+					update_static_data(H)
+					return TRUE
+		if("refund")
+			var/datum/spellbook_entry/SE = possible_spells[text2num(params["refunding"])]
+			if(SE && SE.refundable)
+				var/result = SE.Refund(H,src)
 				if(result > 0)
-					if(!isnull(E.limit))
-						E.limit += result
-					uses += result
-		else if(href_list["page"])
-			tab = sanitize(href_list["page"])
-	attack_self(H)
-	return
+					if(!isnull(SE.limit))
+						SE.limit += result
+					points += result
+					update_static_data(H)
+					return TRUE
+		if("select")
+			selected_cat = params["category"]
+			return TRUE
+		if("compact_toggle")
+			compact_mode = !compact_mode
+			return TRUE
