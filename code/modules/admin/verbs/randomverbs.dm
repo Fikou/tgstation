@@ -1073,7 +1073,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 									ADMIN_PUNISHMENT_SCARIFY,
 									ADMIN_PUNISHMENT_SHOES,
 									ADMIN_PUNISHMENT_DOCK,
-									ADMIN_PUNISHMENT_BREAD
+									ADMIN_PUNISHMENT_BREAD,
+									ADMIN_PUNISHMENT_PLUSHIFY
 									)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
@@ -1271,12 +1272,28 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			var/mutable_appearance/transform_scanline = mutable_appearance('icons/effects/effects.dmi',"transform_effect")
 			target.transformation_animation(bread_appearance,time= 5 SECONDS,transform_overlay=transform_scanline,reset_after=TRUE)
 			addtimer(CALLBACK(GLOBAL_PROC, .proc/breadify, target), 5 SECONDS)
+		if(ADMIN_PUNISHMENT_PLUSHIFY)
+			target.say("Noble admins, surely you will not turn me into marketable plushies!")
+			target.setDir(SOUTH)
+			var/icon/plush_icon = getFlatIcon(target)
+			var/mutable_appearance/plush_appearance = mutable_appearance('icons/obj/toy.dmi',"assistant")
+			plush_appearance.icon = plush_icon
+			plush_appearance.transform = matrix(0.5,0,0,0,0.5,0)
+			var/mutable_appearance/transform_scanline = mutable_appearance('icons/effects/effects.dmi',"transform_effect")
+			target.transformation_animation(plush_appearance,time= 5 SECONDS,transform_overlay=transform_scanline,reset_after=TRUE)
+			addtimer(CALLBACK(GLOBAL_PROC, .proc/plushify, target, plush_icon), 5 SECONDS)
 
 	punish_log(target, punishment)
 
 /proc/breadify(atom/movable/target)
 	var/obj/item/food/bread/plain/bread = new(get_turf(target))
 	target.forceMove(bread)
+
+/proc/plushify(atom/movable/target, plushicon)
+	target.say("NOOOOOOOOOOO!")
+	var/obj/item/toy/punishment/plush = new(get_turf(target), target)
+	plush.icon = plushicon
+	plush.transform = matrix(0.5,0,0,0,0.5,0)
 
 /**
   * firing_squad is a proc for the :B:erforate smite to shoot each individual bullet at them, so that we can add actual delays without sleep() nonsense

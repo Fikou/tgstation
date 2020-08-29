@@ -1494,3 +1494,22 @@
 		cooldown = (world.time + 10)
 		sleep(5)
 		playsound(src, 'sound/effects/blobattack.ogg', 50, FALSE)
+
+/obj/item/toy/punishment
+	name = "plushie"
+	desc = "A marketable plushie!"
+	w_class = WEIGHT_CLASS_SMALL
+	var/atom/movable/target
+
+/obj/item/toy/punishment/Initialize(mapload, admintarget)
+	. = ..()
+	if(!admintarget)
+		return INITIALIZE_HINT_QDEL
+	target = admintarget
+	target.forceMove(src)
+	name = "[target] [initial(name)]"
+	desc = "[initial(desc)] It's designed after [target]!"
+
+/obj/item/toy/punishment/Destroy()
+	. = ..()
+	QDEL_NULL(target)
