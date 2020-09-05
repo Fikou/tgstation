@@ -16,7 +16,7 @@
 	from doing this unless you absolutely know what you are doing, and have defined a
 	conversion in savefile.dm
 */
-/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female,var/roundstart = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
+/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female,roundstart = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
 	if(!istype(L))
 		L = list()
 	if(!istype(male))
@@ -288,10 +288,6 @@
 	icon_state = "hair_dreads"
 
 /datum/sprite_accessory/hair/drillhair
-	name = "Drill Hair"
-	icon_state = "hair_drillhair"
-
-/datum/sprite_accessory/hair/drillhair
 	name = "Drillruru"
 	icon_state = "hair_drillruru"
 
@@ -403,7 +399,7 @@
 	name = "Jensen Hair"
 	icon_state = "hair_jensen"
 
-/datum/sprite_accessory/hair/Joestar
+/datum/sprite_accessory/hair/joestar
 	name = "Joestar"
 	icon_state = "hair_joestar"
 
@@ -475,7 +471,7 @@
 	name = "Mohawk (Shaved)"
 	icon_state = "hair_shavedmohawk"
 
-/datum/sprite_accessory/hair/shavedmohawk
+/datum/sprite_accessory/hair/unshavenmohawk
 	name = "Mohawk (Unshaven)"
 	icon_state = "hair_unshaven_mohawk"
 
@@ -1478,7 +1474,7 @@
 
 /datum/sprite_accessory/socks/stockings_green
 	name = "Stockings (Green)"
-	icon_state = "stockings_black"
+	icon_state = "stockings_green"
 
 /datum/sprite_accessory/socks/stockings_orange
 	name = "Stockings (Orange)"

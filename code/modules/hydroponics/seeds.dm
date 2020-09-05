@@ -5,6 +5,7 @@
 /obj/item/seeds
 	icon = 'icons/obj/hydroponics/seeds.dmi'
 	icon_state = "seed"				// Unknown plant seed - these shouldn't exist in-game.
+	worn_icon_state = "seed"
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 	/// Name of plant when planted.
@@ -49,15 +50,17 @@
 	var/list/reagents_add
 	// Format: "reagent_id" = potency multiplier
 	// Stronger reagents must always come first to avoid being displaced by weaker ones.
-	// Total amount of any reagent in plant is calculated by formula: 1 + round(potency * multiplier)
+	// Total amount of any reagent in plant is calculated by formula: max(round(potency * multiplier), 1)
 	///If the chance below passes, then this many weeds sprout during growth
 	var/weed_rate = 1
 	///Percentage chance per tray update to grow weeds
 	var/weed_chance = 5
 	///Determines if the plant has had a graft removed or not.
 	var/grafted = FALSE
-	///Trait to be applied when grafting a plant.
+	///Type-path of trait to be applied when grafting a plant.
 	var/graft_gene
+	///Determines if the plant should be allowed to mutate early at 30+ instability.
+	var/seed_flags = MUTATE_EARLY
 
 /obj/item/seeds/Initialize(mapload, nogenes = 0)
 	. = ..()
@@ -192,13 +195,43 @@
 
 
 /obj/item/seeds/proc/harvest(mob/user)
+	///Reference to the tray/soil the seeds are planted in.
 	var/obj/machinery/hydroponics/parent = loc //for ease of access
+	///Count used for creating the correct amount of results to the harvest.
 	var/t_amount = 0
+	///List of plants all harvested from the same batch.
 	var/list/result = list()
+	///Tile of the harvester to deposit the growables.
 	var/output_loc = parent.Adjacent(user) ? user.loc : parent.loc //needed for TK
+	///Name of the grown products.
 	var/product_name
-	while(t_amount < getYield())
-		var/obj/item/reagent_containers/food/snacks/grown/t_prod = new product(output_loc, src)
+	///The Number of products produced by the plant, typically the yield. Modified by Densified Chemicals.
+	var/product_count = getYield()
+	if(get_gene(/datum/plant_gene/trait/maxchem))
+		product_count = clamp(round(product_count/2),0,5)
+	while(t_amount < product_count)
+		var/obj/item/reagent_containers/food/snacks/grown/t_prod
+		if(instability >= 30 && (seed_flags & MUTATE_EARLY) && LAZYLEN(mutatelist) && prob(instability/3))
+			var/obj/item/seeds/new_prod = pick(mutatelist)
+			t_prod = initial(new_prod.product)
+			if(!t_prod)
+				continue
+			t_prod = new t_prod(output_loc, src)
+			t_prod.seed = new new_prod
+			t_prod.seed.name = initial(new_prod.name)
+			t_prod.seed.desc = initial(new_prod.desc)
+			t_prod.seed.plantname = initial(new_prod.plantname)
+			for(var/datum/plant_gene/trait/trait in parent.myseed.genes)
+				if(trait.can_add(t_prod.seed))
+					t_prod.seed.genes += trait
+			t_prod.transform = initial(t_prod.transform)
+			t_prod.transform *= TRANSFORM_USING_VARIABLE(t_prod.seed.potency, 100) + 0.5
+			t_amount++
+			if(t_prod.seed)
+				t_prod.seed.instability = round(instability * 0.5)
+			continue
+		else
+			t_prod = new product(output_loc, src)
 		if(parent.myseed.plantname != initial(parent.myseed.plantname))
 			t_prod.name = lowertext(parent.myseed.plantname)
 		if(productdesc)
@@ -217,24 +250,36 @@
 
 	return result
 
-
-/obj/item/seeds/proc/prepare_result(var/obj/item/T)
+/**
+  * This is where plant chemical products are handled.
+  *
+  * Individually, the formula for individual amounts of chemicals is Potency * the chemical production %, rounded to the fullest 1.
+  * Specific chem handling is also handled here, like bloodtype, food taste within nutriment, and the auto-distilling trait.
+  */
+/obj/item/seeds/proc/prepare_result(obj/item/T)
 	if(!T.reagents)
 		CRASH("[T] has no reagents.")
-
+	var/reagent_max = 0
 	for(var/rid in reagents_add)
-		var/amount = max(1, round(potency * reagents_add[rid], 1)) //the plant will always have at least 1u of each of the reagents in its reagent production traits
-
-		var/list/data = null
-		if(rid == /datum/reagent/blood) // Hack to make blood in plants always O-
-			data = list("blood_type" = "O-")
-		if(rid == /datum/reagent/consumable/nutriment || rid == /datum/reagent/consumable/nutriment/vitamin)
-			// apple tastes of apple.
-			if(istype(T, /obj/item/reagent_containers/food/snacks/grown))
-				var/obj/item/reagent_containers/food/snacks/grown/grown_edible = T
-				data = grown_edible.tastes
-
-		T.reagents.add_reagent(rid, amount, data)
+		reagent_max += reagents_add[rid]
+	if(istype(T, /obj/item/reagent_containers/food/snacks/grown))
+		var/obj/item/reagent_containers/food/snacks/grown/grown_edible = T
+		for(var/rid in reagents_add)
+			var/reagent_overflow_mod = reagents_add[rid]
+			if(reagent_max > 1)
+				reagent_overflow_mod = (reagents_add[rid]/ reagent_max)
+			var/edible_vol = grown_edible.reagents ? grown_edible.reagents.maximum_volume : 0
+			var/amount = max(1, round((edible_vol)*(potency/100) * reagent_overflow_mod, 1)) //the plant will always have at least 1u of each of the reagents in its reagent production traits
+			var/list/data
+			if(rid == /datum/reagent/blood) // Hack to make blood in plants always O-
+				data = list("blood_type" = "O-")
+			if(rid == /datum/reagent/consumable/nutriment || rid == /datum/reagent/consumable/nutriment/vitamin)
+				data = grown_edible.tastes // apple tastes of apple.
+				//Handles the distillary trait, swaps nutriment and vitamins for that species brewable if it exists.
+				if(get_gene(/datum/plant_gene/trait/brewing) && grown_edible.distill_reagent)
+					T.reagents.add_reagent(grown_edible.distill_reagent, amount/2)
+					continue
+			T.reagents.add_reagent(rid, amount, data)
 
 
 /// Setters procs ///
@@ -432,9 +477,7 @@
 			continue
 		all_traits += " [traits.get_name()]"
 	text += "- Plant Traits:[all_traits]\n"
-
 	text += "*---------*"
-
 	return text
 
 /obj/item/seeds/proc/on_chem_reaction(datum/reagents/S)  //in case seeds have some special interaction with special chems
@@ -445,11 +488,11 @@
 		to_chat(user, "<span class='info'>*---------*\n This is \a <span class='name'>[src]</span>.</span>")
 		var/text
 		var/obj/item/plant_analyzer/P_analyzer = O
-		if(P_analyzer.scan_mode == 0)
+		if(P_analyzer.scan_mode == PLANT_SCANMODE_STATS)
 			text = get_analyzer_text()
 			if(text)
 				to_chat(user, "<span class='notice'>[text]</span>")
-		if(reagents_add && P_analyzer.scan_mode == 1)
+		if(reagents_add && P_analyzer.scan_mode == PLANT_SCANMODE_CHEMICALS)
 			to_chat(user, "<span class='notice'>- Plant Reagents -</span>")
 			to_chat(user, "<span class='notice'>*---------*</span>")
 			for(var/datum/plant_gene/reagent/G in genes)
@@ -524,7 +567,8 @@
 		var/random_amount = rand(4, 15) * 0.01 // this must be multiplied by 0.01, otherwise, it will not properly associate
 		var/datum/plant_gene/reagent/R = new(get_random_reagent_id(), random_amount)
 		if(R.can_add(src))
-			genes += R
+			if(!R.try_upgrade_gene(src))
+				genes += R
 		else
 			qdel(R)
 	reagents_from_genes()
@@ -553,3 +597,53 @@
 	for(var/i in 1 to amount_random_reagents)
 		var/datum/reagent/chemical = pick(reagents_add)
 		qdel(chemical)
+
+/**
+  * Creates a graft from this plant.
+  *
+  * Creates a new graft from this plant.
+  * Sets the grafts trait to this plants graftable trait.
+  * Gives the graft a reference to this plant.
+  * Copies all the relevant stats from this plant to the graft.
+  * Returns the created graft.
+  */
+/obj/item/seeds/proc/create_graft()
+	var/obj/item/graft/snip = new(loc, graft_gene)
+	snip.parent_seed = src
+	snip.parent_name = plantname
+	snip.name += "([plantname])"
+
+	// Copy over stats so the graft can outlive its parent.
+	snip.lifespan = lifespan
+	snip.endurance = endurance
+	snip.production = production
+	snip.weed_rate = weed_rate
+	snip.weed_chance = weed_chance
+	snip.yield = yield
+
+	return snip
+
+/**
+  * Applies a graft to this plant.
+  *
+  * Adds the graft trait to this plant if possible.
+  * Increases plant stats by 2/3 of the grafts stats to a maximum of 100 (10 for yield).
+  * Returns [TRUE]
+  *
+  * Arguments:
+  * - [snip][/obj/item/graft]: The graft being used applied to this plant.
+  */
+/obj/item/seeds/proc/apply_graft(obj/item/graft/snip)
+	var/datum/plant_gene/trait/new_trait = snip.stored_trait
+	if(new_trait?.can_add(src))
+		genes += new_trait.Copy()
+
+	// Adjust stats based on graft stats.
+	src.lifespan	= round(clamp(max(src.lifespan,		(src.lifespan	+(2/3)*(snip.lifespan	-src.lifespan)		)),0,100))
+	src.endurance	= round(clamp(max(src.endurance,	(src.endurance	+(2/3)*(snip.endurance	-src.endurance)		)),0,100))
+	src.production	= round(clamp(max(src.production,	(src.production	+(2/3)*(snip.production	-src.production)	)),0,100))
+	src.weed_rate	= round(clamp(max(src.weed_rate,	(src.weed_rate	+(2/3)*(snip.weed_rate	-src.weed_rate)		)),0,100))
+	src.weed_chance	= round(clamp(max(src.weed_chance,	(src.weed_chance+(2/3)*(snip.weed_chance-src.weed_chance)	)),0,100))
+	src.yield		= round(clamp(max(src.yield,		(src.yield		+(2/3)*(snip.yield		-src.yield)			)),0,10	))
+
+	return TRUE

@@ -24,3 +24,19 @@
 #define FOOD_IN_CONTAINER (1<<0)
 
 #define STOP_SERVING_BREAKFAST (15 MINUTES)
+
+#define FOOD_WORTHLESS 0
+#define FOOD_JUNK 6
+#define FOOD_FAST 40
+#define FOOD_RARE 80
+#define FOOD_EXOTIC 150
+#define FOOD_LEGENDARY 1000
+#define FOOD_ILLEGAL 1000
+
+#define FOOD_MEAT_NORMAL 5
+#define FOOD_MEAT_HUMAN 50
+#define FOOD_MEAT_MUTANT 100
+#define FOOD_MEAT_MUTANT_RARE 200
+
+
+#define IS_EDIBLE(O) (istype(O, /obj/item/reagent_containers/food/snacks) || O.GetComponent(/datum/component/edible))

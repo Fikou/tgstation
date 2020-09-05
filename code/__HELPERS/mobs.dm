@@ -189,10 +189,14 @@ GLOBAL_LIST_EMPTY(species_list)
 
 	var/target_loc = target.loc
 
+	LAZYADD(user.do_afters, target)
+	LAZYADD(target.targeted_by, user)
 	var/holding = user.get_active_held_item()
 	var/datum/progressbar/progbar
 	if (progress)
 		progbar = new(user, time, target)
+	if(target.pixel_x != 0) //shifts the progress bar if target has an offset sprite
+		progbar.bar.pixel_x -= target.pixel_x
 
 	var/endtime = world.time+time
 	var/starttime = world.time
@@ -206,7 +210,9 @@ GLOBAL_LIST_EMPTY(species_list)
 			break
 		if(uninterruptible)
 			continue
-
+		if(!(target in user.do_afters))
+			. = FALSE
+			break
 		if(drifting && !user.inertia_dir)
 			drifting = FALSE
 			user_loc = user.loc
@@ -216,7 +222,9 @@ GLOBAL_LIST_EMPTY(species_list)
 			break
 	if(!QDELETED(progbar))
 		progbar.end_progress()
-
+	if(!QDELETED(target))
+		LAZYREMOVE(user.do_afters, target)
+		LAZYREMOVE(target.targeted_by, user)
 
 //some additional checks as a callback for for do_afters that want to break on losing health or on the mob taking action
 /mob/proc/break_do_after_checks(list/checked_health, check_clicks)
@@ -233,7 +241,7 @@ GLOBAL_LIST_EMPTY(species_list)
 	return ..()
 
 ///Timed action involving one mob user. Target is optional.
-/proc/do_after(mob/user, var/delay, needhand = TRUE, atom/target = null, progress = TRUE, datum/callback/extra_checks = null)
+/proc/do_after(mob/user, delay, needhand = TRUE, atom/target = null, progress = TRUE, datum/callback/extra_checks = null)
 	if(!user)
 		return FALSE
 	var/atom/Tloc = null
@@ -256,7 +264,7 @@ GLOBAL_LIST_EMPTY(species_list)
 	if(holding)
 		holdingnull = FALSE //Users hand started holding something, check to see if it's still holding that
 
-	delay *= user.do_after_coefficent()
+	delay *= user.cached_multiplicative_actions_slowdown
 
 	var/datum/progressbar/progbar
 	if(progress)
@@ -310,9 +318,6 @@ GLOBAL_LIST_EMPTY(species_list)
 		LAZYREMOVE(user.do_afters, target)
 		LAZYREMOVE(target.targeted_by, user)
 
-/mob/proc/do_after_coefficent() // This gets added to the delay on a do_after, default 1
-	. = 1
-	return
 
 ///Timed action involving at least one mob user and a list of targets.
 /proc/do_after_mob(mob/user, list/targets, time = 3 SECONDS, uninterruptible = FALSE, progress = TRUE, datum/callback/extra_checks, required_mobility_flags = MOBILITY_STAND)
@@ -324,6 +329,8 @@ GLOBAL_LIST_EMPTY(species_list)
 		return FALSE
 	var/user_loc = user.loc
 
+	time *= user.cached_multiplicative_actions_slowdown
+
 	var/drifting = FALSE
 	if(!user.Process_Spacemove(0) && user.inertia_dir)
 		drifting = TRUE
@@ -331,6 +338,8 @@ GLOBAL_LIST_EMPTY(species_list)
 	var/list/originalloc = list()
 	for(var/atom/target in targets)
 		originalloc[target] = target.loc
+		LAZYADD(user.do_afters, target)
+		LAZYADD(target.targeted_by, user)
 
 	var/holding = user.get_active_held_item()
 	var/datum/progressbar/progbar
@@ -368,6 +377,12 @@ GLOBAL_LIST_EMPTY(species_list)
 					break mainloop
 	if(!QDELETED(progbar))
 		progbar.end_progress()
+
+	for(var/thing in targets)
+		var/atom/target = thing
+		if(!QDELETED(target))
+			LAZYREMOVE(user.do_afters, target)
+			LAZYREMOVE(target.targeted_by, user)
 
 /proc/is_species(A, species_datum)
 	. = FALSE
@@ -443,6 +458,8 @@ GLOBAL_LIST_EMPTY(species_list)
 		if(M.client.holder && (chat_toggles & CHAT_DEAD))
 			override = TRUE
 		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE) && message_type == DEADCHAT_REGULAR)
+			override = TRUE
+		if(SSticker.current_state == GAME_STATE_FINISHED)
 			override = TRUE
 		if(isnewplayer(M) && !override)
 			continue
@@ -544,7 +561,7 @@ GLOBAL_LIST_EMPTY(species_list)
 		. += R
 
 //Returns a list of AI's
-/proc/active_ais(check_mind=FALSE, var/z = null)
+/proc/active_ais(check_mind=FALSE, z = null)
 	. = list()
 	for(var/mob/living/silicon/ai/A in GLOB.alive_mob_list)
 		if(A.stat == DEAD)
@@ -560,7 +577,7 @@ GLOBAL_LIST_EMPTY(species_list)
 	return .
 
 //Find an active ai with the least borgs. VERBOSE PROCNAME HUH!
-/proc/select_active_ai_with_fewest_borgs(var/z)
+/proc/select_active_ai_with_fewest_borgs(z)
 	var/mob/living/silicon/ai/selected
 	var/list/active = active_ais(FALSE, z)
 	for(var/mob/living/silicon/ai/A in active)
@@ -578,7 +595,7 @@ GLOBAL_LIST_EMPTY(species_list)
 			. = pick(borgs)
 	return .
 
-/proc/select_active_ai(mob/user, var/z = null)
+/proc/select_active_ai(mob/user, z = null)
 	var/list/ais = active_ais(FALSE, z)
 	if(ais.len)
 		if(user)

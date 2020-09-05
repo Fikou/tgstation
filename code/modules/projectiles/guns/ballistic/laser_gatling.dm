@@ -6,13 +6,13 @@
 	desc = "The massive external power source for the laser gatling gun."
 	icon = 'icons/obj/guns/minigun.dmi'
 	icon_state = "holstered"
-	item_state = "backpack"
+	inhand_icon_state = "backpack"
 	lefthand_file = 'icons/mob/inhands/equipment/backpack_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/backpack_righthand.dmi'
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_HUGE
 	var/obj/item/gun/ballistic/minigun/gun
-	var/armed = 0 //whether the gun is attached, 0 is attached, 1 is the gun is wielded.
+	var/armed = FALSE //whether the gun is attached, FALSE is attached, TRUE is the gun is wielded.
 	var/overheat = 0
 	var/overheat_max = 40
 	var/heat_diffusion = 1
@@ -30,13 +30,13 @@
 	overheat = max(0, overheat - heat_diffusion)
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/item/minigunpack/attack_hand(var/mob/living/carbon/user)
+/obj/item/minigunpack/attack_hand(mob/living/carbon/user)
 	if(src.loc == user)
 		if(!armed)
 			if(user.get_item_by_slot(ITEM_SLOT_BACK) == src)
-				armed = 1
+				armed = TRUE
 				if(!user.put_in_hands(gun))
-					armed = 0
+					armed = FALSE
 					to_chat(user, "<span class='warning'>You need a free hand to hold the gun!</span>")
 					return
 				update_icon()
@@ -80,11 +80,11 @@
 	else
 		icon_state = "holstered"
 
-/obj/item/minigunpack/proc/attach_gun(var/mob/user)
+/obj/item/minigunpack/proc/attach_gun(mob/user)
 	if(!gun)
 		gun = new(src)
 	gun.forceMove(src)
-	armed = 0
+	armed = FALSE
 	if(user)
 		to_chat(user, "<span class='notice'>You attach the [gun.name] to the [name].</span>")
 	else
@@ -98,7 +98,7 @@
 	desc = "An advanced laser cannon with an incredible rate of fire. Requires a bulky backpack power source to use."
 	icon = 'icons/obj/guns/minigun.dmi'
 	icon_state = "minigun_spin"
-	item_state = "minigun"
+	inhand_icon_state = "minigun"
 	flags_1 = CONDUCT_1
 	slowdown = 1
 	slot_flags = null
@@ -127,7 +127,7 @@
 	return
 
 /obj/item/gun/ballistic/minigun/dropped(mob/user)
-	SHOULD_CALL_PARENT(0)
+	SHOULD_CALL_PARENT(FALSE)
 	if(ammo_pack)
 		ammo_pack.attach_gun(user)
 	else

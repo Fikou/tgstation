@@ -7,8 +7,6 @@
 	icon_screen = "crew"
 	icon_keyboard = "med_key"
 	circuit = /obj/item/circuitboard/computer/operating
-	ui_x = 350
-	ui_y = 470
 
 	var/mob/living/carbon/human/patient
 	var/obj/structure/table/optable/table
@@ -24,11 +22,11 @@
 
 /obj/machinery/computer/operating/Destroy()
 	for(var/direction in GLOB.alldirs)
-		table = locate(/obj/structure/table/optable, get_step(src, direction))
+		table = locate(/obj/structure/table/optable) in get_step(src, direction)
 		if(table && table.computer == src)
 			table.computer = null
 		else
-			sbed = locate(/obj/machinery/stasis, get_step(src, direction))
+			sbed = locate(/obj/machinery/stasis) in get_step(src, direction)
 			if(sbed && sbed.op_computer == src)
 				sbed.op_computer = null
 	. = ..()
@@ -53,20 +51,23 @@
 
 /obj/machinery/computer/operating/proc/find_table()
 	for(var/direction in GLOB.alldirs)
-		table = locate(/obj/structure/table/optable, get_step(src, direction))
+		table = locate(/obj/structure/table/optable) in get_step(src, direction)
 		if(table)
 			table.computer = src
 			break
 		else
-			sbed = locate(/obj/machinery/stasis, get_step(src, direction))
+			sbed = locate(/obj/machinery/stasis) in get_step(src, direction)
 			if(sbed)
 				sbed.op_computer = src
 				break
 
-/obj/machinery/computer/operating/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.not_incapacitated_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/computer/operating/ui_state(mob/user)
+	return GLOB.not_incapacitated_state
+
+/obj/machinery/computer/operating/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "OperatingComputer", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "OperatingComputer", name)
 		ui.open()
 
 /obj/machinery/computer/operating/ui_data(mob/user)
@@ -82,14 +83,14 @@
 	data["patient"] = null
 	if(table)
 		data["table"] = table
-		if(!table.check_patient())
+		if(!table.check_eligible_patient())
 			return data
 		data["patient"] = list()
 		patient = table.patient
 	else
 		if(sbed)
 			data["table"] = sbed
-			if(!sbed.check_patient())
+			if(!ishuman(sbed.occupant) &&  !ismonkey(sbed.occupant))
 				return data
 			data["patient"] = list()
 			patient = sbed.occupant
@@ -103,7 +104,7 @@
 		if(SOFT_CRIT)
 			data["patient"]["stat"] = "Conscious"
 			data["patient"]["statstate"] = "average"
-		if(UNCONSCIOUS)
+		if(UNCONSCIOUS, HARD_CRIT)
 			data["patient"]["stat"] = "Unconscious"
 			data["patient"]["statstate"] = "average"
 		if(DEAD)

@@ -1,8 +1,3 @@
-#define TRAY_NAME_UPDATE name = myseed ? "[initial(name)] ([myseed.plantname])" : initial(name)
-#define YIELD_WEED_MINIMUM 3
-#define YIELD_WEED_MAXIMUM 10
-#define STATIC_NUTRIENT_CAPACITY 10
-
 
 /obj/machinery/hydroponics
 	name = "hydroponics tray"
@@ -53,8 +48,6 @@
 	var/unwrenchable = TRUE
 	///Have we been visited by a bee recently, so bees dont overpollinate one plant
 	var/recent_bee_visit = FALSE
-	///If the tray is connected to other trays via irrigation hoses
-	var/using_irrigation = FALSE
 	///The last user to add a reagent to the tray, mostly for logging purposes.
 	var/mob/lastuser
 	///If the tray generates nutrients and water on its own
@@ -72,6 +65,14 @@
 	name = "hydroponics tray"
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "hydrotray3"
+
+/obj/machinery/hydroponics/constructable/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/simple_rotation, ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS, null, CALLBACK(src, .proc/can_be_rotated))
+	AddComponent(/datum/component/plumbing/simple_demand)
+
+/obj/machinery/hydroponics/constructable/proc/can_be_rotated(mob/user, rotation_type)
+	return !anchored
 
 /obj/machinery/hydroponics/constructable/RefreshParts()
 	var/tmp_capacity = 0
@@ -102,32 +103,10 @@
 		// handle opening the panel
 		if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
 			return
-
-		// handle deconstructing the machine, if permissible
-		if(I.tool_behaviour == TOOL_CROWBAR && using_irrigation)
-			to_chat(user, "<span class='warning'>Disconnect the hoses first!</span>")
-			return
-		else if(default_deconstruction_crowbar(I))
+		if(default_deconstruction_crowbar(I))
 			return
 
 	return ..()
-
-/obj/machinery/hydroponics/proc/FindConnected()
-	var/list/connected = list()
-	var/list/processing_atoms = list(src)
-
-	while(processing_atoms.len)
-		var/atom/a = processing_atoms[1]
-		for(var/step_dir in GLOB.cardinals)
-			var/obj/machinery/hydroponics/h = locate() in get_step(a, step_dir)
-			// Soil plots aren't dense
-			if(h && h.using_irrigation && h.density && !(h in connected) && !(h in processing_atoms))
-				processing_atoms += h
-
-		processing_atoms -= a
-		connected += a
-
-	return connected
 
 /obj/machinery/hydroponics/bullet_act(obj/projectile/Proj) //Works with the Somatoray to modify plant variables.
 	if(!myseed)
@@ -261,9 +240,10 @@
 
 //This is where stability mutations exist now.
 			if(myseed.instability >= 80)
-				mutate(0, 0, 0, 0, 0, 0, 0, 5, 0) //Exceedingly low odds of gaining a trait.
+				var/mutation_chance = myseed.instability - 75
+				mutate(0, 0, 0, 0, 0, 0, 0, mutation_chance, 0) //Scaling odds of a random trait or chemical
 			if(myseed.instability >= 60)
-				if(prob((myseed.instability)/2) && !self_sustaining) //Minimum 30%, Maximum 50% chance of mutating every age tick when not on autogrow.
+				if(prob((myseed.instability)/2) && !self_sustaining && length(myseed.mutatelist)) //Minimum 30%, Maximum 50% chance of mutating every age tick when not on autogrow.
 					mutatespecie()
 					myseed.instability = myseed.instability/2
 			if(myseed.instability >= 40)
@@ -325,8 +305,6 @@
 			add_overlay(mutable_appearance('icons/obj/hydroponics/equipment.dmi', "gaia_blessing"))
 		set_light(3)
 
-	update_icon_hoses()
-
 	if(myseed)
 		update_icon_plant()
 		update_icon_lights()
@@ -340,15 +318,6 @@
 
 	return
 
-/obj/machinery/hydroponics/proc/update_icon_hoses()
-	var/n = 0
-	for(var/Dir in GLOB.cardinals)
-		var/obj/machinery/hydroponics/t = locate() in get_step(src,Dir)
-		if(t && t.using_irrigation && using_irrigation)
-			n += Dir
-
-	icon_state = "hoses-[n]"
-
 /obj/machinery/hydroponics/proc/update_icon_plant()
 	var/mutable_appearance/plant_overlay = mutable_appearance(myseed.growing_icon, layer = OBJ_LAYER + 0.01)
 	if(dead)
@@ -359,7 +328,7 @@
 		else
 			plant_overlay.icon_state = myseed.icon_harvest
 	else
-		var/t_growthstate = min(round((age / myseed.maturation) * myseed.growthstages), myseed.growthstages)
+		var/t_growthstate = clamp(round((age / myseed.maturation) * myseed.growthstages), 1, myseed.growthstages)
 		plant_overlay.icon_state = "[myseed.icon_grow][t_growthstate]"
 	add_overlay(plant_overlay)
 
@@ -515,7 +484,7 @@
   * If the seed's instability is >= 20, the seed donates one of it's reagents to that nearby plant.
   * * Range - The Oview range of trays to which to look for plants to donate reagents.
   */
-/obj/machinery/hydroponics/proc/pollinate(var/range = 1)
+/obj/machinery/hydroponics/proc/pollinate(range = 1)
 	for(var/obj/machinery/hydroponics/T in oview(src, range))
 		//Here is where we check for window blocking.
 		if(!Adjacent(T) && range <= 1)
@@ -530,7 +499,8 @@
 					possible_reagents += reag
 				var/datum/plant_gene/reagent/reagent_gene = pick(possible_reagents) //Let this serve as a lession to delete your WIP comments before merge.
 				if(reagent_gene.can_add(myseed))
-					myseed.genes += reagent_gene
+					if(!reagent_gene.try_upgrade_gene(myseed))
+						myseed.genes += reagent_gene.Copy()
 					myseed.reagents_from_genes()
 					continue
 
@@ -570,7 +540,6 @@
 		var/list/trays = list(src)//makes the list just this in cases of syringes and compost etc
 		var/target = myseed ? myseed.plantname : src
 		var/visi_msg = ""
-		var/irrigate = 0	//How am I supposed to irrigate pill contents?
 		var/transfer_amount
 
 		if(istype(reagent_source, /obj/item/reagent_containers/food/snacks) || istype(reagent_source, /obj/item/reagent_containers/pill))
@@ -587,34 +556,21 @@
 				visi_msg="[user] injects [target] with [syr]"
 				if(syr.reagents.total_volume <= syr.amount_per_transfer_from_this)
 					syr.mode = 0
-			else if(istype(reagent_source, /obj/item/reagent_containers/spray/))
-				visi_msg="[user] sprays [target] with [reagent_source]"
-				playsound(loc, 'sound/effects/spray3.ogg', 50, TRUE, -6)
-				irrigate = 1
-			else if(transfer_amount) // Droppers, cans, beakers, what have you.
-				visi_msg="[user] uses [reagent_source] on [target]"
-				irrigate = 1
 			// Beakers, bottles, buckets, etc.
 			if(reagent_source.is_drainable())
 				playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
 
-		if(irrigate && transfer_amount > 30 && reagent_source.reagents.total_volume >= 30 && using_irrigation)
-			trays = FindConnected()
-			if (trays.len > 1)
-				visi_msg += ", setting off the irrigation system"
-
 		if(visi_msg)
 			visible_message("<span class='notice'>[visi_msg].</span>")
-
-		var/split = round(transfer_amount/trays.len)
 
 		for(var/obj/machinery/hydroponics/H in trays)
 		//cause I don't want to feel like im juggling 15 tamagotchis and I can get to my real work of ripping flooring apart in hopes of validating my life choices of becoming a space-gardener
 			//This was originally in apply_chemicals, but due to apply_chemicals only holding nutrients, we handle it here now.
 			if(reagent_source.reagents.has_reagent(/datum/reagent/water, 1))
-				H.adjustWater(round(reagent_source.reagents.get_reagent_amount(/datum/reagent/water)/(trays.len)))
-				reagent_source.reagents.remove_reagent(/datum/reagent/water, reagent_source.reagents.get_reagent_amount(/datum/reagent/water)/(trays.len))
-			reagent_source.reagents.trans_to(H.reagents, split, transfered_by = user)
+				var/water_amt = reagent_source.reagents.get_reagent_amount(/datum/reagent/water) * transfer_amount / reagent_source.reagents.total_volume
+				H.adjustWater(round(water_amt))
+				reagent_source.reagents.remove_reagent(/datum/reagent/water, water_amt)
+			reagent_source.reagents.trans_to(H.reagents, transfer_amount, transfered_by = user)
 			if(istype(reagent_source, /obj/item/reagent_containers/food/snacks) || istype(reagent_source, /obj/item/reagent_containers/pill))
 				qdel(reagent_source)
 				lastuser = user
@@ -647,14 +603,14 @@
 	else if(istype(O, /obj/item/plant_analyzer))
 		var/obj/item/plant_analyzer/P_analyzer = O
 		if(myseed)
-			if(P_analyzer.scan_mode == 0)
+			if(P_analyzer.scan_mode == PLANT_SCANMODE_STATS)
 				to_chat(user, "*** <B>[myseed.plantname]</B> ***" )
 				to_chat(user, "- Plant Age: <span class='notice'>[age]</span>")
 				var/list/text_string = myseed.get_analyzer_text()
 				if(text_string)
 					to_chat(user, text_string)
 					to_chat(user, "*---------*")
-			if(myseed.reagents_add && P_analyzer.scan_mode == 1)
+			if(myseed.reagents_add && P_analyzer.scan_mode == PLANT_SCANMODE_CHEMICALS)
 				to_chat(user, "- <B>Plant Reagents</B> -")
 				to_chat(user, "*---------*")
 				for(var/datum/plant_gene/reagent/G in myseed.genes)
@@ -692,13 +648,13 @@
 			return
 		else
 			user.visible_message("<span class='notice'>[user] grafts off a limb from [src].</span>", "<span class='notice'>You carefully graft off a portion of [src].</span>")
-			var/obj/item/graft/snip = new /obj/item/graft(loc)
-			if(myseed.graft_gene)
-				snip.stored_trait = new myseed.graft_gene
-			snip.parent_seed = myseed
+			var/obj/item/graft/snip = myseed.create_graft()
+			if(!snip)
+				return // The plant did not return a graft.
+
+			snip.forceMove(drop_location())
 			myseed.grafted = TRUE
 			adjustHealth(-5)
-			snip.name += " ([snip.parent_seed.plantname])"
 			return
 
 	else if(istype(O, /obj/item/geneshears))
@@ -734,19 +690,12 @@
 
 	else if(istype(O, /obj/item/graft))
 		var/obj/item/graft/snip = O
-		var/datum/plant_gene/trait/new_trait = snip.stored_trait
 		if(!myseed)
 			to_chat(user, "<span class='notice'>The tray is empty.</span>")
 			return
-		if(new_trait.can_add(myseed))
-			myseed.genes += snip.stored_trait
-		//Alright this one's a mess, but it's either 2/3rds of the difference of the two seed's respective stats, and the higher of the two is taken. Min 0, max 100.
-		myseed.lifespan =  round(clamp(max(myseed.lifespan,(myseed.lifespan+(2/3)*(snip.parent_seed.lifespan-myseed.lifespan))),0,100))
-		myseed.endurance =  round(clamp(max(myseed.endurance,(myseed.endurance+(2/3)*(snip.parent_seed.endurance-myseed.endurance))),0,100))
-		myseed.production = round(clamp(max(myseed.production,(myseed.production+(2/3)*(snip.parent_seed.production-myseed.production))),0,100))
-		myseed.weed_rate = round(clamp(max(myseed.weed_rate,(myseed.weed_rate+(2/3)*(snip.parent_seed.weed_rate-myseed.weed_rate))),0,100))
-		myseed.weed_chance = round(clamp(max(myseed.weed_chance,(myseed.weed_chance+(2/3)*(snip.parent_seed.weed_chance-myseed.weed_chance))),0,100))
-		myseed.yield = round(clamp(max(myseed.yield,(myseed.yield+(2/3)*(snip.parent_seed.yield-myseed.yield))),0,10))
+		if(!myseed.apply_graft(snip))
+			to_chat(user, "<span class='warning'>The [myseed.plantname] rejects the [snip]!</span>")
+			return
 		qdel(snip)
 		to_chat(user, "<span class='notice'>You carefully integrate the grafted plant limb onto [myseed.plantname].</span>")
 		return
@@ -758,18 +707,6 @@
 		return
 
 	else if(default_unfasten_wrench(user, O))
-		return
-
-	else if((O.tool_behaviour == TOOL_WIRECUTTER) && unwrenchable)
-		if (!anchored)
-			to_chat(user, "<span class='warning'>Anchor the tray first!</span>")
-			return
-		using_irrigation = !using_irrigation
-		O.play_tool_sound(src)
-		user.visible_message("<span class='notice'>[user] [using_irrigation ? "" : "dis"]connects [src]'s irrigation hoses.</span>", \
-		"<span class='notice'>You [using_irrigation ? "" : "dis"]connect [src]'s irrigation hoses.</span>")
-		for(var/obj/machinery/hydroponics/h in range(1,src))
-			h.update_icon()
 		return
 
 	else if(istype(O, /obj/item/shovel/spade))
@@ -821,7 +758,7 @@
 			myseed.mutatelist = list(fresh_mut_list[locked_mutation])
 			myseed.endurance = (myseed.endurance/2)
 			flowergun.cell.use(flowergun.cell.charge)
-			flowergun.update_overlays()
+			flowergun.update_icon()
 			to_chat(user, "<span class='notice'>[myseed.plantname]'s mutation was set to [locked_mutation], depleting [flowergun]'s cell!</span>")
 			return
 	else
@@ -830,11 +767,6 @@
 /obj/machinery/hydroponics/can_be_unfasten_wrench(mob/user, silent)
 	if (!unwrenchable)  // case also covered by NODECONSTRUCT checks in default_unfasten_wrench
 		return CANT_UNFASTEN
-
-	if (using_irrigation)
-		if (!silent)
-			to_chat(user, "<span class='warning'>Disconnect the hoses first!</span>")
-		return FAILED_UNFASTEN
 
 	return ..()
 
@@ -874,6 +806,9 @@
 
 /obj/machinery/hydroponics/AltClick(mob/user)
 	. = ..()
+	if(!anchored)
+		update_icon()
+		return FALSE
 	var/warning = alert(user, "Are you sure you wish to empty the tray's nutrient beaker?","Empty Tray Nutrients?", "Yes", "No")
 	if(warning == "Yes" && user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		reagents.clear_reagents()
@@ -962,14 +897,6 @@
 	var/mob/living/simple_animal/hostile/C = new chosen
 	C.faction = list("plants")
 
-//////////////////////////////////////////////////////////////////////////////////
-/obj/machinery/hydroponics/irrigated	//Pre-Irrigated trays! Maybe map a couple on each map, just so they get used?
-	using_irrigation = TRUE
-
-/obj/machinery/hydroponics/irrigated/Initialize()
-	. = ..()
-	update_icon() //Visually hooks up all the pipes.
-
 ///////////////////////////////////////////////////////////////////////////////
 /obj/machinery/hydroponics/soil //Not actually hydroponics at all! Honk!
 	name = "soil"
@@ -982,9 +909,6 @@
 	use_power = NO_POWER_USE
 	flags_1 = NODECONSTRUCT_1
 	unwrenchable = FALSE
-
-/obj/machinery/hydroponics/soil/update_icon_hoses()
-	return // Has no hoses
 
 /obj/machinery/hydroponics/soil/update_icon_lights()
 	return // Has no lights
