@@ -1,7 +1,7 @@
 /datum/surgery/prosthetic_replacement
 	name = "Prosthetic replacement"
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/add_prosthetic)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/human/monkey)
 	possible_locs = list(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD)
 	requires_bodypart = FALSE //need a missing limb
 	requires_bodypart_type = 0
@@ -34,10 +34,6 @@
 		tool = I
 	if(istype(tool, /obj/item/bodypart))
 		var/obj/item/bodypart/BP = tool
-		if(ismonkey(target))// monkey patient only accept organic monkey limbs
-			if(BP.status == BODYPART_ROBOTIC || BP.animal_origin != MONKEY_BODYPART)
-				to_chat(user, "<span class='warning'>[BP] doesn't match the patient's morphology.</span>")
-				return -1
 		if(BP.status != BODYPART_ROBOTIC)
 			organ_rejection_dam = 10
 			if(ishuman(target))

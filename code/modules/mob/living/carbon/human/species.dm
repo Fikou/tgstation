@@ -94,12 +94,16 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/siemens_coeff = 1
 	///What kind of damage overlays (if any) appear on our species when wounded? If this is "", does not add an overlay.
 	var/damage_overlay_type = "human"
+	///What kind of husk icon do we render?
+	var/husk_limb_icon = "husk"
 	///To use MUTCOLOR with a fixed color that's independent of the mcolor feature in DNA.
 	var/fixed_mut_color = ""
 	///Special mutation that can be found in the genepool exclusively in this species. Dont leave empty or changing species will be a headache
 	var/inert_mutation 	= DWARFISM
 	///Used to set the mob's deathsound upon species change
 	var/deathsound
+	///Used to set the mob's icon for dusting/gibbing
+	var/deathanim = "h"
 	///Sounds to override barefeet walking
 	var/list/special_step_sounds
 	///Special sound for grabbing

@@ -71,7 +71,7 @@
 
 	// chance of monkey retaliation
 	if(ismonkey(target) && prob(MONKEY_SYRINGE_RETALIATION_PROB))
-		var/mob/living/carbon/monkey/M
+		var/mob/living/carbon/human/monkey/M
 		M = target
 		M.retaliate(user)
 

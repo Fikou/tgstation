@@ -41,7 +41,7 @@
 		cavity_object = CH.cavity_item
 		CH.cavity_item = null
 
-	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey( loc )
+	var/mob/living/carbon/human/monkey/O = new /mob/living/carbon/human/monkey( loc )
 
 	// hash the original name?
 	if(tr_flags & TR_HASHNAME)

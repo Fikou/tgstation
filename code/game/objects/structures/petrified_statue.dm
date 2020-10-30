@@ -86,7 +86,7 @@
 	S.add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
 	return TRUE
 
-/mob/living/carbon/monkey/petrify(statue_timer)
+/mob/living/carbon/human/monkey/petrify(statue_timer)
 	if(!isturf(loc))
 		return FALSE
 	var/obj/structure/statue/petrified/S = new(loc, src, statue_timer)

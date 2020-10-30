@@ -58,9 +58,9 @@
 			if(!check_rights(R_SPAWN))
 				return
 
-			var/mob/living/carbon/monkey/Mo = locate(href_list["makehuman"]) in GLOB.mob_list
+			var/mob/living/carbon/human/monkey/Mo = locate(href_list["makehuman"]) in GLOB.mob_list
 			if(!istype(Mo))
-				to_chat(usr, "This can only be done to instances of type /mob/living/carbon/monkey", confidential = TRUE)
+				to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human/monkey", confidential = TRUE)
 				return
 
 			if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")

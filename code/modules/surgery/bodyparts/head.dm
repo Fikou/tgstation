@@ -249,11 +249,6 @@
 			if(eyes.eye_color)
 				eyes_overlay.color = "#" + eyes.eye_color
 
-/obj/item/bodypart/head/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_head"
-	animal_origin = MONKEY_BODYPART
-
 /obj/item/bodypart/head/alien
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "alien_head"

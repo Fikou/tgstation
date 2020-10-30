@@ -61,6 +61,7 @@
 
 	var/species_flags_list = list()
 	var/dmg_overlay_type //the type of damage overlay (if any) to use when this bodypart is bruised/burned.
+	var/husk_icon_type
 
 	//Damage messages used by help_shake_act()
 	var/light_brute_msg = "bruised"
@@ -751,7 +752,7 @@
 			no_update = FALSE
 
 	if(HAS_TRAIT(C, TRAIT_HUSK) && is_organic_limb())
-		species_id = "husk" //overrides species_id
+		species_id = husk_icon_type //overrides species_id
 		dmg_overlay_type = "" //no damage overlay shown when husked
 		should_draw_gender = FALSE
 		should_draw_greyscale = FALSE
@@ -792,9 +793,7 @@
 			mutation_color = ""
 
 		dmg_overlay_type = S.damage_overlay_type
-
-	else if(animal_origin == MONKEY_BODYPART) //currently monkeys are the only non human mob to have damage overlays.
-		dmg_overlay_type = animal_origin
+		husk_icon_type = S.husk_limb_icon
 
 	if(status == BODYPART_ROBOTIC)
 		dmg_overlay_type = "robotic"

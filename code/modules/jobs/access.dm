@@ -18,10 +18,10 @@
 		//if they are holding or wearing a card that has access, that works
 		if(check_access(H.get_active_held_item()) || src.check_access(H.wear_id))
 			return TRUE
-	else if(ismonkey(M) || isalienadult(M))
-		var/mob/living/carbon/george = M
+	else if(isalienadult(M))
+		var/mob/living/carbon/alien/george_the_drone = M
 		//they can only hold things :(
-		if(check_access(george.get_active_held_item()))
+		if(check_access(george_the_drone.get_active_held_item()))
 			return TRUE
 	else if(isanimal(M))
 		var/mob/living/simple_animal/A = M

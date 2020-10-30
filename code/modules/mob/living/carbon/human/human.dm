@@ -618,8 +618,11 @@
 		threatcount += 2
 
 	//Check for nonhuman scum
-	if(dna && dna.species.id && dna.species.id != "human")
-		threatcount += 1
+	if(ishuman(src))
+		if(ismonkey(src))
+			threatcount += 10
+		else if(!ishumanbasic(src))
+			threatcount += 1
 
 	//mindshield implants imply trustworthyness
 	if(HAS_TRAIT(src, TRAIT_MINDSHIELD))
@@ -1358,6 +1361,3 @@
 
 /mob/living/carbon/human/species/zombie/krokodil_addict
 	race = /datum/species/krokodil_addict
-
-/mob/living/carbon/human/species/monkey
-	race = /datum/species/monkey

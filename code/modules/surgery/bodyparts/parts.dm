@@ -28,12 +28,6 @@
 		cavity_item = null
 	..()
 
-/obj/item/bodypart/chest/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_chest"
-	animal_origin = MONKEY_BODYPART
-	wound_resistance = -10
-
 /obj/item/bodypart/chest/alien
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "alien_chest"
@@ -128,14 +122,6 @@
 		hand_screen_object?.update_icon()
 
 
-/obj/item/bodypart/l_arm/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_l_arm"
-	animal_origin = MONKEY_BODYPART
-	wound_resistance = -10
-	px_x = -5
-	px_y = -3
-
 /obj/item/bodypart/l_arm/alien
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "alien_l_arm"
@@ -224,14 +210,6 @@
 		hand_screen_object?.update_icon()
 
 
-/obj/item/bodypart/r_arm/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_r_arm"
-	animal_origin = MONKEY_BODYPART
-	wound_resistance = -10
-	px_x = 5
-	px_y = -3
-
 /obj/item/bodypart/r_arm/alien
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "alien_r_arm"
@@ -313,13 +291,6 @@
 /obj/item/bodypart/l_leg/digitigrade
 	name = "left digitigrade leg"
 	use_digitigrade = FULL_DIGITIGRADE
-
-/obj/item/bodypart/l_leg/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_l_leg"
-	animal_origin = MONKEY_BODYPART
-	wound_resistance = -10
-	px_y = 4
 
 /obj/item/bodypart/l_leg/alien
 	icon = 'icons/mob/animal_parts.dmi'
@@ -404,13 +375,6 @@
 /obj/item/bodypart/r_leg/digitigrade
 	name = "right digitigrade leg"
 	use_digitigrade = FULL_DIGITIGRADE
-
-/obj/item/bodypart/r_leg/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_r_leg"
-	animal_origin = MONKEY_BODYPART
-	wound_resistance = -10
-	px_y = 4
 
 /obj/item/bodypart/r_leg/alien
 	icon = 'icons/mob/animal_parts.dmi'

@@ -3,7 +3,7 @@
 	SSmobs.pause()
 
 	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human)
-	var/mob/living/carbon/monkey/monkey = allocate(/mob/living/carbon/monkey)
+	var/mob/living/carbon/human/monkey/monkey = allocate(/mob/living/carbon/human/monkey)
 
 	for (var/reagent_type in subtypesof(/datum/reagent))
 		test_reagent(human, reagent_type)

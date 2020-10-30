@@ -691,7 +691,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 			captured_amount+=0.5
 			continue
 		captured_amount+=1
-	for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
+	for(var/mob/living/carbon/human/monkey/M in A)//Monkeys are almost worthless, you failure.
 		captured_amount+=0.1
 	for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 		if(M.stat == DEAD)

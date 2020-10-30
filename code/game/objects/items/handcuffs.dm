@@ -52,7 +52,7 @@
 
 	// chance of monkey retaliation
 	if(ismonkey(C) && prob(MONKEY_CUFF_RETALIATION_PROB))
-		var/mob/living/carbon/monkey/M
+		var/mob/living/carbon/human/monkey/M
 		M = C
 		M.retaliate(user)
 

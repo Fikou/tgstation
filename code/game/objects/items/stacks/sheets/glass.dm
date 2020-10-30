@@ -314,7 +314,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 			to_chat(H, "<span class='warning'>[src] cuts into your hand!</span>")
 			H.apply_damage(force*0.5, BRUTE, hit_hand)
 	else if(ismonkey(user))
-		var/mob/living/carbon/monkey/M = user
+		var/mob/living/carbon/human/monkey/M = user
 		if(!HAS_TRAIT(M, TRAIT_PIERCEIMMUNE))
 			to_chat(M, "<span class='warning'>[src] cuts into your hand!</span>")
 			M.apply_damage(force*0.5, BRUTE, hit_hand)

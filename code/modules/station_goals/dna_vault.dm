@@ -96,7 +96,7 @@
 		to_chat(user, "<span class='notice'>Plant data added to local storage.</span>")
 
 	//animals
-	var/static/list/non_simple_animals = typecacheof(list(/mob/living/carbon/monkey, /mob/living/carbon/alien))
+	var/static/list/non_simple_animals = typecacheof(list(/mob/living/carbon/human/monkey, /mob/living/carbon/alien))
 	if(isanimal(target) || is_type_in_typecache(target,non_simple_animals))
 		if(isanimal(target))
 			var/mob/living/simple_animal/A = target
