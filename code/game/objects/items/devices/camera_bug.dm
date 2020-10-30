@@ -142,7 +142,7 @@
 	return html
 
 /obj/item/camera_bug/proc/get_seens()
-	if(current && current.can_use())
+	if(current?.can_use())
 		var/list/seen = current.can_see()
 		return seen
 
@@ -163,7 +163,7 @@
 			dat += " (Stage [stage])"
 			dat += " <a href='?[REF(src)];track=[REF(S)]'>\[Track\]</a><br>"
 
-		for(var/obj/mecha/M in seen)
+		for(var/obj/vehicle/sealed/mecha/M in seen)
 			if(M.name in names)
 				names[M.name]++
 				dat += "[M.name] ([names[M.name]])"
@@ -180,7 +180,7 @@
 			else
 				names[M.name] = 1
 				dat += "[M.name]"
-			if(!(M.mobility_flags & MOBILITY_STAND))
+			if(M.body_position == LYING_DOWN)
 				if(M.buckled)
 					dat += " (Sitting)"
 				else

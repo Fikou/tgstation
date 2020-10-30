@@ -7,15 +7,15 @@
 	var/t_is = p_are()
 
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
-	var/list/obscured = check_obscured_slots()
+	var/obscured = check_obscured_slots()
 
 	if (handcuffed)
 		. += "<span class='warning'>[t_He] [t_is] [icon2html(handcuffed, user)] handcuffed!</span>"
 	if (head)
 		. += "[t_He] [t_is] wearing [head.get_examine_string(user)] on [t_his] head. "
-	if(wear_mask && !(ITEM_SLOT_MASK in obscured))
+	if(wear_mask && !(obscured & ITEM_SLOT_MASK))
 		. += "[t_He] [t_is] wearing [wear_mask.get_examine_string(user)] on [t_his] face."
-	if(wear_neck && !(ITEM_SLOT_NECK in obscured))
+	if(wear_neck && !(obscured & ITEM_SLOT_NECK))
 		. += "[t_He] [t_is] wearing [wear_neck.get_examine_string(user)] around [t_his] neck."
 
 	for(var/obj/item/I in held_items)
@@ -42,9 +42,9 @@
 		missing -= BP.body_zone
 		for(var/obj/item/I in BP.embedded_objects)
 			if(I.isEmbedHarmless())
-				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>\n"
+				msg += "<B>[t_He] [t_has] [icon2html(I, user)] \a [I] stuck to [t_his] [BP.name]!</B>\n"
 			else
-				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>\n"
+				msg += "<B>[t_He] [t_has] [icon2html(I, user)] \a [I] embedded in [t_his] [BP.name]!</B>\n"
 		for(var/i in BP.wounds)
 			var/datum/wound/W = i
 			msg += "[W.get_examine_description(user)]\n"
@@ -101,7 +101,7 @@
 	if(fire_stacks < 0)
 		msg += "[t_He] look[p_s()] a little soaked.\n"
 
-	if(pulledby && pulledby.grab_state)
+	if(pulledby?.grab_state)
 		msg += "[t_He] [t_is] restrained by [pulledby]'s grip.\n"
 
 	var/scar_severity = 0

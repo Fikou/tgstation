@@ -40,6 +40,7 @@
 	desc = "Draw out your soul on this canvas!"
 	icon = 'icons/obj/artstuff.dmi'
 	icon_state = "11x11"
+	flags_1 = UNPAINTABLE_1
 	resistance_flags = FLAMMABLE
 	var/width = 11
 	var/height = 11
@@ -284,7 +285,7 @@
 
 /obj/structure/sign/painting/update_icon_state()
 	. = ..()
-	if(C && C.generated_icon)
+	if(C?.generated_icon)
 		icon_state = "frame-overlay"
 	else
 		icon_state = "frame-empty"
@@ -292,7 +293,7 @@
 
 /obj/structure/sign/painting/update_overlays()
 	. = ..()
-	if(C && C.generated_icon)
+	if(C?.generated_icon)
 		var/mutable_appearance/MA = mutable_appearance(C.generated_icon)
 		MA.pixel_x = C.framed_offset_x
 		MA.pixel_y = C.framed_offset_y

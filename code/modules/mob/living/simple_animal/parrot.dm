@@ -91,12 +91,18 @@
 	//Parrots will generally sit on their perch unless something catches their eye.
 	//These vars store their preffered perch and if they dont have one, what they can use as a perch
 	var/obj/parrot_perch = null
-	var/obj/desired_perches = list(/obj/structure/frame/computer, 		/obj/structure/displaycase, \
-									/obj/structure/filingcabinet,		/obj/machinery/teleport, \
-									/obj/machinery/dna_scannernew,		/obj/machinery/telecomms, \
-									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
-									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
-									/obj/machinery/computer,			/obj/machinery/suit_storage_unit)
+	var/obj/desired_perches = list(/obj/structure/frame/computer,
+		/obj/structure/displaycase,
+		/obj/structure/filingcabinet,
+		/obj/machinery/teleport,
+		/obj/machinery/dna_scannernew,
+		/obj/machinery/telecomms,
+		/obj/machinery/nuclearbomb,
+		/obj/machinery/recharge_station,
+		/obj/machinery/smartfridge,
+		/obj/machinery/computer,
+		/obj/machinery/suit_storage_unit,
+	)
 
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
@@ -136,10 +142,11 @@
 	if(buckled)
 		buckled.unbuckle_mob(src,force=1)
 	buckled = null
-	pixel_x = initial(pixel_x)
-	pixel_y = initial(pixel_y)
+	pixel_x = base_pixel_x
+	pixel_y = base_pixel_y
 
-	..(gibbed)
+	return ..()
+
 
 /mob/living/simple_animal/parrot/get_status_tab_items()
 	. = ..()
@@ -159,7 +166,7 @@
 
 /mob/living/simple_animal/parrot/radio(message, list/message_mods = list(), list/spans, language) //literally copied from human/radio(), but there's no other way to do this. at least it's better than it used to be.
 	. = ..()
-	if(!.)
+	if(.)
 		return
 
 	if(message_mods[MODE_HEADSET])
