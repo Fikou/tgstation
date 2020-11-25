@@ -131,7 +131,7 @@
 
 /datum/bounty/item/botany/eggplant_eggy
 	name = "Egg-plants"
-	wanted_types = list(/obj/item/food/grown/shell/eggy)
+	wanted_types = list(/obj/item/food/grown/eggplant/eggy)
 	bonus_desc = "Not to be confused with eggplants."
 	multiplier = 2
 

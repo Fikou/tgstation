@@ -341,7 +341,7 @@
 		/obj/item/food/cheesewedge = 1,
 		/datum/reagent/consumable/gravy = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/customizable/poutine
+	result = /obj/item/food/poutine
 	subcategory = CAT_MISCFOOD
 
 /datum/crafting_recipe/food/royalcheese

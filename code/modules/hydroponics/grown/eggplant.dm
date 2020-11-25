@@ -31,13 +31,13 @@
 	icon_state = "seed-eggy"
 	species = "eggy"
 	plantname = "Egg-Plants"
-	product = /obj/item/food/grown/shell/eggy
+	product = /obj/item/food/grown/eggplant/eggy
 	lifespan = 75
 	production = 12
 	mutatelist = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.1)
 
-/obj/item/food/grown/shell/eggy
+/obj/item/food/grown/eggplant/eggy
 	seed = /obj/item/seeds/eggplant/eggy
 	name = "egg-plant"
 	desc = "There MUST be a chicken inside."

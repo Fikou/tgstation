@@ -386,13 +386,13 @@
 		if(O.density)
 			return FALSE
 
-	var/obj/item/reagent_containers/food/snacks/L
+	var/obj/item/food/L
 	switch(mode)
 		if(DISPENSE_LOLLIPOP_MODE)
 			L = new /obj/item/food/chewable/lollipop(T)
 		if(DISPENSE_ICECREAM_MODE)
-			L = new /obj/item/reagent_containers/food/snacks/icecream(T)
-			var/obj/item/reagent_containers/food/snacks/icecream/I = L
+			L = new /obj/item/food/icecream(T)
+			var/obj/item/food/icecream/I = L
 			I.add_ice_cream("vanilla")
 			I.desc = "Eat the ice cream."
 

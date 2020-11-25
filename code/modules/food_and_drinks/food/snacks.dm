@@ -336,12 +336,7 @@ All foods are distributed among various categories. Use common sense.
 
 // //////////////////////////////////////////////Store////////////////////////////////////////
 /// All the food items that can store an item inside itself, like bread or cake.
-/obj/item/reagent_containers/food/snacks/store
-	w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/reagent_containers/food/snacks/store/Initialize()
-	. = ..()
-	AddComponent(/datum/component/food_storage)
 
 /obj/item/reagent_containers/food/snacks/MouseDrop(atom/over)
 	var/turf/T = get_turf(src)

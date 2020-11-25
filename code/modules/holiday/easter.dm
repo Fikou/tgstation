@@ -165,11 +165,13 @@
 		qdel(src)
 
 //Easter Recipes + food
-/obj/item/reagent_containers/food/snacks/hotcrossbun
-	bitesize = 2
+/obj/item/food/hotcrossbun
+	bite_consumption = 2
 	name = "hot-cross bun"
 	desc = "The Cross represents the Assistants that died for your sins."
 	icon_state = "hotcrossbun"
+	foodtypes = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/sugar = 1)
+	foodtypes = SUGAR | GRAIN
 
 /datum/crafting_recipe/food/hotcrossbun
 	name = "Hot-Cross Bun"
@@ -177,7 +179,7 @@
 		/obj/item/food/bread/plain = 1,
 		/datum/reagent/consumable/sugar = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/hotcrossbun
+	result = /obj/item/food/hotcrossbun
 	subcategory = CAT_MISCFOOD
 
 /datum/crafting_recipe/food/briochecake
@@ -189,14 +191,14 @@
 	result = /obj/item/food/cake/brioche
 	subcategory = CAT_MISCFOOD
 
-/obj/item/reagent_containers/food/snacks/scotchegg
+/obj/item/food/scotchegg
 	name = "scotch egg"
 	desc = "A boiled egg wrapped in a delicious, seasoned meatball."
 	icon_state = "scotchegg"
-	bonus_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/nutriment/vitamin = 2)
-	bitesize = 3
-	filling_color = "#FFFFF0"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 6)
+	food_reagents = list(/datum/reagent/consumable/nutriment = 8, /datum/reagent/consumable/nutriment/vitamin = 2)
+	bite_consumption = 3
+	foodtypes = FRIED | MEAT | JUNKFOOD
+	w_class = WEIGHT_CLASS_SMALL
 
 /datum/crafting_recipe/food/scotchegg
 	name = "Scotch egg"
@@ -206,7 +208,7 @@
 		/obj/item/food/boiledegg = 1,
 		/obj/item/food/meatball = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/scotchegg
+	result = /obj/item/food/scotchegg
 	subcategory = CAT_MISCFOOD
 
 /datum/crafting_recipe/food/mammi
@@ -219,13 +221,12 @@
 	result = /obj/item/food/soup/mammi
 	subcategory = CAT_MISCFOOD
 
-/obj/item/reagent_containers/food/snacks/chocolatebunny
+/obj/item/food/chocolatebunny
 	name = "chocolate bunny"
 	desc = "Contains less than 10% real rabbit!"
 	icon_state = "chocolatebunny"
-	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/vitamin = 1)
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/sugar = 2, /datum/reagent/consumable/coco = 2)
-	filling_color = "#A0522D"
+	food_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/consumable/nutriment/vitamin = 1, /datum/reagent/consumable/sugar = 2, /datum/reagent/consumable/coco = 2)
+	foodtypes = JUNKFOOD | SUGAR
 
 /datum/crafting_recipe/food/chocolatebunny
 	name = "Chocolate bunny"
@@ -233,5 +234,5 @@
 		/datum/reagent/consumable/sugar = 2,
 		/obj/item/food/chocolatebar = 1
 	)
-	result = /obj/item/reagent_containers/food/snacks/chocolatebunny
+	result = /obj/item/food/chocolatebunny
 	subcategory = CAT_MISCFOOD

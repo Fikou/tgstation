@@ -143,27 +143,33 @@ Slimecrossing Items
 	icon_state = "rainbowbarrier"
 
 //Ration pack - Chilling Silver
-/obj/item/reagent_containers/food/snacks/rationpack
+/obj/item/food/rationpack
 	name = "ration pack"
 	desc = "A square bar that sadly <i>looks</i> like chocolate, packaged in a nondescript grey wrapper. Has saved soldiers' lives before - usually by stopping bullets."
 	icon_state = "rationpack"
-	bitesize = 3
-	junkiness = 15
-	filling_color = "#964B00"
+	bite_consumption = 3
 	tastes = list("cardboard" = 3, "sadness" = 3)
-	foodtype = null //Don't ask what went into them. You're better off not knowing.
-	list_reagents = list(/datum/reagent/consumable/nutriment/stabilized = 10, /datum/reagent/consumable/nutriment = 2) //Won't make you fat. Will make you question your sanity.
+	foodtypes = NONE
+	junkiness = 15
+	food_reagents = list(/datum/reagent/consumable/nutriment/stabilized = 10, /datum/reagent/consumable/nutriment = 2) //Won't make you fat. Will make you question your sanity.
 
-/obj/item/reagent_containers/food/snacks/rationpack/checkLiked(fraction, mob/M)	//Nobody likes rationpacks. Nobody.
-	if(last_check_time + 50 < world.time)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(H.mind && !HAS_TRAIT(H, TRAIT_AGEUSIA))
-				to_chat(H,"<span class='notice'>That didn't taste very good...</span>") //No disgust, though. It's just not good tasting.
-				SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "gross_food", /datum/mood_event/gross_food)
-				last_check_time = world.time
-				return
-	..()
+/obj/item/food/rationpack/proc/check_liked(fraction, mob/living/carbon/human/H)	//Nobody likes rationpacks. Nobody.
+	if(!HAS_TRAIT(H, TRAIT_AGEUSIA))
+		return FOOD_DISLIKED
+
+/obj/item/food/rationpack/MakeEdible()
+	AddComponent(/datum/component/edible,\
+				initial_reagents = food_reagents,\
+				food_flags = food_flags,\
+				foodtypes = foodtypes,\
+				volume = max_volume,\
+				eat_time = eat_time,\
+				tastes = tastes,\
+				eatverbs = eatverbs,\
+				bite_consumption = bite_consumption,\
+				microwaved_type = microwaved_type,\
+				junkiness = junkiness,\
+				check_liked = CALLBACK(src, .proc/check_liked))
 
 //Ice stasis block - Chilling Dark Blue
 /obj/structure/ice_stasis
