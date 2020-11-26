@@ -1,0 +1,45 @@
+{
+	"version": 1,
+	"map_name": "JungleStation",
+	"map_path": "map_files/JungleStation",
+	"map_file": [
+		"JungleStation_Bottom.dmm",
+		"JungleStation_Middle.dmm",
+		"JungleStation_Top.dmm"
+	],
+	"space_ruin_levels": 0,
+	"space_empty_levels": 0,
+	"shuttles": {
+		"cargo": "cargo_jungle",
+		"ferry": "ferry_jungle",
+		"whiteship": "whiteship_jungle",
+		"emergency": "emergency_jungle"
+	},
+	"traits": [
+		{
+			"Up": 1,
+			"Mining": true,
+			"Linkage": null,
+			"Gravity": true,
+			"Lava Ruins": true,
+			"Baseturf": "/turf/open/lava/smooth"
+		},
+		{
+			"Down": -1,
+			"Up": 1,
+			"Mining": true,
+			"Linkage": null,
+			"Gravity": true,
+			"Baseturf": "/turf/open/openspace"
+		},
+		{
+			"Down": -1,
+			"Mining": true,
+			"Linkage": null,
+			"Gravity": true,
+			"Weather_Acidrain": true,
+			"Baseturf": "/turf/open/floor/plating/dirt/jungle"
+		}
+	],
+	"minetype": "none"
+}
