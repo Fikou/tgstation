@@ -387,7 +387,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 1
 	},
-/obj/machinery/computer/rdconsole/core,
+/obj/machinery/computer/rdconsole,
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/bridge)
@@ -1109,7 +1109,7 @@
 /area/teleporter)
 "GA" = (
 /obj/item/hand_labeler,
-/obj/item/stack/packageWrap,
+/obj/item/stack/package_wrap,
 /obj/structure/table/wood,
 /obj/structure/cable,
 /obj/item/flashlight/lamp/green,
@@ -1579,7 +1579,7 @@
 /area/bridge)
 "Rg" = (
 /obj/structure/table/wood,
-/obj/item/storage/box/PDAs{
+/obj/item/storage/box/pdas{
 	pixel_x = 4;
 	pixel_y = 4
 	},
@@ -1635,7 +1635,7 @@
 /area/bridge)
 "Sn" = (
 /obj/structure/bed/dogbed/ian,
-/mob/living/simple_animal/pet/dog/corgi/Ian,
+/mob/living/simple_animal/pet/dog/corgi/ian,
 /obj/structure/window/reinforced{
 	dir = 4
 	},

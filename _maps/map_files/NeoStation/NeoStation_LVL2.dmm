@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ad" = (
 /obj/structure/table/reinforced,
-/obj/item/aiModule/supplied/freeform,
+/obj/item/ai_module/supplied/freeform,
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload)
@@ -22,7 +22,7 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/turf/open/openspace/airless,
+/turf/open/transparent/openspace/airless,
 /area/bridge)
 "bt" = (
 /obj/structure/chair/sofa/left{
@@ -33,14 +33,14 @@
 "bB" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable,
-/turf/open/openspace/airless,
+/turf/open/transparent/openspace/airless,
 /area/bridge)
 "bN" = (
 /obj/machinery/suit_storage_unit/standard_unit,
 /turf/open/floor/plasteel/dark,
 /area/bridge/meeting_room)
 "bU" = (
-/turf/open/openspace/airless,
+/turf/open/transparent/openspace/airless,
 /area/space)
 "ce" = (
 /obj/machinery/holopad,
@@ -67,9 +67,9 @@
 /area/crew_quarters/heads/hos)
 "dE" = (
 /obj/structure/table,
-/obj/item/aiModule/core/full/asimov,
+/obj/item/ai_module/core/full/asimov,
 /obj/effect/spawner/lootdrop/aimodule_harmless,
-/obj/item/aiModule/core/freeformcore,
+/obj/item/ai_module/core/freeformcore,
 /obj/machinery/door/window{
 	base_state = "right";
 	dir = 4;
@@ -79,7 +79,7 @@
 	},
 /obj/structure/window/reinforced,
 /obj/effect/spawner/lootdrop/aimodule_neutral,
-/obj/item/aiModule/core/full/custom,
+/obj/item/ai_module/core/full/custom,
 /obj/machinery/flasher{
 	id = "AI";
 	pixel_y = 24
@@ -87,8 +87,8 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/aiModule/supplied/quarantine,
-/obj/item/aiModule/supplied/safeguard,
+/obj/item/ai_module/supplied/quarantine,
+/obj/item/ai_module/supplied/safeguard,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload)
 "dS" = (
@@ -201,7 +201,7 @@
 /area/crew_quarters/heads/hos)
 "kN" = (
 /obj/structure/bed/dogbed/renault,
-/mob/living/simple_animal/pet/fox/Renault,
+/mob/living/simple_animal/pet/fox/renault,
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
 "lu" = (
@@ -285,8 +285,8 @@
 /obj/structure/table/wood,
 /obj/structure/window/reinforced,
 /obj/item/hand_tele{
-	pixel_y = 3;
-	pixel_x = -3
+	pixel_x = -3;
+	pixel_y = 3
 	},
 /turf/open/floor/carpet/royalblue,
 /area/crew_quarters/heads/captain)
@@ -423,7 +423,7 @@
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
 "rV" = (
-/obj/machinery/computer/rdconsole/core{
+/obj/machinery/computer/rdconsole{
 	dir = 1
 	},
 /obj/structure/cable,
@@ -433,7 +433,7 @@
 /turf/open/floor/plasteel/dark,
 /area/bridge/meeting_room)
 "sJ" = (
-/turf/open/openspace,
+/turf/open/transparent/openspace,
 /area/bridge)
 "tk" = (
 /obj/structure/chair/comfy/black{
@@ -502,7 +502,7 @@
 /area/crew_quarters/heads/hor)
 "vK" = (
 /obj/structure/table/reinforced,
-/obj/item/aiModule/reset,
+/obj/item/ai_module/reset,
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload)
@@ -511,11 +511,11 @@
 /area/ai_monitored/turret_protected/ai_upload_foyer)
 "vX" = (
 /obj/structure/easel,
-/obj/item/canvas/twentythreeXtwentythree,
+/obj/item/canvas/twentythree_twentythree,
 /turf/open/floor/wood,
 /area/crew_quarters/heads/cmo)
 "wr" = (
-/turf/open/openspace/airless,
+/turf/open/transparent/openspace/airless,
 /area/space/nearstation)
 "xh" = (
 /obj/structure/table/wood,
@@ -731,10 +731,10 @@
 	pixel_y = 24
 	},
 /obj/effect/spawner/lootdrop/aimodule_harmful,
-/obj/item/aiModule/supplied/oxygen,
-/obj/item/aiModule/supplied/protectStation,
-/obj/item/aiModule/zeroth/oneHuman,
-/obj/item/aiModule/reset/purge,
+/obj/item/ai_module/supplied/oxygen,
+/obj/item/ai_module/supplied/protect_station,
+/obj/item/ai_module/zeroth/onehuman,
+/obj/item/ai_module/reset/purge,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -802,7 +802,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/open/openspace/airless,
+/turf/open/transparent/openspace/airless,
 /area/bridge)
 "Ge" = (
 /obj/structure/table/reinforced,
