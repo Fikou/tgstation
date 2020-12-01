@@ -120,7 +120,7 @@
 		/obj/item/melee/baton/loaded=1,\
 		/obj/item/gun/energy/pulse/pistol/loyalpin=1,\
 		/obj/item/reagent_containers/hypospray/combat/nanites=1,\
-		/obj/item/gun/medbeam=1)
+		/obj/item/gun/medbeam/mega=1)
 
 /datum/outfit/centcom/ert/engineer
 	name = "ERT Engineer"
