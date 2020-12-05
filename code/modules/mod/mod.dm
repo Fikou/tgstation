@@ -22,6 +22,7 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.5
+	light_system = MOVABLE_LIGHT_DIRECTIONAL
 	COOLDOWN_DECLARE(cooldown_mod_move)
 	/// How the MOD and things connected to it look
 	var/theme = "standard"
@@ -339,12 +340,18 @@
 	visor_flags_cover = HEADCOVERSEYES|PEPPERPROOF
 	alternate_worn_layer = NECK_LAYER
 	var/obj/item/mod/control/mod
+	var/light_stat = FALSE
 
 /obj/item/clothing/head/helmet/space/mod/Destroy()
 	..()
 	if(mod)
 		mod.helmet = null
 		QDEL_NULL(mod)
+
+/obj/item/clothing/head/helmet/space/mod/attack_self(mob/user)
+	. = ..()
+	light_stat = !light_stat
+	set_light_on(light_stat)
 
 /obj/item/clothing/suit/armor/mod
 	name = "MOD chestplate"

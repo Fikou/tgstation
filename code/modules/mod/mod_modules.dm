@@ -64,6 +64,38 @@
 	var/datum/component/storage/modstorage = mod.GetComponent(/datum/component/storage)
 	modstorage.RemoveComponent()
 
+///ATTENTION: THIS DOES NOT WORK YET. This is something you should look at if you want to unfuck something
+/obj/item/mod/module/flashlight
+	name = "MOD flashlight booster"
+	desc = "A module that adds a shoulder mounted flashlight onto your MOD suit once installed."
+	complexity = 3
+	selectable = MOD_USABLE
+	var/datum/action/item_action/toggle_helmet_flashlight/headlights
+
+/obj/item/mod/module/flashlight/on_install()
+	mod.light_range = 4
+	mod.light_power = 1
+	mod.light_on = FALSE
+	if(mod?.helmet)
+		headlights = new(mod.helmet)
+
+/obj/item/mod/module/flashlight/on_uninstall()
+	mod.light_range -= 4
+	mod.light_power -= 1
+	mod.light_on = FALSE
+
+/obj/item/mod/module/speed
+	name = "MOD motorized actuators"
+	desc = "Kinetic accelerators built into the MODsuit's legs to reduce slowdown when worn."
+	complexity = 8
+
+
+/obj/item/mod/module/speed/on_install()
+	mod.slowdown = round(mod.slowdown / 2)
+
+/obj/item/mod/module/speed/on_uninstall()
+	mod.slowdown = initial(mod.slowdown)
+
 /obj/item/modpaint
 	name = "MOD paint kit"
 	desc = "This kit will repaint your MOD suit back to it's default grey."
