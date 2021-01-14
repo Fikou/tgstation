@@ -403,7 +403,7 @@
 			if("slime")
 				M.change_mob_type( /mob/living/simple_animal/slime , null, null, delmob )
 			if("monkey")
-				M.change_mob_type( /mob/living/carbon/monkey , null, null, delmob )
+				M.change_mob_type( /mob/living/carbon/human/species/monkey , null, null, delmob )
 			if("robot")
 				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
 			if("cat")
@@ -844,7 +844,7 @@
 			return
 
 		if (SSticker.HasRoundStarted())
-			if (askuser(usr, "The game has already started. Would you like to save this as the default mode effective next round?", "Save mode", "Yes", "Cancel", Timeout = null) == 1)
+			if (tgui_alert(usr, "The game has already started. Would you like to save this as the default mode effective next round?", "Save mode", list("Yes", "Cancel"), timeout = 0) == "Yes")
 				SSticker.save_mode(href_list["c_mode2"])
 			HandleCMode()
 			return
@@ -853,7 +853,7 @@
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] set the mode as [GLOB.master_mode].</span>")
 		to_chat(world, "<span class='adminnotice'><b>The mode is now: [GLOB.master_mode]</b></span>", confidential = TRUE)
 		Game() // updates the main game menu
-		if (askuser(usr, "Would you like to save this as the default mode for the server?", "Save mode", "Yes", "No", Timeout = null) == 1)
+		if (tgui_alert(usr, "Would you like to save this as the default mode for the server?", "Save mode", list("Yes", "No"), timeout = 0) == "Yes")
 			SSticker.save_mode(GLOB.master_mode)
 		HandleCMode()
 
@@ -888,9 +888,9 @@
 		if(!check_rights(R_SPAWN))
 			return
 
-		var/mob/living/carbon/monkey/Mo = locate(href_list["humanone"])
-		if(!istype(Mo))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/monkey.", confidential = TRUE)
+		var/mob/living/carbon/human/Mo = locate(href_list["humanone"])
+		if(!ismonkey(Mo))
+			to_chat(usr, "This can only be used on monkeys.", confidential = TRUE)
 			return
 
 		log_admin("[key_name(usr)] attempting to humanize [key_name(Mo)].")
@@ -1691,9 +1691,6 @@
 					break
 		return
 
-	else if(href_list["secrets"])
-		Secrets_topic(href_list["secrets"],href_list)
-
 	else if(href_list["ac_view_wanted"])            //Admin newscaster Topic() stuff be here
 		if(!check_rights(R_ADMIN))
 			return
@@ -2129,7 +2126,7 @@
 	else if(href_list["ctf_toggle"])
 		if(!check_rights(R_ADMIN))
 			return
-		toggle_all_ctf(usr)
+		toggle_id_ctf(usr, "centcom")
 
 	else if(href_list["rebootworld"])
 		if(!check_rights(R_ADMIN))
@@ -2298,7 +2295,7 @@
 			to_chat(usr, "<span class='warning'>The round must be in progress to use this!</span>")
 			return
 		var/mob/heart_recepient = locate(href_list["admincommend"])
-		if(tgalert(usr, "Are you sure you'd like to anonymously commend [heart_recepient.ckey]? NOTE: This is logged, please use this sparingly and only for actual kind behavior, not as a reward for your friends.", "<3?", "Yes", "No") == "No")
+		if(tgui_alert(usr, "Are you sure you'd like to anonymously commend [heart_recepient.ckey]? NOTE: This is logged, please use this sparingly and only for actual kind behavior, not as a reward for your friends.", "<3?", list("Yes", "No")) == "No")
 			return
 		usr.nominate_heart(heart_recepient)
 

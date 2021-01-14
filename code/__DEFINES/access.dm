@@ -2,7 +2,7 @@
 #define ACCESS_SECURITY 1
 /// Brig cells+timers, permabrig, gulag+gulag shuttle, prisoner management console
 #define ACCESS_BRIG 2
- /// Armory, gulag teleporter, execution chamber
+/// Armory, gulag teleporter, execution chamber
 #define ACCESS_ARMORY 3
 ///Detective's office, forensics lockers, security+medical records
 #define ACCESS_FORENSICS_LOCKERS 4
@@ -141,3 +141,6 @@
 #define ACCESS_MECH_SECURITY 302
 #define ACCESS_MECH_SCIENCE 303
 #define ACCESS_MECH_ENGINE 304
+
+/// A list of access levels that, when added to an ID card, will warn admins. This is currently a list of access levels that can change other access levels.
+#define ACCESS_ALERT_ADMINS list(ACCESS_CHANGE_IDS, ACCESS_HOP, ACCESS_HOS, ACCESS_RD, ACCESS_CMO, ACCESS_CE)
