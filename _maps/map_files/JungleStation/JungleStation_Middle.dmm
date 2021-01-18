@@ -5,9 +5,258 @@
 "b" = (
 /turf/open/floor/plating/asteroid,
 /area/mine/unexplored)
+"c" = (
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"d" = (
+/obj/structure/railing/corner,
+/obj/machinery/light/cold{
+	dir = 1
+	},
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"e" = (
+/obj/structure/railing{
+	dir = 6
+	},
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"f" = (
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"g" = (
+/turf/closed/wall,
+/area/mine/unexplored)
+"h" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"i" = (
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"j" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/lights/mixed,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"l" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/railing/corner,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"m" = (
+/obj/structure/railing{
+	dir = 5
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"n" = (
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/obj/item/wrench,
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"o" = (
+/obj/structure/railing/corner,
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"p" = (
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/obj/machinery/light/cold{
+	dir = 1
+	},
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"q" = (
+/obj/structure/railing,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/glass,
+/area/mine/unexplored)
 "r" = (
 /turf/open/floor/plating/dirt/jungle,
 /area/mine/planetgeneration)
+"s" = (
+/obj/effect/turf_decal/sand,
+/obj/machinery/door/airlock/public/glass,
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"t" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"u" = (
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"v" = (
+/obj/effect/turf_decal/sand,
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"w" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/stripes/line,
+/obj/item/stack/rods,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"x" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"y" = (
+/obj/structure/railing/corner,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"z" = (
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/obj/machinery/light/cold,
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"A" = (
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"C" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"D" = (
+/obj/structure/railing{
+	dir = 9
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"E" = (
+/obj/structure/table/reinforced,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"F" = (
+/obj/effect/turf_decal/sand,
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"G" = (
+/obj/structure/table/reinforced,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/flashlight/lamp,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"I" = (
+/obj/effect/turf_decal/sand,
+/obj/machinery/door/airlock/glass_large,
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"J" = (
+/obj/effect/turf_decal/sand/plating,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"K" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"L" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"M" = (
+/turf/open/openspace,
+/area/mine/unexplored)
+"N" = (
+/obj/docking_port/stationary,
+/turf/open/openspace,
+/area/mine/unexplored)
+"O" = (
+/obj/structure/table/reinforced,
+/obj/item/stack/rods,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"P" = (
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/obj/machinery/light/cold,
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"Q" = (
+/obj/structure/table/reinforced,
+/obj/item/screwdriver{
+	pixel_x = 2;
+	pixel_y = 9
+	},
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"R" = (
+/turf/closed/wall/rust,
+/area/mine/unexplored)
+"S" = (
+/obj/effect/turf_decal/sand,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"T" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"U" = (
+/obj/structure/railing,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"V" = (
+/obj/machinery/light/cold{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/glass,
+/area/mine/unexplored)
+"X" = (
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/turf/open/floor/plasteel,
+/area/mine/unexplored)
+"Y" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/turf_decal/sand/plating,
+/turf/open/floor/plating,
+/area/mine/unexplored)
+"Z" = (
+/obj/structure/railing{
+	dir = 10
+	},
+/turf/open/floor/glass,
+/area/mine/unexplored)
 
 (1,1,1) = {"
 a
@@ -99864,11 +100113,11 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
+Y
+Y
+F
+Y
+Y
 b
 b
 b
@@ -100120,12 +100369,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+Y
+J
+J
+J
+Y
 b
 b
 b
@@ -100377,12 +100626,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+J
+J
+J
+J
+Y
 b
 b
 b
@@ -100634,12 +100883,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+J
+J
+J
+J
+Y
 b
 b
 b
@@ -100891,12 +101140,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+Y
+J
+J
+J
+Y
 b
 b
 b
@@ -101147,15 +101396,15 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+g
+g
+Y
+Y
+s
+Y
+Y
+g
+g
 b
 b
 b
@@ -101403,16 +101652,16 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+R
+g
+d
+T
+T
+S
+S
+i
+A
+g
 b
 b
 b
@@ -101659,19 +101908,19 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+g
+R
+o
+e
+M
+M
+M
+M
+t
+A
+g
+g
+g
 b
 b
 b
@@ -101916,20 +102165,20 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+o
+e
+M
+M
+M
+M
+M
+m
+x
+x
+P
+g
+g
 b
 b
 b
@@ -102173,20 +102422,20 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+q
+M
+M
+M
+M
+M
+M
+M
+M
+M
+t
+A
+I
 b
 b
 b
@@ -102429,21 +102678,21 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+R
+g
+V
+M
+M
+M
+M
+M
+M
+M
+M
+M
+t
+A
+F
 b
 b
 b
@@ -102686,22 +102935,22 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+G
+U
+M
+M
+M
+M
+M
+M
+M
+M
+M
+h
+f
+g
+g
 b
 b
 b
@@ -102943,22 +103192,22 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+O
+L
+M
+M
+M
+M
+M
+M
+M
+M
+M
+h
+f
+f
+Y
 b
 b
 b
@@ -103200,22 +103449,22 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+R
+E
+u
+M
+M
+M
+M
+M
+M
+M
+M
+N
+h
+f
+f
+Y
 b
 b
 b
@@ -103457,22 +103706,22 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+j
+w
+M
+M
+M
+M
+M
+M
+M
+M
+M
+h
+f
+f
+Y
 b
 b
 b
@@ -103714,22 +103963,22 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+Q
+l
+M
+M
+M
+M
+M
+M
+M
+M
+M
+h
+f
+g
+g
 b
 b
 b
@@ -103971,21 +104220,21 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+g
+g
+V
+M
+M
+M
+M
+M
+M
+M
+M
+M
+t
+A
+I
 b
 b
 b
@@ -104229,20 +104478,20 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+y
+M
+M
+M
+M
+M
+M
+M
+M
+M
+t
+A
+F
 b
 b
 b
@@ -104486,20 +104735,20 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+Y
+n
+Z
+M
+M
+M
+M
+M
+D
+C
+C
+z
+g
+g
 b
 b
 b
@@ -104743,19 +104992,19 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+R
+R
+c
+Z
+M
+M
+M
+M
+t
+A
+g
+g
+g
 b
 b
 b
@@ -105001,16 +105250,16 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+g
+R
+p
+K
+v
+v
+K
+X
+A
+g
 b
 b
 b
@@ -105259,15 +105508,15 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
-b
-b
-b
+g
+g
+Y
+Y
+s
+Y
+Y
+g
+g
 b
 b
 b
@@ -105517,12 +105766,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+Y
+J
+J
+J
+Y
 b
 b
 b
@@ -105774,12 +106023,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+J
+J
+J
+J
+Y
 b
 b
 b
@@ -106031,12 +106280,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+J
+J
+J
+J
+Y
 b
 b
 b
@@ -106288,12 +106537,12 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
-b
+Y
+Y
+J
+J
+J
+Y
 b
 b
 b
@@ -106546,11 +106795,11 @@ b
 b
 b
 b
-b
-b
-b
-b
-b
+Y
+Y
+F
+Y
+Y
 b
 b
 b
