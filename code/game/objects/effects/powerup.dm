@@ -124,3 +124,17 @@
 	if(!.)
 		return
 	target.apply_status_effect(STATUS_EFFECT_MAYHEM)
+
+/obj/effect/powerup/invulnerability
+	name = "Invulnerability Sphere"
+	desc = "You feel protected just looking at it."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "necrostone"
+	pickup_sound = 'sound/effects/gong.ogg'
+	pickup_message = "You feel invulnerable!"
+
+/obj/effect/powerup/invulnerability/trigger(mob/living/target)
+	. = ..()
+	if(!.)
+		return
+	target.apply_status_effect(STATUS_EFFECT_INVULNERABILITY)

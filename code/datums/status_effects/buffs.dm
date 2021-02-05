@@ -510,3 +510,35 @@
 	to_chat(owner, "<span class='notice'>Your bloodlust seeps back into the bog of your subconscious and you regain self control.</span>")
 	owner.log_message("exited a blood frenzy", LOG_ATTACK)
 	QDEL_NULL(chainsaw)
+
+/datum/status_effect/invulnerability
+	id = "Invulnerability"
+	duration = 30 SECONDS
+	var/datum/client_colour/colour
+	var/oldeyecolor
+
+/datum/status_effect/invulnerability/on_apply()
+	. = ..()
+	owner.status_flags |= GODMODE
+	ADD_TRAIT(owner, TRAIT_STUNIMMUNE, type)
+	ADD_TRAIT(owner, TRAIT_SLEEPIMMUNE, type)
+	colour = owner.add_client_colour(/datum/client_colour/invulnerability)
+	if(ishuman(owner))
+		var/mob/living/carbon/human/hooman = owner
+		oldeyecolor = hooman.eye_color
+		hooman.eye_color = "ffffd7"
+		hooman.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+		hooman.update_body()
+
+/datum/status_effect/invulnerability/on_remove()
+	. = ..()
+	owner.status_flags &= ~GODMODE
+	REMOVE_TRAIT(owner, TRAIT_STUNIMMUNE, type)
+	REMOVE_TRAIT(owner, TRAIT_SLEEPIMMUNE, type)
+	QDEL_NULL(colour)
+	if(ishuman(owner))
+		var/mob/living/carbon/human/hooman = owner
+		hooman.eye_color = oldeyecolor
+		oldeyecolor = null
+		hooman.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+		hooman.update_body()

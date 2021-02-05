@@ -198,6 +198,11 @@
 /datum/client_colour/monochrome/blind
 	priority = PRIORITY_NORMAL
 
+/datum/client_colour/invulnerability
+	priority = PRIORITY_HIGH
+	override = TRUE
+	colour = list(rgb(255,255,255), rgb(77,77,77), rgb(77,77,77), rgb(0,0,0))
+
 /datum/client_colour/bloodlust
 	priority = PRIORITY_ABSOLUTE // Only anger.
 	colour = list(0,0,0,0,0,0,0,0,0,1,0,0) //pure red.
