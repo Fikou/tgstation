@@ -486,6 +486,7 @@
 /datum/status_effect/mayhem
 	id = "Mayhem"
 	duration = 2 MINUTES
+	alert_type = null
 	/// The chainsaw spawned by the status effect
 	var/obj/item/chainsaw/doomslayer/chainsaw
 
@@ -514,6 +515,7 @@
 /datum/status_effect/invulnerability
 	id = "Invulnerability"
 	duration = 30 SECONDS
+	alert_type = null
 	var/datum/client_colour/colour
 	var/oldeyecolor
 
