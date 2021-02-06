@@ -201,7 +201,7 @@
 /datum/client_colour/invulnerability
 	priority = PRIORITY_HIGH
 	override = TRUE
-	colour = list(rgb(255,255,255), rgb(77,77,77), rgb(77,77,77), rgb(0,0,0))
+	colour = list(rgb(175, 175, 175), rgb(77,77,77), rgb(77,77,77), rgb(0,0,0))
 
 /datum/client_colour/bloodlust
 	priority = PRIORITY_ABSOLUTE // Only anger.

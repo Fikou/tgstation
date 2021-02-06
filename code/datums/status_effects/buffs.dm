@@ -521,6 +521,7 @@
 
 /datum/status_effect/invulnerability/on_apply()
 	. = ..()
+	owner.fully_heal(TRUE)
 	owner.status_flags |= GODMODE
 	ADD_TRAIT(owner, TRAIT_STUNIMMUNE, type)
 	ADD_TRAIT(owner, TRAIT_SLEEPIMMUNE, type)
