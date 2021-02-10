@@ -44,6 +44,9 @@
 /atom/movable/screen/orbit()
 	return
 
+/atom/movable/screen/Click()
+	return
+
 /atom/movable/screen/proc/component_click(atom/movable/screen/component_button/component, params)
 	return
 
@@ -661,6 +664,11 @@
 	icon_state = "artificer_health0"
 	screen_loc = ui_construct_health
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+/atom/movable/screen/healths/swarmer
+	icon = 'icons/hud/screen_swarmer.dmi'
+	icon_state = "ui_display_health"
+	screen_loc = ui_alien_health
 
 /atom/movable/screen/healthdoll
 	name = "health doll"

@@ -6,6 +6,7 @@
  * * S - A reference to the swarmer doing the interaction
  */
 #define DANGEROUS_DELTA_P 250	//Value in kPa where swarmers arent allowed to break a wall or window with this difference in pressure.
+#define NEEDED_RESOURCES 100
 
 ///Finds the greatest difference in pressure across a turf, only considers open turfs.
 /turf/proc/return_turf_delta_p()
@@ -82,7 +83,17 @@
 	return TRUE
 
 /obj/structure/swarmer_beacon/swarmer_act(mob/living/simple_animal/hostile/swarmer/actor)
-	to_chat(actor, "<span class='warning'>This machine is required for further reproduction of swarmers. Aborting.</span>")
+	if(actor.origin_beacon != src)
+		to_chat(actor, "<span class='warning'>This machine is required for further reproduction of swarmers. Aborting.</span>")
+		return FALSE
+	if(actor.resources != NEEDED_RESOURCES)
+		to_chat(actor, "<span class='warning'>You don't have enough resources to reconstruct!</span>")
+		return FALSE
+	if(processing_swarmer)
+		to_chat(actor, "<b>A swarmer is currently being created.  Try again soon.</b>")
+		return FALSE
+	else
+		que_swarmer(actor, /mob/living/simple_animal/hostile/swarmer/guardian, TRUE)
 	return FALSE
 
 /obj/structure/flora/swarmer_act()
@@ -269,3 +280,4 @@
 	return FALSE
 
 #undef DANGEROUS_DELTA_P
+#undef NEEDED_RESOURCES

@@ -51,21 +51,32 @@
 	light_range = 10
 	anchored = TRUE
 	density = FALSE
+	///Team antag role for swarmers
+	var/datum/team/swarmers/swarmers
 	///Whether or not a swarmer is currently being created by this beacon
 	var/processing_swarmer = FALSE
-	///Reference to all the swarmers currently alive this beacon has created
-	var/list/mob/living/simple_animal/hostile/swarmer/swarmerlist
+	///Global material storage
+	var/resources = 0
 
 /obj/structure/swarmer_beacon/Initialize()
 	. = ..()
 	AddElement(/datum/element/point_of_interest)
+	swarmers = new /datum/team/swarmers()
+	var/datum/objective/swarmer/material_objective = new
+	material_objective.gen_objective(src)
+	material_objective.team = swarmers
+	swarmers.objectives += material_objective
+	var/datum/objective/protect_object/protect_objective = new
+	protect_objective.set_target(src)
+	protect_objective.team = swarmers
+	swarmers.objectives += protect_objective
 
 /obj/structure/swarmer_beacon/attack_ghost(mob/user)
 	. = ..()
 	if(processing_swarmer)
 		to_chat(user, "<b>A swarmer is currently being created.  Try again soon.</b>")
 		return
-	que_swarmer(user)
+	que_swarmer(user, /mob/living/simple_animal/hostile/swarmer, FALSE)
 
 /**
  * Interaction when a ghost interacts with a swarmer beacon
@@ -74,14 +85,19 @@
  * Arguments:
  * * user - A reference to the ghost interacting with the beacon
  */
-/obj/structure/swarmer_beacon/proc/que_swarmer(mob/user)
+/obj/structure/swarmer_beacon/proc/que_swarmer(mob/user, mob/living/simple_animal/hostile/swarmer/swarmer_type, reconstructing = FALSE)
 	var/swarm_ask = alert("Become a swarmer?", "Do you wish to consume the station?", "Yes", "No")
 	if(swarm_ask == "No" || QDELETED(src) || QDELETED(user) || processing_swarmer)
 		return FALSE
-	var/mob/living/simple_animal/hostile/swarmer/newswarmer = new /mob/living/simple_animal/hostile/swarmer(src)
-	newswarmer.key = user.key
-	addtimer(CALLBACK(src, .proc/release_swarmer, newswarmer), (LAZYLEN(swarmerlist) * 2 SECONDS) + 5 SECONDS)
-	to_chat(newswarmer, "<span class='boldannounce'>SWARMER CONSTRUCTION INITIALIZED.</span>")
+	var/mob/living/simple_animal/hostile/swarmer/newswarmer = new swarmer_type(src)
+	if(reconstructing)
+		user.mind.transfer_to(newswarmer)
+	else
+		newswarmer.key = user.key
+	newswarmer.origin_beacon = src
+	addtimer(CALLBACK(src, .proc/release_swarmer, newswarmer), (LAZYLEN(swarmers.members.len) * 2 SECONDS) + 5 SECONDS)
+	to_chat(newswarmer, "<span class='boldannounce'>SWARMER [reconstructing ? "RECONSTRUCTION" : "CONSTRUCTION"] INITIALIZED.</span>")
+	playsound(src, 'sound/items/rped.ogg', 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	processing_swarmer = TRUE
 	return TRUE
 
@@ -93,35 +109,11 @@
  * * swarmer - The swarmer being released and told what to do
  */
 /obj/structure/swarmer_beacon/proc/release_swarmer(mob/swarmer)
-	to_chat(swarmer, "<span class='bold'>SWARMER CONSTRUCTION COMPLETED.  OBJECTIVES:\n\
-		1. CONSUME RESOURCES AND REPLICATE UNTIL THERE ARE NO MORE RESOURCES LEFT\n\
-		2. ENSURE PROTECTION OF THE BEACON SO THIS LOCATION CAN BE INVADED AT A LATER DATE; DO NOT PERFORM ACTIONS THAT WOULD RENDER THIS LOCATION DANGEROUS OR INHOSPITABLE\n\
-		3. BIOLOGICAL RESOURCES WILL BE HARVESTED AT A LATER DATE: DO NOT HARM THEM\n\
-		OPERATOR NOTES:\n\
-		- CONSUME RESOURCES TO CONSTRUCT TRAPS, BARRIERS, AND FOLLOWER DRONES\n\
-		- FOLLOWER DRONES WILL FOLLOW YOU AUTOMATCIALLY UNLESS THEY POSSESS A TARGET.  WHILE DRONES CANNOT ASSIST IN RESOURCE HARVESTING, THEY CAN PROTECT YOU FROM THREATS\n\
-		- LCTRL + ATTACKING AN ORGANIC WILL ALOW YOU TO REMOVE SAID ORGANIC FROM THE AREA\n\
-		- YOU AND YOUR DRONES HAVE A STUN EFFECT ON MELEE.  YOU ARE ALSO ARMED WITH A DISABLER PROJECTILE, USE THESE TO PREVENT ORGANICS FROM HALTING YOUR PROGRESS\n\
-		GLORY TO !*# $*#^</span>")
+	playsound(src, 'sound/items/deconstruct.ogg', 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	swarmer.forceMove(get_turf(src))
-	LAZYADD(swarmerlist, swarmer)
-	RegisterSignal(swarmer, COMSIG_PARENT_QDELETING, .proc/remove_swarmer, swarmer)
+	if(!swarmer.mind.has_antag_datum(/datum/antagonist/swarmer))
+		swarmer.mind.add_antag_datum(/datum/antagonist/swarmer, swarmers)
 	processing_swarmer = FALSE
-
-/**
- * Removes a swarmer from the beacon's list.
- *
- * Removes the swarmer from our list.
- * Called specifically when a swarmer is about to be destroyed, so we don't have any null references.
- * Arguments:
- * * mob/swarmer - The swarmer to be removed from the list.
- * * force - Parameter sent by the COSMIG_PARENT_QDELETING signal.  Does nothing in this proc.
- */
-/obj/structure/swarmer_beacon/proc/remove_swarmer(mob/swarmer, force)
-	SIGNAL_HANDLER
-
-	UnregisterSignal(swarmer, COMSIG_PARENT_QDELETING)
-	swarmerlist -= swarmer
 
 /obj/structure/swarmer/trap
 	name = "swarmer trap"

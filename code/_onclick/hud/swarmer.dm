@@ -1,5 +1,5 @@
 /atom/movable/screen/swarmer
-	icon = 'icons/hud/swarmer.dmi'
+	icon = 'icons/hud/screen_swarmer.dmi'
 
 /atom/movable/screen/swarmer/fabricate_trap
 	icon_state = "ui_trap"
@@ -61,7 +61,39 @@
 		var/mob/living/simple_animal/hostile/swarmer/S = usr
 		S.contact_swarmers()
 
+/atom/movable/screen/swarmer/resource_display
+	icon_state = "ui_display_resource"
+	name = "resources"
+	screen_loc = ui_alienplasmadisplay
+
 /datum/hud/swarmer/New(mob/owner)
+	..()
+	var/atom/movable/screen/using
+
+	healths = new /atom/movable/screen/healths/swarmer()
+	healths.hud = src
+	infodisplay += healths
+
+	swarmer_resource_display = new /atom/movable/screen/swarmer/resource_display()
+	swarmer_resource_display.hud = src
+	infodisplay += swarmer_resource_display
+
+	using = new /atom/movable/screen/swarmer/repair_self()
+	using.screen_loc = ui_storage1
+	using.hud = src
+	static_inventory += using
+
+	using = new /atom/movable/screen/swarmer/toggle_light()
+	using.screen_loc = ui_back
+	using.hud = src
+	static_inventory += using
+
+	using = new /atom/movable/screen/swarmer/contact_swarmers()
+	using.screen_loc = ui_inventory
+	using.hud = src
+	static_inventory += using
+
+/datum/hud/swarmer/standard/New(mob/owner)
 	..()
 	var/atom/movable/screen/using
 
@@ -80,17 +112,4 @@
 	using.hud = src
 	static_inventory += using
 
-	using = new /atom/movable/screen/swarmer/repair_self()
-	using.screen_loc = ui_storage1
-	using.hud = src
-	static_inventory += using
-
-	using = new /atom/movable/screen/swarmer/toggle_light()
-	using.screen_loc = ui_back
-	using.hud = src
-	static_inventory += using
-
-	using = new /atom/movable/screen/swarmer/contact_swarmers()
-	using.screen_loc = ui_inventory
-	using.hud = src
-	static_inventory += using
+/datum/hud/swarmer/standard/guardian

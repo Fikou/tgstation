@@ -1,12 +1,5 @@
-/datum/team/swarmer
-	name = "Swarmers"
-
-//Simply lists them.
-/datum/team/swarmer/roundend_report()
-	var/list/parts = list()
-	parts += "<span class='header'>The [name] were:</span>"
-	parts += printplayerlist(members)
-	return "<div class='panel redborder'>[parts.Join("<br>")]</div>"
+/datum/team/swarmers
+	name = "Swarmer Consciousness"
 
 /datum/antagonist/swarmer
 	name = "Swarmer"
@@ -14,26 +7,25 @@
 	show_to_ghosts = TRUE
 	show_in_antagpanel = FALSE
 	prevent_roundtype_conversion = FALSE
-	var/datum/team/swarmer/swarmer_team
+	var/datum/team/swarmers/swarmer_team
 
-/datum/antagonist/swarmer/create_team(datum/team/swarmer/new_team)
-	if(!new_team)
-		for(var/datum/antagonist/swarmer/swarmerantag in GLOB.antagonists)
-			if(!swarmerantag.owner || !swarmerantag.swarmer_team)
-				continue
-			swarmer_team = swarmerantag.swarmer_team
-			return
-		swarmer_team = new
+/datum/antagonist/swarmer/create_team(datum/team/team)
+	if(team)
+		swarmer_team = team
+		objectives |= swarmer_team.objectives
 	else
-		if(!istype(new_team))
-			CRASH("Wrong swarmer team type provided to create_team")
-		swarmer_team = new_team
+		swarmer_team = new
 
 /datum/antagonist/swarmer/get_team()
 	return swarmer_team
 
-//SWARMER
-/mob/living/simple_animal/hostile/swarmer/mind_initialize()
-	..()
-	if(!mind.has_antag_datum(/datum/antagonist/swarmer))
-		mind.add_antag_datum(/datum/antagonist/swarmer)
+/datum/antagonist/swarmer/greet()
+	to_chat(owner, "<span class='bold'>SWARMER CONSTRUCTION COMPLETED.  OPERATOR NOTES:\n\
+		- CONSUME RESOURCES TO CONSTRUCT TRAPS, BARRIERS, AND FOLLOWER DRONES\n\
+		- BIOLOGICAL RESOURCES WILL BE HARVESTED AT A LATER DATE, DO NOT HARM THEM\n\
+		- FOLLOWER DRONES WILL FOLLOW YOU AUTOMATCIALLY UNLESS THEY POSSESS A TARGET.  WHILE DRONES CANNOT ASSIST IN RESOURCE HARVESTING, THEY CAN PROTECT YOU FROM THREATS\n\
+		- LCTRL + ATTACKING AN ORGANIC WILL ALOW YOU TO REMOVE SAID ORGANIC FROM THE AREA\n\
+		- YOU AND YOUR DRONES HAVE A STUN EFFECT ON MELEE.  YOU ARE ALSO ARMED WITH A DISABLER PROJECTILE, USE THESE TO PREVENT ORGANICS FROM HALTING YOUR PROGRESS\n\
+		- YOU CAN SACRIFICE YOUR RESOURCES TO THE BEACON TO BECOME A GUARDIAN, LOSING YOUR OFFENSIVE CAPABILITIES BUT GAINING DEFENSIVE ONES\n\
+		GLORY TO !*# $*#^</span>")
+	owner.announce_objectives()

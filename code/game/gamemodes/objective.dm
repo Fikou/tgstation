@@ -732,7 +732,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 	if(protect_target)
 		explanation_text = "Protect \the [protect_target] at all costs."
 	else
-		explanation_text = "Free objective."
+		explanation_text = "Free Objective."
 
 /datum/objective/protect_object/check_completion()
 	return !QDELETED(protect_target)
@@ -860,6 +860,29 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 
 /datum/objective/destroy/internal
 	var/stolen = FALSE 		//Have we already eliminated this target?
+
+/datum/objective/swarmer
+	name = "gather resources"
+	var/obj/structure/swarmer_beacon/beacon
+	target_amount
+
+/datum/objective/swarmer/proc/gen_objective(obj/target)
+	target_amount = rand(300,700)
+	beacon = target
+	update_explanation_text()
+
+/datum/objective/swarmer/update_explanation_text()
+	..()
+	if(beacon)
+		explanation_text = "Gather [target_amount] Beacon resources."
+	else
+		explanation_text = "Free Objective"
+
+/datum/objective/swarmer/check_completion()
+	if(!beacon)
+		return FALSE
+	if(beacon.resources == target_amount)
+		return TRUE
 
 /datum/objective/steal_five_of_type
 	name = "steal five of"
