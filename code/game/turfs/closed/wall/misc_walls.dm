@@ -97,6 +97,8 @@
 	icon_state = "porous_rock-0"
 	base_icon_state = "porous_rock"
 	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MINERAL_WALLS)
+	canSmoothWith = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MINERAL_WALLS)
 	sheet_amount = 1
 	girder_type = /turf/closed/mineral/asteroid
 	hardness = 50
