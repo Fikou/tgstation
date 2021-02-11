@@ -7,14 +7,9 @@
 	layer = MOB_LAYER
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	light_color = LIGHT_COLOR_CYAN
+	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	max_integrity = 30
 	anchored = TRUE
-	///How strong the light effect for the structure is
-	var/glow_range = 1
-
-/obj/structure/swarmer/Initialize(mapload)
-	. = ..()
-	set_light(glow_range)
 
 /obj/structure/swarmer/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
@@ -53,13 +48,15 @@
 	density = FALSE
 	///Team antag role for swarmers
 	var/datum/team/swarmers/swarmers
-	///Whether or not a swarmer is currently being created by this beacon
-	var/processing_swarmer = FALSE
+	///Whether or not a swarmer is currently being created by this beacon or the beacon is currently being created
+	var/processing = TRUE
 	///Global material storage
 	var/resources = 0
 
 /obj/structure/swarmer_beacon/Initialize()
 	. = ..()
+	flick("swarmer_console_full_boot", src)
+	addtimer(VARSET_CALLBACK(src, processing, FALSE), 4.12 SECONDS)
 	AddElement(/datum/element/point_of_interest)
 	swarmers = new /datum/team/swarmers()
 	var/datum/objective/swarmer/material_objective = new
@@ -73,8 +70,11 @@
 
 /obj/structure/swarmer_beacon/attack_ghost(mob/user)
 	. = ..()
-	if(processing_swarmer)
-		to_chat(user, "<b>A swarmer is currently being created.  Try again soon.</b>")
+	if(processing)
+		to_chat(user, "<b>The beacon is currently processing. Try again later.</b>")
+		return
+	var/swarm_ask = alert("Become a swarmer?", "Do you wish to consume the station?", "Yes", "No")
+	if(swarm_ask == "No" || QDELETED(src) || QDELETED(user) || processing)
 		return
 	que_swarmer(user, /mob/living/simple_animal/hostile/swarmer, FALSE)
 
@@ -86,19 +86,16 @@
  * * user - A reference to the ghost interacting with the beacon
  */
 /obj/structure/swarmer_beacon/proc/que_swarmer(mob/user, mob/living/simple_animal/hostile/swarmer/swarmer_type, reconstructing = FALSE)
-	var/swarm_ask = alert("Become a swarmer?", "Do you wish to consume the station?", "Yes", "No")
-	if(swarm_ask == "No" || QDELETED(src) || QDELETED(user) || processing_swarmer)
-		return FALSE
 	var/mob/living/simple_animal/hostile/swarmer/newswarmer = new swarmer_type(src)
 	if(reconstructing)
 		user.mind.transfer_to(newswarmer)
 	else
 		newswarmer.key = user.key
 	newswarmer.origin_beacon = src
-	addtimer(CALLBACK(src, .proc/release_swarmer, newswarmer), (LAZYLEN(swarmers.members.len) * 2 SECONDS) + 5 SECONDS)
+	addtimer(CALLBACK(src, .proc/release_swarmer, newswarmer), (LAZYLEN(swarmers.members) * 2 SECONDS) + 5 SECONDS)
 	to_chat(newswarmer, "<span class='boldannounce'>SWARMER [reconstructing ? "RECONSTRUCTION" : "CONSTRUCTION"] INITIALIZED.</span>")
 	playsound(src, 'sound/items/rped.ogg', 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	processing_swarmer = TRUE
+	processing = TRUE
 	return TRUE
 
 /**
@@ -113,7 +110,7 @@
 	swarmer.forceMove(get_turf(src))
 	if(!swarmer.mind.has_antag_datum(/datum/antagonist/swarmer))
 		swarmer.mind.add_antag_datum(/datum/antagonist/swarmer, swarmers)
-	processing_swarmer = FALSE
+	processing = FALSE
 
 /obj/structure/swarmer/trap
 	name = "swarmer trap"
@@ -137,7 +134,6 @@
 	name = "swarmer blockade"
 	desc = "A quickly assembled energy blockade. Will not retain its form if damaged enough, but disabler beams and swarmers pass right through."
 	icon_state = "barricade"
-	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	max_integrity = 50
 	density = TRUE
 
@@ -145,6 +141,49 @@
 	. = ..()
 	if(isswarmer(O) || istype(O, /obj/projectile/beam/disabler))
 		return TRUE
+
+/obj/structure/swarmer/field_generator
+
+/obj/structure/swarmer/tower
+
+/obj/structure/swarmer/turret
+	name = "swarmer turret"
+	desc = "A quickly assembled energy turret, it shoots disabler beams in cardinal directions and then in diagonal ones."
+	icon_state = "turret"
+	density = TRUE
+	var/diagonal = TRUE
+	var/cooldown_time = 1 SECONDS
+	COOLDOWN_DECLARE(cooldown_timer)
+
+/obj/structure/swarmer/turret/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+
+/obj/structure/swarmer/turret/process(delta_time)
+	if(COOLDOWN_FINISHED(src, cooldown_timer))
+		prepare_to_shoot()
+
+/obj/structure/swarmer/turret/proc/prepare_to_shoot()
+	var/list/shot_dirs
+	if(diagonal)
+		shot_dirs = GLOB.diagonals
+	else
+		shot_dirs = GLOB.cardinals
+	for(var/dir in shot_dirs)
+		var/turf/target = get_step(src, dir)
+		shoot_projectile(target)
+	diagonal = !diagonal
+	flick("[diagonal ? "turret_diagonal" : "turret_cardinal"]", src)
+	COOLDOWN_START(src, cooldown_timer, cooldown_time)
+
+/obj/structure/swarmer/turret/proc/shoot_projectile(turf/marker)
+	if(!marker || marker == loc)
+		return
+	var/obj/projectile/P = new /obj/projectile/beam/disabler/swarmer(get_turf(src))
+	P.preparePixelProjectile(marker, src)
+	P.fired_from = src
+	P.firer = src
+	P.fire()
 
 /obj/effect/temp_visual/swarmer //temporary swarmer visual feedback objects
 	icon = 'icons/mob/swarmer.dmi'

@@ -83,17 +83,22 @@
 	return TRUE
 
 /obj/structure/swarmer_beacon/swarmer_act(mob/living/simple_animal/hostile/swarmer/actor)
-	if(actor.origin_beacon != src)
+	if(actor.origin_beacon != src || actor.type != /mob/living/simple_animal/hostile/swarmer)
 		to_chat(actor, "<span class='warning'>This machine is required for further reproduction of swarmers. Aborting.</span>")
 		return FALSE
 	if(actor.resources != NEEDED_RESOURCES)
 		to_chat(actor, "<span class='warning'>You don't have enough resources to reconstruct!</span>")
 		return FALSE
-	if(processing_swarmer)
-		to_chat(actor, "<b>A swarmer is currently being created.  Try again soon.</b>")
+	if(processing)
+		to_chat(actor, "<b>The beacon is currently processing. Try again later.</b>")
 		return FALSE
 	else
-		que_swarmer(actor, /mob/living/simple_animal/hostile/swarmer/guardian, TRUE)
+		var/swarm_ask = alert("Become an architect?", "Do you wish to reconstruct?", "Yes", "No")
+		if(swarm_ask == "No" || QDELETED(src) || QDELETED(actor) || processing)
+			return FALSE
+		que_swarmer(actor, /mob/living/simple_animal/hostile/swarmer/architect, TRUE)
+		actor.forceMove(src)
+		qdel(actor)
 	return FALSE
 
 /obj/structure/flora/swarmer_act()

@@ -113,7 +113,8 @@
 /mob/living/simple_animal/hostile/swarmer/get_status_tab_items()
 	. = ..()
 	. += "Resources: [resources]/[max_resources]"
-	. += "Beacon Resources: [origin_beacon.resources]"
+	if(origin_beacon)
+		. += "Beacon Resources: [origin_beacon.resources]"
 
 /mob/living/simple_animal/hostile/swarmer/emp_act()
 	. = ..()
@@ -478,19 +479,26 @@
  * AI subtype of swarmers, always AI-controlled under normal circumstances.  Automatically attacks nearby threats.
  */
 /mob/living/simple_animal/hostile/swarmer/drone
-	icon_state = "swarmer_melee"
-	icon_living = "swarmer_melee"
+	name = "swarmer drone"
+	icon_state = "swarmer_drone"
+	icon_living = "swarmer_drone"
 	max_resources = 0
 	resources = 0
 	hud_type = /datum/hud/swarmer
 	AIStatus = AI_ON
 
-/mob/living/simple_animal/hostile/swarmer/guardian
-	icon_state = "swarmer_guardian"
-	icon_living = "swarmer_guardian"
-	maxHealth = 60
-	health = 60
+/mob/living/simple_animal/hostile/swarmer/drone/melee
+	icon_state = "swarmer_melee"
+	icon_living = "swarmer_melee"
+	ranged = FALSE
+
+/mob/living/simple_animal/hostile/swarmer/architect
+	name = "swarmer architect"
+	icon_state = "swarmer_architect"
+	icon_living = "swarmer_architect"
+	maxHealth = 30
+	health = 30
 	ranged = FALSE
 	max_resources = 200
 	resources = 0
-	hud_type = /datum/hud/swarmer/standard/guardian
+	hud_type = /datum/hud/swarmer/standard/architect

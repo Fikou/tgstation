@@ -107,9 +107,16 @@
 	using.hud = src
 	static_inventory += using
 
-	using = new /atom/movable/screen/swarmer/replicate()
-	using.screen_loc = ui_zonesel
+/datum/hud/swarmer/standard/architect/New(mob/owner)
+	..()
+	var/atom/movable/screen/using
+
+	using = new /atom/movable/screen/swarmer/repair_self()
+	using.screen_loc = ui_storage2
 	using.hud = src
 	static_inventory += using
 
-/datum/hud/swarmer/standard/guardian
+	using = new /atom/movable/screen/swarmer/toggle_light()
+	using.screen_loc = ui_belt
+	using.hud = src
+	static_inventory += using
