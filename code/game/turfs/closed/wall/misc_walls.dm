@@ -101,7 +101,5 @@
 	canSmoothWith = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MINERAL_WALLS)
 	sheet_amount = 1
 	hardness = 50
-
-/turf/closed/wall/porous/break_wall()
-	new sheet_type(src, sheet_amount)
-	ChangeTurf(/turf/closed/mineral/asteroid)
+	girder_type = null
+	baseturfs = /turf/closed/mineral/asteroid
