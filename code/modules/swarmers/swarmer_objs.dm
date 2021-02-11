@@ -143,19 +143,79 @@
 		return TRUE
 
 /obj/structure/swarmer/field_generator
+	name = "swarmer field generator"
+	desc = "A quickly assembled energy generator, it creates rechargeable blockades on its sides."
+	icon_state = "generator"
+	max_integrity = 75
+	density = TRUE
+	var/obj/structure/swarmer/blockade/blockade_right
+	var/obj/structure/swarmer/blockade/blockade_left
+
+/obj/structure/swarmer/field_generator/Initialize()
+	. = ..()
+	AddComponent(/datum/component/simple_rotation, ROTATION_ALTCLICK|ROTATION_CLOCKWISE, CALLBACK(src, .proc/can_user_rotate), CALLBACK(src, .proc/can_be_rotated), CALLBACK(src,.proc/after_rotation))
+	recalculate_barriers(TRUE, TRUE)
+
+/obj/structure/swarmer/field_generator/Destroy()
+	..()
+	QDEL_NULL(blockade_right)
+	QDEL_NULL(blockade_left)
+
+/obj/structure/swarmer/field_generator/proc/can_user_rotate(mob/living/simple_animal/hostile/swarmer/user)
+	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		return FALSE
+	return TRUE
+
+/obj/structure/swarmer/field_generator/proc/can_be_rotated()
+	for(var/turf/torf in orange(1,src))
+		return !torf.is_blocked_turf(TRUE, src, list(/obj/structure/swarmer))
+
+/obj/structure/swarmer/field_generator/proc/after_rotation(mob/user)
+	to_chat(user,"<span class='notice'>You rotate [src].</span>")
+	recalculate_barriers()
+
+/obj/structure/swarmer/field_generator/proc/recalculate_barriers(create_right = FALSE, create_left = FALSE)
+	for(var/turf/torf in orange(1,src))
+		if(torf.is_blocked_turf(TRUE, src, list(/obj/structure/swarmer)))
+			return
+	if(!blockade_right)
+		if(create_right)
+			blockade_right = new /obj/structure/swarmer/blockade(get_step(src, turn(dir, 90)))
+			RegisterSignal(blockade_right, COMSIG_PARENT_QDELETING, .proc/remove_blockade, blockade_right)
+	else
+		blockade_right.forceMove(get_step(src, turn(dir, 90)))
+	if(!blockade_left)
+		if(create_left)
+			blockade_left = new /obj/structure/swarmer/blockade(get_step(src, turn(dir, -90)))
+			RegisterSignal(blockade_left, COMSIG_PARENT_QDELETING, .proc/remove_blockade, blockade_left)
+	else
+		blockade_left.forceMove(get_step(src, turn(dir, -90)))
+
+/obj/structure/swarmer/field_generator/proc/remove_blockade(obj/structure/swarmer/blockade/blockade)
+	if(blockade == blockade_right)
+		addtimer(CALLBACK(src, .proc/recalculate_barriers, TRUE, FALSE), 5 SECONDS)
+		blockade_right = null
+	if(blockade == blockade_left)
+		addtimer(CALLBACK(src, .proc/recalculate_barriers, FALSE, TRUE), 5 SECONDS)
+		blockade_left = null
 
 /obj/structure/swarmer/tower
+	name = "swarmer tower"
+	desc = "A quickly assembled tower, it summons drones that orbit it until they find a target."
+	icon_state = "tower"
+	max_integrity = 50
+	density = TRUE
 
 /obj/structure/swarmer/turret
 	name = "swarmer turret"
 	desc = "A quickly assembled energy turret, it shoots disabler beams in cardinal directions and then in diagonal ones."
-	icon_state = "turret"
+	icon_state = "turret_cardinal"
 	density = TRUE
 	var/diagonal = TRUE
 	var/cooldown_time = 1 SECONDS
 	COOLDOWN_DECLARE(cooldown_timer)
 
-/obj/structure/swarmer/turret/Initialize(mapload)
+/obj/structure/swarmer/turret/Initialize()
 	. = ..()
 	START_PROCESSING(SSfastprocess, src)
 
@@ -173,7 +233,8 @@
 		var/turf/target = get_step(src, dir)
 		shoot_projectile(target)
 	diagonal = !diagonal
-	flick("[diagonal ? "turret_diagonal" : "turret_cardinal"]", src)
+	icon_state = "turret_[diagonal ? "diagonal" : "cardinal"]"
+	flick("[diagonal ? "turret_diagonal_anim" : "turret_cardinal_anim"]", src)
 	COOLDOWN_START(src, cooldown_timer, cooldown_time)
 
 /obj/structure/swarmer/turret/proc/shoot_projectile(turf/marker)
