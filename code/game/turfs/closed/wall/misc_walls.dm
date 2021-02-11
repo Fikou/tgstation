@@ -89,3 +89,14 @@
 	sheet_type = /obj/item/stack/tile/bronze
 	sheet_amount = 2
 	girder_type = /obj/structure/girder/bronze
+
+/turf/closed/wall/porous
+	name = "porous rock"
+	desc = "This rock is filled with pockets of breathable air. It has metal struts to protect it from mining."
+	icon = 'icons/turf/walls/porous_rock.dmi'
+	icon_state = "porous_rock-0"
+	base_icon_state = "porous_rock"
+	smoothing_flags = SMOOTH_BITMASK
+	sheet_amount = 1
+	girder_type = /turf/closed/mineral/asteroid
+	hardness = 50
