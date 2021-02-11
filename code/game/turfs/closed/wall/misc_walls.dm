@@ -100,5 +100,8 @@
 	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MINERAL_WALLS)
 	canSmoothWith = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_MINERAL_WALLS)
 	sheet_amount = 1
-	girder_type = /turf/closed/mineral/asteroid
 	hardness = 50
+
+/turf/closed/wall/porous/break_wall()
+	new sheet_type(src, sheet_amount)
+	ChangeTurf(/turf/closed/mineral/asteroid)
