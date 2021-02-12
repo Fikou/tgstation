@@ -217,10 +217,10 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 			if(resources > 5)
 				if(prob(5)) //lower odds, as to prioritise reproduction
 					StartAction(10) //not a typo
-					create_barricade()
+					create_structure(/obj/structure/swarmer/blockade, 4, 1 SECONDS)
 					return
 				if(prob(5))
-					create_trap()
+					create_structure(/obj/structure/swarmer/trap, 4)
 					return
 
 

@@ -56,7 +56,7 @@
 /obj/structure/swarmer_beacon/Initialize()
 	. = ..()
 	flick("swarmer_console_full_boot", src)
-	addtimer(VARSET_CALLBACK(src, processing, FALSE), 4.12 SECONDS)
+	addtimer(VARSET_CALLBACK(src, processing, FALSE), 5 SECONDS)
 	AddElement(/datum/element/point_of_interest)
 	swarmers = new /datum/team/swarmers()
 	var/datum/objective/swarmer/material_objective = new
@@ -123,7 +123,7 @@
 	if(isliving(AM))
 		var/mob/living/living_crosser = AM
 		if(!istype(living_crosser, /mob/living/simple_animal/hostile/swarmer))
-			playsound(loc,'sound/effects/snap.ogg',50, TRUE, -1)
+			playsound(loc,'sound/effects/snap.ogg',50, TRUE, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 			living_crosser.electrocute_act(100, src, TRUE, flags = SHOCK_NOGLOVES|SHOCK_ILLUSION)
 			if(iscyborg(living_crosser))
 				living_crosser.Paralyze(100)
@@ -148,6 +148,7 @@
 	icon_state = "generator"
 	max_integrity = 75
 	density = TRUE
+	var/cooldown_time = 5 SECONDS
 	var/obj/structure/swarmer/blockade/blockade_right
 	var/obj/structure/swarmer/blockade/blockade_left
 
@@ -168,15 +169,15 @@
 
 /obj/structure/swarmer/field_generator/proc/can_be_rotated()
 	for(var/turf/torf in orange(1,src))
-		return !torf.is_blocked_turf(TRUE, src, list(/obj/structure/swarmer))
+		return !torf.is_blocked_turf(TRUE, src, list(blockade_right, blockade_left))
 
 /obj/structure/swarmer/field_generator/proc/after_rotation(mob/user)
 	to_chat(user,"<span class='notice'>You rotate [src].</span>")
 	recalculate_barriers()
 
 /obj/structure/swarmer/field_generator/proc/recalculate_barriers(create_right = FALSE, create_left = FALSE)
-	for(var/turf/torf in orange(1,src))
-		if(torf.is_blocked_turf(TRUE, src, list(/obj/structure/swarmer)))
+	for(var/turf/torf in orange(1,get_turf(src)))
+		if(torf.is_blocked_turf(TRUE, src, list(blockade_right, blockade_left)))
 			return
 	if(!blockade_right)
 		if(create_right)
@@ -190,13 +191,14 @@
 			RegisterSignal(blockade_left, COMSIG_PARENT_QDELETING, .proc/remove_blockade, blockade_left)
 	else
 		blockade_left.forceMove(get_step(src, turn(dir, -90)))
+	playsound(src,'sound/weapons/resonator_fire.ogg',100,TRUE,SHORT_RANGE_SOUND_EXTRARANGE)
 
 /obj/structure/swarmer/field_generator/proc/remove_blockade(obj/structure/swarmer/blockade/blockade)
 	if(blockade == blockade_right)
-		addtimer(CALLBACK(src, .proc/recalculate_barriers, TRUE, FALSE), 5 SECONDS)
+		addtimer(CALLBACK(src, .proc/recalculate_barriers, TRUE, FALSE), cooldown_time)
 		blockade_right = null
 	if(blockade == blockade_left)
-		addtimer(CALLBACK(src, .proc/recalculate_barriers, FALSE, TRUE), 5 SECONDS)
+		addtimer(CALLBACK(src, .proc/recalculate_barriers, FALSE, TRUE), cooldown_time)
 		blockade_left = null
 
 /obj/structure/swarmer/tower
@@ -205,6 +207,32 @@
 	icon_state = "tower"
 	max_integrity = 50
 	density = TRUE
+	var/list/dronelist = list()
+	var/drone_limit = 4
+	var/cooldown_time = 10 SECONDS
+	COOLDOWN_DECLARE(cooldown_timer)
+
+/obj/structure/swarmer/tower/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/structure/swarmer/tower/process(delta_time)
+	if(COOLDOWN_FINISHED(src, cooldown_timer) && dronelist.len < drone_limit)
+		fabricate_swarmer()
+
+/obj/structure/swarmer/tower/proc/fabricate_swarmer()
+	playsound(src, 'sound/magic/summonitems_generic.ogg', 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+	COOLDOWN_START(src, cooldown_timer, cooldown_time)
+	var/turf/spawn_turf
+	for(var/turf/torf in orange(1,get_turf(src)))
+		if(torf.is_blocked_turf(FALSE, src))
+			continue
+		spawn_turf = torf
+		break
+	if(!spawn_turf)
+		return
+	var/mob/newswarmer = new /mob/living/simple_animal/hostile/swarmer/drone/melee(spawn_turf)
+	dronelist += newswarmer
 
 /obj/structure/swarmer/turret
 	name = "swarmer turret"
@@ -235,6 +263,7 @@
 	diagonal = !diagonal
 	icon_state = "turret_[diagonal ? "diagonal" : "cardinal"]"
 	flick("[diagonal ? "turret_diagonal_anim" : "turret_cardinal_anim"]", src)
+	playsound(src, 'sound/weapons/taser2.ogg', 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	COOLDOWN_START(src, cooldown_timer, cooldown_time)
 
 /obj/structure/swarmer/turret/proc/shoot_projectile(turf/marker)

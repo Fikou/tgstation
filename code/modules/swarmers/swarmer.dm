@@ -298,36 +298,24 @@
 				computer_target.circuit.forceMove(target_loc)
 		qdel(target)
 
-/**
- * Called when a swarmer attempts to create a trap
- *
- * Proc used to allow a swarmer to create a trap.  Checks if a trap is on the tile, then if the swarmer can afford, and then places the trap.
- */
-/mob/living/simple_animal/hostile/swarmer/proc/create_trap()
-	if(locate(/obj/structure/swarmer/trap) in loc)
-		to_chat(src, "<span class='warning'>There is already a trap here. Aborting.</span>")
-		return
-	if(resources < 4)
-		to_chat(src, "<span class='warning'>We do not have the resources for this!</span>")
-		return
-	Fabricate(/obj/structure/swarmer/trap, 4)
 
 /**
- * Called when a swarmer attempts to create a barricade
+ * Called when a swarmer attempts to create a structure
  *
- * Proc used to allow a swarmer to create a barricade.  Checks if a barricade is on the tile, then if the swarmer can afford it, and then will attempt to create a barricade after a second delay.
+ * Proc used to allow a swarmer to create a structure.  Checks if a structure is on the tile, then if the swarmer can afford it, and then will attempt to create that structure after an optional delay.
  */
-/mob/living/simple_animal/hostile/swarmer/proc/create_barricade()
+/mob/living/simple_animal/hostile/swarmer/proc/create_structure(obj/structure/path_type, resource_needed, timer)
 
-	if(locate(/obj/structure/swarmer/blockade) in loc)
-		to_chat(src, "<span class='warning'>There is already a blockade here. Aborting.</span>")
+	if(locate(path_type) in loc)
+		to_chat(src, "<span class='warning'>There is already a [initial(path_type.name)] here. Aborting.</span>")
 		return
-	if(resources < 4)
+	if(resources < resource_needed)
 		to_chat(src, "<span class='warning'>We do not have the resources for this!</span>")
 		return
-	if(!do_mob(src, src, 1 SECONDS))
-		return
-	Fabricate(/obj/structure/swarmer/blockade, 4)
+	if(timer)
+		if(!do_mob(src, src, timer))
+			return
+	Fabricate(path_type, resource_needed)
 
 /**
  * Called when a swarmer attempts to create a drone
@@ -499,6 +487,6 @@
 	maxHealth = 30
 	health = 30
 	ranged = FALSE
-	max_resources = 200
+	max_resources = 150
 	resources = 0
-	hud_type = /datum/hud/swarmer/standard/architect
+	hud_type = /datum/hud/swarmer/architect
