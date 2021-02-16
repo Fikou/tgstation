@@ -237,8 +237,8 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 
 //RANGED SWARMER
 /mob/living/simple_animal/hostile/swarmer/ai/ranged_combat
-	icon_state = "swarmer_ranged"
-	icon_living = "swarmer_ranged"
+	icon_state = "swarmer_laser"
+	icon_living = "swarmer_laser"
 	projectiletype = /obj/projectile/beam/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	check_friendly_fire = TRUE //you're supposed to protect the resource swarmers, you poop
