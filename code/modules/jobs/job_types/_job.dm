@@ -161,7 +161,7 @@
 
 	//Equip the rest of the gear
 	H.dna.species.before_equip_job(src, H, visualsOnly)
-
+	before_equip(H, visualsOnly, preference_source)
 	if(outfit_override || outfit)
 		H.equipOutfit(outfit_override ? outfit_override : outfit, visualsOnly)
 
@@ -173,6 +173,9 @@
 
 	if(!visualsOnly && announce)
 		announce(H, is_captain)
+
+/datum/job/proc/before_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
+	return
 
 /datum/job/proc/announce_head(mob/living/carbon/human/H, channels) //tells the given channel that the given mob is the new department head. See communications.dm for valid channels.
 	if(H && GLOB.announcement_systems.len)

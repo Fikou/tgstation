@@ -86,7 +86,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
-	var/prefered_security_department = SEC_DEPT_RANDOM
+	var/preferred_security_department = SEC_DEPT_RANDOM
+	var/random_assistants = FALSE
 
 	//Quirk list
 	var/list/all_quirks = list()
@@ -270,7 +271,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "<b>Custom Job Preferences:</b><BR>"
 			dat += "<a href='?_src_=prefs;preference=ai_core_icon;task=input'><b>Preferred AI Core Display:</b> [preferred_ai_core_display]</a><br>"
-			dat += "<a href='?_src_=prefs;preference=sec_dept;task=input'><b>Preferred Security Department:</b> [prefered_security_department]</a><BR></td>"
+			dat += "<a href='?_src_=prefs;preference=sec_dept;task=input'><b>Preferred Security Department:</b> [preferred_security_department]</a><br>"
+			dat += "<a href='?_src_=prefs;preference=random_assistant'><b>Random Assistant Titles:</b> [(random_assistants) ? "Enabled" : "Disabled"]</a><BR></td>"
 
 			dat += "</tr></table>"
 
@@ -1562,7 +1564,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("sec_dept")
 					var/department = input(user, "Choose your preferred security department:", "Security Departments") as null|anything in GLOB.security_depts_prefs
 					if(department)
-						prefered_security_department = department
+						preferred_security_department = department
 
 				if ("preferred_map")
 					var/maplist = list()
@@ -1769,6 +1771,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if("persistent_scars")
 					persistent_scars = !persistent_scars
+
+				if("random_assistant")
+					random_assistants = !random_assistants
 
 				if("clear_scars")
 					var/path = "data/player_saves/[user.ckey[1]]/[user.ckey]/scars.sav"

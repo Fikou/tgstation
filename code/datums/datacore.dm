@@ -157,7 +157,7 @@
 		"Medical" = GLOB.medical_positions,
 		"Science" = GLOB.science_positions,
 		"Supply" = GLOB.supply_positions,
-		"Service" = GLOB.service_positions,
+		"Service" = GLOB.service_positions + GLOB.assistant_positions,
 		"Silicon" = GLOB.nonhuman_positions
 	)
 	for(var/datum/data/record/t in GLOB.data_core.general)

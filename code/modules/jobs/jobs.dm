@@ -49,6 +49,11 @@ GLOBAL_LIST_INIT(service_positions, list(
 	"Prisoner",
 	"Assistant"))
 
+GLOBAL_LIST_INIT(assistant_positions, list(
+	"Barber",
+	"Waiter"
+))
+
 
 GLOBAL_LIST_INIT(security_positions, list(
 	"Head of Security",

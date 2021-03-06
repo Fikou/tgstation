@@ -413,7 +413,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		READ_FILE(S[savefile_slot_name], custom_names[custom_name_id])
 
 	READ_FILE(S["preferred_ai_core_display"], preferred_ai_core_display)
-	READ_FILE(S["prefered_security_department"], prefered_security_department)
+	READ_FILE(S["preferred_security_department"], preferred_security_department)
+	READ_FILE(S["random_assistants"], random_assistants)
 
 	//Jobs
 	READ_FILE(S["joblessrole"], joblessrole)
@@ -475,7 +476,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	backpack = sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style = sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
+	preferred_security_department = sanitize_inlist(preferred_security_department, GLOB.security_depts_prefs, initial(preferred_security_department))
 	playtime_reward_cloak = sanitize_integer(playtime_reward_cloak)
+	random_assistants = sanitize_integer(random_assistants)
 	features["mcolor"] = sanitize_hexcolor(features["mcolor"], 3, 0)
 	features["ethcolor"] = copytext_char(features["ethcolor"], 1, 7)
 	features["tail_lizard"] = sanitize_inlist(features["tail_lizard"], GLOB.tails_list_lizard)
@@ -558,7 +561,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		WRITE_FILE(S[savefile_slot_name],custom_names[custom_name_id])
 
 	WRITE_FILE(S["preferred_ai_core_display"] ,  preferred_ai_core_display)
-	WRITE_FILE(S["prefered_security_department"] , prefered_security_department)
+	WRITE_FILE(S["preferred_security_department"] , preferred_security_department)
+	WRITE_FILE(S["random_assistants"], random_assistants)
 
 	//Jobs
 	WRITE_FILE(S["joblessrole"] , joblessrole)
