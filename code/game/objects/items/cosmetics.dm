@@ -247,7 +247,7 @@
 	. = ..()
 	var/new_spray_color = input(user, "Choose your color", "Hair Color", spray_color) as color|null
 	if(new_spray_color)
-		spray_color = sanitize_hexcolor(new_spray_color, include_crunch = TRUE)
+		spray_color = sanitize_hexcolor(new_spray_color)
 
 /obj/item/barber_spray/attack(mob/mob, mob/living/user)
 	if(ishuman(mob))
@@ -268,6 +268,7 @@
 					user.visible_message("<span class='notice'>[user] successfully changes [target]'s facial hair color using [src].</span>", "<span class='notice'>You successfully change [target]'s facial hair color using [src].</span>")
 					target.facial_hair_color = spray_color
 					target.update_hair()
+					playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
 					return
 				else
 					return
@@ -282,6 +283,7 @@
 				user.visible_message("<span class='notice'>[user] successfully changes [target]'s hair color using [src].</span>", "<span class='notice'>You successfully change [target]'s hair color using [src].</span>")
 				target.hair_color = spray_color
 				target.update_hair()
+				playsound(src.loc, 'sound/effects/spray2.ogg', 50, TRUE, -6)
 				return
 		else
 			..()
