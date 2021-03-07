@@ -152,12 +152,12 @@
 	)
 	var/list/departments = list(
 		"Command" = GLOB.command_positions,
-		"Security" = GLOB.security_positions + GLOB.security_sub_positions,
+		"Security" = GLOB.security_positions,
 		"Engineering" = GLOB.engineering_positions,
 		"Medical" = GLOB.medical_positions,
 		"Science" = GLOB.science_positions,
 		"Supply" = GLOB.supply_positions,
-		"Service" = GLOB.service_positions + GLOB.assistant_positions,
+		"Service" = GLOB.service_positions,
 		"Silicon" = GLOB.nonhuman_positions
 	)
 	for(var/datum/data/record/t in GLOB.data_core.general)

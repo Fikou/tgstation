@@ -115,6 +115,17 @@
 	desc = "A small bottle. Contains cold sauce."
 	list_reagents = list(/datum/reagent/consumable/frostoil = 30)
 
+/obj/item/reagent_containers/glass/bottle/barbers_aid
+	name = "barber's aid bottle"
+	desc = "A small bottle of barber's aid."
+	list_reagents = list(/datum/reagent/barbers_aid = 30)
+
+/obj/item/reagent_containers/glass/bottle/baldium
+	name = "baldium bottle"
+	desc = "A small bottle of baldium."
+	list_reagents = list(/datum/reagent/baldium = 30)
+
+
 /obj/item/reagent_containers/glass/bottle/traitor
 	name = "syndicate bottle"
 	desc = "A small bottle. Contains a random nasty chemical."

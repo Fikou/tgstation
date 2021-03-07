@@ -958,14 +958,17 @@
 /obj/item/clothing/suit/toggle/suspenders/blue
 	name = "blue suspenders"
 	desc = "The symbol of hard labor and dirty jobs."
-	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "suspenders_blue"
 
 /obj/item/clothing/suit/toggle/suspenders/gray
 	name = "gray suspenders"
 	desc = "The symbol of hard labor and dirty jobs."
-	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "suspenders_gray"
+
+/obj/item/clothing/suit/toggle/suspenders/black
+	name = "black suspenders"
+	desc = "The symbol of hard labor and dirty jobs."
+	icon_state = "suspenders_black"
 
 /obj/item/clothing/suit/hooded/mysticrobe
 	name = "mystic's robe"

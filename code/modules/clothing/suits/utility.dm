@@ -49,6 +49,13 @@
 	inhand_icon_state = "firesuit_atmos"
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 
+/obj/item/clothing/suit/fire/foldable
+	name = "folding firesuit"
+	icon_state = "foldable_firesuit"
+	inhand_icon_state = "firefighter"
+	w_class = WEIGHT_CLASS_NORMAL
+	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/extinguisher, /obj/item/crowbar)
+
 /*
  * Bomb protection
  */

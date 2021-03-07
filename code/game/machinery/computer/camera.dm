@@ -269,33 +269,24 @@
 	desc = "Damn, they better have the /tg/ channel on these things."
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment_blank"
-	network = list("thunder")
+	network = list("entertainment")
 	density = FALSE
 	circuit = null
-	interaction_flags_atom = NONE  // interact() is called by BigClick()
 	var/icon_state_off = "entertainment_blank"
 	var/icon_state_on = "entertainment"
 
-/obj/machinery/computer/security/telescreen/entertainment/Initialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_CLICK, .proc/BigClick)
-
-// Bypass clickchain to allow humans to use the telescreen from a distance
-/obj/machinery/computer/security/telescreen/entertainment/proc/BigClick()
-	SIGNAL_HANDLER
-
-	INVOKE_ASYNC(src, /atom.proc/interact, usr)
-
-/obj/machinery/computer/security/telescreen/entertainment/proc/notify(on)
-	if(on && icon_state == icon_state_off)
+/obj/machinery/computer/security/telescreen/entertainment/proc/notify(on, list/add_network)
+	if(on)
 		say(pick(
-			"Feats of bravery live now at the thunderdome!",
+			"Feats of bravery live now right here!",
 			"Two enter, one leaves! Tune in now!",
 			"Violence like you've never seen it before!",
 			"Spears! Camera! Action! LIVE NOW!"))
 		icon_state = icon_state_on
+		network |= add_network
 	else
 		icon_state = icon_state_off
+		network &= ~add_network
 
 /obj/machinery/computer/security/telescreen/rd
 	name = "\improper Research Director's telescreen"

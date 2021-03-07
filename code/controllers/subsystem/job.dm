@@ -53,6 +53,7 @@ SUBSYSTEM_DEF(job)
 		LoadJobs()
 	generate_selectable_species()
 	set_overflow_role(CONFIG_GET(string/overflow_job))
+	GLOB.assistant_outfits += subtypesof(/datum/outfit/job/assistant)
 	return ..()
 
 /datum/controller/subsystem/job/proc/set_overflow_role(new_overflow_role)

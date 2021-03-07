@@ -393,27 +393,58 @@
 	else
 		return FALSE
 
-/obj/item/roulette_wheel_beacon
+/obj/item/droppod_beacon
 	name = "roulette wheel beacon"
-	desc = "N.T. approved roulette wheel beacon, toss it down and you will have a complementary roulette wheel delivered to you."
+	desc = "A Nanotrasen approved roulette wheel beacon, toss it down and you will have a complementary roulette wheel delivered to you."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon"
-	var/used
+	w_class = WEIGHT_CLASS_SMALL
+	var/used = FALSE
+	var/atom/movable/drop_target = /obj/machinery/roulette
 
-/obj/item/roulette_wheel_beacon/attack_self()
+/obj/item/droppod_beacon/attack_self()
 	if(used)
 		return
 	loc.visible_message("<span class='warning'>\The [src] begins to beep loudly!</span>")
 	used = TRUE
-	addtimer(CALLBACK(src, .proc/launch_payload), 40)
+	addtimer(CALLBACK(src, .proc/launch_payload), 4 SECONDS)
 
-/obj/item/roulette_wheel_beacon/proc/launch_payload()
+/obj/item/droppod_beacon/proc/launch_payload()
 	var/obj/structure/closet/supplypod/centcompod/toLaunch = new()
 
-	new /obj/machinery/roulette(toLaunch)
+	new drop_target(toLaunch)
 
 	new /obj/effect/pod_landingzone(drop_location(), toLaunch)
 	qdel(src)
+
+/obj/item/droppod_beacon/camera
+	name = "camera drone beacon"
+	desc = "A Nanotrasen approved camera beacon, toss it down and you will receive a personal camera drone."
+	drop_target = /obj/machinery/camera_drone
+
+/obj/machinery/camera_drone
+	name = "camera drone"
+	desc = "A Nanotrasen camera drone, recording to entertainment monitors."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "construction_drone"
+	density = FALSE
+	anchored = FALSE
+	var/obj/machinery/camera/emp_proof/entertainment/internal_camera
+
+/obj/machinery/camera_drone/Initialize()
+	. = ..()
+	internal_camera = new /obj/machinery/camera/emp_proof/entertainment(src)
+
+/obj/machinery/camera_drone/Move()
+	. = ..()
+	if(!QDELETED(internal_camera))
+		GLOB.cameranet.updatePortableCamera(internal_camera)
+
+/obj/machinery/camera/emp_proof/entertainment
+	name = "entertainment camera"
+	network = list("entertainment")
+	c_tag = "Camera Drone"
+	internal_light = FALSE
 
 #undef ROULETTE_SINGLES_PAYOUT
 #undef ROULETTE_SIMPLE_PAYOUT

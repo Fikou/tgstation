@@ -141,3 +141,19 @@
 	upgrades &= ~CAMERA_UPGRADE_MOTION
 	if(!area_motion)
 		QDEL_NULL(proximity_monitor)
+
+/obj/machinery/camera/thunderdome
+	name = "entertainment camera"
+	network = list("thunder")
+	c_tag = "Arena"
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF | FREEZE_PROOF
+
+/obj/machinery/camera/thunderdome/attack_ghost(mob/user)
+	. = ..()
+	if(isAdminObserver(user))
+		var/notify_status = FALSE
+		var/setting = alert("Should the station telescreens see these cameras?", "Access Entertainment", "Yes", "No")
+		if(setting == "Yes")
+			notify_status = TRUE
+		for(var/obj/machinery/computer/security/telescreen/entertainment/TV in GLOB.machines)
+			TV.notify(notify_status, network)

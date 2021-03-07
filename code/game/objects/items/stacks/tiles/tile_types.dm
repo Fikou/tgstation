@@ -407,6 +407,9 @@
 	source = /datum/robot_energy_storage/iron
 	merge_type = /obj/item/stack/tile/iron
 
+/obj/item/stack/tile/iron/loaded
+	amount = 30
+
 /obj/item/stack/tile/plastic
 	name = "plastic tile"
 	singular_name = "plastic floor tile"

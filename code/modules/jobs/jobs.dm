@@ -49,12 +49,6 @@ GLOBAL_LIST_INIT(service_positions, list(
 	"Prisoner",
 	"Assistant"))
 
-GLOBAL_LIST_INIT(assistant_positions, list(
-	"Barber",
-	"Waiter"
-))
-
-
 GLOBAL_LIST_INIT(security_positions, list(
 	"Head of Security",
 	"Warden",
@@ -73,6 +67,9 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"AI",
 	"Cyborg",
 	ROLE_PAI))
+
+/// Typepaths of random assistant jobs that haven't been taken yet
+GLOBAL_LIST_INIT(assistant_outfits, list())
 
 // job categories for rendering the late join menu
 GLOBAL_LIST_INIT(position_categories, list(

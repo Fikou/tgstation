@@ -231,3 +231,59 @@
 			..()
 	else
 		..()
+
+/obj/item/barber_spray
+	name = "hair dye spray"
+	desc = "A spray bottle, containing hair dye. Alt-Click to change its' color."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "sprayer_barber"
+	inhand_icon_state = "sprayer_med_blue"
+	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
+	w_class = WEIGHT_CLASS_SMALL
+	var/spray_color = "#000"
+
+/obj/item/barber_spray/attack_self(mob/user)
+	. = ..()
+	var/new_spray_color = input(user, "Choose your color", "Hair Color", spray_color) as color|null
+	if(new_spray_color)
+		spray_color = sanitize_hexcolor(new_spray_color, include_crunch = TRUE)
+
+/obj/item/barber_spray/attack(mob/mob, mob/living/user)
+	if(ishuman(mob))
+		var/mob/living/carbon/human/target = mob
+		var/location = user.zone_selected
+		if((location in list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_HEAD)) && !target.get_bodypart(BODY_ZONE_HEAD))
+			to_chat(user, "<span class='warning'>[target] doesn't have a head!</span>")
+			return
+		if(location == BODY_ZONE_PRECISE_MOUTH)
+			if(target.gender == MALE)
+				if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+					return
+				if(!get_location_accessible(target, location))
+					to_chat(user, "<span class='warning'>The mask is in the way!</span>")
+					return
+				user.visible_message("<span class='notice'>[user] tries to change [target]'s facial hair color using [src].</span>", "<span class='notice'>You try to change [target]'s facial hair color using [src].</span>")
+				if(do_after(user, 5 SECONDS, target = target))
+					user.visible_message("<span class='notice'>[user] successfully changes [target]'s facial hair color using [src].</span>", "<span class='notice'>You successfully change [target]'s facial hair color using [src].</span>")
+					target.facial_hair_color = spray_color
+					target.update_hair()
+					return
+				else
+					return
+		else if(location == BODY_ZONE_HEAD)
+			if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+				return
+			if(!get_location_accessible(target, location))
+				to_chat(user, "<span class='warning'>The headgear is in the way!</span>")
+				return
+			user.visible_message("<span class='notice'>[user] tries to change [target]'s hair color using [src].</span>", "<span class='notice'>You try to change [target]'s hair color using [src].</span>")
+			if(do_after(user, 5 SECONDS, target = target))
+				user.visible_message("<span class='notice'>[user] successfully changes [target]'s hair color using [src].</span>", "<span class='notice'>You successfully change [target]'s hair color using [src].</span>")
+				target.hair_color = spray_color
+				target.update_hair()
+				return
+		else
+			..()
+	else
+		..()

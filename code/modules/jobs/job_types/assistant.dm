@@ -21,19 +21,21 @@ Assistant
 	family_heirlooms = list(/obj/item/storage/toolbox/mechanical/old/heirloom, /obj/item/clothing/gloves/cut/heirloom)
 
 /datum/job/assistant/before_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
-	if(!visualsOnly && preference_source && preference_source.prefs && preference_source.prefs.random_assistants)
-		var/datum/outfit/random_outfit = pick(subtypesof(/datum/outfit/job/assistant))
+	if(!visualsOnly && preference_source && preference_source.prefs && preference_source.prefs.random_assistants && GLOB.assistant_outfits.len)
+		var/datum/outfit/random_outfit = pick(GLOB.assistant_outfits)
 		outfit = random_outfit
+		GLOB.assistant_outfits -= random_outfit
+	else
+		outfit = initial(outfit)
 
 /datum/outfit/job/assistant
 	name = "Assistant"
 	jobtype = /datum/job/assistant
-	uniform = null
 	id_trim = /datum/id_trim/job/assistant
 
 /datum/outfit/job/assistant/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(uniform)
+	if(type != /datum/outfit/job/assistant) //this is very bad, do better
 		return
 	if(CONFIG_GET(flag/grey_assistants))
 		if(H.jumpsuit_style == PREF_SUIT)

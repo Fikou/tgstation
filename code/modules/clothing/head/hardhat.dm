@@ -58,7 +58,7 @@
 	hat_type = "red"
 	dog_fashion = null
 	name = "firefighter helmet"
-	clothing_flags = STOPSPRESSUREDAMAGE
+	clothing_flags = STOPSPRESSUREDAMAGE | SNUG_FIT
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
 	cold_protection = HEAD
@@ -74,11 +74,19 @@
 	custom_materials = list(/datum/material/iron = 4000, /datum/material/glass = 1000, /datum/material/plastic = 3000, /datum/material/silver = 500)
 	hat_type = "purple"
 
+/obj/item/clothing/head/hardhat/red/masked
+	name = "masked firefighter helmet"
+	icon_state = "hardhat0_mask"
+	hat_type = "mask"
+	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT | SNUG_FIT
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDESNOUT
+	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
+
 /obj/item/clothing/head/hardhat/white
 	icon_state = "hardhat0_white"
 	inhand_icon_state = "hardhat0_white"
 	hat_type = "white"
-	clothing_flags = STOPSPRESSUREDAMAGE
+	clothing_flags = STOPSPRESSUREDAMAGE | SNUG_FIT
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
 	cold_protection = HEAD
@@ -98,7 +106,7 @@
 	dog_fashion = null
 	name = "atmospheric technician's firefighting helmet"
 	desc = "A firefighter's helmet, able to keep the user cool in any situation."
-	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT
+	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT | SNUG_FIT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
@@ -159,7 +167,7 @@
 	inhand_icon_state = "hardhat0_white"
 	light_range = 4 //Boss always takes the best stuff
 	hat_type = "white"
-	clothing_flags = STOPSPRESSUREDAMAGE
+	clothing_flags = STOPSPRESSUREDAMAGE | SNUG_FIT
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
 	cold_protection = HEAD
