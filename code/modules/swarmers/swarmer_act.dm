@@ -1,18 +1,13 @@
-/**
- * Determines what happens to an atom when a swarmer interacts with it
- *
- * Determines behavior upon being interacted on by a swarmer.
- * Arguments:
- * * S - A reference to the swarmer doing the interaction
- */
-#define DANGEROUS_DELTA_P 250	//Value in kPa where swarmers arent allowed to break a wall or window with this difference in pressure.
-#define NEEDED_RESOURCES 100
+/// Value in kPa where swarmers arent allowed to break a wall or window with this difference in pressure.
+#define DANGEROUS_DELTA_P 250
+/// Meeded resources to reconstruct using the swarmer beacon.
+#define NEEDED_UPGRADE_RESOURCES 100
 
 ///Finds the greatest difference in pressure across a turf, only considers open turfs.
 /turf/proc/return_turf_delta_p()
 	var/pressure_greatest = 0
-	var/pressure_smallest = INFINITY 					//Freaking terrified to use INFINITY, man
-	for(var/t in RANGE_TURFS(1, src))			//Begin processing the delta pressure across the wall.
+	var/pressure_smallest = INFINITY //Freaking terrified to use INFINITY, man
+	for(var/t in RANGE_TURFS(1, src)) //Begin processing the delta pressure across the wall.
 		var/turf/open/turf_adjacent = t
 		if(!istype(turf_adjacent))
 			continue
@@ -30,6 +25,14 @@
 		var/turf/open/turf_adjacent = t
 		if(turf_adjacent.planetary_atmos)
 			return TRUE
+
+/**
+ * Determines what happens to an atom when a swarmer interacts with it
+ *
+ * Determines behavior upon being interacted on by a swarmer.
+ * Arguments:
+ * * actor - A reference to the swarmer doing the interaction
+ */
 
 /atom/proc/swarmer_act(mob/living/simple_animal/hostile/swarmer/actor)
 	actor.dis_integrate(src)
@@ -86,7 +89,7 @@
 	if(actor.origin_beacon != src || actor.type != /mob/living/simple_animal/hostile/swarmer)
 		to_chat(actor, "<span class='warning'>This machine is required for further reproduction of swarmers. Aborting.</span>")
 		return FALSE
-	if(actor.resources != NEEDED_RESOURCES)
+	if(actor.resources != NEEDED_UPGRADE_RESOURCES)
 		to_chat(actor, "<span class='warning'>You don't have enough resources to reconstruct!</span>")
 		return FALSE
 	if(processing)
@@ -125,7 +128,7 @@
 
 /obj/machinery/door/swarmer_act(mob/living/simple_animal/hostile/swarmer/actor)
 	var/isonshuttle = istype(get_area(src), /area/shuttle)
-	for(var/turf/turf_in_range in range(1, src))
+	for(var/turf/turf_in_range as anything in RANGE_TURFS(1, src))
 		var/area/turf_area = get_area(turf_in_range)
 		//Check for dangerous pressure differences
 		if (turf_in_range.return_turf_delta_p() > DANGEROUS_DELTA_P)
@@ -209,7 +212,7 @@
 
 /turf/closed/wall/swarmer_act(mob/living/simple_animal/hostile/swarmer/actor)
 	var/isonshuttle = istype(loc, /area/shuttle)
-	for(var/turf/turf_in_range in range(1, src))
+	for(var/turf/turf_in_range as anything in RANGE_TURFS(1, src))
 		var/area/turf_area = get_area(turf_in_range)
 		if (turf_in_range.return_turf_delta_p() > DANGEROUS_DELTA_P)
 			to_chat(actor, "<span class='warning'>Destroying this object has the potential to cause an explosive pressure release. Aborting.</span>")
@@ -285,4 +288,4 @@
 	return FALSE
 
 #undef DANGEROUS_DELTA_P
-#undef NEEDED_RESOURCES
+#undef NEEDED_UPGRADE_RESOURCES
