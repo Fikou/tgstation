@@ -60,6 +60,8 @@
 				return
 
 /obj/item/reagent_containers/pre_attack_secondary(atom/target, mob/living/user, params)
+	if(HAS_TRAIT(target, DO_NOT_SPLASH))
+		return ..()
 	if (try_splash(user, target))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
@@ -129,10 +131,10 @@
 
 	return ..()
 
-/obj/item/reagent_containers/ex_act()
+/obj/item/reagent_containers/ex_act(severity)
 	if(reagents)
 		for(var/datum/reagent/R in reagents.reagent_list)
-			R.on_ex_act()
+			R.on_ex_act(severity)
 	if(!QDELETED(src))
 		return ..()
 

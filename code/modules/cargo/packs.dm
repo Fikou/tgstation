@@ -986,6 +986,24 @@
 	crate_name = "tesla coil crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
 
+/datum/supply_pack/engine/hypertorus_fusion_reactor
+	name = "HFR Crate"
+	desc = "The new and improved fusion reactor. Requires CE access to open."
+	cost = CARGO_CRATE_VALUE * 23
+	access = ACCESS_CE
+	contains = list(/obj/item/hfr_box/corner,
+					/obj/item/hfr_box/corner,
+					/obj/item/hfr_box/corner,
+					/obj/item/hfr_box/corner,
+					/obj/item/hfr_box/body,
+					/obj/item/hfr_box/body,
+					/obj/item/hfr_box/body,
+					/obj/item/hfr_box/body,
+					/obj/item/hfr_box/core)
+	crate_name = "HFR crate"
+	crate_type = /obj/structure/closet/crate/secure/engineering
+	dangerous = TRUE
+
 //////////////////////////////////////////////////////////////////////////////
 /////////////////////// Canisters & Materials ////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -1236,8 +1254,8 @@
 					/obj/item/reagent_containers/blood/o_minus,
 					/obj/item/storage/pill_bottle/mining,
 					/obj/item/reagent_containers/pill/neurine,
-					/obj/item/stack/medical/bone_gel,
-					/obj/item/stack/medical/bone_gel,
+					/obj/item/stack/medical/bone_gel/four,
+					/obj/item/stack/medical/bone_gel/four,
 					/obj/item/vending_refill/medical,
 					/obj/item/vending_refill/drugs)
 	crate_name = "medical supplies crate"
@@ -2457,6 +2475,13 @@
 					/obj/item/book/random)
 	crate_type = /obj/structure/closet/crate/wooden
 
+/datum/supply_pack/misc/exploration_drone
+	name = "Exploration Drone"
+	desc = "A replacement long-range exploration drone."
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(/obj/item/exodrone)
+	crate_name = "exodrone crate"
+
 /datum/supply_pack/misc/paper
 	name = "Bureaucracy Crate"
 	desc = "High stacks of papers on your desk Are a big problem - make it Pea-sized with these bureaucratic supplies! Contains six pens, some camera film, hand labeler supplies, a paper bin, a carbon paper bin, three folders, a laser pointer, two clipboards and two stamps."//that was too forced
@@ -2592,7 +2617,7 @@
 
 ///Generate assorted uplink items, taking into account the same surplus modifiers used for surplus crates
 /datum/supply_pack/misc/syndicate/fill(obj/structure/closet/crate/C)
-	var/list/uplink_items = get_uplink_items(SSticker.mode)
+	var/list/uplink_items = get_uplink_items(UPLINK_TRAITORS)
 	while(crate_value)
 		var/category = pick(uplink_items)
 		var/item = pick(uplink_items[category])
@@ -2799,3 +2824,49 @@
 					/obj/item/vending_refill/wardrobe/det_wardrobe,
 					/obj/item/vending_refill/wardrobe/law_wardrobe)
 	crate_name = "security department supply crate"
+
+
+/// Exploration drone unlockables ///
+
+/datum/supply_pack/exploration
+	special = TRUE
+	group = "Outsourced"
+
+/datum/supply_pack/exploration/scrapyard
+	name = "Scrapyard Crate"
+	desc = "Outsourced crate containing various junk."
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(/obj/item/relic,
+					/obj/item/broken_bottle,
+					/obj/item/pickaxe/rusted)
+	crate_name = "scrapyard crate"
+
+/datum/supply_pack/exploration/catering
+	name = "Catering Crate"
+	desc = "No cook? No problem! Food quality may vary depending on provider."
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(/obj/item/food/sandwich,
+					/obj/item/food/sandwich,
+					/obj/item/food/sandwich,
+					/obj/item/food/sandwich,
+					/obj/item/food/sandwich)
+	crate_name = "outsourced food crate"
+
+/datum/supply_pack/exploration/catering/fill(obj/structure/closet/crate/C)
+	. = ..()
+	if(prob(30))
+		for(var/obj/item/food/F in C)
+			F.name = "spoiled [F.name]"
+			F.foodtypes |= GROSS
+			F.MakeEdible()
+
+/datum/supply_pack/exploration/shrubbery
+	name = "Shrubbery Crate"
+	desc = "Crate full of hedge shrubs."
+	cost = CARGO_CRATE_VALUE * 5
+	crate_name = "shrubbery crate"
+	var/shrub_amount = 8
+
+/datum/supply_pack/exploration/shrubbery/fill(obj/structure/closet/crate/C)
+	for(var/i in 1 to shrub_amount)
+		new /obj/item/grown/shrub(C)

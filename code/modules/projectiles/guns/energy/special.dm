@@ -300,6 +300,7 @@
 /obj/item/gun/energy/printer/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/update_icon_blocker)
+	AddComponent(/datum/component/automatic_fire, 0.3 SECONDS)
 
 /obj/item/gun/energy/printer/emp_act()
 	return
@@ -342,6 +343,18 @@
 	inhand_icon_state = "instagibblue"
 	ammo_type = list(/obj/item/ammo_casing/energy/instakill/blue)
 
+/obj/item/gun/energy/laser/instakill/green
+	desc = "A specialized ASMD laser-rifle, capable of flat-out disintegrating most targets in a single hit. This one has a green design."
+	icon_state = "instagibgreen"
+	inhand_icon_state = "instagibgreen"
+	ammo_type = list(/obj/item/ammo_casing/energy/instakill/green)
+
+/obj/item/gun/energy/laser/instakill/yellow
+	desc = "A specialized ASMD laser-rifle, capable of flat-out disintegrating most targets in a single hit. This one has a yellow design."
+	icon_state = "instagibyellow"
+	inhand_icon_state = "instagibyellow"
+	ammo_type = list(/obj/item/ammo_casing/energy/instakill/yellow)
+
 /obj/item/gun/energy/laser/instakill/emp_act() //implying you could stop the instagib
 	return
 
@@ -375,9 +388,9 @@
 	inhand_icon_state = "tesla"
 	desc = "A gun that shoots balls of \"tesla\", whatever that is."
 	ammo_type = list(/obj/item/ammo_casing/energy/tesla_cannon)
-	shaded_charge = 1
+	shaded_charge = TRUE
 	weapon_weight = WEAPON_HEAVY
 
-/obj/item/gun/energy/tesla_cannon/ComponentInitialize()
+/obj/item/gun/energy/tesla_cannon/Initialize()
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, 0.1 SECONDS)

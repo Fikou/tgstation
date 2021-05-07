@@ -1,7 +1,6 @@
 SUBSYSTEM_DEF(blackbox)
 	name = "Blackbox"
 	wait = 6000
-	flags = SS_NO_TICK_CHECK
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	init_order = INIT_ORDER_BLACKBOX
 
@@ -154,6 +153,10 @@ SUBSYSTEM_DEF(blackbox)
 			record_feedback("tally", "radio_usage", 1, "CTF red team")
 		if(FREQ_CTF_BLUE)
 			record_feedback("tally", "radio_usage", 1, "CTF blue team")
+		if(FREQ_CTF_GREEN)
+			record_feedback("tally", "radio_usage", 1, "CTF green team")
+		if(FREQ_CTF_YELLOW)
+			record_feedback("tally", "radio_usage", 1, "CTF yellow team")
 		else
 			record_feedback("tally", "radio_usage", 1, "other")
 
@@ -347,3 +350,48 @@ Versioning
 	if(query_report_death)
 		query_report_death.Execute(async = TRUE)
 		qdel(query_report_death)
+
+/datum/controller/subsystem/blackbox/proc/ReportCitation(citation, sender, sender_ic, recipient, message, fine = 0, paid = 0)
+	var/datum/db_query/query_report_citation = SSdbcore.NewQuery({"INSERT INTO [format_table_name("citation")]
+	(server_ip,
+	server_port,
+	round_id,
+	citation,
+	action,
+	sender,
+	sender_ic,
+	recipient,
+	crime,
+	fine,
+	paid,
+	timestamp) VALUES (
+	INET_ATON(:server_ip),
+	:port,
+	:round_id,
+	:citation,
+	:action,
+	:sender,
+	:sender_ic,
+	:recipient,
+	:message,
+	:fine,
+	:paid,
+	:timestamp
+	) ON DUPLICATE KEY UPDATE
+	paid = paid + VALUES(paid)"}, list(
+		"server_ip" = world.internet_address || "0",
+		"port" = "[world.port]",
+		"round_id" = GLOB.round_id,
+		"citation" = citation,
+		"action" = "Citation Created",
+		"sender" = sender,
+		"sender_ic" = sender_ic,
+		"recipient" = recipient,
+		"message" = message,
+		"fine" = fine,
+		"paid" = paid,
+		"timestamp" = SQLtime()
+	))
+	if(query_report_citation)
+		query_report_citation.Execute(async = TRUE)
+		qdel(query_report_citation)
