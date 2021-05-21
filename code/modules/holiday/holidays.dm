@@ -1,19 +1,32 @@
 /datum/holiday
+	///Name of the holiday itself. Visible to players.
 	var/name = "If you see this the holiday calendar code is broken"
 
+	///What day of begin_month does the holiday begin on?
 	var/begin_day = 1
+	///What month does the holiday begin on?
 	var/begin_month = 0
-	var/end_day = 0 // Default of 0 means the holiday lasts a single day
+	/// What day of end_month does the holiday end? Default of 0 means the holiday lasts a single.
+	var/end_day = 0
+	/// What month does the holiday end on?
 	var/end_month = 0
-	var/begin_week = FALSE //If set to a number, then this holiday will begin on certain week
-	var/begin_weekday = FALSE //If set to a weekday, then this will trigger the holiday on the above week
-	var/always_celebrate = FALSE // for christmas neverending, or testing.
+	/// for christmas neverending, or testing. Forces a holiday to be celebrated.
+	var/always_celebrate = FALSE
+	/// Held variable to better calculate when certain holidays may fall on, like easter.
 	var/current_year = 0
+	/// How many years are you offsetting your calculations for begin_day and end_day on. Used for holidays like easter.
 	var/year_offset = 0
-	var/obj/item/drone_hat //If this is defined, drones without a default hat will spawn with this one during the holiday; check drones_as_items.dm to see this used
+	///Timezones this holiday is celebrated in (defaults to three timezones spanning a 50 hour window covering all timezones)
+	var/list/timezones = list(TIMEZONE_LINT, TIMEZONE_UTC, TIMEZONE_ANYWHERE_ON_EARTH)
+	///If this is defined, drones without a default hat will spawn with this one during the holiday; check drones_as_items.dm to see this used
+	var/obj/item/drone_hat
+	///When this holiday is active, does this prevent mail from arriving to cargo? Try not to use this for longer holidays.
+	var/mail_holiday = FALSE
 
 // This proc gets run before the game starts when the holiday is activated. Do festive shit here.
 /datum/holiday/proc/celebrate()
+	if(mail_holiday)
+		SSeconomy.mail_blocked = TRUE
 	return
 
 // When the round starts, this proc is ran to get a text message to display to everyone to wish them a happy holiday
@@ -27,7 +40,7 @@
 	return copytext(name, 1, i)
 
 // Return 1 if this holidy should be celebrated today
-/datum/holiday/proc/shouldCelebrate(dd, mm, yy, ww, ddd)
+/datum/holiday/proc/shouldCelebrate(dd, mm, yyyy, ddd)
 	if(always_celebrate)
 		return TRUE
 
@@ -35,9 +48,6 @@
 		end_day = begin_day
 	if(!end_month)
 		end_month = begin_month
-	if(begin_week && begin_weekday)
-		if(begin_week == ww && begin_weekday == ddd && begin_month == mm)
-			return TRUE
 	if(end_month > begin_month) //holiday spans multiple months in one year
 		if(mm == end_month) //in final month
 			if(dd <= end_day)
@@ -66,11 +76,12 @@
 
 /datum/holiday/new_year
 	name = NEW_YEAR
-	begin_day = 30
+	begin_day = 31
 	begin_month = DECEMBER
 	end_day = 2
 	end_month = JANUARY
 	drone_hat = /obj/item/clothing/head/festive
+	mail_holiday = TRUE
 
 /datum/holiday/new_year/getStationPrefix()
 	return pick("Party","New","Hangover","Resolution", "Auld")
@@ -86,7 +97,7 @@
 
 /datum/holiday/valentines
 	name = VALENTINES
-	begin_day = 13
+	begin_day = 14
 	end_day = 15
 	begin_month = FEBRUARY
 
@@ -110,7 +121,7 @@
 	drone_hat = /obj/item/clothing/head/festive
 
 /datum/holiday/birthday/greet()
-	var/game_age = text2num(time2text(world.timeofday, "YY")) - 3
+	var/game_age = text2num(time2text(world.timeofday, "YYYY")) - 2003
 	var/Fact
 	switch(game_age)
 		if(16)
@@ -131,8 +142,6 @@
 			Fact = " Happy golden anniversary!"
 		if(65)
 			Fact = " SS13 can now start thinking about retirement!"
-		if(96)
-			Fact = " Please send a time machine back to pick me up, I need to update the time formatting for this feature!" //See you later suckers
 	if(!Fact)
 		Fact = " SS13 is now [game_age] years old!"
 
@@ -173,11 +182,12 @@
 
 /datum/holiday/april_fools
 	name = APRIL_FOOLS
-	begin_day = 1
-	end_day = 5
 	begin_month = APRIL
+	begin_day = 1
+	end_day = 2
 
 /datum/holiday/april_fools/celebrate()
+	. = ..()
 	SSjob.set_overflow_role("Clown")
 	SSticker.login_music = 'sound/ambience/clown.ogg'
 	for(var/i in GLOB.new_player_list)
@@ -220,6 +230,7 @@
 	begin_day = 1
 	begin_month = MAY
 	drone_hat = /obj/item/clothing/head/hardhat
+	mail_holiday = TRUE
 
 /datum/holiday/firefighter
 	name = "Firefighter's Day"
@@ -260,12 +271,37 @@
 	return pick("Ayy","Truth","Tsoukalos","Mulder","Scully") //Yes it is!
 
 /datum/holiday/usa
-	name = "Independence Day"
+	name = "US Independence Day"
+	timezones = list(TIMEZONE_EDT, TIMEZONE_CDT, TIMEZONE_MDT, TIMEZONE_MST, TIMEZONE_PDT, TIMEZONE_AKDT, TIMEZONE_HDT, TIMEZONE_HST)
 	begin_day = 4
 	begin_month = JULY
+	mail_holiday = TRUE
 
 /datum/holiday/usa/getStationPrefix()
 	return pick("Independent","American","Burger","Bald Eagle","Star-Spangled", "Fireworks")
+
+/datum/holiday/nz
+	name = "Waitangi Day"
+	timezones = list(TIMEZONE_NZDT, TIMEZONE_CHADT)
+	begin_day = 6
+	begin_month = FEBRUARY
+
+/datum/holiday/nz/getStationPrefix()
+	return pick("Aotearoa","Kiwi","Fish 'n' Chips","Kākāpō","Southern Cross")
+
+/datum/holiday/nz/greet()
+	var/nz_age = text2num(time2text(world.timeofday, "YYYY")) - 1840
+	return "On this day [nz_age] years ago, New Zealand's Treaty of Waitangi, the founding document of the nation, was signed!"
+
+/datum/holiday/anz
+	name = "ANZAC Day"
+	timezones = list(TIMEZONE_TKT, TIMEZONE_TOT, TIMEZONE_NZST, TIMEZONE_NFT, TIMEZONE_LHST, TIMEZONE_AEST, TIMEZONE_ACST, TIMEZONE_ACWST, TIMEZONE_AWST, TIMEZONE_CXT, TIMEZONE_CCT, TIMEZONE_CKT, TIMEZONE_NUT)
+	begin_day = 25
+	begin_month = APRIL
+	drone_hat = /obj/item/food/grown/poppy
+
+/datum/holiday/anz/getStationPrefix()
+	return pick("Australian","New Zealand","Poppy", "Southern Cross")
 
 /datum/holiday/writer
 	name = "Writer's Day"
@@ -274,9 +310,11 @@
 
 /datum/holiday/france
 	name = "Bastille Day"
+	timezones = list(TIMEZONE_CEST)
 	begin_day = 14
 	begin_month = JULY
 	drone_hat = /obj/item/clothing/head/beret
+	mail_holiday = TRUE
 
 /datum/holiday/france/getStationPrefix()
 	return pick("Francais","Fromage", "Zut", "Merde")
@@ -291,17 +329,6 @@
 
 /datum/holiday/friendship/greet()
 	return "Have a magical [name]!"
-
-/datum/holiday/beer
-	name = "Beer Day"
-
-/datum/holiday/beer/shouldCelebrate(dd, mm, yy, ww, ddd)
-	if(mm == 8 && ddd == FRIDAY && ww == 1) //First Friday in August
-		return TRUE
-	return FALSE
-
-/datum/holiday/beer/getStationPrefix()
-	return pick("Stout","Porter","Lager","Ale","Malt","Bock","Doppelbock","Hefeweizen","Pilsner","IPA","Lite") //I'm sorry for the last one
 
 /datum/holiday/pirate
 	name = "Talk-Like-a-Pirate Day"
@@ -318,9 +345,9 @@
 /datum/holiday/programmers
 	name = "Programmers' Day"
 
-/datum/holiday/programmers/shouldCelebrate(dd, mm, yy, ww, ddd) //Programmer's day falls on the 2^8th day of the year
+/datum/holiday/programmers/shouldCelebrate(dd, mm, yyyy, ddd) //Programmer's day falls on the 2^8th day of the year
 	if(mm == 9)
-		if(yy/4 == round(yy/4)) //Note: Won't work right on September 12th, 2200 (at least it's a Friday!)
+		if(yyyy/4 == round(yyyy/4)) //Note: Won't work right on September 12th, 2200 (at least it's a Friday!)
 			if(dd == 12)
 				return TRUE
 		else
@@ -361,7 +388,7 @@
 
 /datum/holiday/halloween
 	name = HALLOWEEN
-	begin_day = 28
+	begin_day = 29
 	begin_month = OCTOBER
 	end_day = 2
 	end_month = NOVEMBER
@@ -414,68 +441,17 @@
 	begin_month = DECEMBER
 
 /datum/holiday/monkey
-	name = "Monkey Day"
+	name = MONKEYDAY
 	begin_day = 14
 	begin_month = DECEMBER
 	drone_hat = /obj/item/clothing/mask/gas/monkeymask
 
-/datum/holiday/thanksgiving
-	name = "Thanksgiving in the United States"
-	begin_week = 4
-	begin_month = NOVEMBER
-	begin_weekday = THURSDAY
-	drone_hat = /obj/item/clothing/head/that //This is the closest we can get to a pilgrim's hat
-
-/datum/holiday/thanksgiving/canada
-	name = "Thanksgiving in Canada"
-	begin_week = 2
-	begin_month = OCTOBER
-	begin_weekday = MONDAY
-
-/datum/holiday/columbus
-	name = "Columbus Day"
-	begin_week = 2
-	begin_month = OCTOBER
-	begin_weekday = MONDAY
-
-/datum/holiday/mother
-	name = "Mother's Day"
-	begin_week = 2
-	begin_month = MAY
-	begin_weekday = SUNDAY
-
-/datum/holiday/mother/greet()
-	return "Happy Mother's Day in most of the Americas, Asia, and Oceania!"
-
-/datum/holiday/father
-	name = "Father's Day"
-	begin_week = 3
-	begin_month = JUNE
-	begin_weekday = SUNDAY
-
-/datum/holiday/moth
-	name = "Moth Week"
-
-/datum/holiday/moth/shouldCelebrate(dd, mm, yy, ww, ddd) //National Moth Week falls on the last full week of July, including the saturday and sunday before. See http://nationalmothweek.org/ for precise tracking.
-	if(mm == JULY)
-		var/week
-		if(first_day_of_month() >= 5)	//Friday or later start of the month means week 5 is a full week.
-			week = 5
-		else
-			week = 4
-
-		return (ww == week-1 && (ddd == SATURDAY || ddd == SUNDAY)) || ww == week
-
-
-/datum/holiday/moth/getStationPrefix()
-	return pick("Mothball","Lepidopteran","Lightbulb","Moth","Giant Atlas","Twin-spotted Sphynx","Madagascan Sunset","Luna","Death's Head","Emperor Gum","Polyphenus","Oleander Hawk","Io","Rosy Maple","Cecropia","Noctuidae","Giant Leopard","Dysphania Militaris","Garden Tiger")
-
 /datum/holiday/islamic
 	name = "Islamic calendar code broken"
 
-/datum/holiday/islamic/shouldCelebrate(dd, mm, yy, ww, ddd)
-	var/datum/foreign_calendar/islamic/cal = new
-	return ..(cal.dd, cal.mm, cal.yy, ww, ddd)
+/datum/holiday/islamic/shouldCelebrate(dd, mm, yyyy, ddd)
+	var/datum/foreign_calendar/islamic/cal = new(yyyy, mm, dd)
+	return ..(cal.dd, cal.mm, cal.yyyy, ddd)
 
 /datum/holiday/islamic/ramadan
 	name = "Start of Ramadan"
@@ -508,15 +484,17 @@
 
 /datum/holiday/xmas
 	name = CHRISTMAS
-	begin_day = 22
+	begin_day = 23
 	begin_month = DECEMBER
 	end_day = 27
 	drone_hat = /obj/item/clothing/head/santa
+	mail_holiday = TRUE
 
 /datum/holiday/xmas/greet()
 	return "Have a merry Christmas!"
 
 /datum/holiday/xmas/celebrate()
+	. = ..()
 	SSticker.OnRoundstart(CALLBACK(src, .proc/roundstart_celebrate))
 	GLOB.maintenance_loot += list(
 		list(
@@ -552,7 +530,7 @@
 /datum/holiday/friday_thirteenth
 	name = "Friday the 13th"
 
-/datum/holiday/friday_thirteenth/shouldCelebrate(dd, mm, yy, ww, ddd)
+/datum/holiday/friday_thirteenth/shouldCelebrate(dd, mm, yyyy, ddd)
 	if(dd == 13 && ddd == FRIDAY)
 		return TRUE
 	return FALSE
@@ -566,7 +544,7 @@
 	var/const/days_early = 1 //to make editing the holiday easier
 	var/const/days_extra = 1
 
-/datum/holiday/easter/shouldCelebrate(dd, mm, yy, ww, ddd)
+/datum/holiday/easter/shouldCelebrate(dd, mm, yyyy, ddd)
 	if(!begin_month)
 		current_year = text2num(time2text(world.timeofday, "YYYY"))
 		var/list/easterResults = EasterDate(current_year+year_offset)
@@ -592,6 +570,7 @@
 	return ..()
 
 /datum/holiday/easter/celebrate()
+	. = ..()
 	GLOB.maintenance_loot += list(
 		list(
 			/obj/item/food/egg/loaded = 15,
@@ -625,12 +604,20 @@
 /datum/holiday/hotdogday/greet()
 	return "Happy National Hot Dog Day!"
 
+/datum/holiday/indigenous //Indigenous Peoples' Day from Earth!
+	name = "International Day of the World's Indigenous Peoples"
+	begin_month = AUGUST
+	begin_day = 9
+
+/datum/holiday/indigenous/getStationPrefix()
+	return pick("Endangered language", "Word", "Language", "Language revitalization", "Potato", "Corn")
+
 /datum/holiday/hebrew
 	name = "If you see this the Hebrew holiday calendar code is broken"
 
-/datum/holiday/hebrew/shouldCelebrate(dd, mm, yy, ww, ddd)
-	var/datum/foreign_calendar/hebrew/cal = new
-	return ..(cal.dd, cal.mm, cal.yy, ww, ddd)
+/datum/holiday/hebrew/shouldCelebrate(dd, mm, yyyy, ddd)
+	var/datum/foreign_calendar/hebrew/cal = new(yyyy, mm, dd)
+	return ..(cal.dd, cal.mm, cal.yyyy, ddd)
 
 /datum/holiday/hebrew/hanukkah
 	name = "Hanukkah"

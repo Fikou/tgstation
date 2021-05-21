@@ -41,6 +41,7 @@
 	growing_icon = 'icons/obj/hydroponics/growing_flowers.dmi'
 	genes = list()
 	mutatelist = list()
+	reagents_add = list(/datum/reagent/toxin/formaldehyde = 0.1)
 
 /obj/item/seeds/starthistle/corpse_flower/pre_attack(obj/machinery/hydroponics/I)
 	if(istype(I, /obj/machinery/hydroponics))
@@ -62,7 +63,6 @@
 	stank.gases[/datum/gas/miasma][MOLES] = (yield + 6)*3.5*MIASMA_CORPSE_MOLES*delta_time // this process is only being called about 2/7 as much as corpses so this is 12-32 times a corpses
 	stank.temperature = T20C // without this the room would eventually freeze and miasma mining would be easier
 	T.assume_air(stank)
-	T.air_update_turf()
 
 //Galaxy Thistle
 /obj/item/seeds/galaxythistle
@@ -96,7 +96,7 @@
 	name = "galaxythistle flower head"
 	desc = "This spiny cluster of florets reminds you of the highlands."
 	icon_state = "galaxythistle"
-	bite_consumption_mod = 3
+	bite_consumption_mod = 2
 	foodtypes = VEGETABLES
 	wine_power = 35
 	tastes = list("thistle" = 2, "artichoke" = 1)
@@ -127,7 +127,6 @@
 	name = "cabbage"
 	desc = "Ewwwwwwwwww. Cabbage."
 	icon_state = "cabbage"
-	bite_consumption_mod = 2
 	foodtypes = VEGETABLES
 	wine_power = 20
 
@@ -206,7 +205,7 @@
 	desc = "You think you can hear the hissing of a tiny fuse."
 	icon_state = "cherry_bomb"
 	seed = /obj/item/seeds/cherry/bomb
-	bite_consumption_mod = 2
+	bite_consumption_mod = 3
 	max_volume = 125 //Gives enough room for the gunpowder at max potency
 	max_integrity = 40
 	wine_power = 80
@@ -253,7 +252,7 @@
 	name = "aloe"
 	desc = "Cut leaves from the aloe plant."
 	icon_state = "aloe"
-	bite_consumption_mod = 5
+	bite_consumption_mod = 3
 	foodtypes = VEGETABLES
 	juice_results = list(/datum/reagent/consumable/aloejuice = 0)
 	distill_reagent = /datum/reagent/consumable/ethanol/tequila
@@ -261,3 +260,35 @@
 /obj/item/food/grown/aloe/microwave_act(obj/machinery/microwave/M)
 	new /obj/item/stack/medical/aloe(drop_location(), 2)
 	qdel(src)
+
+/obj/item/seeds/shrub
+	name = "pack of shrub seeds"
+	desc = "These seeds grow into hedge shrubs."
+	icon_state = "seed-shrub"
+	species = "shrub"
+	plantname = "Shrubbery"
+	product = /obj/item/grown/shrub
+	lifespan = 40
+	endurance = 30
+	maturation = 4
+	production = 6
+	yield = 2
+	instability = 10
+	growthstages = 3
+	reagents_add = list()
+
+/obj/item/grown/shrub
+	seed = /obj/item/seeds/shrub
+	name = "shrub"
+	desc = "A shrubbery, it looks nice and it was only a few credits too. Plant it on the ground to grow a hedge, shrubbing skills not required."
+	icon_state = "shrub"
+
+/obj/item/grown/shrub/attack_self(mob/user)
+	var/turf/player_turf = get_turf(user)
+	if(player_turf?.is_blocked_turf(TRUE))
+		return FALSE
+	user.visible_message("<span class='danger'>[user] begins to plant \the [src]...</span>")
+	if(do_after(user, 8 SECONDS, target = user.drop_location(), progress = TRUE))
+		new /obj/structure/fluff/hedge/opaque(user.drop_location())
+		to_chat(user, "<span class='notice'>You plant \the [src].</span>")
+		qdel(src)

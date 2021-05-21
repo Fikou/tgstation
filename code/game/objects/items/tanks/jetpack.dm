@@ -20,10 +20,15 @@
 	ion_trail.auto_process = FALSE
 	ion_trail.set_up(src)
 
+/obj/item/tank/jetpack/Destroy()
+	QDEL_NULL(ion_trail)
+	return ..()
+
 /obj/item/tank/jetpack/populate_gas()
 	if(gas_type)
-		air_contents.assert_gas(gas_type)
-		air_contents.gases[gas_type][MOLES] = ((6 * ONE_ATMOSPHERE) * volume / (R_IDEAL_GAS_EQUATION * T20C))
+		var/datum/gas_mixture/our_mix = return_air()
+		our_mix.assert_gas(gas_type)
+		our_mix.gases[gas_type][MOLES] = ((6 * ONE_ATMOSPHERE) * volume / (R_IDEAL_GAS_EQUATION * T20C))
 
 /obj/item/tank/jetpack/ui_action_click(mob/user, action)
 	if(istype(action, /datum/action/item_action/toggle_jetpack))
@@ -59,6 +64,7 @@
 	ion_trail.start()
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, .proc/move_react)
 	RegisterSignal(user, COMSIG_MOVABLE_PRE_MOVE, .proc/pre_move_react)
+	RegisterSignal(user, COMSIG_MOVABLE_SPACEMOVE, .proc/spacemove_react)
 	if(full_speed)
 		user.add_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
@@ -69,6 +75,7 @@
 	ion_trail.stop()
 	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
+	UnregisterSignal(user, COMSIG_MOVABLE_SPACEMOVE)
 	user.remove_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
 /obj/item/tank/jetpack/proc/move_react(mob/user)
@@ -78,7 +85,7 @@
 		return
 	if(!isturf(user.loc))//You can't use jet in nowhere or from mecha/closet
 		return
-	if(!(user.is_flying() || user.is_floating()) || user.buckled)//You don't want use jet in gravity or while buckled.
+	if(!(user.movement_type & FLOATING) || user.buckled)//You don't want use jet in gravity or while buckled.
 		return
 	if(user.pulledby)//You don't must use jet if someone pull you
 		return
@@ -90,12 +97,18 @@
 /obj/item/tank/jetpack/proc/pre_move_react(mob/user)
 	ion_trail.oldposition = get_turf(src)
 
+/obj/item/tank/jetpack/proc/spacemove_react(mob/user, movement_dir)
+	SIGNAL_HANDLER
+
+	if(on && (movement_dir || stabilizers))
+		return COMSIG_MOVABLE_STOP_SPACEMOVE
+
 /obj/item/tank/jetpack/proc/allow_thrust(num, mob/living/user)
 	if((num < 0.005 || air_contents.total_moles() < num))
 		turn_off(user)
 		return
 
-	var/datum/gas_mixture/removed = air_contents.remove(num)
+	var/datum/gas_mixture/removed = remove_air(num)
 	if(removed.total_moles() < 0.005)
 		turn_off(user)
 		return
@@ -191,14 +204,14 @@
 	slot_flags = null
 	gas_type = null
 	full_speed = FALSE
-	var/datum/gas_mixture/temp_air_contents
+	var/datum/gas_mixture/tempair_contents
 	var/obj/item/tank/internals/tank = null
 	var/mob/living/carbon/human/cur_user
 
 /obj/item/tank/jetpack/suit/Initialize()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
-	temp_air_contents = air_contents
+	tempair_contents = air_contents
 
 /obj/item/tank/jetpack/suit/attack_self()
 	return
@@ -219,14 +232,14 @@
 		return
 	var/mob/living/carbon/human/H = user
 	tank = H.s_store
-	air_contents = tank.air_contents
+	air_contents = tank.return_air()
 	START_PROCESSING(SSobj, src)
 	cur_user = user
 	..()
 
 /obj/item/tank/jetpack/suit/turn_off(mob/user)
 	tank = null
-	air_contents = temp_air_contents
+	air_contents = tempair_contents
 	STOP_PROCESSING(SSobj, src)
 	cur_user = null
 	..()
@@ -239,7 +252,8 @@
 	if(!tank || tank != H.s_store)
 		turn_off(cur_user)
 		return
-	..()
+	excited = TRUE
+	return ..()
 
 
 //Return a jetpack that the mob can use
