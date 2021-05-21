@@ -490,3 +490,74 @@
 	max_resources = 150
 	resources = 0
 	hud_type = /datum/hud/swarmer/architect
+
+/mob/living/simple_animal/hostile/swarmer/bulwark
+	name = "swarmer bulwark"
+	icon_state = "swarmer"
+	icon_living = "swarmer"
+	maxHealth = 80
+	health = 80
+	rapid = 2
+	max_resources = 32
+	resources = 0
+	hud_type = /datum/hud/swarmer
+	speed = 1
+	var/is_transport = FALSE
+	var/has_shield = FALSE
+	var/shield_cost = 8
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/AttackingTarget()
+	if(target == src)
+		if(is_transport)
+			to_chat(src, "<span class='warning'>You begin shifting into combat mode...</span>")
+			if(do_after(src, 2 SECONDS, target = src))
+				CombatMode()
+		else if(has_shield)
+			to_chat(src, "<span class='warning'>You can't shift into transport mode without disabling your shield first.</span>")
+		else
+			to_chat(src, "<span class='warning'>You begin shifting into transport mode...</span>")
+			if(do_after(src, 2 SECONDS, target = src))
+				TransportMode()
+		return
+	. = ..()
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/ranged_secondary_attack(atom/target, modifiers)
+	if(is_transport)
+		create_structure(/obj/structure/swarmer/trap, 4)
+	else
+		if(has_shield)
+			to_chat(src, "<span class='warning'>You begin to disable your shield...</span>")
+			if(do_after(src, 2 SECONDS, target = src))
+				ToggleShield()
+		else
+			if(resources < shield_cost)
+				to_chat(src, "<span class='warning'>You do not have the necessary resources to deploy your shield!</span>")
+				return
+			to_chat(src, "<span class='warning'>You begin to enable your shield...</span>")
+			if(do_after(src, 2 SECONDS, target = src))
+				ToggleShield()
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/bullet_act(obj/projectile/P, def_zone, piercing_hit = FALSE)
+	if(has_shield)
+		//Put a visible flavor message here
+		return
+	. = ..()
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/emp_act()
+	. = ..()
+	has_shield = FALSE
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/proc/TransportMode()
+	is_transport = TRUE
+	ranged = FALSE
+	set_varspeed(-0.3)
+	icon_state = "swarmer_melee"
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/proc/CombatMode()
+	is_transport = FALSE
+	ranged = TRUE
+	set_varspeed(2)
+	icon_state = "swarmer"
+
+/mob/living/simple_animal/hostile/swarmer/bulwark/proc/ToggleShield()
+	has_shield = !has_shield
