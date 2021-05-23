@@ -22,20 +22,12 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.5
-<<<<<<< HEAD
-	light_system = MOVABLE_LIGHT_DIRECTIONAL
-	COOLDOWN_DECLARE(cooldown_mod_move)
-	/// How the MOD and things connected to it look
-	var/theme = "standard"
-	/// If the suit is deployed and turned on
-=======
 	alternate_worn_layer = BODY_FRONT_LAYER
 	/// The MOD's theme, decides on some stuff like armor and statistics.
 	var/datum/mod_theme/theme = /datum/mod_theme
 	/// Looks of the MOD.
 	var/skin = "standard"
 	/// If the suit is deployed and turned on.
->>>>>>> fikou/gitpullupstreammaster
 	var/active = FALSE
 	/// If the suit wire/module hatch is open.
 	var/open = FALSE
