@@ -62,20 +62,21 @@
 		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 		core = I
 		icon_to_use = "core"
-
+		return
 	if(core)
 		if(I.tool_behaviour == TOOL_SCREWDRIVER) //Construct
 			if(I.use_tool(src, user, 0, volume=30))
 				to_chat(user, "<span class='notice'>You screw [I] into [src].</span>")
 				screwed_core = TRUE
 				icon_to_use = "screwed_core"
+				return
 		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				core.forceMove(drop_location())
 				to_chat(user, "<span class='notice'>You remove [core] from [src].</span>")
 				core = null
 				icon_to_use = null
-
+				return
 	if(screwed_core)
 		if(istype(I, /obj/item/mod/construction/helmet)) //Construct
 			if(!user.transferItemToLoc(I, src))
@@ -84,11 +85,13 @@
 			to_chat(user, "<span class='notice'>You fit [I] onto [src].</span>")
 			helmet = I
 			icon_to_use = "helmet"
+			return
 		else if(I.tool_behaviour == TOOL_SCREWDRIVER) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				to_chat(user, "<span class='notice'>You unscrew the core from [src].</span>")
 				screwed_core = FALSE
 				icon_to_use = "core"
+				return
 
 	if(helmet)
 		if(istype(I, /obj/item/mod/construction/chestplate)) //Construct
@@ -98,12 +101,14 @@
 			to_chat(user, "<span class='notice'>You fit [I] onto [src].</span>")
 			chestplate = I
 			icon_to_use = "chestplate"
+			return
 		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				helmet.forceMove(drop_location())
 				to_chat(user, "<span class='notice'>You pry [helmet] from [src].</span>")
 				helmet = null
 				icon_to_use = "screwed_core"
+				return
 
 	if(chestplate)
 		if(istype(I, /obj/item/mod/construction/gauntlets)) //Construct
@@ -113,12 +118,14 @@
 			to_chat(user, "<span class='notice'>You fit [I] onto [src].</span>")
 			gauntlets = I
 			icon_to_use = "gauntlets"
+			return
 		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				chestplate.forceMove(drop_location())
 				to_chat(user, "<span class='notice'>You pry [chestplate] from [src].</span>")
 				chestplate = null
 				icon_to_use = "helmet"
+				return
 
 	if(gauntlets)
 		if(istype(I, /obj/item/mod/construction/boots)) //Construct
@@ -128,12 +135,14 @@
 			to_chat(user, "<span class='notice'>You fit [I] onto [src].</span>")
 			boots = I
 			icon_to_use = "boots"
+			return
 		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				gauntlets.forceMove(drop_location())
 				to_chat(user, "<span class='notice'>You pry [gauntlets] from [src].</span>")
 				gauntlets = null
 				icon_to_use = "chestplate"
+				return
 
 	if(boots)
 		if(I.tool_behaviour == TOOL_WRENCH) //Construct
@@ -141,12 +150,14 @@
 				to_chat(user, "<span class='notice'>You wrench together the assembly.</span>")
 				wrenched_assembly = TRUE
 				icon_to_use = "wrenched_assembly"
+				return
 		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				boots.forceMove(drop_location())
 				to_chat(user, "<span class='notice'>You pry [boots] from [src].</span>")
 				boots = null
 				icon_to_use = "gauntlets"
+				return
 
 	if(wrenched_assembly)
 		if(I.tool_behaviour == TOOL_SCREWDRIVER) //Construct
@@ -154,11 +165,13 @@
 				to_chat(user, "<span class='notice'>You screw together the assembly.</span>")
 				screwed_assembly = TRUE
 				icon_to_use = "screwed_assembly"
+				return
 		else if(I.tool_behaviour == TOOL_WRENCH) //Deconstruct
 			if(I.use_tool(src, user, 0, volume=30))
 				to_chat(user, "<span class='notice'>You unwrench the assembled parts.</span>")
 				wrenched_assembly = FALSE
 				icon_to_use = "boots"
+				return
 
 	if(screwed_assembly)
 		if(istype(I, /obj/item/mod/construction/armor)) //Construct
@@ -176,6 +189,7 @@
 				to_chat(user, "<span class='notice'>You unscrew the assembled parts.</span>")
 				screwed_assembly = FALSE
 				icon_to_use = "wrenched_assembly"
+				return
 	update_icon_state()
 
 /obj/item/mod/construction/shell/update_icon_state()

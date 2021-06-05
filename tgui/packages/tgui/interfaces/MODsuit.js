@@ -178,8 +178,10 @@ const InfoSection = (props, context) => {
         {modules.map(module => (
           !!module.id && (
             <Stack.Item key={module.id}>
-              {!active && <LockedModule />}
-              {ID2MODULE[module.id]()}
+              <Collapsible title={module.name}>
+                {!active && <LockedModule />}
+                {ID2MODULE[module.id]()}
+              </Collapsible>
             </Stack.Item>
           )
         ))}
@@ -347,17 +349,21 @@ const RadCounter = (props, context) => {
     usercontam,
   } = data;
   return (
-    <Stack fill vertical>
+    <Stack fill>
       <Stack.Item>
-        {active && userrads}
+        <Section title="Radiation Magnitude">
+          {active && userrads ? userrads : "N/A"}
+        </Section>
       </Stack.Item>
       <Stack.Item>
-        {active && usercontam}
+        <Section title="Radiation Contamination">
+          {active && usercontam ? usercontam : "N/A"}
+        </Section>
       </Stack.Item>
       <Stack.Item>
         <RoundGauge
           size={3}
-          value={active ? radcount : 0}
+          value={active ? radcount : "N/A"}
           minValue={0}
           maxValue={1500}
           alertAfter={400}

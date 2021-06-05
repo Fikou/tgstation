@@ -199,6 +199,9 @@
 	var/mutable_appearance/module_icon = mutable_appearance('icons/mob/mod.dmi', used_overlay)
 	. += module_icon
 
+///*********************** */
+/// MODsuit Modifications.
+///*********************** */
 /obj/item/mod/module/storage
 	name = "MOD storage module"
 	desc = "A module using nanotechnology to fit a storage inside of the MOD."
