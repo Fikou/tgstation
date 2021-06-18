@@ -676,6 +676,7 @@
 	active_power_cost = 15
 	incompatible_modules = list(/obj/item/mod/module/flashlight)
 	cooldown_time = 0.5 SECONDS
+	configurable = TRUE
 	overlay_state_inactive = "module_light"
 	light_system = MOVABLE_LIGHT_DIRECTIONAL
 	light_color = COLOR_WHITE
@@ -730,6 +731,37 @@
 				mod.wearer.update_inv_back()
 		if("light_range")
 			light_range = clamp(value, min_range, max_range)
+
+/obj/item/mod/module/flashlight/ui_interact(mob/user, datum/tgui/ui)
+	. = ..()
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "ModFlashlight", name)
+		ui.open()
+
+/obj/item/mod/module/flashlight/ui_data(mob/user)
+	var/data = list()
+
+	data["light_on"] = light_on
+	data["light_color"] = light_color
+	return data
+
+/obj/item/mod/module/flashlight/ui_act(action, list/params)
+	. = ..()
+	switch(action)
+		if("light_color")
+			var/mob/user = usr
+			var/new_color
+			while(!new_color)
+				new_color = input(user, "Choose a new color for [src]'s flashlight.", "Light Color",light_color) as color|null
+				if(!new_color)
+					return
+				if(color_hex2num(new_color) < 200) //Colors too dark are rejected
+					to_chat(user, "<span class='warning'>That color is too dark! Choose a lighter one.</span>")
+					new_color = null
+				light_color =  new_color
+				generate_worn_overlay()
+			return
 
 /obj/item/mod/module/science_scanner
 	name = "MOD science scanner module"
