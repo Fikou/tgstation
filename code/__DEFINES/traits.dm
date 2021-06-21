@@ -99,9 +99,6 @@
 Remember to update _globalvars/traits.dm if you're adding/removing/renaming traits.
 */
 
-/// part of eventmode
-#define TRAIT_EVENT "trait_event"
-
 //mob traits
 /// Forces the user to stay unconscious.
 #define TRAIT_KNOCKEDOUT "knockedout"
