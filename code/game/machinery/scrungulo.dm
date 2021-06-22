@@ -708,24 +708,32 @@
 	desc = "Wow, it's almost like the hit 2011 video game \"Portal 2\"!"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "hardlight"
+	base_icon_state = "hardlight"
+	smoothing_flags = NONE
+	canSmoothWith = null
+	smoothing_groups = null
 
 /obj/structure/terminal
 	name = "Instruction Terminal"
 	desc = "<span class='terminal'>SINGULARITY GENERATOR INSTRUCTIONS</span>"
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "terminal"
-	maptext_y = 32
+	anchored = TRUE
+	density = TRUE
+	maptext_x = -6
+	maptext_y = 26
+	maptext_width = 48
 	maptext = "<span class='maptext'><font color='red'>READ ME</font></span>"
 
 /obj/structure/terminal/examine(mob/user)
 	. = ..()
-	. += "<span class='terminal'>1. </span>"
-	. += "<span class='terminal'>2. </span>"
-	. += "<span class='terminal'>3. </span>"
-	. += "<span class='terminal'>4. </span>"
-	. += "<span class='terminal'>5. </span>"
-	. += "<span class='terminal'>6. </span>"
-	. += "<span class='terminal'>7. </span>"
+	. += "<span class='terminal'>1. Set up the particle accelerator by arranging the parts in a T shape with the particle emitters facing the generator.</span>"
+	. += "<span class='terminal'>2. Attach the control box to the acceleration chamber.</span>"
+	. += "<span class='terminal'>3. Anchor, wire and screw the parts of the accelerator.</span>"
+	. += "<span class='terminal'>4. Set up the radiation collectors by putting filled plasma tanks in them.</span>"
+	. += "<span class='terminal'>5. Set up the field generators and power them with emitters.</span>"
+	. += "<span class='terminal'>6. Configure and turn on the particle accelerator.</span>"
+	. += "<span class='terminal'>7. Don't die!</span>"
 
 #undef PA_CONSTRUCTION_UNSECURED
 #undef PA_CONSTRUCTION_UNWIRED
