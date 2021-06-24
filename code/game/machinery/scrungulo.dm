@@ -703,6 +703,14 @@
 		else
 			energy -= delta_time * 0.5
 
+/obj/machinery/the_singularitygen/red
+	creation_type = /obj/singularity/red
+	anchored = TRUE
+
+/obj/machinery/the_singularitygen/green
+	creation_type = /obj/singularity/green
+	anchored = TRUE
+
 /turf/open/floor/glass/hardlight
 	name = "hardlight bridge"
 	desc = "Wow, it's almost like the hit 2011 video game \"Portal 2\"!"
@@ -719,7 +727,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "terminal"
 	anchored = TRUE
-	density = TRUE
+	layer = FLY_LAYER
 	maptext_x = -6
 	maptext_y = 26
 	maptext_width = 48
@@ -730,10 +738,13 @@
 	. += "<span class='terminal'>1. Set up the particle accelerator by arranging the parts in a T shape with the particle emitters facing the generator.</span>"
 	. += "<span class='terminal'>2. Attach the control box to the acceleration chamber.</span>"
 	. += "<span class='terminal'>3. Anchor, wire and screw the parts of the accelerator.</span>"
-	. += "<span class='terminal'>4. Set up the radiation collectors by putting filled plasma tanks in them.</span>"
-	. += "<span class='terminal'>5. Set up the field generators and power them with emitters.</span>"
-	. += "<span class='terminal'>6. Configure and turn on the particle accelerator.</span>"
-	. += "<span class='terminal'>7. Don't die!</span>"
+	. += "<span class='terminal'>4. Anchor and power the PACmans.</span>"
+	. += "<span class='terminal'>5. Weld the field generators and power them with emitters.</span>"
+	. += "<span class='terminal'>6. Use your team beacon in the other team's room to make the singularity home on it.</span>"
+	. += "<span class='terminal'>7. Configure and turn on the particle accelerator.</span>"
+	. += "<span class='terminal'>8. Once the singularity reaches the third stage, turn off the emitters.</span>"
+	. += "<span class='terminal'>9. Hide in the locker shelter.</span>"
+	. += "<span class='terminal'>10. Don't die!</span>"
 
 #undef PA_CONSTRUCTION_UNSECURED
 #undef PA_CONSTRUCTION_UNWIRED
