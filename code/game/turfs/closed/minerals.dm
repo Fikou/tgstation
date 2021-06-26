@@ -22,6 +22,8 @@
 	var/last_act = 0
 	var/scan_state = "" //Holder for the image we display when we're pinged by a mining scanner
 	var/defer_change = 0
+	/// Time needed to break the rock
+	var/break_time = 4 SECONDS
 
 /turf/closed/mineral/Initialize()
 	. = ..()
@@ -67,12 +69,12 @@
 		if (!isturf(T))
 			return
 
-		if(last_act + (40 * I.toolspeed) > world.time)//prevents message spam
+		if(last_act + (break_time * I.toolspeed) > world.time)//prevents message spam
 			return
 		last_act = world.time
 		to_chat(user, "<span class='notice'>You start picking...</span>")
 
-		if(I.use_tool(src, user, 40, volume=50))
+		if(I.use_tool(src, user, break_time, volume=50))
 			if(ismineralturf(src))
 				to_chat(user, "<span class='notice'>You finish cutting into the rock.</span>")
 				gets_drilled(user, TRUE)
@@ -491,6 +493,12 @@
 	icon = 'icons/turf/mining.dmi'
 	smooth_icon = 'icons/turf/walls/red_wall.dmi'
 	base_icon_state = "red_wall"
+
+/turf/closed/mineral/asteroid/porous
+	name = "porous rock"
+	desc = "This rock is filled with pockets of breathable air, which interfere with the efficiency of some high speed mining equipment."
+	baseturfs = /turf/open/floor/plating/asteroid
+	break_time = 5 SECONDS
 
 //GIBTONITE
 
