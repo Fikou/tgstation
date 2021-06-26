@@ -6,7 +6,7 @@
 	"shuttles": {
 		"cargo": "cargo_box",
 		"ferry": "ferry_fancy",
-		"whiteship": "whiteship_box",
+		"whiteship": "whiteship_tram",
 		"emergency": "emergency_tram"
 	},
 	"traits": [
@@ -20,5 +20,13 @@
 			"Baseturf": "/turf/open/openspace",
 			"Linkage": "Cross"
 		}
-	]
+	],
+	"job_changes": {
+		"cook": {
+			"additional_cqc_areas": ["/area/service/kitchen/diner"]
+		},
+		"captain": {
+			"special_charter": "asteroid"
+		}
+	}
 }

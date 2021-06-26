@@ -1,4 +1,4 @@
-/datum/config_entry/flag/sql_enabled	// for sql switching
+/datum/config_entry/flag/sql_enabled // for sql switching
 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/string/address
@@ -48,3 +48,6 @@
 	config_entry_value = 50
 	min_val = 1
 
+/datum/config_entry/number/max_concurrent_queries
+	config_entry_value = 25
+	min_val = 1

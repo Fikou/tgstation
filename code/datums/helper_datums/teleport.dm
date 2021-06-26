@@ -16,6 +16,7 @@
 		/obj/effect/dummy/chameleon,
 		/obj/effect/wisp,
 		/obj/effect/mob_spawn,
+		/obj/effect/immovablerod,
 		))
 	if(delete_atoms[teleatom.type])
 		qdel(teleatom)
@@ -37,7 +38,7 @@
 				precision = max(rand(1,100)*bagholding.len,100)
 				if(isliving(teleatom))
 					var/mob/living/MM = teleatom
-					to_chat(MM, "<span class='warning'>The bluespace interface on your bag of holding interferes with the teleport!</span>")
+					to_chat(MM, span_warning("The bluespace interface on your bag of holding interferes with the teleport!"))
 
 			// if effects are not specified and not explicitly disabled, sparks
 			if ((!effectin || !effectout) && !no_effects)
@@ -166,7 +167,7 @@
 	if(!precision)
 		return list(center)
 	var/list/posturfs = list()
-	for(var/turf/T in range(precision,center))
+	for(var/turf/T as anything in RANGE_TURFS(precision,center))
 		if(T.is_transition_turf())
 			continue // Avoid picking these.
 		var/area/A = T.loc

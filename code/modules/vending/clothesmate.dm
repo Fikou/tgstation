@@ -71,7 +71,7 @@
 		            /obj/item/clothing/under/rank/captain/suit/skirt = 2,
 		            /obj/item/clothing/under/rank/civilian/head_of_personnel/suit/skirt = 2,
 		            /obj/item/clothing/suit/jacket = 2,
-					/obj/item/clothing/suit/hooded/wintercoat = 2,
+					/obj/item/clothing/suit/hooded/wintercoat/custom = 2,
 		            /obj/item/clothing/suit/jacket/puffer/vest = 2,
 		            /obj/item/clothing/suit/jacket/puffer = 2,
 		            /obj/item/clothing/suit/jacket/letterman = 2,
@@ -119,7 +119,9 @@
 		              /obj/item/clothing/suit/jacket/letterman_syndie = 1,
 		              /obj/item/clothing/under/costume/jabroni = 1,
 		              /obj/item/clothing/suit/vapeshirt = 1,
-		              /obj/item/clothing/under/costume/geisha = 1)
+		              /obj/item/clothing/under/costume/geisha = 1,
+					  /obj/item/clothing/under/rank/centcom/officer/replica = 1,
+					  /obj/item/clothing/under/rank/centcom/officer_skirt/replica = 1)
 	premium = list(/obj/item/clothing/under/suit/checkered = 1,
 		           /obj/item/clothing/head/mailman = 1,
 		           /obj/item/clothing/under/misc/mailman = 1,
