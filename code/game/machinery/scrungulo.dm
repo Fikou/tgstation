@@ -740,10 +740,10 @@
 	. += "<span class='terminal'>3. Anchor, wire and screw the parts of the accelerator.</span>"
 	. += "<span class='terminal'>4. Anchor and power the PACmans.</span>"
 	. += "<span class='terminal'>5. Weld the field generators and power them with emitters.</span>"
-	. += "<span class='terminal'>6. Use your team beacon in the other team's room to make the singularity home on it.</span>"
-	. += "<span class='terminal'>7. Configure and turn on the particle accelerator.</span>"
-	. += "<span class='terminal'>8. Once the singularity reaches the third stage, turn off the emitters.</span>"
-	. += "<span class='terminal'>9. Hide in the locker shelter.</span>"
+	. += "<span class='terminal'>6. Configure and turn on the particle accelerator.</span>"
+	. += "<span class='terminal'>7. Reach stage three, the further objectives are optional.</span>"
+	. += "<span class='terminal'>8. Use your team beacon in the other team's room to make the singularity home on it.</span>"
+	. += "<span class='terminal'>9. Turn off the emitters and hide in the locker shelter.</span>"
 	. += "<span class='terminal'>10. Don't die!</span>"
 
 #undef PA_CONSTRUCTION_UNSECURED
@@ -751,3 +751,79 @@
 #undef PA_CONSTRUCTION_PANEL_OPEN
 #undef PA_CONSTRUCTION_COMPLETE
 
+GLOBAL_LIST_EMPTY(feud_buttons)
+
+/obj/structure/feudbutton
+	name = "big red button"
+	desc = "A big, plastic red button."
+	icon = 'icons/obj/assemblies.dmi'
+	icon_state = "bigred"
+	pixel_y = 4
+	anchored = TRUE
+	resistance_flags = INDESTRUCTIBLE
+	light_color = LIGHT_COLOR_FLARE
+	var/obj/structure/feudsign/sign
+
+/obj/structure/feudbutton/Initialize()
+	. = ..()
+	feud_buttons |= src
+
+/obj/structure/feudbutton/Destroy()
+	. = ..()
+	feud_buttons &= ~src
+
+/obj/structure/feudbutton/attack_hand(mob/living/user)
+	. = ..()
+	if(!sign.button_ready)
+		return
+	sign.button_ready = FALSE
+	playsound(src, 'sound/machines/buzz-sigh.ogg', 100, FALSE)
+	balloon_alert_to_viewers("ping!")
+	light_range = 3
+	sleep(0.3 SECONDS)
+	light_range = 0
+
+/obj/structure/feudsign
+	name = "feud board"
+	desc = "6 answers on the board."
+	icon = 'icons/obj/status_display.dmi'
+	icon_state = "frame"
+	anchored = TRUE
+	var/button_ready = TRUE
+
+/obj/structure/feudsign/Initialize()
+	. = ..()
+	var/button = new /obj/item/feudcontrol(get_turf(src))
+	button.sign = src
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/feudsign/LateInitialize()
+	. = ..()
+	for(var/obj/structure/feudbutton/button in GLOB.feud_buttons)
+	button.sign = src
+
+/obj/structure/feudsign/proc/get_input(input)
+	add_overlay(input)
+	if(input == "right")
+		playsound(src, 'sound/machines/ping.ogg', 100, FALSE)
+	if(input == "wrong")
+		playsound(src, 'sound/machines/scanbuzz.ogg', 100, FALSE)
+	addtimer(CALLBACK(src, .proc/reset), 1 SECONDS)
+
+/obj/structure/feudsign/proc/reset()
+	cut_overlays()
+	button_ready = TRUE
+
+/obj/item/feudcontrol
+	name = "feud control button"
+	icon_state = "timer-igniter0"
+	icon = 'icons/obj/assemblies.dmi'
+	var/obj/structure/feudsign/sign
+
+/obj/item/feudcontrol/attack_self(mob/user, modifiers)
+	. = ..()
+	sign.get_input("right")
+
+/obj/item/feudcontrol/attack_self_secondary(mob/user, modifiers)
+	. = ..()
+	sign.get_input("wrong")
