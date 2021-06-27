@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/open/space/basic,
-/area/space)
+/turf/open/floor/plating,
+/area/centcom/control)
 "ab" = (
 /turf/open/floor/iron,
 /area/centcom/control)
@@ -3387,6 +3387,17 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/control)
+"uY" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating/dark,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/centcom/control)
 "va" = (
 /turf/open/floor/iron/sepia,
 /area/centcom/control)
@@ -3937,6 +3948,16 @@
 	dir = 4
 	},
 /area/centcom/control)
+"xS" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/item/kirbyplants{
+	icon_state = "plant-10";
+	pixel_x = 3
+	},
+/turf/open/floor/wood,
+/area/centcom/control)
 "xU" = (
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -4468,17 +4489,6 @@
 	dir = 1
 	},
 /turf/open/floor/iron/grimy,
-/area/centcom/control)
-"BC" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/thinplating/dark,
-/obj/effect/turf_decal/siding/thinplating/dark{
-	dir = 1
-	},
-/turf/open/floor/plating,
 /area/centcom/control)
 "BE" = (
 /obj/effect/turf_decal/siding/wood/corner{
@@ -7002,9 +7012,6 @@
 	},
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron/grimy,
-/area/centcom/control)
-"QY" = (
-/turf/open/floor/plating,
 /area/centcom/control)
 "QZ" = (
 /obj/structure/chair/comfy/shuttle{
@@ -24757,7 +24764,7 @@ ky
 va
 va
 va
-aa
+va
 Mu
 Mu
 Rs
@@ -25787,11 +25794,11 @@ va
 va
 Mu
 Vr
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 ng
 Mu
 ex
@@ -25866,11 +25873,11 @@ ex
 fO
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Mu
 va
@@ -26044,11 +26051,11 @@ va
 va
 Mu
 Vr
-QY
+aa
 cz
 cz
 cz
-QY
+aa
 ng
 ga
 ex
@@ -26123,11 +26130,11 @@ ex
 fO
 ga
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Mu
 va
@@ -26380,11 +26387,11 @@ iu
 fO
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 UD
 va
@@ -26637,11 +26644,11 @@ ex
 fO
 ga
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Py
 va
@@ -26894,11 +26901,11 @@ iu
 Kw
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 qi
 Py
 va
@@ -27151,11 +27158,11 @@ ex
 fO
 ga
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Py
 va
@@ -27408,11 +27415,11 @@ ex
 fO
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Py
 va
@@ -27665,11 +27672,11 @@ ex
 fO
 ga
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 qi
 Py
 va
@@ -27922,11 +27929,11 @@ iu
 fO
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Py
 va
@@ -28179,11 +28186,11 @@ ex
 fO
 ga
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 HP
 va
@@ -28357,11 +28364,11 @@ Mq
 qV
 Mu
 Vr
-QY
+aa
 cz
 cz
 cz
-QY
+aa
 ng
 Mu
 ex
@@ -28436,11 +28443,11 @@ TL
 fO
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Mu
 Hi
@@ -28614,11 +28621,11 @@ Mu
 ga
 Mu
 Vr
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 ng
 Mu
 cM
@@ -28693,11 +28700,11 @@ QN
 fO
 Mu
 ng
-QY
-QY
-QY
-QY
-QY
+aa
+aa
+aa
+aa
+aa
 Ni
 Mu
 ga
@@ -56370,11 +56377,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Mu
 Mu
@@ -56449,11 +56456,11 @@ Mu
 Mu
 Mu
 Vr
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 ng
 Mu
 zK
@@ -56627,11 +56634,11 @@ zK
 zK
 Mu
 ta
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 eA
 Mu
 an
@@ -56706,11 +56713,11 @@ cE
 fl
 Mu
 lm
-QY
+aa
 cz
 cz
 cz
-QY
+aa
 sG
 Mu
 zK
@@ -56884,11 +56891,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Py
 va
@@ -57141,11 +57148,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Py
 va
@@ -57398,11 +57405,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 qi
 Py
 va
@@ -57655,11 +57662,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Py
 va
@@ -57912,11 +57919,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Py
 va
@@ -58169,11 +58176,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 qi
 Py
 va
@@ -58426,11 +58433,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Py
 va
@@ -58683,11 +58690,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Py
 va
@@ -58940,11 +58947,11 @@ zK
 zK
 Mu
 ta
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 eA
 Mu
 Xa
@@ -59019,11 +59026,11 @@ va
 tA
 Mu
 lm
-QY
+aa
 cz
 cz
 cz
-QY
+aa
 sG
 Mu
 zK
@@ -59197,11 +59204,11 @@ zK
 zK
 Mu
 ng
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 Ni
 Mu
 va
@@ -59276,11 +59283,11 @@ va
 va
 Mu
 Vr
-QY
+aa
 aM
-BC
+uY
 Ja
-QY
+aa
 ng
 Mu
 zK
@@ -59462,7 +59469,7 @@ ga
 Mu
 Mu
 rh
-eQ
+xS
 rh
 Mu
 xq

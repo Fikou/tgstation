@@ -779,9 +779,6 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 	sign.button_ready = FALSE
 	playsound(src, 'sound/machines/buzz-sigh.ogg', 100, FALSE)
 	balloon_alert_to_viewers("ping!")
-	light_range = 3
-	sleep(0.3 SECONDS)
-	light_range = 0
 
 /obj/structure/feudsign
 	name = "feud board"
