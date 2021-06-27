@@ -800,7 +800,7 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 /obj/structure/feudsign/LateInitialize()
 	. = ..()
 	for(var/obj/structure/feudbutton/button in GLOB.feud_buttons)
-	button.sign = src
+		button.sign = src
 
 /obj/structure/feudsign/proc/get_input(input)
 	add_overlay(input)
