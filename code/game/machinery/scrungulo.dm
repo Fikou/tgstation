@@ -766,11 +766,11 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 
 /obj/structure/feudbutton/Initialize()
 	. = ..()
-	feud_buttons |= src
+	GLOB.feud_buttons |= src
 
 /obj/structure/feudbutton/Destroy()
 	. = ..()
-	feud_buttons &= ~src
+	GLOB.feud_buttons &= ~src
 
 /obj/structure/feudbutton/attack_hand(mob/living/user)
 	. = ..()
@@ -793,7 +793,7 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 
 /obj/structure/feudsign/Initialize()
 	. = ..()
-	var/button = new /obj/item/feudcontrol(get_turf(src))
+	var/obj/item/feudcontrol/button = new /obj/item/feudcontrol(get_turf(src))
 	button.sign = src
 	return INITIALIZE_HINT_LATELOAD
 
