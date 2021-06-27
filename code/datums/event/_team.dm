@@ -57,7 +57,6 @@
 	var/datum/roster/the_roster = GLOB.global_roster
 	if(!the_roster)
 		CRASH("Tried querying to add member to a team, but there's no roster???")
-		return
 
 	if(!the_roster.active_contestants)
 		to_chat(user, span_warning("ERROR: No active eligible contestants. If you want to add someone who is eliminated, please un-eliminate them first."))

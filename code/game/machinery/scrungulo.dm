@@ -785,11 +785,12 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 
 /obj/structure/feudsign
 	name = "feud board"
-	desc = "6 answers on the board."
+	desc = "Holds the secrets of the universe."
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	anchored = TRUE
 	var/button_ready = TRUE
+	var/strike_counter = 0
 
 /obj/structure/feudsign/Initialize()
 	. = ..()
@@ -802,13 +803,20 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 	for(var/obj/structure/feudbutton/button in GLOB.feud_buttons)
 		button.sign = src
 
-/obj/structure/feudsign/proc/get_input(input)
-	add_overlay(input)
+/obj/structure/feudsign/proc/get_input(input, obj/item/feudcontrol/source)
+	if(!COOLDOWN_FINISHED(source, button_cd))
+		return
 	if(input == "right")
 		playsound(src, 'sound/machines/ping.ogg', 100, FALSE)
+		add_overlay("right")
 	if(input == "wrong")
+		strike_counter += 1
 		playsound(src, 'sound/machines/scanbuzz.ogg', 100, FALSE)
+		add_overlay("wrong[strike_counter]")
+		if(strike_counter == 3)
+			strike_counter = 0
 	addtimer(CALLBACK(src, .proc/reset), 1 SECONDS)
+	COOLDOWN_START(source, button_cd, 1.5 SECONDS)
 
 /obj/structure/feudsign/proc/reset()
 	cut_overlays()
@@ -818,12 +826,14 @@ GLOBAL_LIST_EMPTY(feud_buttons)
 	name = "feud control button"
 	icon_state = "timer-igniter0"
 	icon = 'icons/obj/assemblies.dmi'
+	w_class = WEIGHT_CLASS_TINY
 	var/obj/structure/feudsign/sign
+	COOLDOWN_DECLARE(button_cd)
 
 /obj/item/feudcontrol/attack_self(mob/user, modifiers)
 	. = ..()
-	sign.get_input("right")
+	sign.get_input("right", src)
 
 /obj/item/feudcontrol/attack_self_secondary(mob/user, modifiers)
 	. = ..()
-	sign.get_input("wrong")
+	sign.get_input("wrong", src)
