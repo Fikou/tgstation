@@ -1,7 +1,6 @@
 /obj/item/mod/module
 	name = "MOD module"
 	icon_state = "module"
-	interaction_flags_atom = NONE
 	/// If it can be removed
 	var/removable = TRUE
 	/// If it's passive, active or usable
@@ -95,12 +94,11 @@
 		mod.selected_module = src
 		if(device)
 			mod.wearer.put_in_hands(device)
-			to_chat(mod.wearer, "<span class='notice'>You extend [device].</span>")
+			balloon_alert(mod.wearer, "[device] extended")
 			RegisterSignal(mod.wearer, COMSIG_ATOM_EXITED, .proc/on_exit)
 		else
-			to_chat(mod.wearer, "<span class='notice'>You activate [src]. You can use the middle-mouse button or alt-click to use it.</span>")
-			RegisterSignal(mod.wearer, COMSIG_MOB_MIDDLECLICKON, .proc/on_select_use)
-			RegisterSignal(mod.wearer, COMSIG_MOB_ALTCLICKON, .proc/on_select_use)
+			balloon_alert(mod.wearer, "[src] activated, middle-click or alt-click to use")
+			RegisterSignal(mod.wearer, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), .proc/on_special_click)
 	COOLDOWN_START(src, cooldown_timer, cooldown_time)
 	mod.wearer.update_inv_back()
 	return TRUE
@@ -112,12 +110,11 @@
 		mod.selected_module = null
 		if(device)
 			mod.wearer.transferItemToLoc(device, src, TRUE)
-			to_chat(mod.wearer, "<span class='notice'>You retract [device].</span>")
+			balloon_alert(mod.wearer, "[device] retracted")
 			UnregisterSignal(mod.wearer, COMSIG_ATOM_EXITED)
 		else
-			to_chat(mod.wearer, "<span class='notice'>You deactivate [src].</span>")
-			UnregisterSignal(mod.wearer, COMSIG_MOB_MIDDLECLICKON)
-			UnregisterSignal(mod.wearer, COMSIG_MOB_ALTCLICKON)
+			balloon_alert(mod.wearer, "[src] deactivated")
+			UnregisterSignal(mod.wearer, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON))
 	mod.wearer.update_inv_back()
 	return TRUE
 
@@ -128,16 +125,21 @@
 	if(!drain_power(use_power_cost))
 		return FALSE
 	COOLDOWN_START(src, cooldown_timer, cooldown_time)
+	balloon_alert(mod.wearer, "cooling down...")
 	addtimer(CALLBACK(mod.wearer, /mob.proc/update_inv_back), cooldown_time)
 	mod.wearer.update_inv_back()
 	return TRUE
 
-/// Called when an activated module without a device is used with middle/alt click
-/obj/item/mod/module/proc/on_select_use(mob/source, atom/target)
-	SIGNAL_HANDLER
-
+/// Called when an activated module without a device is used
+/obj/item/mod/module/proc/on_select_use(atom/target)
 	if(!on_use())
-		return NONE
+		return FALSE
+	return TRUE
+
+/// Called when an activated module without a device is active and the user alt/middle-clicks
+/obj/item/mod/module/proc/on_special_click(mob/source, atom/target)
+	SIGNAL_HANDLER
+	on_select_use(target)
 	return COMSIG_MOB_CANCEL_CLICKON
 
 /// Called on the MODsuit's process
@@ -357,7 +359,7 @@
 /obj/item/mod/module/stealth/proc/unstealth(datum/source)
 	SIGNAL_HANDLER
 
-	to_chat(mod.wearer, "<span class='warning'>[src] gets discharged from contact!</span>")
+	to_chat(mod.wearer, span_warning("[src] gets discharged from contact!"))
 	do_sparks(2, TRUE, src)
 	drain_power(use_power_cost)
 	on_deactivation()
@@ -507,17 +509,17 @@
 	if(!holstered)
 		var/obj/item/gun/holding = mod.wearer.get_active_held_item()
 		if(!holding)
-			to_chat(mod.wearer, "<span class='notice'>You aren't holding anything to holster!</span>")
+			balloon_alert(mod.wearer, "nothing to holster!")
 			return
 		if(!istype(holding) || holding.w_class > WEIGHT_CLASS_BULKY || holding.weapon_weight > WEAPON_MEDIUM)
-			to_chat(mod.wearer, "<span class='notice'>[holding] doesn't fit in the holster!</span>")
+			balloon_alert(mod.wearer, "it doesn't fit!")
 			return
 		if(mod.wearer.transferItemToLoc(holding, src, FALSE, FALSE))
 			holstered = holding
-			to_chat(mod.wearer, "<span class='notice'>You holster [holstered].</span>")
+			balloon_alert(mod.wearer, "holstered")
 			playsound(src, 'sound/weapons/gun/revolver/empty.ogg', 100, TRUE)
 	else if(mod.wearer.put_in_active_hand(holstered, FALSE, TRUE))
-		to_chat(mod.wearer, "<span class='notice'>You draw [holstered].</span>")
+		balloon_alert(mod.wearer, "drawn")
 		holstered = null
 		playsound(src, 'sound/weapons/gun/revolver/empty.ogg', 100, TRUE)
 
@@ -541,12 +543,12 @@
 
 /obj/item/mod/module/tether/on_use()
 	if(mod.wearer.has_gravity(get_turf(src)))
-		to_chat(mod.wearer, "<span class='warning'>You need to be in a 0-G environment to use [src]!</span>")
+		balloon_alert(mod.wearer, "too much gravity!")
 		playsound(src, 'sound/weapons/gun/general/dry_fire.ogg', 25, TRUE)
 		return FALSE
 	return ..()
 
-/obj/item/mod/module/tether/on_select_use(mob/source, atom/target)
+/obj/item/mod/module/tether/on_select_use(atom/target)
 	. = ..()
 	if(!.)
 		return
@@ -750,3 +752,22 @@
 		return
 	mod.wearer.research_scanner--
 	mod.helmet.clothing_flags &= ~SCAN_REAGENTS
+
+/obj/item/mod/module/gps
+	name = "MOD internal GPS module"
+	desc = "A module that serves as a built-in GPS."
+	module_type = MODULE_USABLE
+	complexity = 1
+	idle_power_cost = 2
+	incompatible_modules = list(/obj/item/mod/module/gps)
+	cooldown_time = 0.5 SECONDS
+
+/obj/item/mod/module/gps/Initialize()
+	. = ..()
+	AddComponent(/datum/component/gps/item, "MOD0", state = GLOB.inventory_state)
+
+/obj/item/mod/module/gps/on_use()
+	. = ..()
+	if(!.)
+		return
+	ui_interact(mod.wearer)
