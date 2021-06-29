@@ -70,14 +70,8 @@
 				balloon_alert(user, "core screwed")
 				screwed_core = TRUE
 				icon_to_use = "screwed_core"
-<<<<<<< HEAD
-				return
-		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-=======
 		else if(part.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
->>>>>>> fikou/gitpullupstreammaster
 				core.forceMove(drop_location())
 				balloon_alert(user, "core taken out")
 				core = null
@@ -92,16 +86,9 @@
 			balloon_alert(user, "helmet added")
 			helmet = part
 			icon_to_use = "helmet"
-<<<<<<< HEAD
-			return
-		else if(I.tool_behaviour == TOOL_SCREWDRIVER) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-				to_chat(user, "<span class='notice'>You unscrew the core from [src].</span>")
-=======
 		else if(part.tool_behaviour == TOOL_SCREWDRIVER) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
 				balloon_alert(user, "core unscrewed")
->>>>>>> fikou/gitpullupstreammaster
 				screwed_core = FALSE
 				icon_to_use = "core"
 				return
@@ -115,14 +102,8 @@
 			balloon_alert(user, "chestplate added")
 			chestplate = part
 			icon_to_use = "chestplate"
-<<<<<<< HEAD
-			return
-		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-=======
 		else if(part.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
->>>>>>> fikou/gitpullupstreammaster
 				helmet.forceMove(drop_location())
 				balloon_alert(user, "helmet removed")
 				helmet = null
@@ -138,14 +119,8 @@
 			balloon_alert(user, "gauntlets added")
 			gauntlets = part
 			icon_to_use = "gauntlets"
-<<<<<<< HEAD
-			return
-		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-=======
 		else if(part.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
->>>>>>> fikou/gitpullupstreammaster
 				chestplate.forceMove(drop_location())
 				balloon_alert(user, "chestplate removed")
 				chestplate = null
@@ -161,14 +136,8 @@
 			balloon_alert(user, "You fit [part] onto [src].")
 			boots = part
 			icon_to_use = "boots"
-<<<<<<< HEAD
-			return
-		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-=======
 		else if(part.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
->>>>>>> fikou/gitpullupstreammaster
 				gauntlets.forceMove(drop_location())
 				balloon_alert(user, "gauntlets removed")
 				gauntlets = null
@@ -181,14 +150,8 @@
 				balloon_alert(user, "assembly secured")
 				wrenched_assembly = TRUE
 				icon_to_use = "wrenched_assembly"
-<<<<<<< HEAD
-				return
-		else if(I.tool_behaviour == TOOL_CROWBAR) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-=======
 		else if(part.tool_behaviour == TOOL_CROWBAR) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
->>>>>>> fikou/gitpullupstreammaster
 				boots.forceMove(drop_location())
 				balloon_alert(user, "boots removed")
 				boots = null
@@ -201,16 +164,9 @@
 				balloon_alert(user, "assembly screwed")
 				screwed_assembly = TRUE
 				icon_to_use = "screwed_assembly"
-<<<<<<< HEAD
-				return
-		else if(I.tool_behaviour == TOOL_WRENCH) //Deconstruct
-			if(I.use_tool(src, user, 0, volume=30))
-				to_chat(user, "<span class='notice'>You unwrench the assembled parts.</span>")
-=======
 		else if(part.tool_behaviour == TOOL_WRENCH) //Deconstruct
 			if(part.use_tool(src, user, 0, volume=30))
 				balloon_alert(user, "assembly unsecured")
->>>>>>> fikou/gitpullupstreammaster
 				wrenched_assembly = FALSE
 				icon_to_use = "boots"
 				return
