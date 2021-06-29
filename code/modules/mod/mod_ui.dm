@@ -51,12 +51,12 @@
 	if(.)
 		return
 	if(!allowed(usr) && locked)
-		to_chat(usr, "<span class='warning'>Access denied.</span>")
+		balloon_alert(usr, "insufficient access!")
 		return
 	switch(action)
 		if("lock")
 			locked = !locked
-			to_chat(usr, "<span class='notice'>The suit has been [locked ? "unlocked" : "locked"].</span>")
+			balloon_alert(usr, "[locked ? "unlocked" : "locked"]!")
 		if("activate")
 			toggle_activate(usr)
 		if("select")
