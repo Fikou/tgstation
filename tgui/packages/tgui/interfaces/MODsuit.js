@@ -1,10 +1,11 @@
 import { toFixed } from 'common/math';
 import { useBackend } from '../backend';
-import { Button, LabeledList, ProgressBar, Section, Collapsible, Box, Icon, Stack, Table, RoundGauge, Dimmer, Modal } from '../components';
+import { Button, ColorBox, LabeledList, ProgressBar, Section, Collapsible, Box, Icon, Stack, Table, RoundGauge, Dimmer, Modal } from '../components';
 import { Window } from '../layouts';
 
 const ID2MODULE = {
   rad_counter: () => <RadCounter />,
+  flashlight_mod: () => <Flashlight />,
 };
 
 const LockedInterface = () => (
@@ -373,6 +374,35 @@ const RadCounter = (props, context) => {
             "bad": [800, 1500],
           }}
           format={value => toFixed(value/10) + '%'} />
+      </Stack.Item>
+    </Stack>
+  );
+};
+
+const Flashlight = (props, context) => {
+  const { act, data } = useBackend(context);
+  const {
+    light_on,
+    light_color,
+  } = data;
+  return (
+    <Stack fill>
+      <Stack.Item>
+        <Button
+          width="144px"
+          icon="lightbulb"
+          selected={light_on}
+          onClick={() => act('toggle_light')}>
+          Flashlight: {light_on ? 'ON' : 'OFF'}
+        </Button>
+      </Stack.Item>
+      <Stack.Item>
+        <Button
+          ml={1}
+          onClick={() => act('light_color')}>
+          Color:
+          <ColorBox ml={1} color={light_color} />
+        </Button>
       </Stack.Item>
     </Stack>
   );

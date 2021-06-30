@@ -676,6 +676,7 @@
 	module_type = MODULE_TOGGLE
 	complexity = 1
 	active_power_cost = 15
+	tgui_id = "flashlight_mod"
 	incompatible_modules = list(/obj/item/mod/module/flashlight)
 	cooldown_time = 0.5 SECONDS
 	configurable = TRUE
@@ -725,32 +726,21 @@
 	.["light_range"] = "number"
 
 /obj/item/mod/module/flashlight/configure_edit(key, value)
+	var/mob/user = usr
 	switch(key)
 		if("light_color")
-			var/new_color = input(usr, "Pick new light color", "Flashlight Color") as color|null
+			var/new_color = input(user, "Choose a new color for [src]'s flashlight.", "Light Color", light_color) as color|null
+			if(color_hex2num(new_color) < 200) //Colors too dark are rejected
+				to_chat(user, "<span class='warning'>That color is too dark! Choose a lighter one.</span>")
+				new_color = "##ffffff"
 			if(new_color)
 				light_color = new_color
 				mod.wearer.update_inv_back()
 		if("light_range")
-			light_range = clamp(value, min_range, max_range)
+			var/new_range = input(user, "Enter your desired light range.", "Flashlight power range", 1) as num | null
+			light_range = clamp(new_range, min_range, max_range)
 
-/obj/item/mod/module/flashlight/ui_interact(mob/user, datum/tgui/ui)
-	. = ..()
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "ModFlashlight", name)
-		ui.open()
-
-/obj/item/mod/module/flashlight/ui_data(mob/user)
-	var/data = list()
-
-	data["light_on"] = light_on
-	data["light_color"] = light_color
-	return data
-
-/obj/item/mod/module/flashlight/ui_act(action, list/params)
-	. = ..()
-	switch(action)
+/*
 		if("light_color")
 			var/mob/user = usr
 			var/new_color
@@ -763,7 +753,7 @@
 					new_color = null
 				light_color =  new_color
 				generate_worn_overlay()
-			return
+			return */
 
 /obj/item/mod/module/science_scanner
 	name = "MOD science scanner module"
