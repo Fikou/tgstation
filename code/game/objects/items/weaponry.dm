@@ -378,6 +378,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/switchblade/Initialize()
 	. = ..()
+	AddComponent(/datum/component/butchering, 70, 100, disabled = TRUE)
 	set_extended(extended)
 
 /obj/item/switchblade/attack_self(mob/user)
@@ -386,6 +387,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/switchblade/proc/set_extended(new_extended)
 	extended = new_extended
+	var/datum/component/butchering/butchering = GetComponent(/datum/component/butchering)
 	if(extended)
 		force = 20
 		w_class = WEIGHT_CLASS_NORMAL
@@ -395,6 +397,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		attack_verb_simple = list("slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		sharpness = SHARP_EDGED
+		butchering.butchering_enabled = TRUE
 	else
 		force = 3
 		w_class = WEIGHT_CLASS_SMALL
@@ -404,6 +407,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		attack_verb_simple = list("stub", "poke")
 		hitsound = 'sound/weapons/genhit.ogg'
 		sharpness = NONE
+		butchering.butchering_enabled = FALSE
 
 /obj/item/switchblade/suicide_act(mob/user)
 	user.visible_message(span_suicide("[user] is slitting [user.p_their()] own throat with [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
