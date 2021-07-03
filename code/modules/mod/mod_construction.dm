@@ -63,7 +63,7 @@
 		balloon_alert(user, "core inserted")
 		core = part
 		icon_to_use = "core"
-
+		return
 	if(core)
 		if(part.tool_behaviour == TOOL_SCREWDRIVER) //Construct
 			if(part.use_tool(src, user, 0, volume=30))
@@ -76,7 +76,7 @@
 				balloon_alert(user, "core taken out")
 				core = null
 				icon_to_use = null
-
+				return
 	if(screwed_core)
 		if(istype(part, /obj/item/mod/construction/helmet)) //Construct
 			if(!user.transferItemToLoc(part, src))
@@ -91,6 +91,7 @@
 				balloon_alert(user, "core unscrewed")
 				screwed_core = FALSE
 				icon_to_use = "core"
+				return
 
 	if(helmet)
 		if(istype(part, /obj/item/mod/construction/chestplate)) //Construct
@@ -107,6 +108,7 @@
 				balloon_alert(user, "helmet removed")
 				helmet = null
 				icon_to_use = "screwed_core"
+				return
 
 	if(chestplate)
 		if(istype(part, /obj/item/mod/construction/gauntlets)) //Construct
@@ -123,6 +125,7 @@
 				balloon_alert(user, "chestplate removed")
 				chestplate = null
 				icon_to_use = "helmet"
+				return
 
 	if(gauntlets)
 		if(istype(part, /obj/item/mod/construction/boots)) //Construct
@@ -139,6 +142,7 @@
 				balloon_alert(user, "gauntlets removed")
 				gauntlets = null
 				icon_to_use = "chestplate"
+				return
 
 	if(boots)
 		if(part.tool_behaviour == TOOL_WRENCH) //Construct
@@ -152,6 +156,7 @@
 				balloon_alert(user, "boots removed")
 				boots = null
 				icon_to_use = "gauntlets"
+				return
 
 	if(wrenched_assembly)
 		if(part.tool_behaviour == TOOL_SCREWDRIVER) //Construct
@@ -164,6 +169,7 @@
 				balloon_alert(user, "assembly unsecured")
 				wrenched_assembly = FALSE
 				icon_to_use = "boots"
+				return
 
 	if(screwed_assembly)
 		if(istype(part, /obj/item/mod/construction/armor)) //Construct
@@ -181,6 +187,7 @@
 				balloon_alert(user, "assembly unscrewed")
 				screwed_assembly = FALSE
 				icon_to_use = "wrenched_assembly"
+				return
 	update_icon_state()
 
 /obj/item/mod/construction/shell/update_icon_state()
