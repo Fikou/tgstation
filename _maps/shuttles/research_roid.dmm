@@ -1,0 +1,114 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/effect/spawner/structure/window/shuttle,
+/turf/open/floor/plating/airless,
+/area/shuttle/research)
+"h" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/shuttle/research)
+"r" = (
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/research)
+"D" = (
+/turf/open/floor/mineral/titanium/tiled/white,
+/area/shuttle/research)
+"E" = (
+/obj/machinery/light/directional/south,
+/obj/machinery/status_display/supply{
+	pixel_y = -32
+	},
+/turf/open/floor/mineral/titanium/tiled/white,
+/area/shuttle/research)
+"H" = (
+/obj/machinery/computer/shuttle/research{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium/tiled/white,
+/area/shuttle/research)
+"I" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium/tiled/white,
+/area/shuttle/research)
+"T" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/shuttle/engine/heater{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/shuttle/research)
+"W" = (
+/obj/machinery/door/airlock/titanium{
+	id_tag = "researchshuttle";
+	name = "Research Shuttle Airlock"
+	},
+/obj/docking_port/mobile{
+	dir = 2;
+	id = "research";
+	name = "research shuttle"
+	},
+/turf/open/floor/mineral/titanium/tiled/white,
+/area/shuttle/research)
+
+(1,1,1) = {"
+a
+r
+h
+r
+a
+"}
+(2,1,1) = {"
+r
+r
+T
+r
+r
+"}
+(3,1,1) = {"
+b
+I
+I
+I
+b
+"}
+(4,1,1) = {"
+W
+D
+D
+E
+r
+"}
+(5,1,1) = {"
+b
+I
+I
+I
+b
+"}
+(6,1,1) = {"
+r
+r
+H
+r
+r
+"}
+(7,1,1) = {"
+a
+r
+b
+r
+a
+"}

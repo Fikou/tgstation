@@ -532,6 +532,11 @@
 	name = "Lavaland Shuttle (Computer Board)"
 	build_path = /obj/machinery/computer/shuttle/mining/common
 
+/obj/item/circuitboard/computer/research_shuttle
+	name = "Research Shuttle (Computer Board)"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/computer/shuttle/research
+
 /obj/item/circuitboard/computer/exoscanner_console
 	name = "Scanner Array Control Console (Computer Board)"
 	build_path = /obj/machinery/computer/exoscanner_control

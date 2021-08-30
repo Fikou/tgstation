@@ -133,6 +133,10 @@
 	name = "Mining Shuttle"
 	area_flags = NONE //Set this so it doesn't inherit NO_ALERTS
 
+/area/shuttle/research
+	name = "Research Shuttle"
+	area_flags = NONE
+
 /area/shuttle/mining/large
 	name = "Mining Shuttle"
 	requires_power = TRUE

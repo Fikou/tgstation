@@ -415,3 +415,10 @@
 
 /obj/effect/decal/hammerandsickle/shuttleRotate(rotation)
 	setDir(angle2dir(rotation+dir2angle(dir))) // No parentcall, rest of the rotate code breaks the pixel offset.
+
+/obj/machinery/computer/shuttle/research
+	name = "research shuttle console"
+	desc = "A console that controls the research shuttle."
+	circuit = /obj/item/circuitboard/computer/research
+	shuttleId = "research"
+	possible_destinations = "research_home;research_away"

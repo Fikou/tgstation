@@ -447,7 +447,7 @@
 	description = "A large shuttle with a center biodome that is flourishing with life. Frolick with the monkeys! (Extra monkeys are stored on the bridge.)"
 	admin_notes = "Pretty freakin' large, almost as big as Raven or Cere. Excercise caution with it."
 	credit_cost = CARGO_CRATE_VALUE * 16
-	
+
 /datum/map_template/shuttle/emergency/casino
 	suffix = "casino"
 	name = "Lucky Jackpot Casino Shuttle"
@@ -581,6 +581,22 @@
 /datum/map_template/shuttle/labour/box
 	suffix = "box"
 	name = "labour shuttle (Box)"
+
+/datum/map_template/shuttle/arrival/roid
+	suffix = "roid"
+	name = "arrival shuttle (Roid)"
+
+/datum/map_template/shuttle/labour/roid
+	suffix = "roid"
+	name = "labour shuttle (Roid)"
+
+/datum/map_template/shuttle/research
+	port_id = "research"
+	who_can_purchase = null
+
+/datum/map_template/shuttle/research/roid
+	suffix = "roid"
+	name = "research shuttle (Roid)"
 
 /datum/map_template/shuttle/arrival/donut
 	suffix = "donut"

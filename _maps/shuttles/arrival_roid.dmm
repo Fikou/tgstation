@@ -1,0 +1,210 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"i" = (
+/obj/item/radio/intercom/directional/west,
+/obj/structure/closet/wardrobe/black,
+/obj/item/clothing/suit/hooded/wintercoat,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"j" = (
+/obj/structure/shuttle/engine/heater{
+	dir = 1
+	},
+/obj/structure/window/reinforced,
+/turf/open/floor/plating/airless,
+/area/template_noop)
+"o" = (
+/turf/closed/wall/mineral/titanium,
+/area/template_noop)
+"r" = (
+/obj/effect/spawner/randomarcade,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"t" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Arrivals Shuttle Airlock"
+	},
+/obj/docking_port/mobile/arrivals{
+	dir = 4;
+	name = "roid arrivals shuttle"
+	},
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"u" = (
+/obj/item/crowbar,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"v" = (
+/obj/effect/landmark/observer_start,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"w" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Arrivals Shuttle Airlock"
+	},
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"E" = (
+/obj/structure/chair/comfy/shuttle,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"F" = (
+/obj/effect/spawner/structure/window/shuttle,
+/turf/open/floor/plating,
+/area/template_noop)
+"G" = (
+/obj/machinery/light/directional/east,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"H" = (
+/obj/machinery/light/directional/west,
+/obj/structure/closet/wardrobe/green,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"I" = (
+/obj/structure/closet/wardrobe/mixed,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"L" = (
+/obj/structure/closet/wardrobe/green,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"M" = (
+/obj/machinery/light/directional/west,
+/obj/structure/closet/wardrobe/mixed,
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"P" = (
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"Q" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
+/area/template_noop)
+"T" = (
+/obj/machinery/requests_console/directional/west{
+	department = "Arrival shuttle"
+	},
+/obj/structure/closet/wardrobe/black,
+/obj/item/paper/fluff{
+	info = "<b>Target:</b> Research-station Epsilon<br><b>Objective:</b> Prototype weaponry. The captain likely keeps them locked in her safe.<br><br>Our on-board spy has learned the code and has hidden away a few copies of the code around the station. Unfortunatly he has been captured by securityYour objective is to split up, locate any of the papers containing the captain's safe code, open the safe andsecure anything found inside. If possible, recover the imprisioned syndicate operative and recieve the code from him.<br><br><u>As always, eliminate anyone who gets in the way.</u><br><br>Your assigned ship is designed specifically for penetrating the hull of another station or ship with minimal damage to operatives.It is completely fly-by-wire meaning you have just have to enjoy the ride and when the red light comes on... find something to hold onto!"
+	},
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+"W" = (
+/obj/machinery/computer{
+	dir = 1;
+	name = "Shuttle computer"
+	},
+/turf/open/floor/mineral/titanium/tiled/blue,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+o
+o
+o
+o
+o
+o
+o
+o
+w
+o
+o
+a
+"}
+(2,1,1) = {"
+a
+o
+o
+I
+P
+H
+T
+i
+M
+P
+o
+o
+o
+"}
+(3,1,1) = {"
+Q
+j
+r
+E
+P
+E
+P
+E
+P
+E
+P
+W
+F
+"}
+(4,1,1) = {"
+Q
+j
+u
+E
+P
+E
+v
+E
+P
+E
+P
+W
+F
+"}
+(5,1,1) = {"
+Q
+j
+r
+E
+P
+E
+P
+E
+P
+E
+P
+W
+F
+"}
+(6,1,1) = {"
+a
+o
+o
+L
+P
+G
+P
+P
+G
+P
+o
+o
+o
+"}
+(7,1,1) = {"
+a
+o
+o
+o
+w
+o
+F
+F
+o
+t
+o
+o
+a
+"}

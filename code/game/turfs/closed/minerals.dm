@@ -517,6 +517,19 @@
 	smooth_icon = 'icons/turf/walls/red_wall.dmi'
 	base_icon_state = "red_wall"
 
+/turf/closed/mineral/random/asteroid
+	name = "iron rock"
+	icon = 'icons/turf/mining.dmi'
+	smooth_icon = 'icons/turf/walls/red_wall.dmi'
+	icon_state = "redrock"
+	base_icon_state = "red_wall"
+
+/turf/closed/mineral/random/high_chance/asteroid
+	name = "iron rock"
+	icon = 'icons/turf/mining.dmi'
+	smooth_icon = 'icons/turf/walls/red_wall.dmi'
+	base_icon_state = "red_wall"
+
 /turf/closed/mineral/asteroid/porous
 	name = "porous rock"
 	desc = "This rock is filled with pockets of breathable air."
