@@ -642,13 +642,51 @@
 /datum/crafting_recipe/poppybouquet
 	name = "Poppy bouquet"
 	result = /obj/item/bouquet/poppy
-	reqs = list (/obj/item/food/grown/poppy = 6)
+	reqs = list(/obj/item/food/grown/poppy = 6)
+	category = CAT_MISC
+
+/datum/crafting_recipe/poppybouquet/New()
+	..()
+	blacklist |= subtypesof(/obj/item/food/grown/poppy)
+
+/datum/crafting_recipe/geraniumbouquet
+	name = "Geranium bouquet"
+	result = /obj/item/bouquet/geranium
+	reqs = list(/obj/item/food/grown/poppy/geranium = 6)
+	category = CAT_MISC
+
+/datum/crafting_recipe/geraniumbouquet/New()
+	..()
+	blacklist |= subtypesof(/obj/item/food/grown/poppy/geranium)
+
+/datum/crafting_recipe/lilybouquet
+	name = "Lily bouquet"
+	result = /obj/item/bouquet/lily
+	reqs = list(/obj/item/food/grown/poppy/lily = 6)
+	category = CAT_MISC
+
+/datum/crafting_recipe/fraxinellabouquet
+	name = "Fraxinella bouquet"
+	result = /obj/item/bouquet/fraxinella
+	reqs = list(/obj/item/food/grown/poppy/geranium/fraxinella = 6)
+	category = CAT_MISC
+
+/datum/crafting_recipe/harebellbouquet
+	name = "Harebell bouquet"
+	result = /obj/item/bouquet/harebell
+	reqs = list(/obj/item/food/grown/harebell = 6)
 	category = CAT_MISC
 
 /datum/crafting_recipe/rosebouquet
 	name = "Rose bouquet"
 	result = /obj/item/bouquet/rose
 	reqs = list(/obj/item/food/grown/rose = 6)
+	category = CAT_MISC
+
+/datum/crafting_recipe/rosebouquet
+	name = "Carbon rose bouquet"
+	result = /obj/item/bouquet/carbonrose
+	reqs = list(/obj/item/grown/carbon_rose = 6)
 	category = CAT_MISC
 
 /datum/crafting_recipe/spooky_camera
