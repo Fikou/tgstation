@@ -102,17 +102,10 @@
 	icon_state = "cursedheart-off"
 	base_icon_state = "cursedheart"
 	decay_factor = 0
-	actions_types = list(/datum/action/item_action/organ_action/cursed_heart)
-	var/last_pump = 0
-	var/add_colour = TRUE //So we're not constantly recreating colour datums
-	var/pump_delay = 30 //you can pump 1 second early, for lag, but no more (otherwise you could spam heal)
-	var/blood_loss = 100 //600 blood is human default, so 5 failures (below 122 blood is where humans die because reasons?)
-
-	//How much to heal per pump, negative numbers would HURT the player
-	var/heal_brute = 0
-	var/heal_burn = 0
-	var/heal_oxy = 0
-
+	var/last_step = 0
+	var/next_beat = 0
+	var/beats_per_second = 1 SECONDS
+	var/grace_time = 0.3 SECONDS
 
 /obj/item/organ/heart/cursed/attack(mob/living/carbon/human/accursed, mob/living/carbon/human/user, obj/target)
 	if(accursed == user && istype(accursed))
@@ -122,59 +115,53 @@
 	else
 		return ..()
 
-/obj/item/organ/heart/cursed/on_life(delta_time, times_fired)
-	if(world.time > (last_pump + pump_delay))
-		if(ishuman(owner) && owner.client) //While this entire item exists to make people suffer, they can't control disconnects.
-			var/mob/living/carbon/human/accursed_human = owner
-			if(accursed_human.dna && !(NOBLOOD in accursed_human.dna.species.species_traits))
-				accursed_human.blood_volume = max(accursed_human.blood_volume - blood_loss, 0)
-				to_chat(accursed_human, span_userdanger("You have to keep pumping your blood!"))
-				if(add_colour)
-					accursed_human.add_client_colour(/datum/client_colour/cursed_heart_blood) //bloody screen so real
-					add_colour = FALSE
-		else
-			last_pump = world.time //lets be extra fair *sigh*
-
-/obj/item/organ/heart/cursed/Insert(mob/living/carbon/accursed, special = 0)
+/obj/item/organ/heart/cursed/Insert(mob/living/carbon/accursed, special)
 	..()
 	if(owner)
-		to_chat(owner, span_userdanger("Your heart has been replaced with a cursed one, you have to pump this one manually otherwise you'll die!"))
+		to_chat(owner, span_userdanger("Your heart has been replaced with a cursed one, you have to keep up the rhythm!"))
+		START_PROCESSING(SSfastprocess, src)
+		last_step = world.time + 1 SECONDS //some short grace time
+		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_move)
+		RegisterSignal(owner, COMSIG_MOB_ITEM_AFTERATTACK, .proc/on_attack)
 
-/obj/item/organ/heart/cursed/Remove(mob/living/carbon/accursed, special = 0)
-	..()
-	accursed.remove_client_colour(/datum/client_colour/cursed_heart_blood)
-
-/datum/action/item_action/organ_action/cursed_heart
-	name = "Pump your blood"
-
-//You are now brea- pumping blood manually
-/datum/action/item_action/organ_action/cursed_heart/Trigger()
+/obj/item/organ/heart/cursed/Remove(mob/living/carbon/accursed, special)
 	. = ..()
-	if(. && istype(target, /obj/item/organ/heart/cursed))
-		var/obj/item/organ/heart/cursed/cursed_heart = target
+	STOP_PROCESSING(SSfastprocess, src)
+	last_step = 0
 
-		if(world.time < (cursed_heart.last_pump + (cursed_heart.pump_delay-10))) //no spam
-			to_chat(owner, span_userdanger("Too soon!"))
-			return
+/obj/item/organ/heart/cursed/process(delta_time, times_fired)
+	. = ..()
+	if(next_beat > world.time)
+		return
+	if(next_beat > last_step + beats_per_second + grace_time)
+		punish()
+	next_beat = world.time + beats_per_second
 
-		cursed_heart.last_pump = world.time
-		playsound(owner,'sound/effects/singlebeat.ogg',40,TRUE)
-		to_chat(owner, span_notice("Your heart beats."))
+/obj/item/organ/heart/cursed/proc/on_move(datum/source, atom/old_loc, dir, forced)
+	SIGNAL_HANDLER
+	if(!dir || !forced)
+		return
+	last_step = world.time
+	if(last_step < next_beat + grace_time && last_step > next_beat - grace_time)
+		reward()
+	else
+		punish()
 
-		var/mob/living/carbon/human/accursed = owner
-		if(istype(accursed))
-			if(accursed.dna && !(NOBLOOD in accursed.dna.species.species_traits))
-				accursed.blood_volume = min(accursed.blood_volume + cursed_heart.blood_loss*0.5, BLOOD_VOLUME_MAXIMUM)
-				accursed.remove_client_colour(/datum/client_colour/cursed_heart_blood)
-				cursed_heart.add_colour = TRUE
-				accursed.adjustBruteLoss(-cursed_heart.heal_brute)
-				accursed.adjustFireLoss(-cursed_heart.heal_burn)
-				accursed.adjustOxyLoss(-cursed_heart.heal_oxy)
+/obj/item/organ/heart/cursed/proc/on_attack(datum/source, atom/target, mob/user, proximity)
+	SIGNAL_HANDLER
+	if(!ismovable(target) || !proximity && !isgun(user.get_active_held_item()))
+		return
+	last_step = world.time
+	if(last_step < next_beat + grace_time && last_step > next_beat - grace_time)
+		reward()
+	else
+		punish()
 
+/obj/item/organ/heart/cursed/proc/reward()
+	to_chat(owner, span_nicegreen("cool!"))
 
-/datum/client_colour/cursed_heart_blood
-	priority = 100 //it's an indicator you're dying, so it's very high priority
-	colour = "red"
+/obj/item/organ/heart/cursed/proc/punish()
+	to_chat(owner, span_danger("idiot"))
 
 /obj/item/organ/heart/cybernetic
 	name = "basic cybernetic heart"
