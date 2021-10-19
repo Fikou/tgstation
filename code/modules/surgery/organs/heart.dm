@@ -98,14 +98,23 @@
 
 /obj/item/organ/heart/cursed
 	name = "cursed heart"
-	desc = "A heart that, when inserted, will force you to pump it manually."
+	desc = "A heart that, when inserted, will force you to <span class='hypnophrase'>dance to its' beat...</span>"
 	icon_state = "cursedheart-off"
 	base_icon_state = "cursedheart"
 	decay_factor = 0
+	var/atom/movable/screen/cursed_heart/hud
 	var/last_step = 0
 	var/next_beat = 0
-	var/beats_per_second = 1 SECONDS
-	var/grace_time = 0.3 SECONDS
+	var/time_to_beat = 2 SECONDS
+	var/grace_time = 0.5 SECONDS
+	var/blood_loss = 10
+	var/heal = 10
+	COOLDOWN_DECLARE(walk_cooldown)
+	COOLDOWN_DECLARE(punish_cooldown)
+
+/obj/item/organ/heart/cursed/Initialize(mapload)
+	. = ..()
+	hud = new()
 
 /obj/item/organ/heart/cursed/attack(mob/living/carbon/human/accursed, mob/living/carbon/human/user, obj/target)
 	if(accursed == user && istype(accursed))
@@ -120,9 +129,13 @@
 	if(owner)
 		to_chat(owner, span_userdanger("Your heart has been replaced with a cursed one, you have to keep up the rhythm!"))
 		START_PROCESSING(SSfastprocess, src)
-		last_step = world.time + 1 SECONDS //some short grace time
+		last_step = world.time + 3 SECONDS //some short grace time
+		RegisterSignal(owner, COMSIG_LIVING_STATUS_IMMOBILIZE, .proc/on_immobilize)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_move)
 		RegisterSignal(owner, COMSIG_MOB_ITEM_AFTERATTACK, .proc/on_attack)
+		RegisterSignal(owner, COMSIG_MOB_ATTACK_HAND, .proc/on_attack_hand)
+		RegisterSignal(owner, COMSIG_MOB_LOGIN, .proc/on_login)
+		add_hud()
 
 /obj/item/organ/heart/cursed/Remove(mob/living/carbon/accursed, special)
 	. = ..()
@@ -131,37 +144,107 @@
 
 /obj/item/organ/heart/cursed/process(delta_time, times_fired)
 	. = ..()
+	if(!owner.client)
+		return
 	if(next_beat > world.time)
 		return
-	if(next_beat > last_step + beats_per_second + grace_time)
+	if(last_step < next_beat - grace_time)
 		punish()
-	next_beat = world.time + beats_per_second
+	next_beat = world.time + time_to_beat
+	hud.beat()
+	hud_bars()
+	SEND_SOUND(owner, 'sound/effects/beat.ogg')
+
+/obj/item/organ/heart/cursed/proc/on_immobilize(datum/source, amount, ignore_canstun)
+	SIGNAL_HANDLER
+	if(!ignore_canstun)
+		return COMPONENT_NO_STUN
 
 /obj/item/organ/heart/cursed/proc/on_move(datum/source, atom/old_loc, dir, forced)
 	SIGNAL_HANDLER
-	if(!dir || !forced)
+	if(!dir || forced)
 		return
-	last_step = world.time
-	if(last_step < next_beat + grace_time && last_step > next_beat - grace_time)
-		reward()
-	else
-		punish()
+	beat_check()
 
 /obj/item/organ/heart/cursed/proc/on_attack(datum/source, atom/target, mob/user, proximity)
 	SIGNAL_HANDLER
 	if(!ismovable(target) || !proximity && !isgun(user.get_active_held_item()))
 		return
+	beat_check()
+
+/obj/item/organ/heart/cursed/proc/on_attack_hand(datum/source)
+	SIGNAL_HANDLER
+	beat_check()
+
+/obj/item/organ/heart/cursed/proc/beat_check()
+	if(!COOLDOWN_FINISHED(src, walk_cooldown))
+		return punish()
+	COOLDOWN_START(src, walk_cooldown, grace_time*2)
 	last_step = world.time
-	if(last_step < next_beat + grace_time && last_step > next_beat - grace_time)
+	if((last_step > next_beat - grace_time && last_step <= next_beat) || (last_step < next_beat - time_to_beat + grace_time && last_step >= next_beat - time_to_beat))
 		reward()
 	else
 		punish()
 
 /obj/item/organ/heart/cursed/proc/reward()
-	to_chat(owner, span_nicegreen("cool!"))
+	to_chat(owner, span_nicegreen("KOOL!"))
+	if(ishuman(owner))
+		var/mob/living/carbon/human/accursed_human = owner
+		if(accursed_human.dna && (NOBLOOD in accursed_human.dna.species.species_traits))
+			return
+		accursed_human.blood_volume = min(accursed_human.blood_volume + blood_loss*0.5, BLOOD_VOLUME_MAXIMUM)
+		accursed_human.adjustBruteLoss(-heal)
+		accursed_human.adjustFireLoss(-heal)
+		accursed_human.adjustOxyLoss(-heal)
 
 /obj/item/organ/heart/cursed/proc/punish()
-	to_chat(owner, span_danger("idiot"))
+	if(!COOLDOWN_FINISHED(src, punish_cooldown))
+		return
+	COOLDOWN_START(src, punish_cooldown, grace_time*2)
+	if(ishuman(owner))
+		var/mob/living/carbon/human/accursed_human = owner
+		if(accursed_human.dna && (NOBLOOD in accursed_human.dna.species.species_traits))
+			return
+		accursed_human.blood_volume = max(accursed_human.blood_volume - blood_loss, 0)
+
+/obj/item/organ/heart/cursed/proc/on_login(datum/source)
+	SIGNAL_HANDLER
+	add_hud()
+
+/obj/item/organ/heart/cursed/proc/add_hud()
+	owner.client?.screen += hud
+
+/obj/item/organ/heart/cursed/proc/hud_bars()
+	var/atom/movable/screen/cursed_heart_bar/bar1 = new(time_to_beat)
+	var/atom/movable/screen/cursed_heart_bar/bar2 = new(time_to_beat)
+	owner.client?.screen += bar1
+	owner.client?.screen += bar2
+	bar1.screen_loc = "CENTER-4,CENTER-4"
+	bar2.screen_loc = "CENTER+4,CENTER-4"
+	var/matrix/matrix1 = matrix()
+	var/matrix/matrix2 = matrix()
+	matrix1.Translate(32, 0)
+	matrix2.Translate(-32, 0)
+	animate(bar1, alpha = 255, transform = matrix1, time = time_to_beat)
+	animate(bar2, alpha = 255, transform = matrix2, time = time_to_beat)
+
+/atom/movable/screen/cursed_heart
+	icon_state = "heart_from_isaac"
+	screen_loc = "CENTER,CENTER-4"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+/atom/movable/screen/cursed_heart/proc/beat()
+	flick("heart_from_isaac_beat", src)
+
+/atom/movable/screen/cursed_heart_bar
+	icon_state = "heart_bar"
+	screen_loc = "CENTER,CENTER-4"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	alpha = 150
+
+/atom/movable/screen/cursed_heart_bar/Initialize(mapload, time)
+	. = ..()
+	QDEL_IN(src, time)
 
 /obj/item/organ/heart/cybernetic
 	name = "basic cybernetic heart"
