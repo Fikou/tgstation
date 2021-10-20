@@ -105,10 +105,10 @@
 	var/atom/movable/screen/cursed_heart/hud
 	var/last_step = 0
 	var/next_beat = 0
-	var/time_to_beat = 2 SECONDS
-	var/grace_time = 0.5 SECONDS
-	var/blood_loss = 10
-	var/heal = 10
+	var/time_to_beat = 1 SECONDS
+	var/grace_time = 0.25 SECONDS
+	var/blood_loss = 15
+	var/heal = 5
 	COOLDOWN_DECLARE(walk_cooldown)
 	COOLDOWN_DECLARE(punish_cooldown)
 
@@ -128,8 +128,8 @@
 	..()
 	if(owner)
 		to_chat(owner, span_userdanger("Your heart has been replaced with a cursed one, you have to keep up the rhythm!"))
+		next_beat = world.time + 3 SECONDS //some short grace time
 		START_PROCESSING(SSfastprocess, src)
-		last_step = world.time + 3 SECONDS //some short grace time
 		RegisterSignal(owner, COMSIG_LIVING_STATUS_IMMOBILIZE, .proc/on_immobilize)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_move)
 		RegisterSignal(owner, COMSIG_MOB_ITEM_AFTERATTACK, .proc/on_attack)
@@ -138,13 +138,16 @@
 		add_hud()
 
 /obj/item/organ/heart/cursed/Remove(mob/living/carbon/accursed, special)
-	. = ..()
+	accursed.client?.screen -= hud
+	UnregisterSignal(accursed, list(COMSIG_LIVING_STATUS_IMMOBILIZE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_ITEM_AFTERATTACK, COMSIG_MOB_ATTACK_HAND, COMSIG_MOB_LOGIN))
 	STOP_PROCESSING(SSfastprocess, src)
 	last_step = 0
+	return ..()
 
 /obj/item/organ/heart/cursed/process(delta_time, times_fired)
-	. = ..()
-	if(!owner.client)
+	if(!owner)
+		return ..()
+	if(!owner.client || owner.stat)
 		return
 	if(next_beat > world.time)
 		return
@@ -153,7 +156,7 @@
 	next_beat = world.time + time_to_beat
 	hud.beat()
 	hud_bars()
-	SEND_SOUND(owner, 'sound/effects/beat.ogg')
+	owner.playsound_local(null, 'sound/effects/beat.ogg', 100, TRUE, 0.5 / (time_to_beat * 0.1))
 
 /obj/item/organ/heart/cursed/proc/on_immobilize(datum/source, amount, ignore_canstun)
 	SIGNAL_HANDLER
@@ -187,7 +190,6 @@
 		punish()
 
 /obj/item/organ/heart/cursed/proc/reward()
-	to_chat(owner, span_nicegreen("KOOL!"))
 	if(ishuman(owner))
 		var/mob/living/carbon/human/accursed_human = owner
 		if(accursed_human.dna && (NOBLOOD in accursed_human.dna.species.species_traits))
@@ -215,22 +217,23 @@
 	owner.client?.screen += hud
 
 /obj/item/organ/heart/cursed/proc/hud_bars()
-	var/atom/movable/screen/cursed_heart_bar/bar1 = new(time_to_beat)
-	var/atom/movable/screen/cursed_heart_bar/bar2 = new(time_to_beat)
+	var/atom/movable/screen/cursed_heart_bar/bar1 = new(null, time_to_beat)
+	var/atom/movable/screen/cursed_heart_bar/bar2 = new(null, time_to_beat)
 	owner.client?.screen += bar1
 	owner.client?.screen += bar2
 	bar1.screen_loc = "CENTER-4,CENTER-4"
 	bar2.screen_loc = "CENTER+4,CENTER-4"
 	var/matrix/matrix1 = matrix()
 	var/matrix/matrix2 = matrix()
-	matrix1.Translate(32, 0)
-	matrix2.Translate(-32, 0)
+	matrix1.Translate(world.icon_size*4, 0)
+	matrix2.Translate(-world.icon_size*4, 0)
 	animate(bar1, alpha = 255, transform = matrix1, time = time_to_beat)
 	animate(bar2, alpha = 255, transform = matrix2, time = time_to_beat)
 
 /atom/movable/screen/cursed_heart
 	icon_state = "heart_from_isaac"
 	screen_loc = "CENTER,CENTER-4"
+	layer = HIGH_OBJ_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /atom/movable/screen/cursed_heart/proc/beat()
@@ -244,7 +247,8 @@
 
 /atom/movable/screen/cursed_heart_bar/Initialize(mapload, time)
 	. = ..()
-	QDEL_IN(src, time)
+	if(time)
+		QDEL_IN(src, time)
 
 /obj/item/organ/heart/cybernetic
 	name = "basic cybernetic heart"
