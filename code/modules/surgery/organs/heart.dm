@@ -125,10 +125,10 @@
 		return ..()
 
 /obj/item/organ/heart/cursed/Insert(mob/living/carbon/accursed, special)
-	..()
+	. = ..()
 	if(owner)
 		to_chat(owner, span_userdanger("Your heart has been replaced with a cursed one, you have to keep up the rhythm!"))
-		next_beat = world.time + 3 SECONDS //some short grace time
+		last_step = world.time + 3 SECONDS //some short grace time
 		START_PROCESSING(SSfastprocess, src)
 		RegisterSignal(owner, COMSIG_LIVING_STATUS_IMMOBILIZE, .proc/on_immobilize)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_move)
@@ -141,7 +141,7 @@
 	accursed.client?.screen -= hud
 	UnregisterSignal(accursed, list(COMSIG_LIVING_STATUS_IMMOBILIZE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_ITEM_AFTERATTACK, COMSIG_MOB_ATTACK_HAND, COMSIG_MOB_LOGIN))
 	STOP_PROCESSING(SSfastprocess, src)
-	last_step = 0
+	next_beat = 0
 	return ..()
 
 /obj/item/organ/heart/cursed/process(delta_time, times_fired)
@@ -180,6 +180,8 @@
 	beat_check()
 
 /obj/item/organ/heart/cursed/proc/beat_check()
+	if(!next_beat)
+		return
 	if(!COOLDOWN_FINISHED(src, walk_cooldown))
 		return punish()
 	COOLDOWN_START(src, walk_cooldown, grace_time*2)
@@ -190,11 +192,12 @@
 		punish()
 
 /obj/item/organ/heart/cursed/proc/reward()
+	hud.display_text(owner, "GOOD!", COLOR_GREEN, time_to_beat)
 	if(ishuman(owner))
 		var/mob/living/carbon/human/accursed_human = owner
 		if(accursed_human.dna && (NOBLOOD in accursed_human.dna.species.species_traits))
 			return
-		accursed_human.blood_volume = min(accursed_human.blood_volume + blood_loss*0.5, BLOOD_VOLUME_MAXIMUM)
+		accursed_human.blood_volume = min(accursed_human.blood_volume + blood_loss, BLOOD_VOLUME_MAXIMUM)
 		accursed_human.adjustBruteLoss(-heal)
 		accursed_human.adjustFireLoss(-heal)
 		accursed_human.adjustOxyLoss(-heal)
@@ -203,6 +206,7 @@
 	if(!COOLDOWN_FINISHED(src, punish_cooldown))
 		return
 	COOLDOWN_START(src, punish_cooldown, grace_time*2)
+	hud.display_text(owner, "BAD!", COLOR_RED, time_to_beat)
 	if(ishuman(owner))
 		var/mob/living/carbon/human/accursed_human = owner
 		if(accursed_human.dna && (NOBLOOD in accursed_human.dna.species.species_traits))
@@ -221,14 +225,23 @@
 	var/atom/movable/screen/cursed_heart_bar/bar2 = new(null, time_to_beat)
 	owner.client?.screen += bar1
 	owner.client?.screen += bar2
-	bar1.screen_loc = "CENTER-4,CENTER-4"
-	bar2.screen_loc = "CENTER+4,CENTER-4"
+	bar1.screen_loc = "CENTER-5,CENTER-4"
+	bar2.screen_loc = "CENTER+5,CENTER-4"
 	var/matrix/matrix1 = matrix()
 	var/matrix/matrix2 = matrix()
-	matrix1.Translate(world.icon_size*4, 0)
-	matrix2.Translate(-world.icon_size*4, 0)
+	matrix1.Translate(world.icon_size*5, 0)
+	matrix2.Translate(-world.icon_size*5, 0)
 	animate(bar1, alpha = 255, transform = matrix1, time = time_to_beat)
 	animate(bar2, alpha = 255, transform = matrix2, time = time_to_beat)
+	addtimer(CALLBACK(src, .proc/cleanup_bars, bar1, bar2), time_to_beat)
+	bar1 = null
+	bar2 = null
+
+/obj/item/organ/heart/cursed/proc/cleanup_bars(atom/movable/bar1, atom/movable/bar2)
+	owner.client?.screen -= bar1
+	owner.client?.screen -= bar2
+	QDEL_NULL(bar1)
+	QDEL_NULL(bar2)
 
 /atom/movable/screen/cursed_heart
 	icon_state = "heart_from_isaac"
@@ -239,16 +252,32 @@
 /atom/movable/screen/cursed_heart/proc/beat()
 	flick("heart_from_isaac_beat", src)
 
+/atom/movable/screen/cursed_heart/proc/display_text(mob/viewer, text, color, beat_time)
+	if(!viewer.client)
+		return
+	var/image/alert = image(loc = src, layer = ABOVE_MOB_LAYER, pixel_x = rand(-8, 8))
+	alert.plane = HUD_PLANE
+	alert.maptext = MAPTEXT("<span style='text-align: center; -dm-text-outline: 1px #0005'><font color='[color]'>[text]</font></span>")
+	viewer.client?.images += alert
+	animate(
+		alert,
+		pixel_y = world.icon_size * 1.2,
+		time = beat_time*0.2,
+		easing = SINE_EASING | EASE_OUT,
+	)
+	animate(
+		alert,
+		alpha = 0,
+		time = beat_time*0.3,
+		easing = CUBIC_EASING | EASE_IN,
+	)
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_image_from_client, alert, viewer.client), beat_time*0.5)
+
 /atom/movable/screen/cursed_heart_bar
 	icon_state = "heart_bar"
 	screen_loc = "CENTER,CENTER-4"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	alpha = 150
-
-/atom/movable/screen/cursed_heart_bar/Initialize(mapload, time)
-	. = ..()
-	if(time)
-		QDEL_IN(src, time)
+	alpha = 50
 
 /obj/item/organ/heart/cybernetic
 	name = "basic cybernetic heart"
