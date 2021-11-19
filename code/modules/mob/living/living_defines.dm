@@ -171,3 +171,6 @@
 	var/body_position_pixel_x_offset = 0
 	///The x amount a mob's sprite should be offset due to the current position they're in
 	var/body_position_pixel_y_offset = 0
+
+	///The bestiary description of the mob
+	var/bestiary_description = ""

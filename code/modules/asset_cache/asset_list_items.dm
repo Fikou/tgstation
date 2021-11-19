@@ -520,6 +520,37 @@
 		"inventory-collar.png" = 'icons/ui_icons/inventory/collar.png',
 	)
 
+/datum/asset/simple/bestiary
+	assets = list(
+		"paper_texture.png" = 'icons/ui_icons/bestiary/_paper_texture.png',
+		"watcher.png" = 'icons/ui_icons/bestiary/watcher.png',
+	)
+
+/datum/asset/spritesheet/bestiarymobs
+	name = "bestiarymobs"
+
+/datum/asset/spritesheet/bestiarymobs/register()
+	for(var/path in subtypesof(/mob/living))
+		var/mob/living/mob = path
+		if(!initial(mob.bestiary_description))
+			continue
+		if(sprites[sanitize_css_class_name(initial(mob.bestiary_description))])
+			continue
+		var/icon_file = initial(mob.icon)
+		var/icon_state = initial(mob.icon_state)
+		var/icon/icon = icon(icon_file, icon_state, SOUTH)
+		var/height_scale = icon.Height() / world.icon_size
+		var/width_scale = icon.Width() / world.icon_size
+		if(height_scale > 1 || width_scale > 1)
+			if(height_scale > width_scale)
+				icon.Scale(icon.Width() / height_scale, icon.Height() / height_scale)
+			else
+				icon.Scale(icon.Width() / width_scale, icon.Height() / width_scale)
+			var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
+			icon = out_icon.Blend(icon, ICON_OR)
+		Insert(initial(mob.icon_state), icon)
+	return ..()
+
 /// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
 /proc/sanitize_css_class_name(name)
 	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")

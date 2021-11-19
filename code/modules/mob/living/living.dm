@@ -2168,3 +2168,13 @@
 			span_userdanger("You're thrown violently into [lattice], smashing through it and punching straight through!"))
 		apply_damage(rand(5,10), BRUTE, BODY_ZONE_CHEST)
 		lattice.deconstruct(FALSE)
+
+/// Adds a bestiary point to the mob's last attacker
+/mob/living/proc/add_bestiary_point()
+	if(!bestiary_description || !lastattackerckey || flags_1 & ADMIN_SPAWNED_1) //if we dont have a bestiary description, we probably dont have a bestiary entry
+		return
+	var/mob/last_attacker = get_mob_by_ckey(lastattackerckey)
+	if(last_attacker?.status_flags & GODMODE)
+		return
+	var/datum/player_details/details = GLOB.player_details[lastattackerckey]
+	details.bestiary.killcount[bestiary_description]++

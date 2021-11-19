@@ -129,6 +129,7 @@
 	lava_drinker = FALSE
 	search_objects = 1
 	wanted_objects = list(/obj/item/pen/survival, /obj/item/stack/ore/diamond)
+	bestiary_description = "A levitating, eye-like creature held aloft by winglike formations of sinew. A sharp spine of crystal protrudes from its body."
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/Initialize(mapload)
 	. = ..()
@@ -173,6 +174,7 @@
 	projectiletype = /obj/projectile/temp/basilisk/magmawing
 	crusher_loot = /obj/item/crusher_trophy/blaster_tubes/magma_wing
 	crusher_drop_mod = 60
+	bestiary_description = "When raised very close to lava, some watchers adapt to the extreme heat and use lava as both a weapon and wings."
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing
 	name = "icewing watcher"
@@ -187,6 +189,7 @@
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/bone = 1) //No sinew; the wings are too fragile to be usable
 	crusher_loot = /obj/item/crusher_trophy/watcher_wing/ice_wing
 	crusher_drop_mod = 30
+	bestiary_description = "Very rarely, some watchers will eke out an existence far from heat sources. In the absence of warmth, they become icy and fragile but fire much stronger freezing blasts."
 
 /obj/projectile/temp/basilisk/magmawing
 	name = "scorching blast"

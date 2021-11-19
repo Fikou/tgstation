@@ -10,9 +10,11 @@ GLOBAL_LIST_EMPTY(player_details)
 	var/list/played_names = list() //List of names this key played under this round
 	var/byond_version = "Unknown"
 	var/datum/achievement_data/achievements
+	var/datum/bestiary_data/bestiary
 
 /datum/player_details/New(key)
 	achievements = new(key)
+	bestiary = new(key)
 
 /proc/log_played_names(ckey, ...)
 	if(!ckey)

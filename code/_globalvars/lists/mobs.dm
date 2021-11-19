@@ -72,6 +72,8 @@ GLOBAL_LIST_INIT(construct_radial_images, list(
 	CONSTRUCT_ARTIFICER = image(icon = 'icons/mob/cult.dmi', icon_state = "artificer")
 ))
 
+GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
+
 /proc/update_config_movespeed_type_lookup(update_mobs = TRUE)
 	var/list/mob_types = list()
 	var/list/entry_value = CONFIG_GET(keyed_list/multiplicative_movespeed)
@@ -107,3 +109,17 @@ GLOBAL_LIST_INIT(construct_radial_images, list(
 				.[E.key_third_person] = list(E)
 			else
 				.[E.key_third_person] |= E
+
+/proc/generate_bestiary_entries()
+	var/list/bestiary_entries = list()
+	for(var/path in subtypesof(/mob/living))
+		var/mob/living/mob = path
+		if(!initial(mob.bestiary_description))
+			continue
+		if(bestiary_entries[initial(mob.bestiary_description)])
+			continue
+		bestiary_entries[initial(mob.bestiary_description)] = list(
+			"name" = initial(mob.name),
+			"icon" = initial(mob.icon_state),
+		)
+	return bestiary_entries

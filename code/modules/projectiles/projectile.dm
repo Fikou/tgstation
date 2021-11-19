@@ -292,8 +292,11 @@
 		for(var/datum/reagent/R in reagents.reagent_list)
 			reagent_note += "[R.name] ([num2text(R.volume)])"
 
-	if(ismob(firer))
-		log_combat(firer, L, "shot", src, reagent_note)
+	if(isliving(firer))
+		var/mob/living/living_firer = firer
+		log_combat(living_firer, L, "shot", src, reagent_note)
+		L.lastattacker = living_firer.real_name
+		L.lastattackerckey = living_firer.ckey
 	else
 		L.log_message("has been shot by [firer] with [src]", LOG_ATTACK, color="orange")
 
