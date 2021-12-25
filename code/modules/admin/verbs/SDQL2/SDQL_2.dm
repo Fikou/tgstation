@@ -661,6 +661,13 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/sdql2_vv_all, new(null
 			SDQL2_TICK_CHECK
 			SDQL2_HALT_CHECK
 
+	else if(ispath(type, /image))
+		for(var/image/d in location)
+			if(typecache[d.type] && (d.can_vv_get() || superuser))
+				out += d
+			SDQL2_TICK_CHECK
+			SDQL2_HALT_CHECK
+
 	else if(ispath(type, /datum))
 		if(location == world) //snowflake for byond shortcut
 			for(var/datum/d) //stupid byond trick to have it not return atoms to make this less laggy
