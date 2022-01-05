@@ -364,7 +364,10 @@
 /obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, params)
 	user.changeNext_move(CLICK_CD_RAPID)
 	user.do_attack_animation(target, "nothing")
-	new /obj/effect/temp_visual/slash(get_turf(target))
+	var/list/modifiers = params2list(params)
+	var/atom/slash = new /obj/effect/temp_visual/slash(get_turf(target))
+	slash.pixel_x = text2num(modifiers["icon-x"]) - world.icon_size/2
+	slash.pixel_y = text2num(modifiers["icon-y"]) - world.icon_size/2
 	playsound(src, 'sound/weapons/bladeslice.ogg', 75, vary = TRUE)
 	playsound(src, 'sound/weapons/zapbang.ogg', 50, vary = TRUE)
 	if(isliving(target))
@@ -384,4 +387,4 @@
 	. = ..()
 	var/matrix/matrix = matrix(transform)
 	transform = matrix.Turn(rand(1, 360))
-	animate(src, duration, color = COLOR_CYAN, transform = matrix.Scale(2), alpha = 255)
+	animate(src, duration, color = COLOR_YELLOW, transform = matrix.Scale(2), alpha = 255)
