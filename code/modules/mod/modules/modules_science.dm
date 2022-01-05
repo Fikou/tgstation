@@ -323,3 +323,65 @@
 
 /obj/item/mod/module/anomaly_locked/teleporter/prebuilt
 	prebuilt = TRUE
+
+///Blade - Extends a high-frequency blade
+/obj/item/mod/module/anomaly_locked/blade
+	name = "MOD blade module"
+	desc = "A module that uses a flux anomaly to power a high-frequency blade."
+	icon_state = "blade"
+	module_type = MODULE_ACTIVE
+	complexity = 3
+	active_power_cost = DEFAULT_CELL_DRAIN
+	device = /obj/item/highfrequencyblade
+	cooldown_time = 0.5 SECONDS
+	accepted_anomalies = list(/obj/item/assembly/signaler/anomaly/flux)
+
+/obj/item/mod/module/anomaly_locked/blade/prebuilt
+	prebuilt = TRUE
+
+/obj/item/highfrequencyblade
+	name = "high frequency blade"
+	desc = "A sword reinforced by a powerful alternating current and resonating at extremely high vibration frequencies. \
+		This oscillation weakens the molecular bonds of anything it cuts, thereby increasing its cutting ability. "
+	icon_state = "hfrequency1"
+	inhand_icon_state = "hfrequency1"
+	worn_icon_state = "hfrequency0"
+	force = 15
+	sharpness = SHARP_EDGED
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+
+/obj/item/highfrequencyblade/attack(mob/living/target, mob/living/user, params)
+	if(!isliving(target))
+		return
+	slash(target, user, params)
+
+/obj/item/highfrequencyblade/attack_atom(atom/target, mob/living/user, params)
+	if(isobj(target) && !(ismachinery(target) || isstructure(target)))
+		return
+	slash(target, user, params)
+
+/obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, params)
+	user.changeNext_move(CLICK_CD_RAPID)
+	user.do_attack_animation(target, "nothing")
+	new /obj/effect/temp_visual/slash(get_turf(target))
+	playsound(src, 'sound/weapons/bladeslice.ogg', 75, vary = TRUE)
+	playsound(src, 'sound/weapons/zapbang.ogg', 50, vary = TRUE)
+	if(isliving(target))
+		var/mob/living/living_target = target
+		living_target.apply_damage(force, BRUTE, sharpness = SHARP_EDGED, wound_bonus = 30, def_zone = user.zone_selected)
+	else
+		target.take_damage(force*2, BRUTE, MELEE, FALSE, null, 50)
+
+/obj/effect/temp_visual/slash
+	icon_state = "slash"
+	icon = 'icons/obj/mod.dmi'
+	alpha = 150
+	duration = 0.5 SECONDS
+	plane = ABOVE_GAME_PLANE
+
+/obj/effect/temp_visual/slash/Initialize(mapload)
+	. = ..()
+	var/matrix/matrix = matrix(transform)
+	transform = matrix.Turn(rand(1, 360))
+	animate(src, duration, color = COLOR_CYAN, transform = matrix.Scale(2), alpha = 255)
