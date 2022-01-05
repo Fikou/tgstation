@@ -361,8 +361,13 @@
 		return
 	slash(target, user, params)
 
+/obj/item/highfrequencyblade/afterattack(atom/target, mob/user, proximity_flag, params)
+	if(!proximity_flag || !isclosedturf(target))
+		return
+	slash(target, user, params)
+
 /obj/item/highfrequencyblade/proc/slash(atom/target, mob/living/user, params)
-	user.changeNext_move(CLICK_CD_RAPID)
+	user.changeNext_move(1)
 	user.do_attack_animation(target, "nothing")
 	var/list/modifiers = params2list(params)
 	var/atom/slash = new /obj/effect/temp_visual/slash(get_turf(target))
@@ -372,7 +377,7 @@
 	playsound(src, 'sound/weapons/zapbang.ogg', 50, vary = TRUE)
 	if(isliving(target))
 		var/mob/living/living_target = target
-		living_target.apply_damage(force, BRUTE, sharpness = SHARP_EDGED, wound_bonus = 30, def_zone = user.zone_selected)
+		living_target.apply_damage(force, BRUTE, sharpness = SHARP_EDGED, wound_bonus = 50, def_zone = user.zone_selected)
 	else
 		target.take_damage(force*2, BRUTE, MELEE, FALSE, null, 50)
 
@@ -387,4 +392,4 @@
 	. = ..()
 	var/matrix/matrix = matrix(transform)
 	transform = matrix.Turn(rand(1, 360))
-	animate(src, duration, color = COLOR_YELLOW, transform = matrix.Scale(2), alpha = 255)
+	animate(src, duration*0.5, color = COLOR_BLUE, transform = matrix.Scale(2), alpha = 255)
