@@ -86,6 +86,7 @@
 /mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck
 	name = "gubbuck"
 	gender = MALE
+	bestiary_description = ""
 
 /mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck/Initialize(mapload)
 	. = ..()
@@ -97,11 +98,13 @@
 /mob/living/simple_animal/hostile/asteroid/gutlunch/guthen
 	name = "guthen"
 	gender = FEMALE
+	bestiary_description = ""
 
 /mob/living/simple_animal/hostile/asteroid/gutlunch/grublunch
 	name = "grublunch"
 	wanted_objects = list() //They don't eat.
 	gold_core_spawnable = NO_SPAWN
+	bestiary_description = ""
 	var/growth = 0
 
 //Baby gutlunch

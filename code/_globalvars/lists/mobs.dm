@@ -118,13 +118,16 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 			continue
 		if(bestiary_entries[initial(mob.bestiary_description)])
 			continue
-		mob = new mob() // yea this sucks
+		mob = new mob() // yea this sucks but byond doesnt support initial with lists
 		var/list/loot = list()
 		loot |= mob.butcher_results
 		loot |= mob.guaranteed_butcher_results
 		if(isanimal(mob))
 			var/mob/living/simple_animal/simplemob = mob
 			loot |= simplemob.loot
+		if(ismegafauna(mob))
+			var/mob/living/simple_animal/hostile/megafauna/megafauna = mob
+			loot |= megafauna.crusher_loot
 		if(istype(mob, /mob/living/simple_animal/hostile/asteroid))
 			var/mob/living/simple_animal/hostile/asteroid/asteroidmob = mob
 			loot |= asteroidmob.crusher_loot
@@ -132,7 +135,8 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 		for(var/loot_path in loot)
 			if(ispath(loot_path, /obj/structure/closet))
 				var/atom/loot_container = new loot_path()
-				loot |= loot_container.contents
+				for(var/atom/treasure in loot_container.contents)
+					loot_names |= treasure.name
 				qdel(loot_container)
 				continue
 			else if(!ispath(loot_path) || ispath(loot_path, /obj/effect))

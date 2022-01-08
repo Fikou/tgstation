@@ -14,20 +14,19 @@ export const Bestiary = (props, context) => {
   const beast = data.bestiary_info[index];
   return (
     <Window
-      width={737}
-      height={550}
-      resizable
+      width={765}
+      height={580}
       title="Bestiary">
       <Window.Content
+        scrollable
         style={{
           "background-image": `url("${resolveAsset('paper_texture.png')}")`,
           "background-repeat": "repeat",
           "background-color": '#ffebcd',
-          "background-size": '480px',
           "color": '#37230a',
         }}>
         <Section
-          fill
+          fill={index !== null}
           backgroundColor="rgba(0, 0, 0, 0.1)"
           fontSize="25px">
           {index !== null && (
@@ -48,13 +47,21 @@ export const Bestiary = (props, context) => {
                     Loot
                   </Box>
                   <Box fontSize="15px">
-                    {beast.loot}
+                    {beast.kills > 0 ? (beast.loot.length
+                      ? beast.loot.map(loot => (
+                        <Box key={loot}>
+                          {loot}
+
+                        </Box>
+                      )): 'none') : '???'}
                   </Box>
                 </Box>
-                <Box bold>
-                  {beast.kills > 0 ? capitalize(beast.name) : '???'}
+                <Box>
+                  <Box bold>
+                    {beast.kills > 0 ? capitalize(beast.name) : '???'}
+                  </Box>
+                  {beast.kills > 0 ? beast.desc : 'You have not slain this creature!'}
                 </Box>
-                {beast.kills > 0 ? beast.desc : 'You have not slain this creature!'}
               </span>
               <Box position="absolute" bottom="0px">
                 <Button
@@ -99,6 +106,8 @@ export const Bestiary = (props, context) => {
               {bestiary_info.map((beast, index) => (
                 <Button
                   key={beast.name}
+                  textColor="black"
+                  textAlign="left"
                   color="transparent"
                   width="96px"
                   height="96px"
@@ -113,8 +122,9 @@ export const Bestiary = (props, context) => {
                       beast.icon,
                     ])}
                     style={{
-                      'transform': 'translate(4px, 16px)',
+                      'transform': 'translate(3px, 16px)',
                     }} />
+                  {beast.kills > 0 && '★'}
                 </Button>
               ))}
             </>

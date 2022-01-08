@@ -327,6 +327,7 @@ Difficulty: Hard
 	deathmessage = "Explodes into a pool of blood!"
 	deathsound = 'sound/effects/splat.ogg'
 	true_spawn = FALSE
+	bestiary_description = ""
 	var/move_through_mob
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/Initialize()

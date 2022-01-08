@@ -72,6 +72,7 @@
 	name = "magic polar bear"
 	desc = "It seems sentient somehow."
 	faction = list("neutral")
+	bestiary_description = ""
 
 /obj/item/crusher_trophy/bear_paw
 	name = "polar bear paw"

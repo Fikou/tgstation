@@ -346,6 +346,7 @@
 	crusher_loot = list()
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
 	attack_action_types = list()
+	bestiary_description = ""
 
 /mob/living/simple_animal/hostile/megafauna/dragon/lesser/Initialize()
 	. = ..()

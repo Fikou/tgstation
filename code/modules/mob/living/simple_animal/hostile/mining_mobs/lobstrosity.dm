@@ -56,3 +56,4 @@
 	icon_state = "lobstrosity"
 	icon_living = "lobstrosity"
 	icon_dead = "lobstrosity_dead"
+	bestiary_description = ""
