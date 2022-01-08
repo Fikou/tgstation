@@ -35,6 +35,7 @@
 	stat_attack = HARD_CRIT
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
+	bestiary_description = "A beast that survives by feasting on weaker opponents, they're much stronger with numbers."
 	/// Message for when the wolf decides to start running away
 	var/retreat_message_said = FALSE
 

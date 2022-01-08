@@ -59,6 +59,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	layer = BELOW_MOB_LAYER
 	AIStatus = AI_OFF
 	del_on_death = TRUE
+	bestiary_description = "That name is a bit of a mouthful, but stop paying attention to your mouth they're eating everything!"
 	var/swarmer_spawn_cooldown = 0
 	var/swarmer_spawn_cooldown_amt = 15 SECONDS //Deciseconds between the swarmers we spawn
 	var/call_help_cooldown = 0

@@ -12,9 +12,9 @@ GLOBAL_LIST_EMPTY(player_details)
 	var/datum/achievement_data/achievements
 	var/datum/bestiary_data/bestiary
 
-/datum/player_details/New(key)
-	achievements = new(key)
-	bestiary = new(key)
+/datum/player_details/New(ckey)
+	achievements = new(ckey)
+	bestiary = new(ckey)
 
 /proc/log_played_names(ckey, ...)
 	if(!ckey)

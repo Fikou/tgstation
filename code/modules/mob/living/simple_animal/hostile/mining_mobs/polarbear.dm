@@ -33,6 +33,7 @@
 	stat_attack = HARD_CRIT
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
+	bestiary_description = "An aggressive animal that defends it's territory with incredible power. These beasts don't run from their enemies."
 	/// Message for when the polar bear starts to attack faster
 	var/aggressive_message_said = FALSE
 

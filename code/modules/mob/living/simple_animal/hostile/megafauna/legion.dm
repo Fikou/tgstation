@@ -59,6 +59,7 @@
 							   /datum/action/innate/megafauna_attack/charge_target,
 							   /datum/action/innate/megafauna_attack/create_turrets)
 	small_sprite_type = /datum/action/small_sprite/megafauna/legion
+	bestiary_description = "We are Legion."
 	var/size = 3
 	var/charging = FALSE
 

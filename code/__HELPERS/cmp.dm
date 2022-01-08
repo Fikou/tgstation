@@ -138,6 +138,9 @@ GLOBAL_VAR_INIT(cmp_field, "name")
 /proc/cmp_port_order_asc(datum/port/compare1, datum/port/compare2)
 	return compare1.order - compare2.order
 
+/proc/cmp_bestiary_health_asc(list/entry1, list/entry2)
+	return entry1["health"] - entry2["health"]
+
 /**
  * Sorts crafting recipe requirements before the crafting recipe is inserted into GLOB.crafting_recipes
  *

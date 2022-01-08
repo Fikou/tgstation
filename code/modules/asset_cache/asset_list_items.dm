@@ -510,12 +510,12 @@
 /datum/asset/spritesheet/bestiarymobs
 	name = "bestiarymobs"
 
-/datum/asset/spritesheet/bestiarymobs/register()
+/datum/asset/spritesheet/bestiarymobs/create_spritesheets()
 	for(var/path in subtypesof(/mob/living))
 		var/mob/living/mob = path
 		if(!initial(mob.bestiary_description))
 			continue
-		if(sprites[sanitize_css_class_name(initial(mob.bestiary_description))])
+		if(sprites[initial(mob.icon_state)])
 			continue
 		var/icon_file = initial(mob.icon)
 		var/icon_state = initial(mob.icon_state)
@@ -524,13 +524,14 @@
 		var/width_scale = icon.Width() / world.icon_size
 		if(height_scale > 1 || width_scale > 1)
 			if(height_scale > width_scale)
-				icon.Scale(icon.Width() / height_scale, icon.Height() / height_scale)
+				icon.Scale(FLOOR(icon.Width() / height_scale, 1), FLOOR(icon.Height() / height_scale, 1))
 			else
-				icon.Scale(icon.Width() / width_scale, icon.Height() / width_scale)
-			var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
-			icon = out_icon.Blend(icon, ICON_OR)
-		Insert(initial(mob.icon_state), icon)
-	return ..()
+				icon.Scale(FLOOR(icon.Width() / width_scale, 1), FLOOR(icon.Height() / width_scale, 1))
+		var/icon/output_icon = icon('icons/effects/effects.dmi', "nothing")
+		output_icon.Blend(icon, ICON_OVERLAY)
+		output_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
+		output_icon.Scale(world.icon_size*2, world.icon_size*2)
+		Insert(icon_state, output_icon)
 
 /// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
 /proc/sanitize_css_class_name(name)

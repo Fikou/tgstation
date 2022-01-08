@@ -39,9 +39,8 @@
 	deathsound = 'sound/magic/demon_dies.ogg'
 	deathmessage = "begins to shudder as it becomes transparent..."
 	loot_drop = /obj/item/clothing/neck/cloak/herald_cloak
-
-	can_talk = 1
-
+	can_talk = TRUE
+	bestiary_description = "A monstrous beast which fires deadly projectiles at threats and prey."
 	attack_action_types = list(/datum/action/innate/elite_attack/herald_trishot,
 								/datum/action/innate/elite_attack/herald_directionalshot,
 								/datum/action/innate/elite_attack/herald_teleshot,

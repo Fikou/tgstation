@@ -69,6 +69,7 @@ Difficulty: Hard
 	deathsound = 'sound/magic/enter_blood.ogg'
 	small_sprite_type = /datum/action/small_sprite/megafauna/bubblegum
 	faction = list("mining", "boss", "hell")
+	bestiary_description = "In what passes for a hierarchy among slaughter demons, this one is king."
 	/// Check to see if we should spawn blood
 	var/spawn_blood = TRUE
 	/// Actual time where enrage ends

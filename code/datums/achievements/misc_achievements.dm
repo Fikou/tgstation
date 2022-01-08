@@ -186,3 +186,9 @@
 	desc = "Where's my free smartphone?!?"
 	database_id = MEDAL_CLICKBAIT
 	icon = "bait"
+
+/datum/award/achievement/misc/full_bestiary
+	name = "The Beastmaster"
+	desc = "Fill out the bestiary."
+	database_id = MEDAL_BESTIARY
+	icon = "bestiary"

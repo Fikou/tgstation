@@ -30,6 +30,7 @@
 	retreat_distance = 3
 	minimum_distance = 3
 	pass_flags = PASSTABLE
+	bestiary_description = "A truly alien creature, it is a mass of unknown organic material, constantly fluctuating. When attacking, pieces of it split off and attack in tandem with the original."
 	loot = list(/obj/item/organ/regenerative_core)
 	var/brood_type = /mob/living/simple_animal/hostile/asteroid/hivelordbrood
 	var/has_clickbox = TRUE
@@ -91,6 +92,7 @@
 	pass_flags = PASSTABLE | PASSMOB
 	density = FALSE
 	del_on_death = 1
+	bestiary_description = "A fragment of the original Hivelord, rallying behind its original. One isn't much of a threat, but..."
 	var/clickbox_state = "hivelord"
 	var/clickbox_max_scale = INFINITY
 
@@ -128,6 +130,7 @@
 	stat_attack = HARD_CRIT
 	robust_searching = 1
 	has_clickbox = FALSE
+	bestiary_description = "You can still see what was once a human under the shifting mass of corruption."
 	var/dwarf_mob = FALSE
 	var/mob/living/carbon/human/stored_mob
 
@@ -149,6 +152,7 @@
 	speed = 2 //faster!
 	crusher_drop_mod = 20
 	dwarf_mob = TRUE
+	bestiary_description = "You can still see what was once a rather small human under the shifting mass of corruption."
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion/death(gibbed)
 	visible_message(span_warning("The skulls on [src] wail in anger as they flee from their dying host!"))
@@ -197,6 +201,7 @@
 	robust_searching = 1
 	clickbox_state = "sphere"
 	clickbox_max_scale = 2
+	bestiary_description = "One of many."
 	var/can_infest_dead = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/Life(delta_time = SSMOBS_DT, times_fired)
@@ -296,6 +301,7 @@
 	crusher_loot = /obj/item/crusher_trophy/legion_skull
 	loot = list(/obj/item/organ/regenerative_core/legion)
 	brood_type = /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/snow
+	bestiary_description = "You can still see what was once a human under the shifting snowy mass, clearly decorated by a clown."
 
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/snow/make_legion(mob/living/carbon/human/H)
 	return new /mob/living/simple_animal/hostile/asteroid/hivelord/legion/snow(H.loc)
@@ -309,3 +315,4 @@
 	icon_living = "snowlegion_head"
 	icon_aggro = "snowlegion_head"
 	icon_dead = "snowlegion_head"
+	bestiary_description = "One of many. Snow!"

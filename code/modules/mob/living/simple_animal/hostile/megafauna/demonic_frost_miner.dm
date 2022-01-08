@@ -43,6 +43,7 @@ Difficulty: Extremely Hard
 	deathmessage = "falls to the ground, decaying into plasma particles."
 	deathsound = "bodyfall"
 	footstep_type = FOOTSTEP_MOB_HEAVY
+	bestiary_description = "An extremely well-geared miner, driven crazy or possessed by the demonic forces here, either way a terrifying enemy."
 	/// If the demonic frost miner is in its enraged state
 	var/enraged = FALSE
 	/// If the demonic frost miner is currently transforming to its enraged state

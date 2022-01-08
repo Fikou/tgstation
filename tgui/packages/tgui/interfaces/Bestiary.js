@@ -14,7 +14,7 @@ export const Bestiary = (props, context) => {
   const beast = data.bestiary_info[index];
   return (
     <Window
-      width={750}
+      width={737}
       height={550}
       resizable
       title="Bestiary">
@@ -43,6 +43,12 @@ export const Bestiary = (props, context) => {
                   </Box>
                   <Box fontSize="15px">
                     Kills: {beast.kills}
+                  </Box>
+                  <Box>
+                    Loot
+                  </Box>
+                  <Box fontSize="15px">
+                    {beast.loot}
                   </Box>
                 </Box>
                 <Box bold>
@@ -93,16 +99,22 @@ export const Bestiary = (props, context) => {
               {bestiary_info.map((beast, index) => (
                 <Button
                   key={beast.name}
-                  width="128px"
-                  height="128px"
                   color="transparent"
+                  width="96px"
+                  height="96px"
                   tooltip={beast.kills > 0 ? capitalize(beast.name) : '???'}
                   style={{
                     'border-radius': '64px',
                   }}
                   onClick={() => { setIndex(index); }}>
                   <Box
-                    className={classes(['bestiarymobs32x32', beast.icon])} />
+                    className={classes([
+                      'bestiarymobs64x64',
+                      beast.icon,
+                    ])}
+                    style={{
+                      'transform': 'translate(4px, 16px)',
+                    }} />
                 </Button>
               ))}
             </>

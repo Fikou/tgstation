@@ -38,6 +38,7 @@
 	stat_attack = HARD_CRIT
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
+	bestiary_description = "The offspring of an ice drake, weak in comparison but still terrifying."
 	/// How far the whelps fire can go
 	var/fire_range = 4
 

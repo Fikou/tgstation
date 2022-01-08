@@ -36,8 +36,8 @@
 	var/pre_attack = 0
 	var/pre_attack_icon = "Goliath_preattack"
 	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide)
-
 	footstep_type = FOOTSTEP_MOB_HEAVY
+	bestiary_description = "A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions."
 
 /mob/living/simple_animal/hostile/asteroid/goliath/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
@@ -102,7 +102,7 @@
 	loot = list()
 	stat_attack = HARD_CRIT
 	robust_searching = 1
-
+	bestiary_description = "A hulking, armor-plated beast with long tendrils arching from its back."
 	var/can_saddle = FALSE
 	var/saddled = FALSE
 
@@ -155,6 +155,7 @@
 	var/list/cached_tentacle_turfs
 	var/turf/last_location
 	var/tentacle_recheck_cooldown = 100
+	bestiary_description = "Goliaths are biologically immortal, and rare specimens have survived for centuries. This one is clearly ancient, and its tentacles constantly churn the earth around it."
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/ancient/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()

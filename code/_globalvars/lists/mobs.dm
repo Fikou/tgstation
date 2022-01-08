@@ -118,8 +118,32 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 			continue
 		if(bestiary_entries[initial(mob.bestiary_description)])
 			continue
-		bestiary_entries[initial(mob.bestiary_description)] = list(
-			"name" = initial(mob.name),
+		mob = new mob() // yea this sucks
+		var/list/loot = list()
+		loot |= mob.butcher_results
+		loot |= mob.guaranteed_butcher_results
+		if(isanimal(mob))
+			var/mob/living/simple_animal/simplemob = mob
+			loot |= simplemob.loot
+		if(istype(mob, /mob/living/simple_animal/hostile/asteroid))
+			var/mob/living/simple_animal/hostile/asteroid/asteroidmob = mob
+			loot |= asteroidmob.crusher_loot
+		var/list/loot_names = list()
+		for(var/loot_path in loot)
+			if(ispath(loot_path, /obj/structure/closet))
+				var/atom/loot_container = new loot_path()
+				loot |= loot_container.contents
+				qdel(loot_container)
+				continue
+			else if(!ispath(loot_path) || ispath(loot_path, /obj/effect))
+				continue
+			var/atom/loot_atom = loot_path
+			loot_names += initial(loot_atom.name)
+		bestiary_entries[mob.bestiary_description] = list(
+			"name" = mob.name,
 			"icon" = initial(mob.icon_state),
+			"health" = initial(mob.maxHealth),
+			"loot" = loot_names,
 		)
-	return bestiary_entries
+		qdel(mob)
+	return sortTim(bestiary_entries, cmp = /proc/cmp_bestiary_health_asc, associative = TRUE)

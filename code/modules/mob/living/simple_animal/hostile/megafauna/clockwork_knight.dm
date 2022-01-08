@@ -39,6 +39,7 @@ I'd rather there be something than the clockwork ruin be entirely empty though s
 	deathsound = "bodyfall"
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	attack_action_types = list()
+	bestiary_description = "A traitorous clockwork knight who lived on, despite its creators destruction."
 
 /mob/living/simple_animal/hostile/megafauna/clockwork_defender/Initialize(mapload)
 	. = ..()

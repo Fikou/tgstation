@@ -31,7 +31,7 @@
 	search_objects = 1
 	wanted_objects = list(/obj/item/stack/ore/diamond, /obj/item/stack/ore/gold, /obj/item/stack/ore/silver,
 						  /obj/item/stack/ore/uranium)
-
+	bestiary_description = "A worm that grows fat from eating everything in its sight. Seems to enjoy precious metals and other shiny things, hence the name."
 	var/chase_time = 100
 	var/will_burrow = TRUE
 	var/datum/action/innate/goldgrub/spitore/spit

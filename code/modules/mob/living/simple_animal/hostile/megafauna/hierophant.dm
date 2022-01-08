@@ -71,7 +71,7 @@ Difficulty: Hard
 							   /datum/action/innate/megafauna_attack/chaser_swarm,
 							   /datum/action/innate/megafauna_attack/cross_blasts,
 							   /datum/action/innate/megafauna_attack/blink_spam)
-
+	bestiary_description = "A massive metal club that hangs in the air as though waiting. It'll make you dance to its beat."
 	var/burst_range = 3 //range on burst aoe
 	var/beam_range = 5 //range on cross blast beams
 	var/chaser_speed = 3 //how fast chasers are currently

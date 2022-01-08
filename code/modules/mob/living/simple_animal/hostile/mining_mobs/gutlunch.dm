@@ -38,6 +38,7 @@
 	del_on_death = TRUE
 	loot = list(/obj/effect/decal/cleanable/blood/gibs)
 	deathmessage = "is pulped into bugmash."
+	bestiary_description = "A scavenger that eats raw meat, often found alongside ash walkers. Produces a thick, nutritious milk."
 
 	animal_species = /mob/living/simple_animal/hostile/asteroid/gutlunch
 	childtype = list(/mob/living/simple_animal/hostile/asteroid/gutlunch/grublunch = 100)
