@@ -585,7 +585,7 @@
 /obj/item/grenade/c4/x4,
 /obj/structure/table/reinforced,
 /obj/item/clothing/ears/earmuffs,
-/obj/structure/reagent_dispensers/peppertank/directional/east,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/east,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -824,11 +824,10 @@
 /turf/open/floor/stone,
 /area/centcom/holding)
 "dr" = (
-/mob/living/simple_animal/bot/medbot{
+/mob/living/simple_animal/bot/medbot/stationary{
 	desc = "A little medical robot. You can make out the word \"sincerity\" on its chassis.";
 	name = "Hijikata";
-	radio_key = null;
-	stationary_mode = 1
+	radio_key = null
 	},
 /turf/open/floor/wood/large,
 /area/centcom/holding)
@@ -964,10 +963,6 @@
 	dir = 8
 	},
 /turf/open/floor/wood/tile,
-/area/centcom/holding)
-"ed" = (
-/obj/structure/chair/stool/directional/north,
-/turf/open/floor/wood/parquet,
 /area/centcom/holding)
 "eh" = (
 /obj/structure/chair/office,
@@ -1139,7 +1134,7 @@
 /obj/structure/chair/office{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/intern,
+/obj/effect/mob_spawn/corpse/human/intern,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/centcom/control)
@@ -1599,11 +1594,10 @@
 /turf/open/floor/iron,
 /area/tdome/arena)
 "gV" = (
-/mob/living/simple_animal/bot/medbot{
+/mob/living/simple_animal/bot/medbot/stationary{
 	desc = "When engaged in combat, the vanquishing of thine enemy can be the warrior's only concern.";
 	name = "Momo";
-	radio_key = null;
-	stationary_mode = 1
+	radio_key = null
 	},
 /turf/open/floor/sepia,
 /area/centcom/holding)
@@ -1995,7 +1989,7 @@
 /obj/item/grenade/c4/x4,
 /obj/structure/table/reinforced,
 /obj/item/clothing/ears/earmuffs,
-/obj/structure/reagent_dispensers/peppertank/directional/north,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/north,
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
 /area/centcom/control)
@@ -2257,7 +2251,7 @@
 /turf/open/floor/iron,
 /area/centcom/supply)
 "jg" = (
-/obj/structure/reagent_dispensers/peppertank/directional/west,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/west,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -3215,7 +3209,7 @@
 /turf/open/floor/plating/abductor,
 /area/abductor_ship)
 "lj" = (
-/obj/structure/closet/abductor,
+/obj/machinery/limbgrower/fullupgrade,
 /turf/open/floor/plating/abductor,
 /area/abductor_ship)
 "lk" = (
@@ -3999,7 +3993,7 @@
 /turf/open/floor/iron/dark,
 /area/centcom/control)
 "mW" = (
-/obj/structure/reagent_dispensers/peppertank/directional/west,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/west,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
@@ -5862,7 +5856,7 @@
 /obj/item/storage/box/silver_ids,
 /obj/structure/table/reinforced,
 /obj/machinery/newscaster/security_unit/directional/north,
-/obj/structure/reagent_dispensers/peppertank/directional/east,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/east,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -9485,7 +9479,7 @@
 /obj/structure/table/wood,
 /obj/item/storage/photo_album,
 /obj/item/camera,
-/obj/structure/reagent_dispensers/peppertank/directional/north,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/north,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -9828,7 +9822,7 @@
 	},
 /obj/item/storage/box/silver_ids,
 /obj/structure/table/reinforced,
-/obj/structure/reagent_dispensers/peppertank/directional/east,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/east,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -10684,7 +10678,7 @@
 /obj/structure/table/reinforced,
 /obj/item/storage/box/syringes,
 /obj/item/gun/syringe/rapidsyringe,
-/obj/structure/reagent_dispensers/peppertank/directional/south,
+/obj/structure/reagent_dispensers/wall/peppertank/directional/south,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
@@ -14894,6 +14888,7 @@
 "RQ" = (
 /obj/structure/closet/abductor,
 /obj/item/storage/box/alienhandcuffs,
+/obj/item/reagent_containers/glass/beaker/synthflesh,
 /turf/open/floor/plating/abductor,
 /area/abductor_ship)
 "RU" = (
@@ -14937,11 +14932,10 @@
 /turf/open/floor/iron/dark,
 /area/centcom/admin)
 "Sa" = (
-/mob/living/simple_animal/bot/medbot{
+/mob/living/simple_animal/bot/medbot/stationary{
 	desc = "When engaged in combat, the vanquishing of thine enemy can be the warrior's only concern.";
 	name = "Hattori";
-	radio_key = null;
-	stationary_mode = 1
+	radio_key = null
 	},
 /turf/open/floor/sepia,
 /area/centcom/holding)
@@ -14961,7 +14955,7 @@
 /area/centcom/supplypod/loading/two)
 "Sh" = (
 /obj/structure/table/reinforced,
-/obj/item/clothing/suit/space/hardsuit/deathsquad{
+/obj/item/mod/control/pre_equipped/corporate{
 	pixel_y = 5
 	},
 /obj/item/clothing/gloves/combat,
@@ -15956,15 +15950,6 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/plating/beach/sand,
 /area/centcom/holding)
-"VX" = (
-/obj/structure/chair/stool/directional/east,
-/obj/effect/landmark/start/nukeop,
-/obj/effect/turf_decal/tile/bar,
-/obj/effect/turf_decal/tile/bar{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/syndicate_mothership/control)
 "VZ" = (
 /obj/structure/closet/secure_closet/ert_med,
 /obj/structure/sign/directions/medical{
@@ -44163,7 +44148,7 @@ es
 bu
 fO
 Pf
-hb
+Sa
 cH
 fO
 Oe
@@ -44420,7 +44405,7 @@ AG
 AG
 Up
 hb
-Sa
+hb
 ge
 fO
 UC
