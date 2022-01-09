@@ -41,6 +41,7 @@
 	loot_drop = /obj/item/clothing/neck/cloak/herald_cloak
 	can_talk = TRUE
 	bestiary_description = "A monstrous beast which fires deadly projectiles at threats and prey."
+	bestiary_id = "herald"
 	attack_action_types = list(/datum/action/innate/elite_attack/herald_trishot,
 								/datum/action/innate/elite_attack/herald_directionalshot,
 								/datum/action/innate/elite_attack/herald_teleshot,
@@ -202,7 +203,7 @@
 	deathsound = 'sound/effects/glassbr1.ogg'
 	del_on_death = TRUE
 	is_mirror = TRUE
-	bestiary_description = ""
+	bestiary_id = null
 	var/mob/living/simple_animal/hostile/asteroid/elite/herald/my_master = null
 
 /mob/living/simple_animal/hostile/asteroid/elite/herald/mirror/Initialize(mapload)

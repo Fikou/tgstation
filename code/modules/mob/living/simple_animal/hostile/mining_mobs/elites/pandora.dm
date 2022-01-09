@@ -40,6 +40,7 @@
 	deathmessage = "'s lights flicker, before its top part falls down."
 	loot_drop = /obj/item/clothing/accessory/pandora_hope
 	bestiary_description = "A large magic box with similar power and design to the Hierophant.  Once it opens, it's not easy to close it."
+	bestiary_id = "pandora"
 	attack_action_types = list(/datum/action/innate/elite_attack/singular_shot,
 								/datum/action/innate/elite_attack/magic_box,
 								/datum/action/innate/elite_attack/pandora_teleport,

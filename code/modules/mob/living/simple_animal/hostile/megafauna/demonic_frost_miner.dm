@@ -44,6 +44,7 @@ Difficulty: Extremely Hard
 	deathsound = "bodyfall"
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	bestiary_description = "An extremely well-geared miner, driven crazy or possessed by the demonic forces here, either way a terrifying enemy."
+	bestiary_id = "miner_frost"
 	/// If the demonic frost miner is in its enraged state
 	var/enraged = FALSE
 	/// If the demonic frost miner is currently transforming to its enraged state

@@ -1,7 +1,7 @@
 /datum/bestiary_data
 	///Ckey of this achievement data's owner
 	var/owner_ckey
-	/// List of all entries by the amount of kills.
+	/// List of all entry ids by the amount of kills.
 	var/list/killcount = list()
 
 /datum/bestiary_data/New(ckey)
@@ -23,7 +23,7 @@
 	for(var/bestiary_entry in GLOB.bestiary_entries)
 		var/list/bestiary_data = list()
 		bestiary_data["name"] = GLOB.bestiary_entries[bestiary_entry]["name"]
-		bestiary_data["desc"] = bestiary_entry
+		bestiary_data["desc"] = GLOB.bestiary_entries[bestiary_entry]["desc"]
 		bestiary_data["icon"] = GLOB.bestiary_entries[bestiary_entry]["icon"]
 		bestiary_data["kills"] = killcount[bestiary_entry] || 0
 		bestiary_data["loot"] = GLOB.bestiary_entries[bestiary_entry]["loot"]
@@ -36,23 +36,29 @@
 		ui = new(user, src, "Bestiary")
 		ui.open()
 
-/datum/bestiary_data/proc/check_kills()
-	for(var/bestiary_entry in GLOB.bestiary_entries)
-		if(!killcount[bestiary_entry])
+/datum/bestiary_data/proc/check_completed_bestiary()
+	for(var/bestiary_id in GLOB.bestiary_entries)
+		if(!killcount[bestiary_id])
 			return
 	var/client/bestiary_holder = GLOB.directory[owner_ckey]
-	bestiary_holder.give_award(/datum/award/achievement/misc/full_bestiary, bestiary_holder.mob)
+	bestiary_holder?.give_award(/datum/award/achievement/misc/full_bestiary, bestiary_holder.mob)
 
 /datum/bestiary_data/proc/load_killcount()
-	var/list/killcount_entries = strings("bestiary.json", "killcount", "data/npc_saves")
-	for(var/killcount_entry in killcount_entries)
-
+	killcount = list()
+	var/file_path = "data/player_saves/[owner_ckey[1]]/[owner_ckey]/bestiary.json"
+	if(!fexists(file_path))
+		return
+	var/list/decoded_save = json_decode(file2text(file_path))
+	for(var/beast_type in decoded_save)
+		killcount[beast_type] = decoded_save[beast_type]
 
 /datum/bestiary_data/proc/save_killcount()
-	var/path = "data/player_saves/[owner_ckey[1]]/[owner_ckey]/bestiary.sav"
-	var/savefile/F = new /savefile(path)
-	for(var/bestiary_entry in killcount)
-		WRITE_FILE(F[bestiary_entry], killcount[bestiary_entry])
+	if(!length(killcount))
+		return
+	var/file_path = "data/player_saves/[owner_ckey[1]]/[owner_ckey]/bestiary.json"
+	var/save_file = file(file_path)
+	fdel(save_file)
+	WRITE_FILE(save_file, json_encode(killcount))
 
 /client/verb/viewbestiary()
 	set category = "OOC"

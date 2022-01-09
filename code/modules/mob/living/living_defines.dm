@@ -183,3 +183,5 @@
 
 	///The bestiary description of the mob
 	var/bestiary_description = ""
+	///ID of the mob in the bestiary, for persistence purposes
+	var/bestiary_id

@@ -70,6 +70,7 @@ Difficulty: Hard
 	small_sprite_type = /datum/action/small_sprite/megafauna/bubblegum
 	faction = list("mining", "boss", "hell")
 	bestiary_description = "In what passes for a hierarchy among slaughter demons, this one is king."
+	bestiary_id = "bubblegum"
 	/// Check to see if we should spawn blood
 	var/spawn_blood = TRUE
 	/// Actual time where enrage ends
@@ -327,7 +328,7 @@ Difficulty: Hard
 	deathmessage = "Explodes into a pool of blood!"
 	deathsound = 'sound/effects/splat.ogg'
 	true_spawn = FALSE
-	bestiary_description = ""
+	bestiary_id = null
 	var/move_through_mob
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hallucination/Initialize()

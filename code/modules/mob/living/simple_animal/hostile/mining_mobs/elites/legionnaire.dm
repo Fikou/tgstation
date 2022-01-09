@@ -41,6 +41,7 @@
 	deathmessage = "'s arms reach out before it falls apart onto the floor, lifeless."
 	loot_drop = /obj/item/crusher_trophy/legionnaire_spine
 	bestiary_description = "A towering skeleton, embodying the terrifying power of Legion."
+	bestiary_id = "legionnaire"
 	attack_action_types = list(/datum/action/innate/elite_attack/legionnaire_charge,
 								/datum/action/innate/elite_attack/head_detach,
 								/datum/action/innate/elite_attack/bonfire_teleport,

@@ -40,6 +40,7 @@ I'd rather there be something than the clockwork ruin be entirely empty though s
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	attack_action_types = list()
 	bestiary_description = "A traitorous clockwork knight who lived on, despite its creators destruction."
+	bestiary_id = "clockwork_knight"
 
 /mob/living/simple_animal/hostile/megafauna/clockwork_defender/Initialize(mapload)
 	. = ..()

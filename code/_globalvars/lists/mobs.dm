@@ -114,9 +114,9 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 	var/list/bestiary_entries = list()
 	for(var/path in sortTim(subtypesof(/mob/living), /proc/cmp_typepaths_asc))
 		var/mob/living/mob = path
-		if(!initial(mob.bestiary_description))
+		if(!initial(mob.bestiary_id) || !initial(mob.bestiary_description))
 			continue
-		if(bestiary_entries[initial(mob.bestiary_description)])
+		if(bestiary_entries[initial(mob.bestiary_id)])
 			continue
 		mob = new mob() // yea this sucks but byond doesnt support initial with lists
 		var/list/loot = list()
@@ -144,10 +144,11 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 				continue
 			var/atom/loot_atom = loot_path
 			loot_names += initial(loot_atom.name)
-		bestiary_entries[mob.bestiary_description] = list(
+		bestiary_entries[mob.bestiary_id] = list(
 			"name" = mob.name,
-			"icon" = initial(mob.icon_state),
-			"health" = initial(mob.maxHealth),
+			"desc" = mob.bestiary_description,
+			"icon" = mob.icon_state,
+			"health" = mob.maxHealth,
 			"loot" = loot_names,
 		)
 		qdel(mob)

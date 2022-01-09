@@ -38,6 +38,7 @@
 	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide)
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	bestiary_description = "A massive beast that uses long tentacles to ensnare its prey, threatening them is not advised under any conditions."
+	bestiary_id = "goliath_asteroid"
 
 /mob/living/simple_animal/hostile/asteroid/goliath/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
@@ -103,6 +104,7 @@
 	stat_attack = HARD_CRIT
 	robust_searching = 1
 	bestiary_description = "A hulking, armor-plated beast with long tendrils arching from its back."
+	bestiary_id = "goliath_lavaland"
 	var/can_saddle = FALSE
 	var/saddled = FALSE
 
@@ -152,6 +154,7 @@
 	guaranteed_butcher_results = list()
 	crusher_drop_mod = 30
 	wander = FALSE
+	bestiary_id = "goliath_ancient"
 	var/list/cached_tentacle_turfs
 	var/turf/last_location
 	var/tentacle_recheck_cooldown = 100

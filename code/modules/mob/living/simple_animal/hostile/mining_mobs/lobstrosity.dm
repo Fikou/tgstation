@@ -33,6 +33,7 @@
 	footstep_type = FOOTSTEP_MOB_CLAW
 	gold_core_spawnable = HOSTILE_SPAWN
 	bestiary_description = "A marvel of evolution gone wrong, the frosty ice produces underground lakes where these ill tempered seafood gather. Beware its charge."
+	bestiary_id = "lobstrosity_arctic"
 	/// Charging ability
 	var/datum/action/cooldown/mob_cooldown/charge/basic_charge/charge
 
@@ -56,4 +57,4 @@
 	icon_state = "lobstrosity"
 	icon_living = "lobstrosity"
 	icon_dead = "lobstrosity_dead"
-	bestiary_description = ""
+	bestiary_description = null

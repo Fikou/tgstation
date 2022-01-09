@@ -2126,7 +2126,7 @@
 	if(last_attacker?.status_flags & GODMODE)
 		return
 	var/datum/player_details/details = GLOB.player_details[lastattackerckey]
-	if(!details.bestiary.killcount[bestiary_description])
+	if(!details.bestiary.killcount[bestiary_id])
 		to_chat(last_attacker, span_greenannounce("<b>Bestiary entry unlocked: [capitalize(name)]!</b>"))
-	details.bestiary.killcount[bestiary_description]++
-	details.bestiary.check_kills()
+	details.bestiary.killcount[bestiary_id]++
+	details.bestiary.check_completed_bestiary()

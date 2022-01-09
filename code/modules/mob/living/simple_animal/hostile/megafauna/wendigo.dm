@@ -57,6 +57,7 @@ Difficulty: Hard
 							   /datum/action/innate/megafauna_attack/teleport,
 							   /datum/action/innate/megafauna_attack/shockwave_scream)
 	bestiary_description = "A mythological man-eating legendary creature, you probably aren't going to survive this."
+	bestiary_id = "wendigo"
 	/// Saves the turf the megafauna was created at (spawns exit portal here)
 	var/turf/starting
 	/// Range for wendigo stomping when it moves

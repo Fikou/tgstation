@@ -34,6 +34,7 @@
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
 	bestiary_description = "An aggressive animal that defends it's territory with incredible power. These beasts don't run from their enemies."
+	bestiary_id = "bear_polar"
 	/// Message for when the polar bear starts to attack faster
 	var/aggressive_message_said = FALSE
 
@@ -72,7 +73,7 @@
 	name = "magic polar bear"
 	desc = "It seems sentient somehow."
 	faction = list("neutral")
-	bestiary_description = ""
+	bestiary_id = null
 
 /obj/item/crusher_trophy/bear_paw
 	name = "polar bear paw"

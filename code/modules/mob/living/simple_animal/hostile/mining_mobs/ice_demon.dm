@@ -41,6 +41,7 @@
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
 	bestiary_description = "A creature formed entirely out of ice, bluespace energy emanates from inside of it."
+	bestiary_id = "watcher_demonic"
 	/// Distance the demon will teleport from the target
 	var/teleport_distance = 3
 

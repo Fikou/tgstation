@@ -39,6 +39,7 @@
 	robust_searching = TRUE
 	footstep_type = FOOTSTEP_MOB_CLAW
 	bestiary_description = "The offspring of an ice drake, weak in comparison but still terrifying."
+	bestiary_id = "ice_whelp"
 	/// How far the whelps fire can go
 	var/fire_range = 4
 
