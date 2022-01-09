@@ -1,17 +1,12 @@
 /datum/bestiary_data
 	///Ckey of this achievement data's owner
 	var/owner_ckey
-	///Up to date list of all achievements and their info.
-	var/data = list()
-	///Original status of achievement.
-	var/original_cached_data = list()
-	///Have we done our set-up yet?
-	var/initialized = FALSE
 	/// List of all entries by the amount of kills.
 	var/list/killcount = list()
 
 /datum/bestiary_data/New(ckey)
 	owner_ckey = ckey
+	load_killcount()
 
 /datum/bestiary_data/ui_state(mob/user)
 	return GLOB.always_state
@@ -47,6 +42,17 @@
 			return
 	var/client/bestiary_holder = GLOB.directory[owner_ckey]
 	bestiary_holder.give_award(/datum/award/achievement/misc/full_bestiary, bestiary_holder.mob)
+
+/datum/bestiary_data/proc/load_killcount()
+	var/list/killcount_entries = strings("bestiary.json", "killcount", "data/npc_saves")
+	for(var/killcount_entry in killcount_entries)
+
+
+/datum/bestiary_data/proc/save_killcount()
+	var/path = "data/player_saves/[owner_ckey[1]]/[owner_ckey]/bestiary.sav"
+	var/savefile/F = new /savefile(path)
+	for(var/bestiary_entry in killcount)
+		WRITE_FILE(F[bestiary_entry], killcount[bestiary_entry])
 
 /client/verb/viewbestiary()
 	set category = "OOC"

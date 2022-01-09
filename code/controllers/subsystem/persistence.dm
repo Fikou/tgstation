@@ -45,6 +45,7 @@ SUBSYSTEM_DEF(persistence)
 	SaveRandomizedRecipes()
 	SaveScars()
 	save_custom_outfits()
+	save_bestiary()
 
 /datum/controller/subsystem/persistence/proc/LoadPoly()
 	for(var/mob/living/simple_animal/parrot/poly/P in GLOB.alive_mob_list)
@@ -467,3 +468,8 @@ SUBSYSTEM_DEF(persistence)
 		data += list(outfit.get_json_data())
 
 	WRITE_FILE(file, json_encode(data))
+
+/datum/controller/subsystem/persistence/proc/save_bestiary()
+	for(var/datum/ckey in GLOB.player_details)
+		var/datum/player_details/details = GLOB.player_details[ckey]
+		details.bestiary.save_killcount()

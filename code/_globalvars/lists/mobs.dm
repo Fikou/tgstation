@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 
 /proc/generate_bestiary_entries()
 	var/list/bestiary_entries = list()
-	for(var/path in subtypesof(/mob/living))
+	for(var/path in sortTim(subtypesof(/mob/living), /proc/cmp_typepaths_asc))
 		var/mob/living/mob = path
 		if(!initial(mob.bestiary_description))
 			continue
@@ -134,8 +134,9 @@ GLOBAL_LIST_INIT(bestiary_entries, generate_bestiary_entries())
 		var/list/loot_names = list()
 		for(var/loot_path in loot)
 			if(ispath(loot_path, /obj/structure/closet))
-				var/atom/loot_container = new loot_path()
-				for(var/atom/treasure in loot_container.contents)
+				var/obj/structure/closet/loot_container = new loot_path()
+				loot_container.PopulateContents()
+				for(var/atom/treasure in loot_container)
 					loot_names |= treasure.name
 				qdel(loot_container)
 				continue

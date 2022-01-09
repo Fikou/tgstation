@@ -214,6 +214,12 @@
 			loot = null
 	return ..()
 
+/mob/living/simple_animal/hostile/megafauna/legion/add_bestiary_point()
+	for(var/mob/living/simple_animal/hostile/megafauna/legion/other in GLOB.mob_living_list)
+		if(other != src)
+			return
+	return ..()
+
 ///Splits legion into smaller skulls.
 /mob/living/simple_animal/hostile/megafauna/legion/proc/Split()
 	size--

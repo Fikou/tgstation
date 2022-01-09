@@ -135,7 +135,7 @@
 	var/mob/living/carbon/human/stored_mob
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion/random
-	bestiary_description = ""
+
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion/random/Initialize(mapload)
 	. = ..()
@@ -174,7 +174,6 @@
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/legion/tendril
 	fromtendril = TRUE
-	bestiary_description = ""
 
 //Legion skull
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion
@@ -250,12 +249,10 @@
 	icon_living = "dwarf_legion"
 	icon_aggro = "dwarf_legion"
 	icon_dead = "dwarf_legion"
-	bestiary_description = ""
 
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/advanced
 	stat_attack = DEAD
 	can_infest_dead = TRUE
-	bestiary_description = ""
 
 //Legion that spawns Legions
 /mob/living/simple_animal/hostile/big_legion

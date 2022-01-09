@@ -129,9 +129,6 @@
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/proc/tamed(mob/living/tamer)
 	can_saddle = TRUE
 
-/mob/living/simple_animal/hostile/asteroid/goliath/beast/random
-	bestiary_description = ""
-
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/random/Initialize(mapload)
 	. = ..()
 	if(prob(1))
@@ -180,7 +177,6 @@
 
 /mob/living/simple_animal/hostile/asteroid/goliath/beast/tendril
 	fromtendril = TRUE
-	bestiary_description = ""
 
 //tentacles
 /obj/effect/temp_visual/goliath_tentacle

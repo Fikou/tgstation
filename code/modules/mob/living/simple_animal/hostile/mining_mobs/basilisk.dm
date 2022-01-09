@@ -150,9 +150,6 @@
 			qdel(potential_consumption)
 			visible_message(span_notice("[src] examines [potential_consumption] closer, and telekinetically shatters the pen."))
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/random
-	bestiary_description = ""
-
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/random/Initialize(mapload)
 	. = ..()
 	if(prob(1))
@@ -226,4 +223,3 @@
 
 /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/tendril
 	fromtendril = TRUE
-	bestiary_description = ""

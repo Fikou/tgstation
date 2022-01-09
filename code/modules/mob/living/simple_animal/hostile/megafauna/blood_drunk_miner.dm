@@ -182,10 +182,6 @@ Difficulty: Medium
 
 /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/guidance
 	guidance = TRUE
-	bestiary_description = ""
-
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/hunter
-	bestiary_description = ""
 
 /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/hunter/AttackingTarget()
 	. = ..()
@@ -198,7 +194,6 @@ Difficulty: Medium
 	speed = 8
 	move_to_delay = 8
 	ranged_cooldown_time = 0.8 SECONDS
-	bestiary_description = ""
 
 /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/doom/Initialize(mapload)
 	. = ..()

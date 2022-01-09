@@ -2120,7 +2120,7 @@
 
 /// Adds a bestiary point to the mob's last attacker
 /mob/living/proc/add_bestiary_point()
-	if(!bestiary_description || !lastattackerckey || flags_1 & ADMIN_SPAWNED_1) //if we dont have a bestiary description, we probably dont have a bestiary entry
+	if(!bestiary_description || ckey || !lastattackerckey || flags_1 & ADMIN_SPAWNED_1) //if we dont have a bestiary description, we probably dont have a bestiary entry
 		return
 	var/mob/last_attacker = get_mob_by_ckey(lastattackerckey)
 	if(last_attacker?.status_flags & GODMODE)
