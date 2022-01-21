@@ -13,7 +13,7 @@
 	strip_delay = 10
 	equip_delay_other = 10
 	dynamic_hair_suffix = ""
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/chefhat
+	pocket_storage_component_path = /datum/storage/concrete/pockets/chefhat
 	dog_fashion = /datum/dog_fashion/head/chef
 	///the chance that the movements of a mouse inside of this hat get relayed to the human wearing the hat
 	var/mouse_control_probability = 20
@@ -94,7 +94,7 @@
 	armor = list(MELEE = 25, BULLET = 5, LASER = 25, ENERGY = 35, BOMB = 0, BIO = 0, FIRE = 30, ACID = 50, WOUND = 5)
 	icon_state = "detective"
 	var/candy_cooldown = 0
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/fedora/detective
+	pocket_storage_component_path = /datum/storage/concrete/pockets/small/fedora/detective
 	dog_fashion = /datum/dog_fashion/head/detective
 
 /obj/item/clothing/head/fedora/det_hat/Initialize(mapload)

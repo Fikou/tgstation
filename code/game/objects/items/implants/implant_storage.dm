@@ -11,7 +11,7 @@
 
 /obj/item/implant/storage/removed(source, silent = FALSE, special = 0)
 	if(!special)
-		var/datum/component/storage/lostimplant = GetComponent(/datum/component/storage/concrete/implant)
+		var/datum/storage/lostimplant = GetComponent(/datum/storage/concrete/implant)
 		var/mob/living/implantee = source
 		for (var/obj/item/I in lostimplant.contents())
 			I.add_mob_blood(implantee)
@@ -25,13 +25,12 @@
 	for(var/X in target.implants)
 		if(istype(X, type))
 			var/obj/item/implant/storage/imp_e = X
-			var/datum/component/storage/STR = imp_e.GetComponent(/datum/component/storage)
-			if(!STR || (STR && STR.max_items < max_slot_stacking))
-				imp_e.AddComponent(/datum/component/storage/concrete/implant)
+			if(!imp_e.storage || (imp_e.storage && imp_e.storage.max_items < max_slot_stacking))
+				imp_e.storage.max_items += storage.max_items
 				qdel(src)
 				return TRUE
 			return FALSE
-	AddComponent(/datum/component/storage/concrete/implant)
+	AddComponent(/datum/storage/concrete/implant)
 
 	return ..()
 

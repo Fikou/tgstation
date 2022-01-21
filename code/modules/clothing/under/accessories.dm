@@ -12,7 +12,7 @@
 	/// TRUE if shown as a small icon in corner, FALSE if overlayed
 	var/minimize_when_attached = TRUE
 	/// Whether the accessory has any storage to apply to the clothing it's attached to.
-	var/datum/component/storage/detached_pockets
+	var/datum/storage/detached_pockets
 	/// What equipment slot the accessory attaches to.
 	var/attachment_slot = CHEST
 
@@ -27,7 +27,7 @@
 		to_chat(user, span_warning("There doesn't seem to be anywhere to put [src]..."))
 
 /obj/item/clothing/accessory/proc/attach(obj/item/clothing/under/U, user)
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
+	var/datum/storage/storage = GetComponent(/datum/storage)
 	if(storage)
 		if(SEND_SIGNAL(U, COMSIG_CONTAINS_STORAGE))
 			return FALSE
@@ -231,7 +231,7 @@
 	icon_state = "gold"
 	medaltype = "medal-gold"
 	custom_materials = list(/datum/material/gold=1000)
-	
+
 /obj/item/clothing/accessory/medal/med_medal
 	name = "exemplary performance medal"
 	desc = "A medal awarded to those who have shown distinguished conduct, performance, and initiative within the medical department."
@@ -359,7 +359,7 @@
 	name = "pocket protector"
 	desc = "Can protect your clothing from ink stains, but you'll look like a nerd if you're using one."
 	icon_state = "pocketprotector"
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/pocketprotector
+	pocket_storage_component_path = /datum/storage/concrete/pockets/pocketprotector
 
 /obj/item/clothing/accessory/pocketprotector/full/Initialize(mapload)
 	. = ..()

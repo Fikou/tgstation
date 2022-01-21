@@ -597,7 +597,7 @@
 	permeability_coefficient = 0.05
 	resistance_flags = NONE
 	armor = list(MELEE = 10, BULLET = 10, LASER = 10, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 50, ACID = 50)
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
@@ -659,8 +659,7 @@
 
 /obj/item/storage/belt/chameleon/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.silent = TRUE
+	storage.silent = TRUE
 
 /obj/item/storage/belt/chameleon/emp_act(severity)
 	. = ..()

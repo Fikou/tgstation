@@ -441,20 +441,20 @@
 
 /obj/item/shared_storage/red/Initialize(mapload)
 	. = ..()
-	var/datum/component/storage/STR = AddComponent(/datum/component/storage/concrete)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 15
-	STR.max_items = 21
-	new /obj/item/shared_storage/blue(drop_location(), STR)
+	var/datum/storage/storage = AddComponent(/datum/storage/concrete)
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.max_combined_w_class = 15
+	storage.max_items = 21
+	new /obj/item/shared_storage/blue(drop_location(), storage)
 
-/obj/item/shared_storage/blue/Initialize(mapload, datum/component/storage/concrete/master)
+/obj/item/shared_storage/blue/Initialize(mapload, datum/storage/concrete/master)
 	. = ..()
 	if(!istype(master))
 		return INITIALIZE_HINT_QDEL
-	var/datum/component/storage/STR = AddComponent(/datum/component/storage, master)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 15
-	STR.max_items = 21
+	var/datum/storage/storage = AddComponent(/datum/storage, master)
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.max_combined_w_class = 15
+	storage.max_items = 21
 
 //Book of Babel
 

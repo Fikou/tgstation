@@ -18,13 +18,12 @@
 	///If the UI has the pH meter shown
 	var/show_ph = TRUE
 
-/obj/item/storage/portable_chem_mixer/ComponentInitialize()
+/obj/item/storage/portable_chem_mixer/Initialize(mapload)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_combined_w_class = 200
-	STR.max_items = 50
-	STR.insert_preposition = "in"
-	STR.set_holdable(list(
+	storage.max_combined_w_class = 200
+	storage.max_items = 50
+	storage.insert_preposition = "in"
+	storage.set_holdable(list(
 		/obj/item/reagent_containers/glass/beaker,
 		/obj/item/reagent_containers/glass/bottle,
 		/obj/item/reagent_containers/food/drinks/waterbottle,

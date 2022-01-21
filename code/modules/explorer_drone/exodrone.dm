@@ -71,7 +71,7 @@ GLOBAL_LIST_EMPTY(exodrone_launchers)
 		name_counter[name] = 1
 	GLOB.exodrones += src
 	/// Cargo storage
-	var/datum/component/storage/storage = AddComponent(/datum/component/storage/concrete)
+	var/datum/storage/storage = AddComponent(/datum/storage/concrete)
 	storage.cant_hold = GLOB.blacklisted_cargo_types
 	storage.max_w_class = WEIGHT_CLASS_NORMAL
 	storage.max_items = EXODRONE_CARGO_SLOTS
@@ -153,7 +153,7 @@ GLOBAL_LIST_EMPTY(exodrone_launchers)
 
 /// Resizes storage component depending on slots used by tools.
 /obj/item/exodrone/proc/update_storage_size()
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage/concrete)
+	var/datum/storage/storage = GetComponent(/datum/storage/concrete)
 	storage.max_items = EXODRONE_CARGO_SLOTS - length(tools)
 
 /// Builds ui data for drone storage.

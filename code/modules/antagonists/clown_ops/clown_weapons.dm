@@ -21,7 +21,7 @@
 	strip_delay = 70
 	resistance_flags = NONE
 	permeability_coefficient = 0.05
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 
 /// Recharging rate in PPS (peels per second)
 #define BANANA_SHOES_RECHARGE_RATE 17
@@ -36,7 +36,7 @@
 	strip_delay = 70
 	resistance_flags = NONE
 	permeability_coefficient = 0.05
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	always_noslip = TRUE
 
 /obj/item/clothing/shoes/clown_shoes/banana_shoes/combat/Initialize(mapload)

@@ -192,7 +192,7 @@ GLOBAL_LIST_EMPTY(tcgcard_radial_choices)
 
 /obj/item/tcgcard_deck/Initialize(mapload)
 	. = ..()
-	LoadComponent(/datum/component/storage/concrete/tcg)
+	LoadComponent(/datum/storage/concrete/tcg)
 
 /obj/item/tcgcard_deck/update_icon_state()
 	if(!flipped)
@@ -412,10 +412,9 @@ GLOBAL_LIST_EMPTY(tcgcard_radial_choices)
 
 /obj/item/storage/card_binder/Initialize(mapload)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(list(/obj/item/tcgcard))
-	STR.max_combined_w_class = 120
-	STR.max_items = 60
+	storage.set_holdable(list(/obj/item/tcgcard))
+	storage.max_combined_w_class = 120
+	storage.max_items = 60
 
 ///Returns a list of cards ids of card_cnt weighted by rarity from the pack's tables that have matching series, with gnt_cnt of the guarenteed table.
 /obj/item/cardpack/proc/buildCardListWithRarity(card_cnt, rarity_cnt)

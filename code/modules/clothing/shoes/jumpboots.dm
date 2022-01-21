@@ -4,7 +4,7 @@
 	icon_state = "jetboots"
 	inhand_icon_state = "jetboots"
 	resistance_flags = FIRE_PROOF
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	actions_types = list(/datum/action/item_action/bhop)
 	permeability_coefficient = 0.05
 	strip_delay = 30

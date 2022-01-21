@@ -35,9 +35,8 @@
 
 /obj/item/storage/secure/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_SMALL
-	STR.max_combined_w_class = 14
+	storage.max_w_class = WEIGHT_CLASS_SMALL
+	storage.max_combined_w_class = 14
 
 /obj/item/storage/secure/examine(mob/user)
 	. = ..()
@@ -143,9 +142,8 @@
 
 /obj/item/storage/secure/briefcase/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_combined_w_class = 21
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.max_combined_w_class = 21
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
 
 ///Syndie variant of Secure Briefcase. Contains space cash, slightly more robust.
 /obj/item/storage/secure/briefcase/syndie
@@ -153,7 +151,7 @@
 
 /obj/item/storage/secure/briefcase/syndie/PopulateContents()
 	..()
-	var/datum/component/storage/storage_space = GetComponent(/datum/component/storage)
+	var/datum/storage/storage_space = GetComponent(/datum/storage)
 	for(var/i in 1 to storage_space.max_items - 2)
 		new /obj/item/stack/spacecash/c1000(src)
 
@@ -174,9 +172,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/item/storage/secure/safe, 32)
 
 /obj/item/storage/secure/safe/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(null, list(/obj/item/storage/secure/briefcase))
-	STR.max_w_class = 8 //??
+	storage.set_holdable(null, list(/obj/item/storage/secure/briefcase))
+	storage.max_w_class = 8 //??
 
 /obj/item/storage/secure/safe/PopulateContents()
 	new /obj/item/paper(src)

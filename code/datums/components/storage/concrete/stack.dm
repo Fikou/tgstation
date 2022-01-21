@@ -1,11 +1,11 @@
 //Stack-only storage.
-/datum/component/storage/concrete/stack
+/datum/storage/concrete/stack
 	display_numerical_stacking = TRUE
 	var/max_combined_stack_amount = 300
 	max_w_class = WEIGHT_CLASS_NORMAL
 	max_combined_w_class = WEIGHT_CLASS_NORMAL * 14
 
-/datum/component/storage/concrete/stack/proc/total_stack_amount()
+/datum/storage/concrete/stack/proc/total_stack_amount()
 	. = 0
 	var/atom/real_location = real_location()
 	for(var/i in real_location)
@@ -14,12 +14,12 @@
 			continue
 		. += S.amount
 
-/datum/component/storage/concrete/stack/proc/remaining_space()
+/datum/storage/concrete/stack/proc/remaining_space()
 	return max(0, max_combined_stack_amount - total_stack_amount())
 
 //emptying procs do not need modification as stacks automatically merge.
 
-/datum/component/storage/concrete/stack/_insert_physical_item(obj/item/I, override = FALSE)
+/datum/storage/concrete/stack/_insert_physical_item(obj/item/I, override = FALSE)
 	if(!istype(I, /obj/item/stack))
 		if(override)
 			return ..()
@@ -42,7 +42,7 @@
 	I = S.split_stack(null, can_insert)
 	return ..()
 
-/datum/component/storage/concrete/stack/remove_from_storage(obj/item/I, atom/new_location)
+/datum/storage/concrete/stack/remove_from_storage(obj/item/I, atom/new_location)
 	var/atom/real_location = real_location()
 	var/obj/item/stack/S = I
 	if(!istype(S))
@@ -54,7 +54,7 @@
 		handle_item_insertion(temp)
 	return ..(S, new_location)
 
-/datum/component/storage/concrete/stack/_process_numerical_display()
+/datum/storage/concrete/stack/_process_numerical_display()
 	var/atom/real_location = real_location()
 	. = list()
 	for(var/i in real_location)

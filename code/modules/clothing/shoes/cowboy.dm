@@ -3,7 +3,7 @@
 	desc = "A small sticker lets you know they've been inspected for snakes, It is unclear how long ago the inspection took place..."
 	icon_state = "cowboy_brown"
 	permeability_coefficient = 0.05 //these are quite tall
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	custom_price = PAYCHECK_EASY
 	var/list/occupants = list()
 	var/max_occupants = 4

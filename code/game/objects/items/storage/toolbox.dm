@@ -162,8 +162,7 @@
 
 /obj/item/storage/toolbox/syndicate/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.silent = TRUE
+	storage.silent = TRUE
 
 /obj/item/storage/toolbox/syndicate/PopulateContents()
 	new /obj/item/screwdriver/nuke(src)
@@ -200,9 +199,8 @@
 
 /obj/item/storage/toolbox/artistic/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_combined_w_class = 20
-	STR.max_items = 10
+	storage.max_combined_w_class = 20
+	storage.max_items = 10
 
 /obj/item/storage/toolbox/artistic/PopulateContents()
 	new /obj/item/storage/crayons(src)
@@ -267,10 +265,9 @@
 
 /obj/item/storage/toolbox/infiltrator/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 10
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.set_holdable(list(
+	storage.max_items = 10
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.set_holdable(list(
 		/obj/item/clothing/head/helmet/infiltrator,
 		/obj/item/clothing/suit/armor/vest/infiltrator,
 		/obj/item/clothing/under/syndicate/bloodred,

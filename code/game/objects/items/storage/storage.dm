@@ -3,7 +3,7 @@
 	icon = 'icons/obj/storage.dmi'
 	w_class = WEIGHT_CLASS_NORMAL
 	var/rummage_if_nodrop = TRUE
-	var/component_type = /datum/component/storage/concrete
+	var/component_type = /datum/storage/concrete
 	/// Should we preload the contents of this type?
 	/// BE CAREFUL, THERE'S SOME REALLY NASTY SHIT IN THIS TYPEPATH
 	/// SANTA IS EVIL
@@ -37,7 +37,7 @@
 
 /obj/item/storage/doStrip(mob/who)
 	if(HAS_TRAIT(src, TRAIT_NODROP) && rummage_if_nodrop)
-		var/datum/component/storage/CP = GetComponent(/datum/component/storage)
+		var/datum/storage/CP = GetComponent(/datum/storage)
 		CP.do_quick_empty()
 		return TRUE
 	return ..()
@@ -48,7 +48,7 @@
 /obj/item/storage/proc/PopulateContents()
 
 /obj/item/storage/proc/emptyStorage()
-	var/datum/component/storage/ST = GetComponent(/datum/component/storage)
+	var/datum/storage/ST = GetComponent(/datum/storage)
 	ST.do_quick_empty()
 
 /obj/item/storage/Destroy()

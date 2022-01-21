@@ -1,4 +1,4 @@
-/datum/component/storage/concrete/extract_inventory
+/datum/storage/concrete/extract_inventory
 	max_combined_w_class = WEIGHT_CLASS_TINY * 3
 	max_items = 3
 	insert_preposition = "in"
@@ -14,7 +14,7 @@
 	var/obj/item/slimecross/reproductive/parentSlimeExtract
 
 
-/datum/component/storage/concrete/extract_inventory/Initialize()
+/datum/storage/concrete/extract_inventory/Initialize()
 	. = ..()
 	set_holdable(/obj/item/food/monkeycube)
 	if(!istype(parent, /obj/item/slimecross/reproductive))
@@ -22,13 +22,13 @@
 	parentSlimeExtract = parent
 
 
-/datum/component/storage/concrete/extract_inventory/proc/processCubes(obj/item/slimecross/reproductive/parentSlimeExtract, mob/user)
+/datum/storage/concrete/extract_inventory/proc/processCubes(obj/item/slimecross/reproductive/parentSlimeExtract, mob/user)
 
 	if(length(parentSlimeExtract.contents) >= max_items)
 		QDEL_LIST(parentSlimeExtract.contents)
 		createExtracts(parentSlimeExtract,user)
 
-/datum/component/storage/concrete/extract_inventory/proc/createExtracts(obj/item/slimecross/reproductive/parentSlimeExtract, mob/user)
+/datum/storage/concrete/extract_inventory/proc/createExtracts(obj/item/slimecross/reproductive/parentSlimeExtract, mob/user)
 	var/cores = rand(1,4)
 	playsound(parentSlimeExtract, 'sound/effects/splat.ogg', 40, TRUE)
 	parentSlimeExtract.last_produce = world.time

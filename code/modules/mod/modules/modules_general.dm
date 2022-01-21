@@ -9,7 +9,7 @@
 	complexity = 3
 	incompatible_modules = list(/obj/item/mod/module/storage)
 	/// The storage component of the module.
-	var/datum/component/storage/concrete/storage
+	var/datum/storage/concrete/storage
 	/// Max weight class of items in the storage.
 	var/max_w_class = WEIGHT_CLASS_NORMAL
 	/// Max combined weight of all items in the storage.
@@ -19,7 +19,7 @@
 
 /obj/item/mod/module/storage/Initialize(mapload)
 	. = ..()
-	storage = AddComponent(/datum/component/storage/concrete)
+	storage = AddComponent(/datum/storage/concrete)
 	storage.max_w_class = max_w_class
 	storage.max_combined_w_class = max_combined_w_class
 	storage.max_items = max_items
@@ -27,7 +27,7 @@
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_SET_LOCKSTATE, TRUE)
 
 /obj/item/mod/module/storage/on_install()
-	var/datum/component/storage/modstorage = mod.AddComponent(/datum/component/storage, storage)
+	var/datum/storage/modstorage = mod.AddComponent(/datum/storage, storage)
 	modstorage.max_w_class = max_w_class
 	modstorage.max_combined_w_class = max_combined_w_class
 	modstorage.max_items = max_items
@@ -35,7 +35,7 @@
 	RegisterSignal(mod.chestplate, COMSIG_ITEM_PRE_UNEQUIP, .proc/on_chestplate_unequip)
 
 /obj/item/mod/module/storage/on_uninstall()
-	var/datum/component/storage/modstorage = mod.GetComponent(/datum/component/storage)
+	var/datum/storage/modstorage = mod.GetComponent(/datum/storage)
 	storage.slaves -= modstorage
 	qdel(modstorage)
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_SET_LOCKSTATE, TRUE)

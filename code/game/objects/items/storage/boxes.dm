@@ -462,8 +462,7 @@
 
 /obj/item/storage/box/donkpockets/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(list(/obj/item/food/donkpocket))
+	storage.set_holdable(list(/obj/item/food/donkpocket))
 
 /obj/item/storage/box/donkpockets/donkpocketspicy
 	name = "box of spicy-flavoured donk-pockets"
@@ -504,9 +503,8 @@
 
 /obj/item/storage/box/monkeycubes/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 7
-	STR.set_holdable(list(/obj/item/food/monkeycube))
+	storage.max_items = 7
+	storage.set_holdable(list(/obj/item/food/monkeycube))
 
 /obj/item/storage/box/monkeycubes/PopulateContents()
 	for(var/i in 1 to 5)
@@ -524,9 +522,8 @@
 
 /obj/item/storage/box/gorillacubes/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 3
-	STR.set_holdable(list(/obj/item/food/monkeycube))
+	storage.max_items = 3
+	storage.set_holdable(list(/obj/item/food/monkeycube))
 
 /obj/item/storage/box/gorillacubes/PopulateContents()
 	for(var/i in 1 to 3)
@@ -691,9 +688,8 @@
 
 /obj/item/storage/box/snappops/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(list(/obj/item/toy/snappop))
-	STR.max_items = 8
+	storage.set_holdable(list(/obj/item/toy/snappop))
+	storage.max_items = 8
 
 /obj/item/storage/box/snappops/PopulateContents()
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_FILL_TYPE, /obj/item/toy/snappop)
@@ -715,9 +711,8 @@
 
 /obj/item/storage/box/matches/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 10
-	STR.set_holdable(list(/obj/item/match))
+	storage.max_items = 10
+	storage.set_holdable(list(/obj/item/match))
 
 /obj/item/storage/box/matches/PopulateContents()
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_FILL_TYPE, /obj/item/match)
@@ -750,11 +745,10 @@
 
 /obj/item/storage/box/lights/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 21
-	STR.set_holdable(list(/obj/item/light/tube, /obj/item/light/bulb))
-	STR.max_combined_w_class = 21
-	STR.click_gather = FALSE //temp workaround to re-enable filling the light replacer with the box
+	storage.max_items = 21
+	storage.set_holdable(list(/obj/item/light/tube, /obj/item/light/bulb))
+	storage.max_combined_w_class = 21
+	storage.click_gather = FALSE //temp workaround to re-enable filling the light replacer with the box
 
 /obj/item/storage/box/lights/bulbs/PopulateContents()
 	for(var/i in 1 to 21)
@@ -1228,9 +1222,8 @@
 
 /obj/item/storage/box/gum/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(list(/obj/item/food/bubblegum))
-	STR.max_items = 4
+	storage.set_holdable(list(/obj/item/food/bubblegum))
+	storage.max_items = 4
 
 /obj/item/storage/box/gum/PopulateContents()
 	for(var/i in 1 to 4)

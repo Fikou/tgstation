@@ -18,9 +18,8 @@
 
 /obj/item/storage/briefcase/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 21
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.max_combined_w_class = 21
 
 /obj/item/storage/briefcase/PopulateContents()
 	new /obj/item/pen(src)

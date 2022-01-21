@@ -5,7 +5,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_ID
-	component_type = /datum/component/storage/concrete/wallet
+	component_type = /datum/storage/concrete/wallet
 
 	var/obj/item/card/id/front_id = null
 	var/list/combined_access
@@ -13,9 +13,9 @@
 
 /obj/item/storage/wallet/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage/concrete/wallet)
-	STR.max_items = 4
-	STR.set_holdable(list(
+	var/datum/storage/storage = GetComponent(/datum/storage/concrete/wallet)
+	storage.max_items = 4
+	storage.set_holdable(list(
 		/obj/item/stack/spacecash,
 		/obj/item/holochip,
 		/obj/item/card,

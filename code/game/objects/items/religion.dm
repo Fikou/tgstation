@@ -254,8 +254,7 @@
 
 /obj/item/storage/backpack/bannerpack/Initialize(mapload)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_combined_w_class = 27 //6 more then normal, for the tradeoff of declaring yourself an antag at all times.
+	storage.max_combined_w_class = 27 //6 more then normal, for the tradeoff of declaring yourself an antag at all times.
 
 /obj/item/storage/backpack/bannerpack/red
 	name = "red banner backpack"

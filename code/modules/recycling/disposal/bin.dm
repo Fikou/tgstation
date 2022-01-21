@@ -259,7 +259,7 @@
 	return src
 
 //How disposal handles getting a storage dump from a storage object
-/obj/machinery/disposal/storage_contents_dump_act(datum/component/storage/src_object, mob/user)
+/obj/machinery/disposal/storage_contents_dump_act(datum/storage/src_object, mob/user)
 	. = ..()
 	if(.)
 		return
@@ -286,10 +286,10 @@
 /obj/machinery/disposal/bin/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/storage/bag/trash)) //Not doing component overrides because this is a specific type.
 		var/obj/item/storage/bag/trash/T = I
-		var/datum/component/storage/STR = T.GetComponent(/datum/component/storage)
+		var/datum/storage/storage = T.GetComponent(/datum/storage)
 		to_chat(user, span_warning("You empty the bag."))
 		for(var/obj/item/O in T.contents)
-			STR.remove_from_storage(O,src)
+			storage.remove_from_storage(O,src)
 		T.update_appearance()
 		update_appearance()
 	else

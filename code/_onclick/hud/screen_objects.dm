@@ -246,7 +246,7 @@
 	master = new_master
 
 /atom/movable/screen/close/Click()
-	var/datum/component/storage/S = master
+	var/datum/storage/S = master
 	S.hide_from(usr)
 	return TRUE
 

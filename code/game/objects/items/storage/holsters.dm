@@ -18,10 +18,9 @@
 
 /obj/item/storage/belt/holster/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 1
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.set_holdable(list(
+	storage.max_items = 1
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.set_holdable(list(
 		/obj/item/gun/ballistic/automatic/pistol,
 		/obj/item/gun/ballistic/revolver,
 		/obj/item/gun/energy/e_gun/mini,
@@ -36,10 +35,9 @@
 
 /obj/item/storage/belt/holster/detective/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 3
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.set_holdable(list(
+	storage.max_items = 3
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.set_holdable(list(
 		/obj/item/gun/ballistic/automatic/pistol,
 		/obj/item/ammo_box/magazine/m9mm, // Pistol magazines.
 		/obj/item/ammo_box/magazine/m9mm_aps,
@@ -92,8 +90,7 @@
 
 /obj/item/storage/belt/holster/chameleon/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.silent = TRUE
+	storage.silent = TRUE
 
 /obj/item/storage/belt/holster/chameleon/emp_act(severity)
 	. = ..()
@@ -107,10 +104,9 @@
 
 /obj/item/storage/belt/holster/chameleon/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 2
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.set_holdable(list(
+	storage.max_items = 2
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.set_holdable(list(
 		/obj/item/gun/ballistic/automatic/pistol,
 		/obj/item/ammo_box/magazine/m9mm,
 		/obj/item/ammo_box/magazine/m9mm_aps,
@@ -137,10 +133,9 @@
 
 /obj/item/storage/belt/holster/nukie/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 2
-	STR.max_w_class = WEIGHT_CLASS_BULKY
-	STR.set_holdable(list(
+	storage.max_items = 2
+	storage.max_w_class = WEIGHT_CLASS_BULKY
+	storage.set_holdable(list(
 		/obj/item/gun, // ALL guns.
 		/obj/item/ammo_box/magazine, // ALL magazines.
 		/obj/item/ammo_box/c38, //There isn't a speedloader parent type, so I just put these three here by hand.

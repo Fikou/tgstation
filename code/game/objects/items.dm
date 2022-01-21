@@ -691,7 +691,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	else
 		return
 
-/obj/item/on_exit_storage(datum/component/storage/concrete/master_storage)
+/obj/item/on_exit_storage(datum/storage/concrete/master_storage)
 	. = ..()
 	var/atom/location = master_storage.real_location()
 	do_drop_animation(location)
@@ -1263,7 +1263,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	return
 
 /// Whether or not this item can be put into a storage item through attackby
-/obj/item/proc/attackby_storage_insert(datum/component/storage, atom/storage_holder, mob/user)
+/obj/item/proc/attackby_storage_insert(datum/storage, mob/user)
 	return TRUE
 
 /obj/item/proc/do_pickup_animation(atom/target)

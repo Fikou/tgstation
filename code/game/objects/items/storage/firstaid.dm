@@ -62,11 +62,10 @@
 
 /obj/item/storage/firstaid/medical/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL //holds the same equipment as a medibelt
-	STR.max_items = 12
-	STR.max_combined_w_class = 24
-	STR.set_holdable(list(
+	storage.max_w_class = WEIGHT_CLASS_NORMAL //holds the same equipment as a medibelt
+	storage.max_items = 12
+	storage.max_combined_w_class = 24
+	storage.set_holdable(list(
 		/obj/item/healthanalyzer,
 		/obj/item/dnainjector,
 		/obj/item/reagent_containers/dropper,
@@ -276,8 +275,7 @@
 
 /obj/item/storage/firstaid/tactical/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/storage/firstaid/tactical/PopulateContents()
 	if(empty)
@@ -335,10 +333,9 @@
 
 /obj/item/storage/pill_bottle/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.allow_quick_gather = TRUE
-	STR.click_gather = TRUE
-	STR.set_holdable(list(/obj/item/reagent_containers/pill))
+	storage.allow_quick_gather = TRUE
+	storage.click_gather = TRUE
+	storage.set_holdable(list(/obj/item/reagent_containers/pill))
 
 /obj/item/storage/pill_bottle/suicide_act(mob/user)
 	user.visible_message(span_suicide("[user] is trying to get the cap off [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
@@ -545,10 +542,9 @@
 
 /obj/item/storage/organbox/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_BULKY /// you have to remove it from your bag before opening it but I think that's fine
-	STR.max_combined_w_class = 21
-	STR.set_holdable(list(
+	storage.max_w_class = WEIGHT_CLASS_BULKY /// you have to remove it from your bag before opening it but I think that's fine
+	storage.max_combined_w_class = 21
+	storage.set_holdable(list(
 		/obj/item/organ,
 		/obj/item/bodypart,
 		/obj/item/food/icecream

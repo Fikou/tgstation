@@ -15,11 +15,10 @@
 
 /obj/item/storage/lockbox/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 14
-	STR.max_items = 4
-	STR.locked = TRUE
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.max_combined_w_class = 14
+	storage.max_items = 4
+	storage.locked = TRUE
 
 /obj/item/storage/lockbox/attackby(obj/item/W, mob/user, params)
 	var/locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
@@ -99,11 +98,10 @@
 
 /obj/item/storage/lockbox/medal/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_SMALL
-	STR.max_items = 10
-	STR.max_combined_w_class = 20
-	STR.set_holdable(list(/obj/item/clothing/accessory/medal))
+	storage.max_w_class = WEIGHT_CLASS_SMALL
+	storage.max_items = 10
+	storage.max_combined_w_class = 20
+	storage.set_holdable(list(/obj/item/clothing/accessory/medal))
 
 /obj/item/storage/lockbox/medal/examine(mob/user)
 	. = ..()
@@ -173,12 +171,12 @@
 	name = "security medal box"
 	desc = "A locked box used to store medals to be given to members of the security department."
 	req_access = list(ACCESS_HOS)
-	
+
 /obj/item/storage/lockbox/medal/med
 	name = "medical medal box"
 	desc = "A locked box used to store medals to be given to members of the medical department."
 	req_access = list(ACCESS_CMO)
-	
+
 /obj/item/storage/lockbox/medal/med/PopulateContents()
 	new /obj/item/clothing/accessory/medal/med_medal(src)
 	new /obj/item/clothing/accessory/medal/med_medal2(src)

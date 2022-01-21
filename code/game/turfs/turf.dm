@@ -454,7 +454,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 /turf/proc/Bless()
 	new /obj/effect/blessing(src)
 
-/turf/storage_contents_dump_act(datum/component/storage/src_object, mob/user)
+/turf/storage_contents_dump_act(datum/storage/src_object, mob/user)
 	. = ..()
 	if(.)
 		return
@@ -465,7 +465,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 	var/list/things = src_object.contents()
 	var/datum/progressbar/progress = new(user, things.len, src)
-	while (do_after(usr, 1 SECONDS, src, NONE, FALSE, CALLBACK(src_object, /datum/component/storage.proc/mass_remove_from_storage, src, things, progress)))
+	while (do_after(usr, 1 SECONDS, src, NONE, FALSE, CALLBACK(src_object, /datum/storage.proc/mass_remove_from_storage, src, things, progress)))
 		stoplag(1)
 	progress.end_progress()
 

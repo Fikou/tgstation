@@ -1,9 +1,9 @@
-/datum/component/storage/concrete/bluespace
+/datum/storage/concrete/bluespace
 	var/dumping_range = 8
 	var/dumping_sound = 'sound/items/pshoom.ogg'
 	var/alt_sound = 'sound/items/pshoom_2.ogg'
 
-/datum/component/storage/concrete/bluespace/dump_content_at(atom/dest, mob/M)
+/datum/storage/concrete/bluespace/dump_content_at(atom/dest, mob/M)
 	var/atom/A = parent
 	if(A.Adjacent(M))
 		var/atom/dumping_location = dest.get_dumping_location()

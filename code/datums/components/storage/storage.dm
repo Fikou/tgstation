@@ -2,9 +2,9 @@
 // /mob/proc/ClickOn() in /_onclick/click.dm - clicking items in storages
 // /mob/living/Move() in /modules/mob/living/living.dm - hiding storage boxes on mob movement
 
-/datum/component/storage
+/datum/storage
 	dupe_mode = COMPONENT_DUPE_UNIQUE
-	var/datum/component/storage/concrete/master //If not null, all actions act on master and this is just an access point.
+	var/datum/storage/concrete/master //If not null, all actions act on master and this is just an access point.
 
 	var/list/can_hold //if this is set, only items, and their children, will fit
 	var/list/cant_hold //if this is set, items, and their children, won't fit
@@ -55,7 +55,7 @@
 	var/screen_start_y = 2
 	//End
 
-/datum/component/storage/Initialize(datum/component/storage/concrete/master)
+/datum/storage/Initialize(datum/storage/concrete/master)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 	if(master)
@@ -105,14 +105,14 @@
 
 	update_actions()
 
-/datum/component/storage/Destroy()
+/datum/storage/Destroy()
 	close_all()
 	QDEL_NULL(boxes)
 	QDEL_NULL(closer)
 	LAZYCLEARLIST(is_using)
 	return ..()
 
-/datum/component/storage/PreTransfer()
+/datum/storage/PreTransfer()
 	update_actions()
 
 /// Almost 100% of the time the lists passed into set_holdable are reused for each instance of the component
@@ -124,7 +124,7 @@
 /// ~Lemon
 GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
-/datum/component/storage/proc/set_holdable(list/can_hold_list, list/cant_hold_list)
+/datum/storage/proc/set_holdable(list/can_hold_list, list/cant_hold_list)
 	if(!islist(can_hold_list))
 		can_hold_list = list(can_hold_list)
 	if(!islist(cant_hold_list))
@@ -143,7 +143,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			GLOB.cached_storage_typecaches[unique_key] = typecacheof(cant_hold_list)
 		cant_hold = GLOB.cached_storage_typecaches[unique_key]
 
-/datum/component/storage/proc/generate_hold_desc(can_hold_list)
+/datum/storage/proc/generate_hold_desc(can_hold_list)
 	var/list/desc = list()
 
 	for(var/valid_type in can_hold_list)
@@ -152,7 +152,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	return "\n\t[span_notice("[desc.Join("\n\t")]")]"
 
-/datum/component/storage/proc/update_actions()
+/datum/storage/proc/update_actions()
 	SIGNAL_HANDLER
 
 	QDEL_NULL(modeswitch_action)
@@ -167,7 +167,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			return
 		modeswitch_action.Grant(M)
 
-/datum/component/storage/proc/change_master(datum/component/storage/concrete/new_master)
+/datum/storage/proc/change_master(datum/storage/concrete/new_master)
 	if(new_master == src || (!isnull(new_master) && !istype(new_master)))
 		return FALSE
 	if(master)
@@ -177,28 +177,28 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		master.on_slave_link(src)
 	return TRUE
 
-/datum/component/storage/proc/master()
+/datum/storage/proc/master()
 	if(master == src)
 		return //infinite loops yo.
 	return master
 
-/datum/component/storage/proc/real_location()
-	var/datum/component/storage/concrete/master = master()
+/datum/storage/proc/real_location()
+	var/datum/storage/concrete/master = master()
 	return master? master.real_location() : null
 
-/datum/component/storage/proc/canreach_react(datum/source, list/next)
+/datum/storage/proc/canreach_react(datum/source, list/next)
 	SIGNAL_HANDLER
 
-	var/datum/component/storage/concrete/master = master()
+	var/datum/storage/concrete/master = master()
 	if(!master)
 		return
 	. = COMPONENT_ALLOW_REACH
 	next += master.parent
 	for(var/i in master.slaves)
-		var/datum/component/storage/slave = i
+		var/datum/storage/slave = i
 		next += slave.parent
 
-/datum/component/storage/proc/on_move()
+/datum/storage/proc/on_move()
 	SIGNAL_HANDLER
 
 	var/atom/A = parent
@@ -206,7 +206,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(!L.CanReach(A))
 			hide_from(L)
 
-/datum/component/storage/proc/attack_self(datum/source, mob/M)
+/datum/storage/proc/attack_self(datum/source, mob/M)
 	SIGNAL_HANDLER
 
 	if(locked)
@@ -215,7 +215,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if((M.get_active_held_item() == parent) && allow_quick_empty)
 		INVOKE_ASYNC(src, .proc/quick_empty, M)
 
-/datum/component/storage/proc/preattack_intercept(datum/source, obj/O, mob/M, params)
+/datum/storage/proc/preattack_intercept(datum/source, obj/O, mob/M, params)
 	SIGNAL_HANDLER
 
 	if(!isitem(O) || !click_gather || SEND_SIGNAL(O, COMSIG_CONTAINS_STORAGE))
@@ -234,7 +234,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	INVOKE_ASYNC(src, .proc/async_preattack_intercept, I, M)
 
 ///async functionality from preattack_intercept
-/datum/component/storage/proc/async_preattack_intercept(obj/item/attack_item, mob/pre_attack_mob)
+/datum/storage/proc/async_preattack_intercept(obj/item/attack_item, mob/pre_attack_mob)
 	var/list/things = attack_item.loc.contents.Copy()
 	if(collection_mode == COLLECT_SAME)
 		things = typecache_filter_list(things, typecacheof(attack_item.type))
@@ -249,7 +249,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	progress.end_progress()
 	to_chat(pre_attack_mob, span_notice("You put everything you could [insert_preposition] [parent]."))
 
-/datum/component/storage/proc/handle_mass_item_insertion(list/things, datum/component/storage/src_object, mob/user, datum/progressbar/progress)
+/datum/storage/proc/handle_mass_item_insertion(list/things, datum/storage/src_object, mob/user, datum/progressbar/progress)
 	var/atom/source_real_location = src_object.real_location()
 	for(var/obj/item/I in things)
 		things -= I
@@ -267,7 +267,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	progress.update(progress.goal - things.len)
 	return FALSE
 
-/datum/component/storage/proc/handle_mass_pickup(list/things, atom/thing_loc, list/rejections, datum/progressbar/progress)
+/datum/storage/proc/handle_mass_pickup(list/things, atom/thing_loc, list/rejections, datum/progressbar/progress)
 	var/atom/real_location = real_location()
 	for(var/obj/item/I in things)
 		things -= I
@@ -290,7 +290,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	progress.update(progress.goal - things.len)
 	return FALSE
 
-/datum/component/storage/proc/quick_empty(mob/M)
+/datum/storage/proc/quick_empty(mob/M)
 	var/atom/A = parent
 	if(!M.canUseStorage() || !A.Adjacent(M) || M.incapacitated())
 		return
@@ -306,7 +306,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		stoplag(1)
 	progress.end_progress()
 
-/datum/component/storage/proc/mass_remove_from_storage(atom/target, list/things, datum/progressbar/progress, trigger_on_found = TRUE)
+/datum/storage/proc/mass_remove_from_storage(atom/target, list/things, datum/progressbar/progress, trigger_on_found = TRUE)
 	var/atom/real_location = real_location()
 	for(var/obj/item/I in things)
 		things -= I
@@ -323,7 +323,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	progress.update(progress.goal - length(things))
 	return FALSE
 
-/datum/component/storage/proc/do_quick_empty(atom/_target)
+/datum/storage/proc/do_quick_empty(atom/_target)
 	if(!_target)
 		_target = get_turf(parent)
 	if(usr)
@@ -336,14 +336,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		remove_from_storage(I, _target)
 	return TRUE
 
-/datum/component/storage/proc/set_locked(datum/source, new_state)
+/datum/storage/proc/set_locked(datum/source, new_state)
 	SIGNAL_HANDLER
 
 	locked = new_state
 	if(locked)
 		close_all()
 
-/datum/component/storage/proc/_process_numerical_display()
+/datum/storage/proc/_process_numerical_display()
 	. = list()
 	var/atom/real_location = real_location()
 	for(var/obj/item/I in real_location.contents)
@@ -356,7 +356,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			ND.number++
 
 //This proc determines the size of the inventory to be displayed. Please touch it only if you know what you're doing.
-/datum/component/storage/proc/orient2hud()
+/datum/storage/proc/orient2hud()
 	var/atom/real_location = real_location()
 	var/adjusted_contents = real_location.contents.len
 
@@ -371,7 +371,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	standard_orient_objs(rows, columns, numbered_contents)
 
 //This proc draws out the inventory and places the items on it. It uses the standard position.
-/datum/component/storage/proc/standard_orient_objs(rows, cols, list/obj/item/numerical_display_contents)
+/datum/storage/proc/standard_orient_objs(rows, cols, list/obj/item/numerical_display_contents)
 	boxes.screen_loc = "[screen_start_x]:[screen_pixel_x],[screen_start_y]:[screen_pixel_y] to [screen_start_x+cols-1]:[screen_pixel_x],[screen_start_y+rows-1]:[screen_pixel_y]"
 	var/cx = screen_start_x
 	var/cy = screen_start_y
@@ -405,7 +405,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 					break
 	closer.screen_loc = "[screen_start_x + cols]:[screen_pixel_x],[screen_start_y]:[screen_pixel_y]"
 
-/datum/component/storage/proc/show_to(mob/M)
+/datum/storage/proc/show_to(mob/M)
 	if(!M.client)
 		return FALSE
 	var/atom/real_location = real_location()
@@ -424,11 +424,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	RegisterSignal(M, COMSIG_PARENT_QDELETING, .proc/mob_deleted)
 	return TRUE
 
-/datum/component/storage/proc/mob_deleted(datum/source)
+/datum/storage/proc/mob_deleted(datum/source)
 	SIGNAL_HANDLER
 	hide_from(source)
 
-/datum/component/storage/proc/hide_from(mob/M)
+/datum/storage/proc/hide_from(mob/M)
 	if(M.active_storage == src)
 		M.set_active_storage(null)
 	LAZYREMOVE(is_using, M)
@@ -442,10 +442,10 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	M.client.screen -= real_location.contents
 	return TRUE
 
-/datum/component/storage/proc/close(mob/M)
+/datum/storage/proc/close(mob/M)
 	hide_from(M)
 
-/datum/component/storage/proc/close_all()
+/datum/storage/proc/close_all()
 	SIGNAL_HANDLER
 
 	. = FALSE
@@ -453,17 +453,17 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		close(M)
 		. = TRUE //returns TRUE if any mobs actually got a close(M) call
 
-/datum/component/storage/proc/emp_act(datum/source, severity)
+/datum/storage/proc/emp_act(datum/source, severity)
 	SIGNAL_HANDLER
 
 	if(emp_shielded)
 		return
-	var/datum/component/storage/concrete/master = master()
+	var/datum/storage/concrete/master = master()
 	master.emp_act(source, severity)
 
 //This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.
 //The numbers are calculated from the bottom-left The bottom-left slot being 1,1.
-/datum/component/storage/proc/orient_objs(tx, ty, mx, my)
+/datum/storage/proc/orient_objs(tx, ty, mx, my)
 	var/atom/real_location = real_location()
 	var/cx = tx
 	var/cy = ty
@@ -480,30 +480,30 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	closer.screen_loc = "[mx+1],[my]"
 
 //Resets something that is being removed from storage.
-/datum/component/storage/proc/_removal_reset(atom/movable/thing)
+/datum/storage/proc/_removal_reset(atom/movable/thing)
 	if(!istype(thing))
 		return FALSE
-	var/datum/component/storage/concrete/master = master()
+	var/datum/storage/concrete/master = master()
 	if(!istype(master))
 		return FALSE
 	return master._removal_reset(thing)
 
-/datum/component/storage/proc/_remove_and_refresh(datum/source, atom/movable/gone, direction)
+/datum/storage/proc/_remove_and_refresh(datum/source, atom/movable/gone, direction)
 	SIGNAL_HANDLER
 
 	_removal_reset(gone)
 	refresh_mob_views()
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the new_location target, if that is null it's being deleted
-/datum/component/storage/proc/remove_from_storage(atom/movable/AM, atom/new_location)
+/datum/storage/proc/remove_from_storage(atom/movable/AM, atom/new_location)
 	if(!istype(AM))
 		return FALSE
-	var/datum/component/storage/concrete/master = master()
+	var/datum/storage/concrete/master = master()
 	if(!istype(master))
 		return FALSE
 	return master.remove_from_storage(AM, new_location)
 
-/datum/component/storage/proc/refresh_mob_views()
+/datum/storage/proc/refresh_mob_views()
 	SIGNAL_HANDLER
 
 	var/list/seeing = can_see_contents()
@@ -511,7 +511,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		show_to(i)
 	return TRUE
 
-/datum/component/storage/proc/can_see_contents()
+/datum/storage/proc/can_see_contents()
 	var/list/cansee = list()
 	for(var/mob/M in is_using)
 		if(M.active_storage == src && M.client)
@@ -522,7 +522,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	return cansee
 
 //Tries to dump content
-/datum/component/storage/proc/dump_content_at(atom/dest_object, mob/M)
+/datum/storage/proc/dump_content_at(atom/dest_object, mob/M)
 	var/atom/A = parent
 	var/atom/dump_destination = get_dumping_location(dest_object)
 	if(M.CanReach(A) && dump_destination && M.CanReach(dump_destination))
@@ -534,14 +534,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			return TRUE
 	return FALSE
 
-/datum/component/storage/proc/get_dumping_location(atom/dest_object)
-	var/datum/component/storage/storage = dest_object.GetComponent(/datum/component/storage)
+/datum/storage/proc/get_dumping_location(atom/dest_object)
+	var/datum/storage/storage = dest_object.GetComponent(/datum/storage)
 	if(storage)
 		return storage.real_location()
 	return dest_object.get_dumping_location()
 
 //This proc is called when you want to place an item into the storage item.
-/datum/component/storage/proc/attackby(datum/source, obj/item/I, mob/M, params)
+/datum/storage/proc/attackby(datum/source, obj/item/I, mob/M, params)
 	SIGNAL_HANDLER
 
 	if(!I.attackby_storage_insert(src, parent, M))
@@ -556,7 +556,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 	handle_item_insertion(I, FALSE, M)
 
-/datum/component/storage/proc/return_inv(recursive)
+/datum/storage/proc/return_inv(recursive)
 	var/list/ret = list()
 	ret |= contents()
 	if(recursive)
@@ -565,12 +565,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			SEND_SIGNAL(A, COMSIG_TRY_STORAGE_RETURN_INVENTORY, ret, TRUE)
 	return ret
 
-/datum/component/storage/proc/contents() //ONLY USE IF YOU NEED TO COPY CONTENTS OF REAL LOCATION, COPYING IS NOT AS FAST AS DIRECT ACCESS!
+/datum/storage/proc/contents() //ONLY USE IF YOU NEED TO COPY CONTENTS OF REAL LOCATION, COPYING IS NOT AS FAST AS DIRECT ACCESS!
 	var/atom/real_location = real_location()
 	return real_location.contents.Copy()
 
 //Abuses the fact that lists are just references, or something like that.
-/datum/component/storage/proc/signal_return_inv(datum/source, list/interface, recursive = TRUE)
+/datum/storage/proc/signal_return_inv(datum/source, list/interface, recursive = TRUE)
 	SIGNAL_HANDLER
 
 	if(!islist(interface))
@@ -578,16 +578,16 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	interface |= return_inv(recursive)
 	return TRUE
 
-/datum/component/storage/proc/topic_handle(datum/source, user, href_list)
+/datum/storage/proc/topic_handle(datum/source, user, href_list)
 	SIGNAL_HANDLER
 
 	if(href_list["show_valid_pocket_items"])
 		handle_show_valid_items(source, user)
 
-/datum/component/storage/proc/handle_show_valid_items(datum/source, user)
+/datum/storage/proc/handle_show_valid_items(datum/source, user)
 	to_chat(user, span_notice("[source] can hold: [can_hold_description]"))
 
-/datum/component/storage/proc/mousedrop_onto(datum/source, atom/over_object, mob/M)
+/datum/storage/proc/mousedrop_onto(datum/source, atom/over_object, mob/M)
 	SIGNAL_HANDLER
 
 	set waitfor = FALSE
@@ -617,7 +617,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 	A.add_fingerprint(M)
 
-/datum/component/storage/proc/user_show_to_mob(mob/M, force = FALSE)
+/datum/storage/proc/user_show_to_mob(mob/M, force = FALSE)
 	var/atom/A = parent
 	if(!istype(M))
 		return FALSE
@@ -628,7 +628,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(force || M.CanReach(parent, view_only = TRUE))
 		show_to(M)
 
-/datum/component/storage/proc/mousedrop_receive(datum/source, atom/movable/O, mob/M)
+/datum/storage/proc/mousedrop_receive(datum/source, atom/movable/O, mob/M)
 	SIGNAL_HANDLER
 
 	if(isitem(O))
@@ -641,7 +641,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
-/datum/component/storage/proc/can_be_inserted(obj/item/I, stop_messages = FALSE, mob/M)
+/datum/storage/proc/can_be_inserted(obj/item/I, stop_messages = FALSE, mob/M)
 	if(!istype(I) || (I.item_flags & ABSTRACT))
 		return FALSE //Not an item
 	if(I == parent)
@@ -672,7 +672,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(!stop_messages)
 			to_chat(M, span_warning("[I] is too big for [host]!"))
 		return FALSE
-	var/datum/component/storage/biggerfish = real_location.loc.GetComponent(/datum/component/storage)
+	var/datum/storage/biggerfish = real_location.loc.GetComponent(/datum/storage)
 	if(biggerfish && biggerfish.max_w_class < max_w_class) //return false if we are inside of another container, and that container has a smaller max_w_class than us (like if we're a bag in a box)
 		if(!stop_messages)
 			to_chat(M, span_warning("[I] can't fit in [host] while [real_location.loc] is in the way!"))
@@ -686,7 +686,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 	if(isitem(host))
 		var/obj/item/IP = host
-		var/datum/component/storage/STR_I = I.GetComponent(/datum/component/storage)
+		var/datum/storage/STR_I = I.GetComponent(/datum/storage)
 		if((I.w_class >= IP.w_class) && STR_I && !allow_big_nesting)
 			if(!stop_messages)
 				to_chat(M, span_warning("[IP] cannot hold [I] as it's a storage item of the same size!"))
@@ -695,20 +695,20 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(!stop_messages)
 			to_chat(M, span_warning("\the [I] is stuck to your hand, you can't put it in \the [host]!"))
 		return FALSE
-	var/datum/component/storage/concrete/master = master()
+	var/datum/storage/concrete/master = master()
 	if(!istype(master))
 		return FALSE
 	return master.slave_can_insert_object(src, I, stop_messages, M)
 
-/datum/component/storage/proc/_insert_physical_item(obj/item/I, override = FALSE)
+/datum/storage/proc/_insert_physical_item(obj/item/I, override = FALSE)
 	return FALSE
 
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The prevent_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/datum/component/storage/proc/handle_item_insertion(obj/item/I, prevent_warning = FALSE, mob/M, datum/component/storage/remote)
+/datum/storage/proc/handle_item_insertion(obj/item/I, prevent_warning = FALSE, mob/M, datum/storage/remote)
 	var/atom/parent = src.parent
-	var/datum/component/storage/concrete/master = master()
+	var/datum/storage/concrete/master = master()
 	if(!istype(master))
 		return FALSE
 	if(silent)
@@ -717,7 +717,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		parent.add_fingerprint(M)
 	. = master.handle_item_insertion_from_slave(src, I, prevent_warning, M)
 
-/datum/component/storage/proc/mob_item_insertion_feedback(mob/user, mob/M, obj/item/I, override = FALSE)
+/datum/storage/proc/mob_item_insertion_feedback(mob/user, mob/M, obj/item/I, override = FALSE)
 	if(silent && !override)
 		return
 	if(rustle_sound)
@@ -730,44 +730,44 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		else if(I && I.w_class >= 3) //Otherwise they can only see large or normal items from a distance...
 			viewing.show_message(span_notice("[M] puts [I] [insert_preposition]to [parent]."), MSG_VISUAL)
 
-/datum/component/storage/proc/update_icon()
+/datum/storage/proc/update_icon()
 	if(isobj(parent))
 		var/obj/O = parent
 		O.update_appearance()
 
-/datum/component/storage/proc/signal_insertion_attempt(datum/source, obj/item/I, mob/M, silent = FALSE, force = FALSE)
+/datum/storage/proc/signal_insertion_attempt(datum/source, obj/item/I, mob/M, silent = FALSE, force = FALSE)
 	SIGNAL_HANDLER
 
 	if((!force && !can_be_inserted(I, TRUE, M)) || (I == parent))
 		return FALSE
 	return handle_item_insertion(I, silent, M)
 
-/datum/component/storage/proc/signal_can_insert(datum/source, obj/item/I, mob/M, silent = FALSE)
+/datum/storage/proc/signal_can_insert(datum/source, obj/item/I, mob/M, silent = FALSE)
 	SIGNAL_HANDLER
 
 	return can_be_inserted(I, silent, M)
 
-/datum/component/storage/proc/show_to_ghost(datum/source, mob/dead/observer/M)
+/datum/storage/proc/show_to_ghost(datum/source, mob/dead/observer/M)
 	SIGNAL_HANDLER
 
 	return user_show_to_mob(M, TRUE)
 
-/datum/component/storage/proc/signal_show_attempt(datum/source, mob/showto, force = FALSE)
+/datum/storage/proc/signal_show_attempt(datum/source, mob/showto, force = FALSE)
 	SIGNAL_HANDLER
 
 	return user_show_to_mob(showto, force)
 
-/datum/component/storage/proc/on_check()
+/datum/storage/proc/on_check()
 	SIGNAL_HANDLER
 
 	return TRUE
 
-/datum/component/storage/proc/check_locked()
+/datum/storage/proc/check_locked()
 	SIGNAL_HANDLER
 
 	return locked
 
-/datum/component/storage/proc/signal_take_type(datum/source, type, atom/destination, amount = INFINITY, check_adjacent = FALSE, force = FALSE, mob/user, list/inserted)
+/datum/storage/proc/signal_take_type(datum/source, type, atom/destination, amount = INFINITY, check_adjacent = FALSE, force = FALSE, mob/user, list/inserted)
 	SIGNAL_HANDLER
 
 	if(!force)
@@ -786,11 +786,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			remove_from_storage(i, destination)
 	return TRUE
 
-/datum/component/storage/proc/remaining_space_items()
+/datum/storage/proc/remaining_space_items()
 	var/atom/real_location = real_location()
 	return max(0, max_items - real_location.contents.len)
 
-/datum/component/storage/proc/signal_fill_type(datum/source, type, amount = 20, force = FALSE)
+/datum/storage/proc/signal_fill_type(datum/source, type, amount = 20, force = FALSE)
 	SIGNAL_HANDLER
 
 	var/atom/real_location = real_location()
@@ -804,7 +804,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	return TRUE
 
 
-/datum/component/storage/proc/on_attack_hand(datum/source, mob/user)
+/datum/storage/proc/on_attack_hand(datum/source, mob/user)
 	SIGNAL_HANDLER
 
 	var/atom/A = parent
@@ -840,32 +840,32 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			show_to(user)
 
 
-/datum/component/storage/proc/signal_on_pickup(datum/source, mob/user)
+/datum/storage/proc/signal_on_pickup(datum/source, mob/user)
 	SIGNAL_HANDLER
 
 	update_actions()
 	for(var/mob/M in can_see_contents() - user)
 		close(M)
 
-/datum/component/storage/proc/signal_take_obj(datum/source, atom/movable/AM, new_loc, force = FALSE)
+/datum/storage/proc/signal_take_obj(datum/source, atom/movable/AM, new_loc, force = FALSE)
 	SIGNAL_HANDLER
 
 	if(!(AM in real_location()))
 		return FALSE
 	return remove_from_storage(AM, new_loc)
 
-/datum/component/storage/proc/signal_quick_empty(datum/source, atom/loctarget)
+/datum/storage/proc/signal_quick_empty(datum/source, atom/loctarget)
 	SIGNAL_HANDLER
 
 	return do_quick_empty(loctarget)
 
-/datum/component/storage/proc/signal_hide_attempt(datum/source, mob/target)
+/datum/storage/proc/signal_hide_attempt(datum/source, mob/target)
 	SIGNAL_HANDLER
 
 	return hide_from(target)
 
 
-/datum/component/storage/proc/open_storage(mob/user)
+/datum/storage/proc/open_storage(mob/user)
 	if(!user.CanReach(parent))
 		user.balloon_alert(user, "can't reach!")
 		return FALSE
@@ -889,7 +889,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	INVOKE_ASYNC(src, .proc/attempt_put_in_hands, to_remove, user)
 
-/datum/component/storage/proc/on_open_storage_click(datum/source, mob/user, list/modifiers)
+/datum/storage/proc/on_open_storage_click(datum/source, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(open_storage(user))
@@ -897,14 +897,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
-/datum/component/storage/proc/on_open_storage_attackby(datum/source, obj/item/weapon, mob/user, params)
+/datum/storage/proc/on_open_storage_attackby(datum/source, obj/item/weapon, mob/user, params)
 	SIGNAL_HANDLER
 
 	if(open_storage(user))
 		return COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN
 
 ///attempt to put an item from contents into the users hands
-/datum/component/storage/proc/attempt_put_in_hands(obj/item/to_remove, mob/user)
+/datum/storage/proc/attempt_put_in_hands(obj/item/to_remove, mob/user)
 	var/atom/parent_as_atom = parent
 
 	parent_as_atom.add_fingerprint(user)
@@ -914,13 +914,13 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 	user.visible_message(span_warning("[user] draws [to_remove] from [parent]!"), span_notice("You draw [to_remove] from [parent]."))
 
-/datum/component/storage/proc/action_trigger(datum/signal_source, datum/action/source)
+/datum/storage/proc/action_trigger(datum/signal_source, datum/action/source)
 	SIGNAL_HANDLER
 
 	gather_mode_switch(source.owner)
 	return COMPONENT_ACTION_BLOCK_TRIGGER
 
-/datum/component/storage/proc/gather_mode_switch(mob/user)
+/datum/storage/proc/gather_mode_switch(mob/user)
 	collection_mode = (collection_mode+1)%3
 	switch(collection_mode)
 		if(COLLECT_SAME)

@@ -22,7 +22,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 
-	component_type = /datum/component/storage/concrete/fish_case
+	component_type = /datum/storage/concrete/fish_case
 
 /obj/item/storage/fish_case/Initialize(mapload)
 	. = ..()

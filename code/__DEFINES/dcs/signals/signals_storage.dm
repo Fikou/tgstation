@@ -1,4 +1,4 @@
-// /datum/component/storage signals
+// /datum/storage signals
 ///() - returns bool.
 #define COMSIG_CONTAINS_STORAGE "is_storage"
 ///(obj/item/inserting, mob/user, silent, force) - returns bool
@@ -26,7 +26,7 @@
 ///(obj/item/insertion_candidate, mob/user, silent) - returns bool
 #define COMSIG_TRY_STORAGE_CAN_INSERT "storage_can_equip"
 
-//from base of atom/movable/on_enter_storage(): (datum/component/storage/concrete/master_storage)
+//from base of atom/movable/on_enter_storage(): (datum/storage/concrete/master_storage)
 #define COMSIG_STORAGE_ENTERED "storage_entered"
-//from base of atom/movable/on_exit_storage(): (datum/component/storage/concrete/master_storage)
+//from base of atom/movable/on_exit_storage(): (datum/storage/concrete/master_storage)
 #define COMSIG_STORAGE_EXITED "storage_exited"

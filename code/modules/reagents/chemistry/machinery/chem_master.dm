@@ -220,9 +220,8 @@
 	data["autoCondiStyle"] = CONDIMASTER_STYLE_AUTO
 	data["isPillBottleLoaded"] = bottle ? 1 : 0
 	if(bottle)
-		var/datum/component/storage/STRB = bottle.GetComponent(/datum/component/storage)
 		data["pillBottleCurrentAmount"] = bottle.contents.len
-		data["pillBottleMaxAmount"] = STRB.max_items
+		data["pillBottleMaxAmount"] = bottle.storage.max_items
 
 	var/beaker_contents[0]
 	if(beaker)
@@ -372,12 +371,9 @@
 			var/obj/item/reagent_containers/pill/P
 			var/target_loc = drop_location()
 			var/drop_threshold = INFINITY
-			if(bottle)
-				var/datum/component/storage/STRB = bottle.GetComponent(
-					/datum/component/storage)
-				if(STRB)
-					drop_threshold = STRB.max_items - bottle.contents.len
-					target_loc = bottle
+			if(bottle?.storage)
+				drop_threshold = bottle.storage.max_items - bottle.contents.len
+				target_loc = bottle
 			for(var/i in 1 to amount)
 				if(i-1 < drop_threshold)
 					P = new/obj/item/reagent_containers/pill(target_loc)

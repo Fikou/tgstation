@@ -9,7 +9,7 @@
 	strip_delay = 40
 	resistance_flags = NONE
 	permeability_coefficient = 0.05 //Thick soles, and covers the ankle
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	lace_time = 12 SECONDS
 
 /obj/item/clothing/shoes/combat/sneakboots
@@ -39,7 +39,7 @@
 	equip_delay_other = 50
 	resistance_flags = NONE
 	permeability_coefficient = 0.05 //Thick soles, and covers the ankle
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	can_be_tied = FALSE
 
 /obj/item/clothing/shoes/jackboots/fast
@@ -55,7 +55,7 @@
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
 	heat_protection = FEET|LEGS
 	max_heat_protection_temperature = SHOES_MAX_TEMP_PROTECT
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	lace_time = 8 SECONDS
 
 /obj/item/clothing/shoes/winterboots/ice_boots
@@ -75,7 +75,7 @@
 	permeability_coefficient = 0.15
 	strip_delay = 20
 	equip_delay_other = 40
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	lace_time = 8 SECONDS
 	species_exception = list(/datum/species/golem/uranium)
 
@@ -90,7 +90,7 @@
 	desc = "Comfy shoes."
 	icon_state = "rus_shoes"
 	inhand_icon_state = "rus_shoes"
-	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
+	pocket_storage_component_path = /datum/storage/concrete/pockets/shoes
 	lace_time = 8 SECONDS
 
 /obj/item/clothing/shoes/discoshoes

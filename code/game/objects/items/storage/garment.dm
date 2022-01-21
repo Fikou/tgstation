@@ -32,13 +32,12 @@
 
 /obj/item/storage/bag/garment/ComponentInitialize()
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.display_numerical_stacking = FALSE
-	STR.max_combined_w_class = 200
-	STR.max_items = 15
-	STR.insert_preposition = "in"
-	STR.set_holdable(list(
+	storage.max_w_class = WEIGHT_CLASS_NORMAL
+	storage.display_numerical_stacking = FALSE
+	storage.max_combined_w_class = 200
+	storage.max_items = 15
+	storage.insert_preposition = "in"
+	storage.set_holdable(list(
 		/obj/item/clothing,
 	))
 

@@ -967,13 +967,13 @@
  * Implement the behaviour for when a user click drags a storage object to your atom
  *
  * This behaviour is usually to mass transfer, but this is no longer a used proc as it just
- * calls the underyling /datum/component/storage dump act if a component exists
+ * calls the underyling /datum/storage dump act if a component exists
  *
  * TODO these should be purely component items that intercept the atom clicks higher in the
  * call chain
  */
 /atom/proc/storage_contents_dump_act(obj/item/storage/src_object, mob/user)
-	if(GetComponent(/datum/component/storage))
+	if(GetComponent(/datum/storage))
 		return component_storage_contents_dump_act(src_object, user)
 	return FALSE
 
@@ -986,15 +986,15 @@
  * TODO these should be purely component items that intercept the atom clicks higher in the
  * call chain
  */
-/atom/proc/component_storage_contents_dump_act(datum/component/storage/src_object, mob/user)
+/atom/proc/component_storage_contents_dump_act(datum/storage/src_object, mob/user)
 	var/list/things = src_object.contents()
 	var/datum/progressbar/progress = new(user, things.len, src)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	while (do_after(user, 1 SECONDS, src, NONE, FALSE, CALLBACK(STR, /datum/component/storage.proc/handle_mass_item_insertion, things, src_object, user, progress)))
+	var/datum/storage/storage = GetComponent(/datum/storage)
+	while (do_after(user, 1 SECONDS, src, NONE, FALSE, CALLBACK(storage, /datum/storage.proc/handle_mass_item_insertion, things, src_object, user, progress)))
 		stoplag(1)
 	progress.end_progress()
-	to_chat(user, span_notice("You dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as you can."))
-	STR.orient2hud(user)
+	to_chat(user, span_notice("You dump as much of [src_object.parent]'s contents [storage.insert_preposition]to [src] as you can."))
+	storage.orient2hud(user)
 	src_object.orient2hud(user)
 	if(user.active_storage) //refresh the HUD to show the transfered contents
 		user.active_storage.close(user)

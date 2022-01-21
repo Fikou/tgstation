@@ -1,4 +1,4 @@
-/datum/component/storage/concrete/wallet/open_storage(mob/user)
+/datum/storage/concrete/wallet/open_storage(mob/user)
 	if(!isliving(user) || !user.CanReach(parent) || user.incapacitated())
 		return FALSE
 	if(locked)

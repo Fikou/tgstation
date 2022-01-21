@@ -10,7 +10,7 @@ If you create T5+ please take a pass at mech_fabricator.dm. The parts being good
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	w_class = WEIGHT_CLASS_HUGE
-	component_type = /datum/component/storage/concrete/rped
+	component_type = /datum/storage/concrete/rped
 	var/works_from_distance = FALSE
 	var/pshoom_or_beepboopblorpzingshadashwoosh = 'sound/items/rped.ogg'
 	var/alt_sound = null
@@ -49,7 +49,7 @@ If you create T5+ please take a pass at mech_fabricator.dm. The parts being good
 	works_from_distance = TRUE
 	pshoom_or_beepboopblorpzingshadashwoosh = 'sound/items/pshoom.ogg'
 	alt_sound = 'sound/items/pshoom_2.ogg'
-	component_type = /datum/component/storage/concrete/bluespace/rped
+	component_type = /datum/storage/concrete/bluespace/rped
 
 /obj/item/storage/part_replacer/bluespace/Initialize(mapload)
 	. = ..()
