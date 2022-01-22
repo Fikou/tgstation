@@ -644,3 +644,127 @@ GLOBAL_DATUM(everyone_a_traitor, /datum/everyone_is_a_traitor_controller)
 		new_objective.explanation_text = objective
 		malfunction_datum.objectives += new_objective
 		player.mind.add_antag_datum(malfunction_datum)
+
+/proc/grimdarkify()
+	if(locate(/datum/grimdark_controller))
+		return
+	var/datum/grimdark_controller/controller = new /datum/grimdark_controller()
+	for(var/mob/mob in GLOB.player_list)
+		controller.grimdarkify(null,mob)
+	for(var/obj/machinery/light/light in GLOB.machines)
+		light.brightness *= 0.75
+		light.nightshift_brightness *= 0.75
+		light.nightshift_allowed = FALSE
+		light.color = "#FFDDCC"
+		light.update()
+
+/datum/grimdark_controller/New(objective)
+	..()
+	RegisterSignal(SSdcs, COMSIG_GLOB_MOB_LOGGED_IN, .proc/grimdarkify)
+
+/datum/grimdark_controller/Destroy()
+	UnregisterSignal(SSdcs, COMSIG_GLOB_MOB_LOGGED_IN)
+	return ..()
+
+/datum/grimdark_controller/proc/grimdarkify(datum/source, mob/new_login)
+	SIGNAL_HANDLER
+	if(isnewplayer(new_login) || !new_login.client)
+		return
+	new_login.overlay_fullscreen("grimdark", /atom/movable/screen/fullscreen/noise)
+	if(isobserver(new_login))
+		new_login.add_client_colour(/datum/client_colour/monochrome)
+		return
+	if(iscameramob(new_login) || new_login.has_movespeed_modifier(/datum/movespeed_modifier/grimdark))
+		return
+	var/mob/living/victim = new_login
+	victim.add_movespeed_modifier(/datum/movespeed_modifier/grimdark)
+	victim.add_fov_trait(type, FOV_90_DEGREES)
+	victim.update_fov()
+	if(victim.combat_mode)
+		victim.set_dir_on_move = FALSE
+	ADD_TRAIT(victim, TRAIT_EASILY_WOUNDED, "grimdark")
+	RegisterSignal(victim, COMSIG_LIVING_LIFE, .proc/on_life)
+	RegisterSignal(victim, COMSIG_MOB_APPLY_DAMAGE, .proc/on_take_damage)
+	RegisterSignal(victim, COMSIG_KB_LIVING_TOGGLE_COMBAT_DOWN, .proc/on_combat_toggle)
+	RegisterSignal(victim, COMSIG_KB_LIVING_ENABLE_COMBAT_DOWN, .proc/on_combat_enable)
+	RegisterSignal(victim, COMSIG_KB_LIVING_DISABLE_COMBAT_DOWN, .proc/on_combat_disable)
+	if(!ishuman(victim))
+		to_chat(victim, span_notice("You feel darker."))
+		return
+	var/mob/living/carbon/human/human_victim = victim
+	if(is_assistant_job(human_victim.mind?.assigned_role))
+		human_victim.undershirt = "Nude"
+		human_victim.socks = "Nude"
+		human_victim.update_body()
+		if(human_victim.shoes)
+			qdel(human_victim.shoes)
+		if(human_victim.gloves)
+			qdel(human_victim.gloves)
+		var/obj/item/card/id/card = human_victim.get_idcard(TRUE)
+		if(card?.registered_account)
+			card.registered_account.account_balance = 0
+		to_chat(human_victim, span_warning("You feel poorer."))
+	else if(is_chaplain_job(human_victim.mind?.assigned_role))
+		var/obj/item/radio/headset/radio = human_victim.ears
+		radio.command = TRUE
+		var/obj/item/encryptionkey/headset_com/key = new(get_turf(human_victim))
+		if(!radio.keyslot)
+			key.forceMove(radio)
+			radio.keyslot = key
+		else if(!radio.keyslot2)
+			key.forceMove(radio)
+			radio.keyslot2 = key
+		var/obj/item/card/id/card = human_victim.get_idcard(TRUE)
+		if(card)
+			card.add_access(list(ACCESS_HEADS, ACCESS_KEYCARD_AUTH, ACCESS_RC_ANNOUNCE))
+		to_chat(human_victim, span_nicegreen("You feel more important."))
+	else
+		to_chat(human_victim, span_notice("You feel grim."))
+
+/datum/grimdark_controller/proc/on_life(mob/living/source, delta_time, times_fired)
+	SIGNAL_HANDLER
+	var/stamina = source.getStaminaLoss()
+	if(stamina >= 90)
+		source.overlay_fullscreen("pain", /atom/movable/screen/fullscreen/pain)
+		if(prob(20))
+			INVOKE_ASYNC(source, /mob/living.proc/emote, "scream")
+	else if(stamina)
+		source.overlay_fullscreen("pain", /atom/movable/screen/fullscreen/pain/weak)
+		if(prob(10))
+			INVOKE_ASYNC(source, /mob/living.proc/emote, "scream")
+	else
+		source.clear_fullscreen("pain", animated = FALSE)
+
+/datum/grimdark_controller/proc/on_take_damage(mob/living/source, damage, damagetype, def_zone)
+	SIGNAL_HANDLER
+	if(source.stat <= SOFT_CRIT && prob(15))
+		INVOKE_ASYNC(source, /mob/living.proc/emote, "scream")
+	if(damagetype == STAMINA)
+		return
+	source.adjustStaminaLoss(damage/2)
+
+/datum/grimdark_controller/proc/on_combat_toggle(mob/living/source)
+	source.set_dir_on_move = !source.set_dir_on_move
+
+/datum/grimdark_controller/proc/on_combat_enable(mob/living/source)
+	source.set_dir_on_move = FALSE
+
+/datum/grimdark_controller/proc/on_combat_disable(mob/living/source)
+	source.set_dir_on_move = TRUE
+
+/datum/movespeed_modifier/grimdark
+	multiplicative_slowdown = 2
+
+/atom/movable/screen/fullscreen/noise
+	icon = 'icons/hud/screen_gen.dmi'
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	icon_state = "noise_alternate"
+	alpha = 110
+
+/atom/movable/screen/fullscreen/pain
+	icon = 'icons/hud/screen_gen.dmi'
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	icon_state = "pain"
+
+/atom/movable/screen/fullscreen/pain/weak
+	icon_state = "weak_pain"
