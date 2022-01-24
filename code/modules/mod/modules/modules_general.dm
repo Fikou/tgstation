@@ -296,7 +296,7 @@
 				balloon_alert(mod.wearer, "too dark!")
 				return
 			set_light_color(value)
-			mod.wearer.update_inv_back()
+			mod.wearer.update_clothing(mod.slot_flags)
 		if("light_range")
 			set_light_range(clamp(value, min_range, max_range))
 
@@ -564,7 +564,7 @@
 	if(mod.wearer.transferItemToLoc(hitting_item, src, force = FALSE, silent = TRUE))
 		attached_hat = hitting_item
 		balloon_alert(user, "hat attached, right-click to remove")
-		mod.wearer.update_inv_back()
+		mod.wearer.update_clothing(mod.slot_flags)
 
 /obj/item/mod/module/hat_stabilizer/generate_worn_overlay()
 	. = ..()
@@ -582,7 +582,7 @@
 	else
 		balloon_alert_to_viewers("the hat falls to the floor!")
 	attached_hat = null
-	mod.wearer.update_inv_back()
+	mod.wearer.update_clothing(mod.slot_flags)
 
 ///Sign Language Translator - allows people to sign over comms using the modsuit's gloves.
 /obj/item/mod/module/signlang_radio
@@ -600,3 +600,50 @@
 
 /obj/item/mod/module/signlang_radio/on_suit_deactivation()
 	REMOVE_TRAIT(mod.wearer, TRAIT_CAN_SIGN_ON_COMMS, MOD_TRAIT)
+
+/obj/item/mod/module/emergency_deploy
+	name = "MOD emergency deploy module"
+	desc = "A module that contains environmental sensors, able to scan the surroundings for improper atmosphere conditions, \
+		If those are detected, the module deploys the suit quickly, to save the user in emergency situations."
+	icon_state = "emergencydeploy"
+	removable = FALSE
+	incompatible_modules = list(/obj/item/mod/module/emergency_deploy)
+
+/obj/item/mod/module/emergency_deploy/on_equip()
+	RegisterSignal(mod.wearer, COMSIG_LIVING_LIFE, .proc/handle_life)
+
+/obj/item/mod/module/emergency_deploy/on_unequip()
+	UnregisterSignal(mod.wearer, COMSIG_LIVING_LIFE)
+
+/obj/item/mod/module/emergency_deploy/proc/handle_life(datum/source, delta_time, times_fired)
+	SIGNAL_HANDLER
+
+	if(mod.active || mod.activating)
+		return
+	var/datum/gas_mixture/air = mod.wearer.return_air()
+	if(!air)
+		return
+	if(air.return_pressure() < WARNING_LOW_PRESSURE)
+		INVOKE_ASYNC(src, .proc/deploy)
+
+/obj/item/mod/module/emergency_deploy/proc/deploy()
+	balloon_alert(mod.wearer, "unsafe environment detected")
+	var/deploy = FALSE
+	for(var/obj/item/part as anything in mod.mod_parts)
+		if(part.loc == mod)
+			deploy = TRUE
+			break
+	if(mod.wearer.head != mod.helmet && !mod.wearer.dropItemToGround(mod.wearer.head))
+		mod.quick_deploy(mod.wearer)
+		return
+	if(mod.wearer.wear_suit != mod.chestplate && !mod.wearer.dropItemToGround(mod.wearer.wear_suit))
+		mod.quick_deploy(mod.wearer)
+		return
+	if(deploy)
+		mod.quick_deploy(mod.wearer)
+	for(var/obj/item/part as anything in mod.mod_parts)
+		if(part.loc == mod)
+			return
+	mod.activation_step_time *= 0.4
+	mod.toggle_activate(mod.wearer)
+	mod.activation_step_time *= 2.5

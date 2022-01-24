@@ -31,6 +31,9 @@
 		/obj/item/mod/module/magboot,
 	)
 
+/obj/item/mod/control/pre_equipped/emergency
+	theme = /datum/mod_theme/emergency
+
 /obj/item/mod/control/pre_equipped/atmospheric
 	theme = /datum/mod_theme/atmospheric
 	initial_modules = list(

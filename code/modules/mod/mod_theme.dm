@@ -21,6 +21,10 @@
 	var/default_skin = "standard"
 	/// Armor shared across the MOD pieces.
 	var/armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 25, ACID = 25, WOUND = 10)
+	/// Weight class of the MOD control unit.
+	var/weight_class = WEIGHT_CLASS_BULKY
+	/// Slot of the MOD control unit
+	var/slot_flag = ITEM_SLOT_BACK
 	/// Resistance flags shared across the MOD pieces.
 	var/resistance_flags = NONE
 	/// Atom flags shared across the MOD pieces.
@@ -81,6 +85,45 @@
 				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
 				UNSEALED_INVISIBILITY = HIDEFACIALHAIR|HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDESNOUT,
 				UNSEALED_COVER = HEADCOVERSMOUTH|HEADCOVERSEYES|PEPPERPROOF,
+			),
+			CHESTPLATE_FLAGS = list(
+				UNSEALED_CLOTHING = THICKMATERIAL,
+				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
+				SEALED_INVISIBILITY = HIDEJUMPSUIT,
+			),
+			GAUNTLETS_FLAGS = list(
+				UNSEALED_CLOTHING = THICKMATERIAL,
+				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
+			),
+			BOOTS_FLAGS = list(
+				UNSEALED_CLOTHING = THICKMATERIAL,
+				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
+			),
+		),
+	)
+
+/datum/mod_theme/emergency
+	name = "emergency"
+	desc = "A lightweight quick-deployment emergency space suit, fitted onto the user's belt."
+	extended_desc = "A belt-fit emergency space suit."
+	default_skin = "emergency"
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 10, ACID = 10, WOUND = 5)
+	slot_flag = ITEM_SLOT_BELT
+	siemens_coefficient = 0.75
+	complexity_max = DEFAULT_MAX_COMPLEXITY-10
+	slowdown_inactive = 0.5
+	slowdown_active = 1
+	inbuilt_modules = list(/obj/item/mod/module/emergency_deploy)
+	module_blacklist = list(/obj/item/mod/module/storage, /obj/item/mod/module/pathfinder)
+	skins = list(
+		"emergency" = list(
+			HELMET_LAYER = NECK_LAYER,
+			HELMET_FLAGS = list(
+				UNSEALED_CLOTHING = SNUG_FIT,
+				SEALED_CLOTHING = THICKMATERIAL|STOPSPRESSUREDAMAGE,
+				UNSEALED_INVISIBILITY = HIDEFACIALHAIR,
+				SEALED_INVISIBILITY = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDESNOUT,
+				SEALED_COVER = HEADCOVERSMOUTH|HEADCOVERSEYES|PEPPERPROOF,
 			),
 			CHESTPLATE_FLAGS = list(
 				UNSEALED_CLOTHING = THICKMATERIAL,

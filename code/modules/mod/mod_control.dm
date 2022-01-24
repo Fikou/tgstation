@@ -98,6 +98,8 @@
 		theme = new_theme
 	theme = GLOB.mod_themes[theme]
 	extended_desc = theme.extended_desc
+	w_class = theme.weight_class
+	slot_flags = theme.slot_flag
 	slowdown_inactive = theme.slowdown_inactive
 	slowdown_active = theme.slowdown_active
 	complexity_max = theme.complexity_max
@@ -200,7 +202,7 @@
 		. += span_notice("Charge: [core ? "[get_charge_percent()]%" : "No core"].")
 		. += span_notice("Selected module: [selected_module || "None"].")
 	if(!open && !active)
-		. += span_notice("You could put it on your <b>back</b> to turn it on.")
+		. += span_notice("You could equip it to turn it on.")
 		. += span_notice("You could open the cover with a <b>screwdriver</b>.")
 	else if(open)
 		. += span_notice("You could close the cover with a <b>screwdriver</b>.")
@@ -239,7 +241,7 @@
 
 /obj/item/mod/control/equipped(mob/user, slot)
 	..()
-	if(slot == ITEM_SLOT_BACK)
+	if(slot_flags & slot)
 		set_wearer(user)
 	else if(wearer)
 		unset_wearer()
@@ -250,7 +252,7 @@
 		unset_wearer()
 
 /obj/item/mod/control/item_action_slot_check(slot)
-	if(slot == ITEM_SLOT_BACK)
+	if(slot_flags & slot)
 		return TRUE
 
 /obj/item/mod/control/allow_attack_hand_drop(mob/user)
