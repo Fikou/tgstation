@@ -232,3 +232,5 @@
 
 /obj/item/mod/module/anomaly_locked/teleporter/prebuilt
 	prebuilt = TRUE
+
+/obj/item/mod/module/mech_link

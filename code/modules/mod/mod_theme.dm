@@ -413,6 +413,44 @@
 		),
 	)
 
+/datum/mod_theme/neurolink
+	name = "neurolink"
+	desc = "A suit designed to connect to the user's brain, to let them mentally steer a mech unit."
+	extended_desc = "A belt-fit emergency space suit."
+	default_skin = "emergency"
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 30, ACID = 30, WOUND = 5)
+	slot_flag = ITEM_SLOT_EYES
+	complexity_max = DEFAULT_MAX_COMPLEXITY-10
+	slowdown_inactive = 0
+	slowdown_active = 0.5
+	inbuilt_modules = list(/obj/item/mod/module/mech_link)
+	module_blacklist = list(/obj/item/mod/module/storage, /obj/item/mod/module/pathfinder)
+	skins = list(
+		"emergency" = list(
+			HELMET_LAYER = NECK_LAYER,
+			HELMET_FLAGS = list(
+				UNSEALED_CLOTHING = SNUG_FIT,
+				SEALED_CLOTHING = THICKMATERIAL|STOPSPRESSUREDAMAGE,
+				UNSEALED_INVISIBILITY = HIDEFACIALHAIR,
+				SEALED_INVISIBILITY = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDESNOUT,
+				SEALED_COVER = HEADCOVERSMOUTH|HEADCOVERSEYES|PEPPERPROOF,
+			),
+			CHESTPLATE_FLAGS = list(
+				UNSEALED_CLOTHING = THICKMATERIAL,
+				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
+				SEALED_INVISIBILITY = HIDEJUMPSUIT,
+			),
+			GAUNTLETS_FLAGS = list(
+				UNSEALED_CLOTHING = THICKMATERIAL,
+				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
+			),
+			BOOTS_FLAGS = list(
+				UNSEALED_CLOTHING = THICKMATERIAL,
+				SEALED_CLOTHING = STOPSPRESSUREDAMAGE,
+			),
+		),
+	)
+
 /datum/mod_theme/research
 	name = "research"
 	desc = "A private military EOD suit by Aussec Armory, intended for explosive research. Bulky, but expansive."

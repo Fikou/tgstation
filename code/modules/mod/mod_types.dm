@@ -86,6 +86,13 @@
 		/obj/item/mod/module/injector,
 	)
 
+/obj/item/mod/control/pre_equipped/neurolink
+	theme = /datum/mod_theme/neurolink
+	initial_modules = list(
+		/obj/item/mod/module/welding,
+		/obj/item/mod/module/visor/diaghud,
+	)
+
 /obj/item/mod/control/pre_equipped/research
 	theme = /datum/mod_theme/research
 	applied_cell = /obj/item/stock_parts/cell/super
