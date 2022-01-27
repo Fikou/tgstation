@@ -129,3 +129,13 @@
 	prebuilt = TRUE
 
 /obj/item/mod/module/mech_link
+	name = "MOD mech link module"
+	desc = "A module creating a neural link between a mech and the suit user, letting them move in a coordinated way."
+	icon_state = "mechlink"
+	module_type = MODULE_ACTIVE
+	removable = FALSE
+	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
+	incompatible_modules = list(/obj/item/mod/module/mech_link)
+	cooldown_time = 0.5 SECONDS
+	var/obj/vehicle/sealed/mecha/mech
+
