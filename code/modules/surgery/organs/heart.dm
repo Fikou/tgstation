@@ -238,6 +238,99 @@
 	. = ..()
 	addtimer(VARSET_CALLBACK(src, dose_available, TRUE), 5 MINUTES)
 
+/obj/item/organ/heart/cybernetic/nanomachine
+	name = "nanotech-infused heart"
+	desc = "Nanomachines, son. They harden in response to physical trauma."
+	icon_state = "heart-nanomachine"
+	maxHealth = STANDARD_ORGAN_THRESHOLD
+	emp_vulnerability = 20
+	var/image/limb_image
+	var/protecting_zone
+	var/timerid
+	var/underwearer
+
+/obj/item/organ/heart/cybernetic/nanomachine/Initialize(mapload)
+	. = ..()
+	limb_image = image('icons/effects/effects.dmi', "nothing", layer = -BODY_ADJ_LAYER)
+	limb_image.color = COLOR_BLACK
+
+/obj/item/organ/heart/cybernetic/nanomachine/Insert(mob/living/carbon/heart_owner, special = FALSE)
+	. = ..()
+	RegisterSignal(heart_owner, COMSIG_MOB_APPLY_DAMAGE, .proc/on_damage)
+	if(NO_UNDERWEAR in heart_owner.dna.species.species_traits)
+		underwearer = FALSE
+	else
+		heart_owner.dna.species.species_traits += NO_UNDERWEAR
+		heart_owner.update_body()
+		underwearer = TRUE
+
+/obj/item/organ/heart/cybernetic/nanomachine/Remove(mob/living/carbon/heart_owner, special = FALSE)
+	. = ..()
+	UnregisterSignal(heart_owner, COMSIG_MOB_APPLY_DAMAGE)
+	if(underwearer)
+		heart_owner.dna.species.species_traits -= NO_UNDERWEAR
+		heart_owner.update_body()
+	underwearer = null
+	if(timerid)
+		reset_bodypart(heart_owner)
+
+/obj/item/organ/heart/cybernetic/nanomachine/proc/on_damage(datum/source, damage, damagetype, def_zone)
+	SIGNAL_HANDLER
+
+	if(!owner.stat)
+		return
+	if(!def_zone)
+		return
+	if(!(damagetype in list(BRUTE, BURN)))
+		return
+	if(isbodypart(def_zone)) //for some fucking reason like half the time def_zone is a body part, including punch code
+		var/obj/item/bodypart/aiming_bodypart = def_zone
+		def_zone = aiming_bodypart.body_zone
+	var/aiming_zone = check_zone(def_zone)
+	var/obj/item/bodypart/bodypart = owner.get_bodypart(aiming_zone)
+	if(is_covered_zone(bodypart))
+		return
+	if(aiming_zone == protecting_zone)
+		timerid = addtimer(CALLBACK(src, .proc/reset_bodypart, owner), 3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
+		playsound(owner, 'sound/magic/clockwork/fellowship_armory.ogg', 25, TRUE, frequency = 0.75)
+		return
+	else if(!COOLDOWN_FINISHED(src, switch_cooldown))
+		return
+	protecting_zone = aiming_zone
+	timerid = addtimer(CALLBACK(src, .proc/reset_bodypart, owner), 3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_STOPPABLE)
+	RegisterSignal(owner, COMSIG_CARBON_REMOVE_LIMB, .proc/limb_check)
+	bodypart.brute_reduction += 25
+	bodypart.burn_reduction += 20
+	var/list/limb_images = bodypart.get_limb_icon()
+	for(var/image/overlay_image as anything in limb_images)
+		limb_image.add_overlay(overlay_image)
+	owner.add_overlay(limb_image)
+	playsound(owner, 'sound/magic/clockwork/fellowship_armory.ogg', 25, TRUE, frequency = 0.75)
+
+/obj/item/organ/heart/cybernetic/nanomachine/proc/limb_check(datum/source, obj/item/bodypart/lost_part, special)
+	SIGNAL_HANDLER
+
+	if(lost_part.body_zone != protecting_zone)
+		return
+	reset_bodypart(owner)
+
+/obj/item/organ/heart/cybernetic/nanomachine/proc/reset_bodypart(mob/living/carbon/heart_owner)
+	if(timerid)
+		deltimer(timerid)
+	UnregisterSignal(heart_owner, COMSIG_CARBON_REMOVE_LIMB)
+	var/obj/item/bodypart/bodypart = heart_owner.get_bodypart(protecting_zone)
+	heart_owner.cut_overlay(limb_image)
+	limb_image.cut_overlays()
+	bodypart.brute_reduction -= 25
+	bodypart.burn_reduction -= 20
+	protecting_zone = null
+
+/obj/item/organ/heart/cybernetic/nanomachine/proc/is_covered_zone(obj/item/bodypart/bodypart)
+	for(var/obj/item/possible_cover as anything in owner.get_equipped_items())
+		if(possible_cover.body_parts_covered & bodypart.body_part)
+			return TRUE
+	return FALSE
+
 /obj/item/organ/heart/freedom
 	name = "heart of freedom"
 	desc = "This heart pumps with the passion to give... something freedom."
