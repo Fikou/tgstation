@@ -1,68 +1,51 @@
 /datum/autowiki/modsuit
-	page = "Template:Autowiki/Content/Techweb"
+	page = "Template:Autowiki/Content/MODsuit"
 
-/datum/autowiki/techweb/generate()
+/datum/autowiki/modsuit/generate()
 	var/output = ""
+	var/mob/living/carbon/human/human = new /mob/living/carbon/human/dummy/consistent()
+	for(var/datum/mod_theme/mod as anything in typesof(/datum/mod_theme))
+		var/filename = SANITIZE_FILENAME(escape_value(format_text(mod.name)))
+		var/obj/item/mod/control/modsuit = new /obj/item/mod/control(null, mod.type, null, new /obj/item/mod/core/infinite())
+		human.equip_to_slot_if_possible(modsuit, modsuit.slot_flags, qdel_on_fail = FALSE, disable_warning = TRUE)
+		modsuit.quick_activation()
+		output += include_template("Autowiki/MODsuitTheme", list(
+			"icon" = escape_value(filename),
+			"name" = escape_value(capitalize(format_text(mod.name))),
+			"cell_drain" = mod.charge_drain,
+			"complexity" = mod.complexity_max,
+			"skins" = format_skin_list(mod.skins, mod.default_skin, human, modsuit),
+			"modules" = format_module_list(mod.inbuilt_modules),
+		))
+		upload_icon(getFlatIcon(human, no_anim = TRUE), filename)
+		qdel(modsuit)
+	return output
 
-	for (var/node_id in sort_list(SSresearch.techweb_nodes, /proc/sort_research_nodes))
-		var/datum/techweb_node/node = SSresearch.techweb_nodes[node_id]
-		if (!node.show_on_wiki)
+/datum/autowiki/modsuit/proc/format_skin_list(list/skin_list, default_skin, mob/wearer, obj/item/mod/control/modsuit)
+	var/output = ""
+	for(var/skin in skin_list)
+		if(skin == default_skin)
 			continue
-
-		if (!valid_node(node))
-			continue
-
-		output += "\n\n" + include_template("Autowiki/TechwebEntry", list(
-			"name" = escape_value(node.display_name),
-			"description" = escape_value(node.description),
-			"prerequisites" = generate_prerequisites(node.prereq_ids),
-			"designs" = generate_designs(node.design_ids),
+		for(var/obj/item/part as anything in modsuit.mod_parts)
+			modsuit.seal_part(part, seal = FALSE)
+		modsuit.finish_activation(on = FALSE)
+		modsuit.set_mod_skin(skin)
+		modsuit.quick_activation()
+		var/filename = SANITIZE_FILENAME(escape_value(format_text(skin)))
+		output += include_template("Autowiki/MODsuitThemeSkin", list(
+			"name" = escape_value(capitalize(format_text(skin))),
+			"icon" = escape_value(filename),
 		))
-
+		upload_icon(getFlatIcon(wearer, no_anim = TRUE), filename)
 	return output
 
-/datum/autowiki/techweb/proc/valid_node(datum/techweb_node/node)
-	return !node.experimental
-
-/datum/autowiki/techweb/proc/generate_designs(list/design_ids)
+/datum/autowiki/modsuit/proc/format_module_list(list/module_list)
 	var/output = ""
-
-	for (var/design_id in design_ids)
-		var/datum/design/design = SSresearch.techweb_designs[design_id]
-		output += include_template("Autowiki/TechwebEntryDesign", list(
-			"name" = escape_value(design.name),
-			"description" = escape_value(design.get_description()),
+	for(var/obj/item/mod/module/module as anything in module_list)
+		var/filename = SANITIZE_FILENAME(escape_value(format_text(module.name)))
+		output += include_template("Autowiki/MODsuitThemeModule", list(
+			"name" = escape_value(capitalize(format_text(module.name))),
+			"icon" = escape_value(filename),
 		))
-
+		upload_icon(icon(module.icon, module.icon_state), filename)
 	return output
-
-/datum/autowiki/techweb/proc/generate_prerequisites(list/prereq_ids)
-	var/output = ""
-
-	for (var/prereq_id in prereq_ids)
-		var/datum/techweb_node/node = SSresearch.techweb_nodes[prereq_id]
-		output += include_template("Autowiki/TechwebEntryPrerequisite", list(
-			"name" = escape_value(node.display_name),
-		))
-
-	return output
-
-/datum/autowiki/techweb/experimental
-	page = "Template:Autowiki/Content/Techweb/Experimental"
-
-/datum/autowiki/techweb/experimental/valid_node(datum/techweb_node/node)
-	return node.experimental
-
-/proc/sort_research_nodes(node_id_a, node_id_b)
-	var/datum/techweb_node/node_a = SSresearch.techweb_nodes[node_id_a]
-	var/datum/techweb_node/node_b = SSresearch.techweb_nodes[node_id_b]
-
-	var/prereq_difference = node_a.prereq_ids.len - node_b.prereq_ids.len
-	if (prereq_difference != 0)
-		return prereq_difference
-
-	var/experiment_difference = node_a.required_experiments.len - node_b.required_experiments.len
-	if (experiment_difference != 0)
-		return experiment_difference
-
-	return sorttext(node_b.display_name, node_a.display_name)
