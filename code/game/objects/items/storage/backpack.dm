@@ -18,6 +18,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/backpack_righthand.dmi'
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK //ERROOOOO
+	body_parts_covered = BACK
 	resistance_flags = NONE
 	max_integrity = 300
 

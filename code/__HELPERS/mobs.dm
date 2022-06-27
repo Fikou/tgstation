@@ -811,6 +811,39 @@ GLOBAL_LIST_EMPTY(species_list)
 		else
 			return precise_zone
 
+///Return a string for the specified cover flags.
+/proc/parse_cover_flag(flags)
+	var/list/cover_strings = list()
+	if(flags & HEAD)
+		cover_strings += "head"
+	if(flags & CHEST)
+		cover_strings += "chest"
+	if(flags & GROIN)
+		cover_strings += "groin"
+	if(flags & LEG_LEFT)
+		cover_strings += "left leg"
+	if(flags & LEG_RIGHT)
+		cover_strings += "right leg"
+	if(flags & FOOT_LEFT)
+		cover_strings += "left foot"
+	if(flags & FOOT_RIGHT)
+		cover_strings += "right foot"
+	if(flags & ARM_LEFT)
+		cover_strings += "left arm"
+	if(flags & ARM_RIGHT)
+		cover_strings += "right arm"
+	if(flags & HAND_LEFT)
+		cover_strings += "left hand"
+	if(flags & HAND_RIGHT)
+		cover_strings += "right hand"
+	if(flags & NECK)
+		cover_strings += "neck"
+	if(flags & BACK)
+		cover_strings += "back"
+	if(flags == FULL_BODY)
+		cover_strings = "full body"
+	return cover_strings
+
 ///Returns the direction that the initiator and the target are facing
 /proc/check_target_facings(mob/living/initiator, mob/living/target)
 	/*This can be used to add additional effects on interactions between mobs depending on how the mobs are facing each other, such as adding a crit damage to blows to the back of a guy's head.

@@ -3,31 +3,31 @@
 	name = "MOD module"
 	icon = 'icons/obj/clothing/modsuit/mod_modules.dmi'
 	icon_state = "module"
-	/// If it can be removed
+	/// If it can be removed.
 	var/removable = TRUE
-	/// If it's passive, togglable, usable or active
+	/// If it's passive, togglable, usable or active.
 	var/module_type = MODULE_PASSIVE
-	/// Is the module active
+	/// Is the module active.
 	var/active = FALSE
-	/// How much space it takes up in the MOD
+	/// How much space it takes up in the MOD.
 	var/complexity = 0
-	/// Power use when idle
+	/// Power use when idle.
 	var/idle_power_cost = DEFAULT_CHARGE_DRAIN * 0
-	/// Power use when active
+	/// Power use when active.
 	var/active_power_cost = DEFAULT_CHARGE_DRAIN * 0
-	/// Power use when used, we call it manually
+	/// Power use when used, we call it manually.
 	var/use_power_cost = DEFAULT_CHARGE_DRAIN * 0
-	/// ID used by their TGUI
+	/// ID used by their TGUI.
 	var/tgui_id
-	/// Linked MODsuit
+	/// Linked MODsuit.
 	var/obj/item/mod/control/mod
 	/// If we're an active module, what item are we?
 	var/obj/item/device
-	/// Overlay given to the user when the module is inactive
+	/// Overlay given to the user when the module is inactive.
 	var/overlay_state_inactive
-	/// Overlay given to the user when the module is active
+	/// Overlay given to the user when the module is active.
 	var/overlay_state_active
-	/// Overlay given to the user when the module is used, lasts until cooldown finishes
+	/// Overlay given to the user when the module is used, lasts until cooldown finishes.
 	var/overlay_state_use
 	/// Icon file for the overlay.
 	var/overlay_icon_file = 'icons/mob/clothing/modsuit/mod_modules.dmi'
@@ -35,16 +35,18 @@
 	var/use_mod_colors = FALSE
 	/// What modules are we incompatible with?
 	var/list/incompatible_modules = list()
-	/// Cooldown after use
+	/// Time we cooldown for after use.
 	var/cooldown_time = 0
-	/// The mouse button needed to use this module
+	/// The mouse button needed to use this module.
 	var/used_signal
-	/// List of REF()s mobs we are pinned to, linked with their action buttons
+	/// List of REF()s mobs we are pinned to, linked with their action buttons.
 	var/list/pinned_to = list()
 	/// If we're allowed to use this module while phased out.
 	var/allowed_in_phaseout = FALSE
 	/// If we're allowed to use this module while the suit is disabled.
 	var/allowed_inactive = FALSE
+	/// List of cover flags required for the module to work.
+	var/list/required_cover = list(BACK)
 	/// Timer for the cooldown
 	COOLDOWN_DECLARE(cooldown_timer)
 
@@ -67,6 +69,19 @@
 
 /obj/item/mod/module/examine(mob/user)
 	. = ..()
+	var/cover_message = ""
+	for(var/cover_flag in required_cover)
+		if(cover_flag != required_cover[1])
+			cover_message += ", and "
+		var/list/cover_strings = parse_cover_flag(cover_flag)
+		for(var/cover_string in cover_strings)
+			if(cover_string == cover_strings[length(required_cover)])
+				cover_message += ", or "
+			else if(cover_string != cover_strings[1])
+				cover_message += ", "
+			cover_message += cover_string
+	if(cover_message)
+		. += span_notice("Requires the suit to cover your [cover_message].")
 	if(HAS_TRAIT(user, TRAIT_DIAGNOSTIC_HUD))
 		. += span_notice("Complexity level: [complexity]")
 
@@ -242,6 +257,21 @@
 /// Receives configure edits from the TGUI and edits the vars
 /obj/item/mod/module/proc/configure_edit(key, value)
 	return
+
+/obj/item/mod/module/proc/check_cover(obj/item/mod/control/modsuit, require_deployed = FALSE)
+	var/list/mod_parts = modsuit.mod_parts + modsuit
+	for(var/cover_flag in required_cover)
+		var/fulfilled = FALSE
+		for(var/obj/item/mod_part in mod_parts)
+			if(require_deployed && mod_part.loc != modsuit && mod_part != modsuit)
+				continue
+			if(mod_part.body_parts_covered & cover_flag)
+				fulfilled = TRUE
+				continue
+		if(fulfilled)
+			continue
+		return FALSE
+	return TRUE
 
 /// Called when the device moves to a different place on active modules
 /obj/item/mod/module/proc/on_exit(datum/source, atom/movable/part, direction)

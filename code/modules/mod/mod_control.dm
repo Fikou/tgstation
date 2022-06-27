@@ -531,6 +531,11 @@
 			balloon_alert(user, "[src] doesn't accept [new_module]!")
 			playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
 		return
+	if(!new_module.check_cover(src))
+		if(user)
+			balloon_alert(user, "[src] doesn't have the required parts!")
+			playsound(src, 'sound/machines/scanbuzz.ogg', 25, TRUE, SILENCED_SOUND_EXTRARANGE)
+		return
 	var/complexity_with_module = complexity
 	complexity_with_module += new_module.complexity
 	if(complexity_with_module > complexity_max)
