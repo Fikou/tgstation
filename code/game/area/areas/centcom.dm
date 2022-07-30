@@ -229,6 +229,11 @@ The areas used here are STRICTLY on the CC Z level.
 	icon_state = "syndie-elite"
 	static_lighting = TRUE
 
+/area/centcom/syndicate_mothership/expansion_costumeroom
+	name = "Syndicate Costumes, Makeup, and Props Storage"
+	icon_state = "syndie-elite"
+	static_lighting = TRUE
+
 /area/centcom/syndicate_mothership/elite_squad
 	name = "Syndicate Elite Squad"
 	icon_state = "syndie-elite"

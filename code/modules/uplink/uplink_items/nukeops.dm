@@ -796,3 +796,13 @@
 	item = /obj/item/keycard/syndicate_fridge
 	cost = 5
 	purchasable_from = UPLINK_CLOWN_OPS | UPLINK_NUKE_OPS
+
+/datum/uplink_item/support/dress_key
+	name = "Greenroom Access Card"
+	desc = "Syndicate Command has decided to relocated all Costume and Dress accessories into the newly designated Greenroom \
+			following the Giggles Incident. This room will serve as a hub for all operatives' deception based needs. All you \
+			need to take care of is this one-time fee and we'll take care of the rest. There are what, five of you? That means \
+			five costumes each. Lipstick and Fake Mustache not included."
+	item = /obj/item/keycard/syndicate_dress
+	cost = 16
+	purchasable_from = UPLINK_CLOWN_OPS | UPLINK_NUKE_OPS

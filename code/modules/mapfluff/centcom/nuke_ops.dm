@@ -23,6 +23,11 @@
 	color = "#636363"
 	puzzle_id = "syndicate_fridge"
 
+/obj/item/keycard/syndicate_dress
+	name = "Greenroom Access Card"
+	desc = "A green keycard with the word COSTUME crossed out on it."
+	color = "#24c600"
+
 //keycard doors
 /obj/machinery/door/puzzle/keycard/syndicate_bomb
 	name = "Syndicate Ordinance Laboratory"
@@ -43,3 +48,8 @@
 	name = "The Walk-In Fridge"
 	desc = "Locked. Lopez sure runs a tight galley."
 	puzzle_id = "syndicate_fridge"
+
+/obj/machinery/door/puzzle/keycard/syndicate_dress
+	name = "The Greenroom"
+	desc = "Locked. Following the Giggles Incident, contact Syndicate Command for an Access Card."
+	puzzle_id = "syndicate_dress"
