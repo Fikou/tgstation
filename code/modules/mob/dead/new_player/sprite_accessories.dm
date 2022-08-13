@@ -79,6 +79,17 @@
 	var/dimension_y = 32
 	/// Should this sprite block emissives?
 	var/em_block = FALSE
+	///The config type to use for greyscaled sprites. Both this and greyscale_colors must be assigned to work.
+	var/greyscale_config
+	///A string of hex format colors to be used by greyscale sprites, ex: "#0054aa#badcff"
+	var/greyscale_colors
+
+/datum/sprite_accessory/build_icon(colors)
+	if(!colors)
+		colors = greyscale_colors
+	if(!greyscale_config || !colors)
+		return icon(icon, icon_state)
+	return SSgreyscale.GetColoredIconByType(greyscale_config, colors)
 
 /datum/sprite_accessory/blank
 	name = "None"
