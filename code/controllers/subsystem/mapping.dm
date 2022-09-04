@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(mapping)
 	var/space_levels_so_far = 0
 	///list of all z level datums in the order of their z (z level 1 is at index 1, etc.)
 	var/list/datum/space_level/z_list
-	///list of all z level indices that form multiz connections and whether theyre linked up or down
+	///list of all z level indices that form multiz connections and whether theyre linked up or down.
 	///list of lists, inner lists are of the form: list("up or down link direction" = TRUE)
 	var/list/multiz_levels = list()
 	var/datum/space_level/transit
@@ -54,6 +54,9 @@ SUBSYSTEM_DEF(mapping)
 	///shows the default gravity value for each z level. recalculated when gravity generators change.
 	///associative list of the form: list("[z level num]" = max generator gravity in that z level OR the gravity level trait)
 	var/list/gravity_by_z_level = list()
+
+	/// list of traits and their associated z leves
+	var/list/z_trait_levels = list()
 
 /datum/controller/subsystem/mapping/New()
 	..()
@@ -107,7 +110,6 @@ SUBSYSTEM_DEF(mapping)
 	setup_map_transitions()
 	generate_station_area_list()
 	initialize_reserved_level(transit.z_value)
-	SSticker.OnRoundstart(CALLBACK(src, .proc/spawn_maintenance_loot))
 	generate_z_level_linkages()
 	calculate_default_z_level_gravities()
 
@@ -657,10 +659,3 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 		isolated_ruins_z = add_new_zlevel("Isolated Ruins/Reserved", list(ZTRAIT_RESERVED = TRUE, ZTRAIT_ISOLATED_RUINS = TRUE))
 		initialize_reserved_level(isolated_ruins_z.z_value)
 	return isolated_ruins_z.z_value
-
-/datum/controller/subsystem/mapping/proc/spawn_maintenance_loot()
-	for(var/obj/effect/spawner/random/maintenance/spawner as anything in GLOB.maintenance_loot_spawners)
-		CHECK_TICK
-
-		spawner.spawn_loot()
-		qdel(spawner)

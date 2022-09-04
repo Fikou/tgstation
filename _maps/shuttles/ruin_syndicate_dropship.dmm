@@ -156,8 +156,7 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/caravan/syndicate3)
 "rU" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced/plasma/plastitanium,
+/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
 /obj/machinery/door/poddoor{
 	id = "caravansyndicate3_bridge"
 	},
@@ -311,9 +310,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/structure/sign/warning/vacuum{
-	pixel_y = -32
-	},
+/obj/structure/sign/warning/vacuum/directional/south,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/syndicate{
 	anchored = 1
@@ -385,9 +382,7 @@
 /obj/structure/closet/syndicate{
 	anchored = 1
 	},
-/obj/structure/sign/warning/vacuum{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/vacuum/directional/north,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/clothing/shoes/sneakers/black,
 /turf/open/floor/mineral/plastitanium,
