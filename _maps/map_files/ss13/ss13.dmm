@@ -6,6 +6,9 @@
 	},
 /turf/open/floor/engine,
 /area/station/commons/dorms)
+"ab" = (
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
 "ac" = (
 /obj/structure/fluff/empty_sleeper{
 	name = "empty cryosleeper";
@@ -33,6 +36,13 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/iron,
 /area/station/commons/storage/art)
+"ak" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ao" = (
 /turf/open/floor/circuit,
 /area/station/engineering/hallway)
@@ -60,6 +70,10 @@
 /obj/machinery/rnd/production/circuit_imprinter,
 /turf/open/floor/engine,
 /area/station/engineering/break_room)
+"at" = (
+/obj/machinery/air_sensor/mix_tank,
+/turf/open/floor/engine/vacuum,
+/area/station/engineering/atmos)
 "av" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
@@ -135,7 +149,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "aX" = (
-/turf/closed/wall,
+/turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
 "aY" = (
 /obj/effect/decal/cleanable/dirt,
@@ -153,6 +167,16 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/circuit/off,
 /area/station/engineering/storage/tcomms)
+"bd" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 9
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"bf" = (
+/obj/machinery/air_sensor/nitrogen_tank,
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
 "bg" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron,
@@ -188,6 +212,15 @@
 /obj/effect/spawner/structure/window/hollow/reinforced,
 /turf/open/floor/plating,
 /area/station/engineering/storage)
+"br" = (
+/obj/machinery/meter{
+	name = "Mixed Air Tank Out"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "bx" = (
 /obj/structure/rack,
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -249,6 +282,22 @@
 "bJ" = (
 /turf/open/floor/iron/stairs/left,
 /area/station/service/kitchen/coldroom)
+"bK" = (
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
+"bM" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 4;
+	name = "Distro to Waste"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "bR" = (
 /obj/structure/disposalpipe/segment{
 	dir = 10
@@ -268,7 +317,7 @@
 /turf/open/floor/iron/textured,
 /area/station/engineering/lobby)
 "bW" = (
-/obj/machinery/rnd/destructive_analyzer,
+/obj/machinery/autolathe,
 /turf/open/floor/engine,
 /area/station/engineering/break_room)
 "bX" = (
@@ -319,6 +368,36 @@
 /obj/effect/turf_decal/siding/thinplating_new/light/corner,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"cd" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "N2O to Pure"
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"ce" = (
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
+"cg" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue,
+/obj/machinery/light/directional/south,
+/obj/structure/table,
+/obj/item/flashlight/lamp{
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/obj/item/pipe_dispenser,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
+"ch" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ci" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/holosign/barrier/atmos/sturdy,
@@ -332,6 +411,13 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
+"cl" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "cm" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -383,6 +469,28 @@
 	dir = 1
 	},
 /area/station/ai_monitored/command/nuke_storage)
+"cx" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/scrubbers/hidden,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 4
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "atmosdoor";
+	name = "Atmospherics Shutters"
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/office)
+"cy" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"cA" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/yellow/visible,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "cB" = (
 /obj/structure/closet/emcloset,
 /obj/effect/turf_decal/siding/thinplating_new,
@@ -404,6 +512,13 @@
 /obj/machinery/duct,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security)
+"cK" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "cM" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -413,6 +528,12 @@
 /obj/item/reagent_containers/cup/glass/sillycup/smallcarton,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"cS" = (
+/obj/machinery/camera/directional/north{
+	c_tag = "Atmospherics Tank - CO2"
+	},
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
 "cU" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -435,6 +556,17 @@
 	},
 /turf/open/floor/engine,
 /area/station/commons/dorms)
+"da" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"db" = (
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "dd" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
@@ -463,6 +595,17 @@
 /obj/structure/tank_holder/extinguisher,
 /turf/open/floor/circuit/off,
 /area/station/engineering/break_room)
+"di" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "Air to Ports"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "dj" = (
 /obj/effect/turf_decal/trimline/red/filled/warning{
 	dir = 1
@@ -533,13 +676,13 @@
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/door/airlock/atmos/glass{
-	name = "Atmospherics"
+	name = "Mechanical Engineer's Office"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /turf/open/floor/iron/textured,
-/area/station/engineering/atmos)
+/area/station/engineering/atmos/office)
 "dC" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/dirt,
@@ -582,6 +725,12 @@
 /obj/effect/spawner/structure/window/hollow/reinforced/end,
 /turf/open/floor/plating,
 /area/station/commons/storage/primary)
+"dK" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/plasma_input{
+	dir = 8
+	},
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
 "dL" = (
 /turf/open/floor/engine,
 /area/station/engineering/main)
@@ -628,6 +777,10 @@
 	},
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet)
+"dT" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/violet/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "dU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate,
@@ -658,6 +811,12 @@
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/iron/dark/textured,
 /area/station/cargo/warehouse)
+"eb" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/effect/turf_decal/tile/blue,
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ec" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/food/ready_donk/mac_n_cheese{
@@ -674,6 +833,9 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"ef" = (
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos/office)
 "eg" = (
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/decal/cleanable/dirt,
@@ -730,6 +892,13 @@
 /obj/effect/landmark/navigate_destination/det,
 /turf/open/floor/iron/textured,
 /area/station/security/office)
+"eE" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "eG" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/reagent_dispensers/water_cooler,
@@ -746,6 +915,10 @@
 /obj/item/clothing/mask/cigarette/pipe,
 /turf/open/floor/carpet,
 /area/station/service/theater)
+"eI" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
 "eM" = (
 /obj/structure/table/reinforced/rglass,
 /obj/item/stock_parts/subspace/analyzer,
@@ -773,12 +946,26 @@
 /obj/item/reagent_containers/cup/glass/coffee,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"eP" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "eQ" = (
 /obj/item/crowbar,
 /obj/item/stack/package_wrap,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
+"eS" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1;
+	name = "Mix to Ports"
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "eV" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -821,10 +1008,31 @@
 /obj/structure/urinal/directional/west,
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet)
+"fh" = (
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"fm" = (
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos/pumproom)
 "fp" = (
 /obj/structure/holosign/barrier/atmos/sturdy,
 /turf/open/floor/engine,
 /area/station/engineering/main)
+"fq" = (
+/obj/machinery/atmospherics/components/binary/pump/on{
+	name = "Unfiltered & Air to Mix";
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "fr" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/plaque{
@@ -832,6 +1040,19 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"fu" = (
+/obj/machinery/atmospherics/pipe/smart/simple/violet/visible{
+	dir = 6
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"fv" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/end,
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "fz" = (
 /obj/structure/closet/secure_closet/personal,
 /obj/effect/turf_decal/bot,
@@ -901,6 +1122,12 @@
 /obj/machinery/holopad,
 /turf/open/floor/circuit/off,
 /area/station/engineering/hallway)
+"fM" = (
+/obj/effect/spawner/structure/window/hollow/plasma/middle{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "fN" = (
 /obj/machinery/light/warm/directional/north,
 /turf/open/floor/grass,
@@ -911,6 +1138,16 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"fS" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/end,
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
 "fT" = (
 /obj/machinery/power/smes{
 	charge = 5e+006
@@ -928,6 +1165,24 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"fX" = (
+/obj/machinery/portable_atmospherics/canister/plasma,
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
+"fY" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 4;
+	name = "South Ports to North Ports"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"fZ" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "gb" = (
 /obj/structure/reagent_dispensers/plumbed{
 	dir = 1
@@ -935,6 +1190,16 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security)
+"gc" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/binary/pump/on{
+	name = "O2 to Airmix"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "gf" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -942,6 +1207,10 @@
 /obj/structure/holosign/barrier/atmos/sturdy,
 /turf/open/floor/iron/textured,
 /area/station/engineering/main)
+"gg" = (
+/obj/machinery/atmospherics/components/unary/thermomachine/heater,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "gh" = (
 /obj/machinery/computer/secure_data,
 /turf/open/floor/circuit/red,
@@ -982,9 +1251,29 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/station/commons/dorms)
+"gn" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue,
+/obj/structure/rack,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo{
+	pixel_x = 7
+	},
+/obj/item/rcd_ammo{
+	pixel_x = -7
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "go" = (
-/turf/closed/indestructible/necropolis,
-/area/template_noop)
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "gp" = (
 /obj/structure/sign/flag/nanotrasen/directional/south,
 /obj/structure/railing{
@@ -1033,6 +1322,14 @@
 "gx" = (
 /turf/open/floor/iron/textured,
 /area/station/engineering/transit_tube)
+"gB" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1;
+	name = "Air to Mix"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "gD" = (
 /turf/closed/wall,
 /area/station/maintenance/department/security)
@@ -1043,6 +1340,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"gG" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/violet/visible{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "gH" = (
 /obj/machinery/light/directional/east,
 /obj/effect/turf_decal/tile/brown{
@@ -1059,6 +1362,13 @@
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"gM" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "gN" = (
 /turf/closed/wall,
 /area/station/maintenance/aft)
@@ -1068,6 +1378,13 @@
 	},
 /turf/open/floor/iron/white/textured,
 /area/station/command/heads_quarters/hop)
+"gP" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 4;
+	name = "North Ports to South Ports"
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "gQ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line,
@@ -1085,10 +1402,47 @@
 /obj/effect/spawner/structure/window/hollow/reinforced/end,
 /turf/open/floor/plating,
 /area/station/engineering/storage/tech)
+"gW" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "gX" = (
 /obj/machinery/light/cold/directional/east,
 /turf/open/floor/circuit/green/anim,
 /area/station/engineering/gravity_generator)
+"gZ" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
+	dir = 6
+	},
+/obj/machinery/meter,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
+"hb" = (
+/obj/machinery/atmospherics/components/trinary/filter/atmos{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"he" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 4;
+	name = "Port Mix to North Ports"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"hf" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "hg" = (
 /obj/machinery/light/cold/directional/south,
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner,
@@ -1132,7 +1486,7 @@
 	dir = 5
 	},
 /obj/machinery/light/small/directional/south,
-/obj/structure/tank_holder/emergency_oxygen/engi,
+/obj/structure/tank_holder/emergency_oxygen,
 /turf/open/floor/circuit/off,
 /area/station/engineering/break_room)
 "hl" = (
@@ -1150,6 +1504,22 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/execution/transfer)
+"hm" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/space_heater,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
+"hn" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/components/unary/passive_vent{
+	dir = 8
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "ho" = (
 /obj/machinery/door/airlock{
 	name = "Bathrooms"
@@ -1226,6 +1596,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"hC" = (
+/obj/machinery/air_sensor/nitrous_tank,
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "hE" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/toilet,
@@ -1243,6 +1617,13 @@
 /obj/effect/turf_decal/bot_white,
 /turf/open/floor/engine,
 /area/station/engineering/gravity_generator)
+"hI" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
 "hJ" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -1315,6 +1696,13 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"id" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ie" = (
 /obj/machinery/light/small/directional/south,
 /obj/structure/railing/corner{
@@ -1346,6 +1734,12 @@
 /obj/item/storage/lockbox/loyalty,
 /turf/open/floor/iron/checker,
 /area/station/security/interrogation)
+"in" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Atmospherics Tank - N2O"
+	},
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "io" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -1353,6 +1747,15 @@
 /obj/structure/railing,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"it" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/air_input,
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
+"iy" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/middle,
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "iz" = (
 /obj/machinery/deepfryer,
 /obj/effect/turf_decal/bot,
@@ -1362,6 +1765,20 @@
 /obj/structure/tank_holder/extinguisher,
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"iD" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
+"iI" = (
+/obj/machinery/air_sensor/oxygen_tank,
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
+"iJ" = (
+/obj/machinery/air_sensor/air_tank,
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
 "iL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/directional/west,
@@ -1432,6 +1849,16 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"jo" = (
+/obj/machinery/computer/atmos_control/plasma_tank{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 10
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "jt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/airlock{
@@ -1441,6 +1868,13 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet)
+"jv" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
 "jz" = (
 /obj/machinery/door/window/brigdoor/security/cell{
 	id = "Cell 1";
@@ -1462,6 +1896,17 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/cargo/warehouse)
+"jE" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/visible{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "jG" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 9
@@ -1633,6 +2078,15 @@
 /obj/item/stock_parts/subspace/filter,
 /turf/open/floor/circuit,
 /area/station/engineering/storage/tcomms)
+"kr" = (
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "kt" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -1707,6 +2161,9 @@
 /obj/structure/fluff/big_chain,
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"kO" = (
+/turf/open/floor/iron/stairs,
+/area/station/maintenance/fore)
 "kQ" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -1718,6 +2175,15 @@
 /obj/structure/bookcase/random,
 /turf/open/floor/iron/dark/diagonal,
 /area/station/security/prison)
+"kS" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/structure/tank_holder/extinguisher/advanced,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "kV" = (
 /obj/structure/table,
 /obj/item/paper_bin/carbon{
@@ -1731,6 +2197,10 @@
 	},
 /turf/open/floor/iron/white/textured,
 /area/station/command/heads_quarters/hop)
+"kX" = (
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
 "kY" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/textured,
@@ -1746,6 +2216,12 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/iron/dark/herringbone,
 /area/station/security/execution/transfer)
+"lf" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "lg" = (
 /obj/structure/holosign/barrier/atmos/sturdy,
 /turf/open/floor/engine,
@@ -1915,6 +2391,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"lW" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ma" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Tech Storage"
@@ -1938,6 +2420,14 @@
 /obj/machinery/shower/directional/south,
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet)
+"mf" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "Pure to Mix";
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "mg" = (
 /turf/closed/wall/r_wall,
 /area/station/security/execution/transfer)
@@ -2035,6 +2525,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"mL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/structure/closet_private,
+/obj/item/pen/fourcolor,
+/turf/open/floor/iron/grimy,
+/area/station/commons/dorms)
 "mM" = (
 /obj/structure/railing{
 	dir = 4
@@ -2045,11 +2541,35 @@
 "mP" = (
 /turf/closed/wall/r_wall,
 /area/station/engineering/lobby)
+"mT" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/scrubbers/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "mU" = (
 /obj/effect/turf_decal/tile/red,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/textured,
 /area/station/security/brig)
+"mV" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1,
+/obj/machinery/atmospherics/pipe/smart/simple/violet/visible{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "mW" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/vomit/old,
@@ -2063,6 +2583,24 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"nj" = (
+/obj/effect/spawner/structure/window/hollow/plasma/end,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "atmosdoor";
+	name = "Atmospherics Shutters";
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/office)
+"nk" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "nl" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/bot,
@@ -2087,6 +2625,24 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security)
+"no" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/purple/visible,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"nr" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "nt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/mirror/directional/south,
@@ -2111,10 +2667,23 @@
 	},
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"nB" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "nC" = (
 /obj/effect/turf_decal/trimline/red/filled/warning,
 /turf/open/floor/iron/textured,
 /area/station/security/office)
+"nE" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "nF" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron,
@@ -2129,6 +2698,10 @@
 	},
 /turf/open/floor/glass,
 /area/station/command/heads_quarters/hop)
+"nI" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/high_volume/siphon/monitored/air_output,
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
 "nL" = (
 /obj/machinery/light/directional/west,
 /obj/effect/turf_decal/tile/yellow{
@@ -2206,6 +2779,9 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/station/security/prison)
+"ok" = (
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
 "ol" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -2243,6 +2819,13 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/textured,
 /area/station/security/brig)
+"or" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ou" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -2253,10 +2836,26 @@
 /obj/machinery/vending/coffee,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"ow" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/nitrogen_output,
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
 "ox" = (
 /obj/structure/shipping_container/donk_co,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"oy" = (
+/obj/machinery/atmospherics/components/binary/pump/on{
+	dir = 4;
+	name = "Waste to Filter"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/machinery/light/directional/south,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "oA" = (
 /obj/machinery/vending/tool,
 /obj/effect/turf_decal/bot,
@@ -2267,6 +2866,14 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/execution/transfer)
+"oE" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"oF" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
 "oJ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -2325,6 +2932,22 @@
 /obj/machinery/light/small/red/dim/directional/south,
 /turf/open/floor/iron/dark/small,
 /area/station/security/execution/education)
+"pa" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/middle{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
+"pb" = (
+/obj/machinery/computer/atmos_control/air_tank,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "pc" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Gravity Generator Foyer"
@@ -2341,6 +2964,22 @@
 "pg" = (
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
+"pi" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"pj" = (
+/obj/effect/spawner/structure/window/hollow/plasma,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "atmosdoor";
+	name = "Atmospherics Shutters";
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/office)
 "pl" = (
 /obj/structure/railing{
 	dir = 5
@@ -2516,6 +3155,10 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
+"qi" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/mix_input,
+/turf/open/floor/engine/vacuum,
+/area/station/engineering/atmos)
 "qm" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -2533,6 +3176,12 @@
 	},
 /turf/open/floor/engine,
 /area/station/engineering/gravity_generator)
+"qr" = (
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "qs" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -2647,6 +3296,13 @@
 /obj/structure/closet/crate/large,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"qY" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/violet/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "qZ" = (
 /turf/closed/wall,
 /area/station/service/kitchen/coldroom)
@@ -2713,6 +3369,13 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
+"rk" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 5
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "rl" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/directional/east,
@@ -2726,6 +3389,15 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/security)
+"rr" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "N2 to Pure"
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "ru" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -2751,6 +3423,12 @@
 /obj/effect/turf_decal/siding/thinplating_new,
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/aft)
+"rA" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "Mix to Filter"
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "rC" = (
 /turf/closed/wall,
 /area/station/hallway/secondary/exit/departure_lounge)
@@ -2841,6 +3519,14 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/hop)
+"sk" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "sm" = (
 /turf/open/floor/iron/stairs/right{
 	dir = 1
@@ -2907,7 +3593,7 @@
 /obj/item/clothing/glasses/meson,
 /obj/item/card/id/departmental_budget/car,
 /obj/structure/closet/secure_closet{
-	req_access = list("hop");
+	req_access = list("qm");
 	icon_state = "qm";
 	name = "\proper equipment custodian's locker"
 	},
@@ -2922,6 +3608,12 @@
 	},
 /turf/open/floor/plating,
 /area/station/security/execution/education)
+"sK" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Atmospherics Tank - O2"
+	},
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
 "sL" = (
 /obj/effect/turf_decal/siding/thinplating_new{
 	dir = 1
@@ -2929,6 +3621,12 @@
 /obj/effect/decal/cleanable/food/salt,
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"sM" = (
+/obj/machinery/atmospherics/components/trinary/mixer/airmix{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "sP" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 8
@@ -2978,6 +3676,11 @@
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"sW" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "sX" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/thinplating_new/dark{
@@ -2991,6 +3694,12 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron,
 /area/station/commons/storage/art)
+"td" = (
+/obj/machinery/atmospherics/components/trinary/filter/atmos/co2{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "te" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/red,
@@ -3037,6 +3746,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/r_wall,
 /area/station/ai_monitored/command/nuke_storage)
+"tt" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "tv" = (
 /obj/structure/table,
 /obj/item/plate/small{
@@ -3055,6 +3771,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"tA" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/machinery/atmospherics/components/binary/valve/digital{
+	name = "Waste Release";
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "tF" = (
 /turf/open/floor/iron/stairs{
 	dir = 8
@@ -3077,6 +3803,17 @@
 "tN" = (
 /turf/closed/wall/r_wall,
 /area/station/command/heads_quarters/captain/private)
+"tP" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 8
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "atmosdoor";
+	name = "Atmospherics Shutters"
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/office)
 "tR" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -3096,6 +3833,10 @@
 /obj/structure/railing/corner,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"tU" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "tV" = (
 /obj/effect/turf_decal/tile/dark_blue{
 	dir = 8
@@ -3172,6 +3913,11 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet)
+"uq" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "ur" = (
 /turf/open/floor/iron/textured,
 /area/station/security/brig)
@@ -3403,6 +4149,18 @@
 /obj/effect/mapping_helpers/airlock/access/all/engineering/tcoms,
 /turf/open/floor/circuit/off,
 /area/station/engineering/storage/tcomms)
+"vC" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 8;
+	name = "Mix Outlet Pump"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "vD" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark/corner,
 /obj/effect/turf_decal/siding/thinplating_new/dark/corner{
@@ -3410,6 +4168,10 @@
 	},
 /turf/open/floor/circuit/off,
 /area/station/engineering/storage/tcomms)
+"vF" = (
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "vI" = (
 /obj/machinery/light/small/directional/south,
 /obj/effect/decal/cleanable/dirt,
@@ -3440,6 +4202,13 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"vO" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "vQ" = (
 /obj/machinery/door/airlock/external{
 	name = "External Access"
@@ -3517,6 +4286,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"wo" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "wt" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
@@ -3563,6 +4339,15 @@
 "wI" = (
 /turf/closed/wall,
 /area/station/engineering/lobby)
+"wK" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 6
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "wM" = (
 /obj/effect/spawner/random/maintenance,
 /obj/effect/decal/cleanable/dirt,
@@ -3577,6 +4362,10 @@
 "wP" = (
 /turf/open/space/basic,
 /area/station/maintenance/aft)
+"wU" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/pink/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "wV" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate/internals,
@@ -3617,6 +4406,15 @@
 "xc" = (
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
+"xe" = (
+/obj/machinery/atmospherics/components/binary/pump/on{
+	name = "Air to Distro";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible/layer2,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "xg" = (
 /obj/machinery/duct,
 /turf/open/floor/iron/cafeteria,
@@ -3628,6 +4426,12 @@
 	},
 /turf/open/floor/iron/grimy,
 /area/station/commons/dorms)
+"xj" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 5
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "xl" = (
 /obj/machinery/door/poddoor/preopen{
 	id = "xo";
@@ -3636,6 +4440,10 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/command/heads_quarters/hop)
+"xn" = (
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "xo" = (
 /obj/item/toy/plush/nukeplushie,
 /obj/effect/decal/cleanable/cobweb,
@@ -3699,6 +4507,7 @@
 "xv" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/random/structure/closet_private,
+/obj/item/coin/bananium,
 /turf/open/floor/iron/grimy,
 /area/station/commons/dorms)
 "xx" = (
@@ -3755,6 +4564,12 @@
 /obj/effect/decal/cleanable/plastic,
 /turf/open/floor/carpet,
 /area/station/service/theater)
+"xS" = (
+/obj/machinery/atmospherics/pipe/smart/simple/violet/visible{
+	dir = 9
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "xV" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/stripes/line{
@@ -3762,6 +4577,16 @@
 	},
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"xW" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "Mix to Distro"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "xY" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall,
@@ -3775,6 +4600,16 @@
 /obj/machinery/duct,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"ya" = (
+/obj/effect/turf_decal/tile/yellow,
+/obj/item/storage/toolbox/mechanical,
+/obj/structure/rack,
+/obj/item/screwdriver/power,
+/obj/item/weldingtool/hugetank,
+/obj/item/crowbar/large,
+/obj/item/clothing/glasses/meson/engine,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "ye" = (
 /obj/structure/railing{
 	dir = 9
@@ -3892,6 +4727,15 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/small,
 /area/station/commons/dorms/barracks)
+"yA" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
+"yB" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "yC" = (
 /obj/effect/spawner/random/structure/girder,
 /obj/effect/decal/cleanable/dirt,
@@ -3926,6 +4770,29 @@
 "yL" = (
 /turf/open/floor/circuit/green/anim,
 /area/station/engineering/gravity_generator)
+"yM" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"yN" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"yP" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
+"yQ" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "yS" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/greenglow,
@@ -3961,6 +4828,28 @@
 "zc" = (
 /turf/open/floor/iron/dark/textured,
 /area/station/service/janitor)
+"ze" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/structure/closet/secure_closet{
+	req_access = list("atmospherics");
+	icon_state = "atmos";
+	name = "\proper mechanical engineer's locker"
+	},
+/obj/item/holosign_creator/atmos,
+/obj/item/clothing/suit/utility/fire/atmos,
+/obj/item/clothing/mask/gas/atmos,
+/obj/item/clothing/head/utility/hardhat/atmos,
+/obj/machinery/button/door/directional/south{
+	name = "Atmospherics Shutters Control";
+	req_access = list("atmospherics");
+	id = "atmosdoor"
+	},
+/obj/item/construction/rcd/loaded/upgraded,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "zf" = (
 /obj/effect/turf_decal/siding/thinplating_new/light,
 /turf/open/floor/iron/white/textured,
@@ -4008,6 +4897,14 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/wood/tile,
 /area/station/service/kitchen/coldroom)
+"zq" = (
+/obj/effect/spawner/structure/window/hollow/plasma/middle,
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "atmosdoor";
+	name = "Atmospherics Shutters"
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/office)
 "zt" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
@@ -4048,6 +4945,12 @@
 /obj/structure/closet/secure_closet/brig,
 /turf/open/floor/iron/dark/herringbone,
 /area/station/security/execution/transfer)
+"zD" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Atmospherics Tank - Mix"
+	},
+/turf/open/floor/engine/vacuum,
+/area/station/engineering/atmos)
 "zG" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Garage"
@@ -4162,6 +5065,12 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/execution/transfer)
+"Al" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/yellow/visible{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Am" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -4188,6 +5097,12 @@
 	},
 /turf/open/floor/iron/white/textured,
 /area/station/command/heads_quarters/captain/private)
+"Ar" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "As" = (
 /obj/machinery/light/directional/south,
 /turf/open/floor/iron,
@@ -4201,6 +5116,12 @@
 /obj/item/clothing/head/helmet/toggleable/riot,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/office)
+"Aw" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/plasma_output{
+	dir = 8
+	},
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
 "AF" = (
 /obj/structure/table/reinforced/rglass,
 /obj/effect/spawner/random/techstorage/engineering_all,
@@ -4221,6 +5142,14 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/security/office)
+"AI" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "AJ" = (
 /obj/effect/decal/cleanable/oil/streak,
 /obj/effect/decal/cleanable/robot_debris,
@@ -4417,6 +5346,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"BF" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 6
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"BG" = (
+/obj/machinery/air_sensor/plasma_tank,
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
 "BI" = (
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/hop)
@@ -4462,6 +5401,16 @@
 "BR" = (
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"BW" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/cyan/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "BX" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/herringbone,
@@ -4542,6 +5491,13 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"Cs" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "Ct" = (
 /obj/structure/cable,
 /obj/machinery/power/port_gen/pacman,
@@ -4556,6 +5512,20 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/iron/textured,
 /area/station/engineering/hallway)
+"Cv" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"Cy" = (
+/obj/machinery/door/airlock/atmos/glass{
+	name = "Atmospherics"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "Cz" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/light/small/red/dim/directional/east,
@@ -4576,6 +5546,9 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/security/office)
+"CC" = (
+/turf/closed/wall,
+/area/station/maintenance/fore)
 "CD" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 1
@@ -4602,6 +5575,19 @@
 /obj/machinery/hydroponics/constructable,
 /turf/open/floor/grass,
 /area/station/service/kitchen/coldroom)
+"CH" = (
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/smart/manifold/violet/visible,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"CM" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "CN" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
@@ -4618,6 +5604,10 @@
 /obj/effect/landmark/start/detective,
 /turf/open/floor/carpet/neon/simple/red/nodots,
 /area/station/security/office)
+"CQ" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "CR" = (
 /turf/closed/wall,
 /area/station/commons/dorms)
@@ -4653,6 +5643,34 @@
 	},
 /turf/open/floor/carpet/executive,
 /area/station/command/bridge)
+"CZ" = (
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 1
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	id = "atmosdoor";
+	name = "Atmospherics Shutters";
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/office)
+"Dc" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"Dh" = (
+/obj/machinery/atmospherics/components/trinary/filter/atmos/n2o{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"Dj" = (
+/obj/effect/spawner/structure/window/hollow/plasma/middle,
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
 "Dl" = (
 /obj/effect/landmark/tram{
 	destination_id = "north_part";
@@ -4773,6 +5791,13 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/lobby)
+"DK" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "DL" = (
 /obj/machinery/door/airlock/highsecurity{
 	name = "Nuke Storage";
@@ -4806,6 +5831,11 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/office)
+"DO" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/pink/visible,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "DR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/red{
@@ -4872,6 +5902,13 @@
 	},
 /turf/open/floor/circuit/off,
 /area/station/engineering/storage/tech)
+"Ei" = (
+/obj/machinery/atmospherics/components/trinary/filter/atmos/plasma{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Ej" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/industrial_lift/tram{
@@ -4990,6 +6027,20 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/iron/checker,
 /area/station/security/interrogation)
+"EK" = (
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"EN" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Atmospherics Tank - N2"
+	},
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
+"EO" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "EQ" = (
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
@@ -5066,6 +6117,16 @@
 /obj/machinery/washing_machine,
 /turf/open/floor/iron/dark,
 /area/station/commons/dorms)
+"Fj" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Fn" = (
 /obj/structure/chair/comfy/brown{
 	dir = 4
@@ -5078,6 +6139,15 @@
 	},
 /turf/open/floor/plating,
 /area/station/commons/dorms)
+"Fp" = (
+/obj/machinery/meter{
+	name = "Mixed Air Tank Out"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "Fq" = (
 /obj/item/storage/box/shipping,
 /obj/structure/closet/crate/bin,
@@ -5097,6 +6167,11 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"Fu" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/machinery/meter,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Fx" = (
 /obj/effect/mapping_helpers/broken_floor,
 /obj/structure/fluff/big_chain,
@@ -5115,6 +6190,10 @@
 /obj/effect/landmark/start/captain,
 /turf/open/floor/carpet/executive,
 /area/station/command/bridge)
+"FA" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "FB" = (
 /obj/structure/fluff/empty_sleeper{
 	name = "empty cryosleeper";
@@ -5133,6 +6212,16 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/circuit/off,
 /area/station/engineering/gravity_generator)
+"FE" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
+"FF" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/visible{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "FG" = (
 /obj/effect/turf_decal/bot_white/left,
 /turf/open/floor/engine,
@@ -5183,6 +6272,13 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
+"FV" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 6
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "FW" = (
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
@@ -5208,6 +6304,13 @@
 /obj/structure/table/wood/fancy/blue,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/hop)
+"Gc" = (
+/obj/machinery/computer/atmos_control/mix_tank,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "Gf" = (
 /obj/effect/turf_decal/trimline/red/filled/warning,
 /obj/effect/decal/cleanable/dirt,
@@ -5216,6 +6319,22 @@
 "Gg" = (
 /turf/closed/wall,
 /area/station/hallway/primary/port)
+"Gi" = (
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Gj" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 4
+	},
+/obj/machinery/computer/atmos_control/carbon_tank{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Gm" = (
 /obj/machinery/door/airlock/command{
 	name = "Executive Officer's Office"
@@ -5244,6 +6363,25 @@
 	},
 /turf/open/floor/wood/large,
 /area/station/service/kitchen/coldroom)
+"Gy" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible,
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
+"Gz" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/binary/pump/on{
+	name = "N2 to Airmix"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"GF" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/nitrous_input,
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "GH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/railing{
@@ -5255,6 +6393,14 @@
 	},
 /turf/open/floor/engine,
 /area/station/commons/dorms)
+"GJ" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
+"GK" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/oxygen_output,
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
 "GN" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/oil/streak,
@@ -5324,6 +6470,12 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/showroomfloor,
 /area/station/commons/toilet)
+"Hh" = (
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "Hn" = (
 /obj/structure/table/wood/fancy/royalblue,
 /obj/item/flashlight/lamp/green{
@@ -5331,6 +6483,14 @@
 	},
 /turf/open/floor/carpet/royalblue,
 /area/station/command/heads_quarters/captain/private)
+"Hp" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
+	dir = 9
+	},
+/obj/machinery/meter,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Hq" = (
 /turf/closed/wall/r_wall,
 /area/station/engineering/storage)
@@ -5398,6 +6558,15 @@
 /obj/effect/decal/cleanable/greenglow,
 /turf/open/floor/iron/dark/small,
 /area/station/commons/dorms/barracks)
+"HH" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/middle{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "HK" = (
 /turf/closed/wall,
 /area/station/hallway/primary/aft)
@@ -5409,6 +6578,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"HO" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible,
+/obj/machinery/atmospherics/pipe/bridge_pipe/scrubbers/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "HP" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
@@ -5436,6 +6612,13 @@
 /obj/item/kirbyplants/photosynthetic,
 /turf/open/floor/glass,
 /area/station/command/bridge)
+"HV" = (
+/obj/machinery/computer/atmos_control/oxygen_tank,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "HW" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/checker,
@@ -5444,6 +6627,10 @@
 /obj/effect/spawner/structure/window/hollow/reinforced,
 /turf/open/floor/plating,
 /area/station/hallway/primary/starboard)
+"Ia" = (
+/obj/structure/grille,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "Ie" = (
 /obj/effect/spawner/random/maintenance,
 /turf/open/floor/plating,
@@ -5454,6 +6641,10 @@
 	},
 /turf/open/floor/carpet/executive,
 /area/station/command/bridge)
+"Ii" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/nitrous_output,
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "Ij" = (
 /obj/item/flashlight/lamp/green{
 	pixel_y = 8
@@ -5461,10 +6652,22 @@
 /obj/structure/table/wood/fancy/blue,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/hop)
+"Ik" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "Il" = (
 /obj/machinery/lapvend,
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
+"Im" = (
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
 "Io" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/flora/rock/pile/style_3{
@@ -5478,6 +6681,21 @@
 /obj/effect/decal/cleanable/glass,
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Is" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"It" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/machinery/rnd/destructive_analyzer,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "Iu" = (
 /turf/closed/wall/r_wall,
 /area/station/command/heads_quarters/hop)
@@ -5493,6 +6711,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"Iy" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
 "Iz" = (
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/iron/textured,
@@ -5559,6 +6781,20 @@
 /obj/effect/turf_decal/tile/dark_blue,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"IK" = (
+/obj/machinery/atmospherics/pipe/smart/simple/supply/visible{
+	dir = 5
+	},
+/obj/machinery/meter/monitored/distro_loop,
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "IL" = (
 /obj/structure/window/reinforced/fulltile,
 /obj/structure/flora/bush/pale/style_random,
@@ -5566,6 +6802,22 @@
 /obj/structure/flora/bush/ferny/style_random,
 /turf/open/floor/grass,
 /area/station/hallway/primary/aft)
+"IN" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/green/visible{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
+"IP" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/yellow/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "IQ" = (
 /obj/machinery/door/window{
 	dir = 1
@@ -5583,6 +6835,11 @@
 /obj/effect/turf_decal/tile/bar,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"IT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair/office,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "IU" = (
 /obj/machinery/door/airlock/security{
 	name = "Brig"
@@ -5613,6 +6870,10 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Je" = (
+/obj/effect/spawner/structure/window/hollow/plasma/middle,
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "Jg" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 4
@@ -5669,6 +6930,12 @@
 "Jv" = (
 /turf/closed/wall,
 /area/station/cargo/sorting)
+"Jw" = (
+/obj/machinery/atmospherics/components/trinary/filter/atmos/o2{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Jz" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/directional/west,
@@ -5716,6 +6983,15 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
+"JM" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/purple/visible{
+	dir = 8
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "JP" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/machinery/recharger{
@@ -5727,6 +7003,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
+"JW" = (
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
 "Ka" = (
 /obj/structure/closet/secure_closet/brig{
 	id = "Cell 2";
@@ -5734,6 +7014,10 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/security/brig)
+"Kc" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/engine/vacuum,
+/area/station/engineering/atmos)
 "Ke" = (
 /turf/open/space/basic,
 /area/template_noop)
@@ -5758,6 +7042,13 @@
 /obj/machinery/space_heater,
 /turf/open/floor/circuit/off,
 /area/station/engineering/hallway)
+"Kk" = (
+/obj/machinery/computer/atmos_control/nocontrol/master{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "Kl" = (
 /obj/effect/turf_decal/trimline/dark_blue/filled/corner{
 	dir = 8
@@ -5774,6 +7065,9 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/textured,
 /area/station/cargo/warehouse)
+"Kr" = (
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "Kt" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -5822,6 +7116,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"KG" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "KK" = (
 /obj/structure/fluff/paper{
 	dir = 5
@@ -5891,6 +7191,13 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/execution/transfer)
+"KT" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 4;
+	name = "Port Mix to South Ports"
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "KU" = (
 /obj/effect/turf_decal/tile/yellow,
 /obj/effect/decal/cleanable/dirt,
@@ -5905,6 +7212,12 @@
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/circuit/green/off,
 /area/station/engineering/gravity_generator)
+"La" = (
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
 "Lb" = (
 /obj/structure/fluff/paper/stack,
 /turf/open/floor/iron,
@@ -6117,6 +7430,10 @@
 /obj/machinery/vending/cola/shamblers,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"Mk" = (
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Mm" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/duct,
@@ -6164,6 +7481,12 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/gravity_generator)
+"Mt" = (
+/obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible{
+	dir = 9
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Mv" = (
 /turf/open/floor/iron/stairs/medium,
 /area/station/service/kitchen/coldroom)
@@ -6239,6 +7562,15 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/interrogation)
+"MQ" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "MR" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
@@ -6266,6 +7598,10 @@
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/starboard)
+"MX" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/scrubbers/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "MY" = (
 /obj/effect/spawner/random/engineering/atmospherics_portable,
 /obj/effect/decal/cleanable/dirt,
@@ -6331,12 +7667,23 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"Ny" = (
+/obj/machinery/air_sensor/carbon_tank,
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
 "Nz" = (
 /obj/effect/turf_decal/tile/red,
 /obj/structure/closet/l3closet/security,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/textured,
 /area/station/security/brig)
+"NA" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "NE" = (
 /obj/structure/railing/corner,
 /obj/effect/turf_decal/loading_area{
@@ -6413,11 +7760,27 @@
 	},
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"NT" = (
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
+"NU" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+	dir = 4
+	},
+/obj/effect/spawner/structure/window/hollow/plasma/end,
+/turf/open/floor/plating,
+/area/station/engineering/atmos/pumproom)
 "Ob" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
 /area/station/security/prison)
+"Oc" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/carbon_output{
+	dir = 8
+	},
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
 "Oe" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -6458,6 +7821,13 @@
 /obj/machinery/light/floor,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"Oq" = (
+/obj/machinery/meter{
+	name = "Mixed Air Tank Out"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "Ot" = (
 /obj/machinery/duct,
 /obj/machinery/door/airlock/maintenance{
@@ -6470,6 +7840,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/textured,
 /area/station/engineering/lobby)
+"Ow" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/atmospheric_technician,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "OB" = (
 /obj/effect/turf_decal/siding/thinplating_new/light{
 	dir = 8
@@ -6486,6 +7862,13 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/checker,
 /area/station/security/interrogation)
+"OE" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/cyan/visible{
+	dir = 8
+	},
+/obj/machinery/meter,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "OF" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/cobweb,
@@ -6499,6 +7882,13 @@
 /obj/effect/landmark/navigate_destination/sec,
 /turf/open/floor/iron/textured,
 /area/station/security/brig)
+"OM" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "OO" = (
 /obj/structure/railing{
 	dir = 5
@@ -6567,6 +7957,10 @@
 "OY" = (
 /turf/open/floor/wood/large,
 /area/station/commons/lounge)
+"OZ" = (
+/obj/effect/spawner/structure/window/hollow/reinforced/plasma,
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "Pd" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -6584,6 +7978,14 @@
 /obj/effect/turf_decal/trimline/dark_blue/end,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"Pg" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Ph" = (
 /obj/machinery/disposal/bin,
 /obj/effect/turf_decal/bot,
@@ -6639,6 +8041,10 @@
 	},
 /turf/open/floor/carpet/donk,
 /area/station/commons/dorms)
+"Pu" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/oxygen_input,
+/turf/open/floor/engine/o2,
+/area/station/engineering/atmos)
 "Pv" = (
 /turf/closed/wall/r_wall,
 /area/station/security/interrogation)
@@ -6664,6 +8070,13 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/security/office)
+"PC" = (
+/obj/machinery/door/airlock/atmos/glass,
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "PD" = (
 /obj/effect/turf_decal/siding/thinplating_new,
 /obj/structure/closet/emcloset,
@@ -6715,10 +8128,26 @@
 	},
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"PK" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/green/visible,
+/obj/machinery/meter,
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "PM" = (
 /obj/structure/shipping_container/nakamura,
 /turf/open/floor/engine,
 /area/station/cargo/warehouse)
+"PP" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible,
+/obj/machinery/meter/monitored/waste_loop,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible/layer2,
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "PR" = (
 /obj/structure/fluff/paper/stack{
 	dir = 9
@@ -6819,6 +8248,25 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
+"Qs" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/yellow/visible{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"Qt" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
+/obj/machinery/meter,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Qv" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/effect/turf_decal/tile/blue{
@@ -6839,6 +8287,10 @@
 "Qz" = (
 /turf/closed/wall/r_wall,
 /area/station/ai_monitored/command/nuke_storage)
+"QE" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/mix_output,
+/turf/open/floor/engine/vacuum,
+/area/station/engineering/atmos)
 "QH" = (
 /obj/machinery/modular_computer/console/preset/command{
 	dir = 1
@@ -6864,6 +8316,10 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"QM" = (
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "QN" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/effect/decal/cleanable/blood/old,
@@ -6879,6 +8335,16 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"QT" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "O2 to Pure"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Ra" = (
 /obj/machinery/computer/secure_data{
 	dir = 1
@@ -7012,6 +8478,14 @@
 /obj/structure/closet/crate/decorations,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
+"RH" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "RI" = (
 /obj/machinery/computer/security{
 	name = "\improper Spybot";
@@ -7071,9 +8545,32 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/small,
 /area/station/commons/dorms/barracks)
+"RQ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/visible{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible/layer1,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "RR" = (
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"RU" = (
+/obj/effect/turf_decal/tile/yellow,
+/obj/machinery/light/directional/south,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"RX" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/obj/machinery/computer/atmos_control/nitrous_tank,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Sb" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/fluff/big_chain{
@@ -7138,6 +8635,12 @@
 /obj/effect/spawner/structure/window/hollow/reinforced,
 /turf/open/floor/plating,
 /area/station/commons/storage/art)
+"Sq" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/carbon_input{
+	dir = 8
+	},
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
 "Sr" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/plaque{
@@ -7157,6 +8660,12 @@
 /obj/effect/decal/cleanable/oil,
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Sx" = (
+/obj/machinery/camera/directional/north{
+	c_tag = "Atmospherics Tank - Plasma"
+	},
+/turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
 "Sy" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
@@ -7200,6 +8709,13 @@
 	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
+"SC" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/scrubbers/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "SD" = (
 /turf/open/space/basic,
 /area/station/maintenance/port)
@@ -7212,6 +8728,12 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"SG" = (
+/obj/machinery/atmospherics/components/trinary/filter/atmos/n2{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "SH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/cell_charger{
@@ -7223,6 +8745,13 @@
 /obj/structure/table/reinforced,
 /turf/open/floor/engine,
 /area/station/engineering/storage)
+"SI" = (
+/obj/machinery/meter{
+	name = "Mixed Air Tank Out"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "SJ" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine,
@@ -7251,6 +8780,13 @@
 	},
 /turf/open/floor/circuit/red,
 /area/station/ai_monitored/command/nuke_storage)
+"SV" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 9
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "SW" = (
 /obj/machinery/nuclearbomb/selfdestruct,
 /obj/effect/turf_decal/delivery/red,
@@ -7310,6 +8846,13 @@
 "Tk" = (
 /turf/closed/wall,
 /area/station/engineering/break_room)
+"Tp" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible/layer2,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "Ts" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/dirt,
@@ -7318,6 +8861,19 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/station/security/prison)
+"Tt" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow,
+/obj/machinery/light/directional/south,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"Tx" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "Pure to Ports"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "TA" = (
 /obj/machinery/vending/games,
 /obj/effect/turf_decal/bot,
@@ -7337,6 +8893,12 @@
 /obj/effect/landmark/navigate_destination/engineering,
 /turf/open/floor/iron/textured,
 /area/station/engineering/lobby)
+"TF" = (
+/obj/machinery/camera/directional/west{
+	c_tag = "Atmospherics Tank - Air"
+	},
+/turf/open/floor/engine/air,
+/area/station/engineering/atmos)
 "TH" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -7429,6 +8991,13 @@
 /obj/item/clothing/suit/hazardvest,
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"Ue" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 9
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "Uf" = (
 /turf/closed/wall,
 /area/station/cargo/office)
@@ -7441,6 +9010,14 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
+"Up" = (
+/obj/machinery/atmospherics/pipe/layer_manifold/purple/visible,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "Uq" = (
 /obj/machinery/computer/security{
 	name = "\improper Spybot";
@@ -7470,6 +9047,10 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron,
 /area/station/commons/storage/art)
+"Uv" = (
+/obj/machinery/atmospherics/pipe/smart/manifold/yellow/visible,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Ux" = (
 /obj/effect/mapping_helpers/airlock/locked,
 /obj/effect/decal/cleanable/dirt,
@@ -7540,6 +9121,10 @@
 /obj/effect/mapping_helpers/airlock/access/all/service/janitor,
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
+"UJ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible/layer2,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "UK" = (
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/iron/textured,
@@ -7549,6 +9134,14 @@
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"UP" = (
+/obj/machinery/atmospherics/components/unary/portables_connector/visible{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "US" = (
 /obj/machinery/vending/clothing,
 /turf/open/floor/carpet,
@@ -7564,10 +9157,17 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"UX" = (
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "UZ" = (
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Va" = (
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "Vb" = (
 /obj/effect/turf_decal/tile/yellow,
 /obj/structure/table/reinforced,
@@ -7618,6 +9218,15 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Vo" = (
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/item/storage/bag/construction,
+/obj/item/watertank/atmos,
+/turf/open/floor/iron,
+/area/station/engineering/atmos/office)
 "Vp" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/textured,
@@ -7633,6 +9242,13 @@
 /area/station/service/kitchen/coldroom)
 "Vv" = (
 /obj/effect/spawner/random/structure/closet_private,
+/obj/item/clothing/head/wig{
+	hairstyle = "Mohawk (Unshaven)";
+	dir = 4;
+	icon_state = "hair_unshaven_mohawk";
+	color = null;
+	pixel_y = -9
+	},
 /turf/open/floor/iron/grimy,
 /area/station/commons/dorms)
 "Vx" = (
@@ -7655,6 +9271,13 @@
 	},
 /turf/open/floor/iron/textured,
 /area/station/engineering/main)
+"VB" = (
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
+	dir = 10
+	},
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
 "VE" = (
 /obj/effect/turf_decal/tile/red,
 /obj/structure/closet/bombcloset/security,
@@ -7777,6 +9400,18 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/carpet,
 /area/station/service/theater)
+"Wl" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
+	dir = 5
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
+"Wm" = (
+/turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
 "Wn" = (
 /obj/structure/table,
 /obj/item/reagent_containers/cup/glass/coffee{
@@ -7789,11 +9424,19 @@
 /obj/machinery/light/red/directional/east,
 /turf/open/floor/carpet/neon/simple/red/nodots,
 /area/station/security/office)
+"Ws" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
 "Wt" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/glass,
 /turf/open/floor/engine,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Wu" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "Wv" = (
 /obj/structure/rack,
 /obj/machinery/light/cold/directional/east,
@@ -7821,6 +9464,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/small,
 /area/station/commons/dorms/barracks)
+"WE" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible,
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "WF" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering{
@@ -7845,6 +9496,14 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/cargo/warehouse)
+"WI" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	name = "CO2 to Pure";
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "WL" = (
 /obj/structure/chair/wood/wings,
 /obj/structure/sign/poster/contraband/clown{
@@ -7876,6 +9535,10 @@
 /obj/item/storage/crayons,
 /turf/open/floor/iron/dark,
 /area/station/commons/storage/art)
+"WU" = (
+/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/turf/open/floor/engine/n2o,
+/area/station/engineering/atmos)
 "WV" = (
 /turf/open/floor/iron/stairs{
 	dir = 4
@@ -7929,6 +9592,13 @@
 "Xf" = (
 /turf/closed/wall/r_wall,
 /area/station/engineering/transit_tube)
+"Xi" = (
+/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
+/obj/effect/spawner/structure/window/hollow/plasma/end{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/engineering/atmos)
 "Xj" = (
 /obj/machinery/computer/med_data{
 	dir = 4
@@ -7957,6 +9627,13 @@
 /obj/structure/tank_holder/extinguisher,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"Xo" = (
+/obj/machinery/meter{
+	name = "Mixed Air Tank Out"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "Xr" = (
 /obj/machinery/computer/med_data,
 /turf/open/floor/circuit/red,
@@ -8011,6 +9688,13 @@
 /obj/structure/chair/stool/bar/directional/north,
 /turf/open/floor/iron,
 /area/station/commons/lounge)
+"XE" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1;
+	name = "Ports to Filter"
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "XJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/computer/security,
@@ -8077,6 +9761,9 @@
 /obj/structure/railing/corner,
 /turf/open/floor/iron/textured,
 /area/station/engineering/break_room)
+"XZ" = (
+/turf/open/floor/engine/vacuum,
+/area/station/engineering/atmos)
 "Yc" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 1
@@ -8163,6 +9850,12 @@
 	},
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
+"Yu" = (
+/obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
+	dir = 10
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos/pumproom)
 "Yv" = (
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/machinery/light/small/red/dim/directional/north,
@@ -8281,14 +9974,40 @@
 /obj/effect/decal/cleanable/food/tomato_smudge,
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"YS" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "YT" = (
 /obj/structure/chair/stool/directional/west,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
+"YX" = (
+/obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "YZ" = (
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"Zb" = (
+/obj/machinery/computer/atmos_control/nitrogen_tank,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Zd" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
@@ -8362,12 +10081,32 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
+"Zt" = (
+/obj/machinery/atmospherics/components/unary/outlet_injector/monitored/nitrogen_input,
+/turf/open/floor/engine/n2,
+/area/station/engineering/atmos)
+"Zv" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 8;
+	name = "Plasma to Pure"
+	},
+/obj/effect/turf_decal/tile/blue,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Zw" = (
 /obj/structure/chair/office{
 	dir = 8
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/service/janitor)
+"Zx" = (
+/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "Zy" = (
 /obj/structure/reagent_dispensers/cooking_oil,
 /obj/structure/railing,
@@ -8392,6 +10131,13 @@
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/iron/dark/small,
 /area/station/ai_monitored/command/nuke_storage)
+"ZA" = (
+/obj/machinery/meter{
+	name = "Mixed Air Tank Out"
+	},
+/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "ZB" = (
 /obj/machinery/door/airlock/public/glass{
 	name = "Art Storage"
@@ -8472,7 +10218,7 @@
 	dir = 6
 	},
 /obj/machinery/light/small/broken/directional/north,
-/obj/structure/tank_holder/emergency_oxygen/engi,
+/obj/structure/tank_holder/emergency_oxygen,
 /turf/open/floor/circuit/off,
 /area/station/engineering/break_room)
 "ZW" = (
@@ -14233,11 +15979,11 @@ Xf
 yn
 Xf
 Xf
-Ke
-Ke
-Ke
-Fg
-Ke
+Va
+xn
+Va
+Va
+Va
 WR
 WR
 WR
@@ -14334,30 +16080,30 @@ Ke
 Xf
 Jc
 Xf
-Ke
-Ke
-Ke
-Ke
-Fg
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Va
+Va
+oE
+Va
+xn
+Va
+Va
+Va
+Va
+xn
+Va
+oE
+Va
+Va
+xn
 Tk
 ZS
 Jm
 hk
 Tk
-Ke
-Ke
-Ke
-Ke
+fZ
+fh
+Va
+Va
 Af
 kp
 ps
@@ -14436,30 +16182,30 @@ Ke
 Xf
 vQ
 Xf
-Ke
-Ke
-Ke
-Ke
-Fg
-Fg
-Fg
-Fg
-Fg
-Fg
-Fg
-Fg
-Fg
-Fg
-Fg
+vR
+Va
+Va
+Va
+Va
+Va
+oE
+xn
+Va
+Va
+Va
+Va
+xn
+Va
+Va
 LN
 Jm
 Jm
 Mz
 LN
-Fg
-Fg
-Fg
-Ke
+kO
+kr
+Va
+Va
 Af
 Af
 Af
@@ -14538,35 +16284,35 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Tk
+vR
+vR
+vR
+vR
+vR
+vR
+vR
+vR
+fm
+fm
+fm
+fm
+fm
+fm
+fm
+Kw
 de
 Iz
 jG
 Tk
-Ke
-Ke
-Fg
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+lf
+Gi
+Va
+Va
+Va
+Va
+Va
+Va
+Va
 pY
 hx
 Xw
@@ -14647,28 +16393,28 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-aX
-aX
+vF
+fm
+gZ
+JM
+Up
+xW
+RQ
+IK
+ef
+ef
 dB
-aX
-aX
-Ke
-Ke
-Fg
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+ef
+ef
+Va
+Va
+Va
+Va
+Va
+Va
+Va
+Va
+Va
 pY
 PG
 Xw
@@ -14744,33 +16490,33 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-aX
-aX
-Ke
-Fg
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Ia
+Ia
+Ia
+Ia
+vF
+fm
+vC
+Yu
+rA
+MX
+xe
+jE
+tP
+hm
+RH
+ze
+ef
+ef
+Va
+Va
+Va
+Va
+Va
+Va
+Va
+Va
 pY
 mi
 lG
@@ -14799,7 +16545,7 @@ pV
 EA
 CR
 yh
-xv
+mL
 CR
 wP
 Ke
@@ -14846,28 +16592,28 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-aX
-Ke
-Fg
-Ke
+Ia
+XZ
+zD
+QE
+Xo
+Gy
+jv
+MQ
+wo
+gB
+OE
+Tp
+bM
+zq
+Vo
+Ow
+IT
+Kk
+ef
+Va
+Va
+Va
 rC
 rC
 rC
@@ -14948,27 +16694,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-Ke
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-aX
-Ke
-Fg
+Ia
+Kc
+XZ
+at
+OZ
+vF
+Dj
+Gc
+IN
+iD
+gM
+UJ
+PP
+cx
+It
+yB
+ce
+cg
+ef
+Va
+Va
 rC
 rC
 Ph
@@ -15050,27 +16796,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-aX
-Ke
-Fg
+Ia
+XZ
+XZ
+qi
+ZA
+uq
+hI
+fq
+PK
+mf
+cl
+bK
+oy
+ef
+kS
+db
+gn
+ya
+ef
+Va
+Va
 LN
 Ji
 Ji
@@ -15152,27 +16898,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-aX
-Ke
-Ke
+Ia
+Ia
+Ia
+Ia
+Ia
+vF
+fm
+La
+pa
+NU
+PC
+La
+fS
+ef
+pj
+Cy
+CZ
+nj
+ef
+Va
+Va
 rC
 Ji
 Ji
@@ -15254,27 +17000,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+NT
+TF
+nI
+Oq
+yA
+NA
+sk
+YX
+Fj
+BW
+Qt
+mT
+di
+mV
+no
+Wl
+YS
 aX
-Ke
-Ke
+Va
+Va
 rC
 VU
 Iw
@@ -15356,27 +17102,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+oF
+FE
+iJ
+OZ
+vF
+Je
+pb
+ak
+Al
+CQ
+Fu
+SC
+Tx
+dT
+eS
+Hp
+QM
 aX
-Ke
-Ke
+Va
+Va
 rC
 zx
 kQ
@@ -15458,27 +17204,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+NT
+NT
+it
+Oq
+yA
+Xi
+sk
+hf
+yM
+lW
+Is
+Mt
+fu
+CH
+UX
+EK
+Tt
 aX
-Ke
-Ke
+Va
+Va
 rC
 om
 wl
@@ -15560,27 +17306,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Ia
+Ia
+Ia
+Ia
+vF
 aX
-Ke
-Ke
+nr
+QT
+Uv
+OM
+gW
+EK
+he
+KT
+yN
+EK
+QM
+aX
+Va
+Va
 rC
 CN
 FW
@@ -15662,27 +17408,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+ok
+sK
+GK
+SI
+sW
+vO
+Qs
+gc
+Dc
+sM
+gW
+tU
+wU
+gG
+UP
+EO
+Mk
 aX
-Ke
-Ke
+Va
+Va
 rC
 om
 FW
@@ -15764,27 +17510,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+yP
+Iy
+iI
+OZ
+vF
+Je
+HV
+ak
+KG
+OM
+eP
+gg
+DO
+hb
+DK
 aX
 aX
 aX
-Ke
-Ke
+Va
+Va
 rC
 CN
 Vn
@@ -15866,27 +17612,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+ok
+ok
+Pu
+ZA
+uq
+yQ
+id
+Jw
+KG
+Ar
+gW
+tU
+wU
+gG
+or
 aX
-Ke
-Ke
-Ke
-Ke
+Va
+Va
+Va
+Va
 rC
 vs
 FW
@@ -15968,27 +17714,27 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Ia
+Ia
+Ia
+Ia
+vF
 aX
-Ke
-Ke
-Ke
-Ke
+wK
+rr
+cA
+Ar
+eP
+UX
+gP
+fY
+EO
+aX
+Va
+Va
+Va
+Va
 rC
 Fc
 FW
@@ -16070,25 +17816,25 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Im
+EN
+ow
+SI
+sW
+vO
+IP
+Gz
+yM
+bd
+FF
+XE
+qY
+xS
+RU
 aX
-Ke
-Ke
+Va
+Va
 rC
 rC
 rC
@@ -16172,25 +17918,25 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-Ke
-Ke
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Ws
+JW
+bf
+OZ
+vF
+Je
+Zb
+cy
+KG
+BF
+nB
+xj
+UX
+EK
+QM
+aX
+Va
+Va
 rC
 VS
 ZG
@@ -16274,25 +18020,25 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Im
+Im
+Zt
+ZA
+uq
+yQ
+Pg
+SG
+Cv
+td
+ch
+HO
+ch
+FA
+pi
+aX
+Va
+Va
 rC
 UE
 qV
@@ -16376,25 +18122,25 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Ia
+Ia
+Ia
+Ia
+vF
+aX
+CM
+ak
+Al
+WE
+eb
+tA
+WI
+nE
+Gj
+aX
+CC
+CC
 rC
 qR
 qQ
@@ -16478,23 +18224,23 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-Ke
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Kr
+in
+Ii
+SI
+sW
+vO
+Zx
+cd
+cA
+AI
+aX
+nk
+fM
+HH
+fv
+aX
 Ke
 Ke
 rC
@@ -16580,23 +18326,23 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-go
-Ke
-go
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Wu
+WU
+hC
+OZ
+FV
+iy
+RX
+Dh
+Cv
+tt
+Hh
+hn
+vF
+Cs
+VB
+rk
 Ke
 Ke
 rC
@@ -16682,24 +18428,24 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Kr
+Kr
+GF
+ZA
+Ue
+qr
 go
-Ke
-Ke
-go
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+da
+cK
+AI
+Je
+vF
+aX
+Fp
+OZ
+br
+aX
 Ke
 rC
 Ji
@@ -16784,24 +18530,24 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+Ia
+Ia
+Ia
+Ia
+Ia
+vF
+aX
+Zv
+jo
+Ei
+SV
+qr
+vF
+aX
+Oc
+Ny
+Sq
+aX
 Ke
 rC
 AR
@@ -16891,19 +18637,19 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+vF
+aX
+Ik
+fM
+fv
+aX
+aX
+vF
+aX
+cS
+kX
+Wm
+aX
 Ke
 rC
 Xn
@@ -16993,19 +18739,19 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+vF
+vF
+Cs
+vF
+eE
+vF
+vF
+vF
+aX
+Wm
+GJ
+Wm
+aX
 Ke
 rC
 YC
@@ -17096,18 +18842,18 @@ Ke
 Ke
 Ke
 Ke
+aX
+Fp
+OZ
+br
+aX
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+aX
+aX
+aX
+aX
+aX
 Ke
 rC
 HE
@@ -17198,11 +18944,11 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+aX
+Aw
+BG
+dK
+aX
 Ke
 Ke
 Ke
@@ -17300,11 +19046,11 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+aX
+Sx
+fX
+ab
+aX
 Ke
 Ke
 Ke
@@ -17402,11 +19148,11 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+aX
+ab
+eI
+ab
+aX
 Ke
 Ke
 Ke
@@ -17504,11 +19250,11 @@ Ke
 Ke
 Ke
 Ke
-Ke
-Ke
-Ke
-Ke
-Ke
+aX
+aX
+aX
+aX
+aX
 Ke
 Ke
 Ke
