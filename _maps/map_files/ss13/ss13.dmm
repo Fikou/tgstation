@@ -379,6 +379,7 @@
 /area/station/engineering/atmos)
 "ce" = (
 /obj/effect/mapping_helpers/burnt_floor,
+/obj/effect/decal/cleanable/oil/streak,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/office)
 "cg" = (
@@ -977,7 +978,8 @@
 /area/station/commons/lounge)
 "eW" = (
 /obj/machinery/door/poddoor{
-	name = "Dock"
+	name = "Garage";
+	id = "hangar_garage"
 	},
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/plating,
@@ -1255,12 +1257,13 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/blue,
 /obj/structure/rack,
-/obj/item/rcd_ammo,
+/obj/item/storage/bag/construction,
+/obj/item/watertank/atmos,
 /obj/item/rcd_ammo{
-	pixel_x = 7
+	pixel_x = 5
 	},
 /obj/item/rcd_ammo{
-	pixel_x = -7
+	pixel_x = -4
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos/office)
@@ -2333,6 +2336,10 @@
 "lG" = (
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
+"lH" = (
+/obj/effect/spawner/random/structure/girder,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "lI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/brown{
@@ -3146,7 +3153,8 @@
 /area/station/commons/lounge)
 "qf" = (
 /obj/machinery/door/poddoor{
-	name = "Dock"
+	name = "Dock";
+	id = "hangar_dock"
 	},
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/engine,
@@ -4604,9 +4612,8 @@
 /obj/effect/turf_decal/tile/yellow,
 /obj/item/storage/toolbox/mechanical,
 /obj/structure/rack,
-/obj/item/screwdriver/power,
-/obj/item/weldingtool/hugetank,
 /obj/item/crowbar/large,
+/obj/item/gun/energy/plasmacutter,
 /obj/item/clothing/glasses/meson/engine,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/office)
@@ -4734,6 +4741,7 @@
 /area/space/nearstation)
 "yB" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/oil,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/office)
 "yC" = (
@@ -4847,7 +4855,9 @@
 	req_access = list("atmospherics");
 	id = "atmosdoor"
 	},
-/obj/item/construction/rcd/loaded/upgraded,
+/obj/item/construction/rcd/loaded/upgraded{
+	upgrade = 9
+	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos/office)
 "zf" = (
@@ -5560,7 +5570,6 @@
 	pixel_y = 6
 	},
 /obj/item/detective_scanner,
-/obj/item/storage/belt/holster/thermal,
 /obj/item/clothing/glasses/hud/diagnostic/night,
 /turf/open/floor/iron/textured,
 /area/station/security/office)
@@ -6431,10 +6440,11 @@
 /turf/open/floor/iron/textured,
 /area/station/engineering/lobby)
 "GW" = (
-/obj/machinery/door/poddoor{
-	name = "Garage"
-	},
 /obj/machinery/door/firedoor/heavy,
+/obj/machinery/door/poddoor{
+	name = "Garage";
+	id = "hangar_garage"
+	},
 /turf/open/floor/plating,
 /area/station/cargo/warehouse)
 "Ha" = (
@@ -8148,6 +8158,10 @@
 /obj/effect/turf_decal/tile/blue,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/pumproom)
+"PQ" = (
+/obj/effect/spawner/random/structure/grille,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "PR" = (
 /obj/structure/fluff/paper/stack{
 	dir = 9
@@ -9222,9 +9236,10 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
 	},
-/obj/structure/rack,
-/obj/item/storage/bag/construction,
-/obj/item/watertank/atmos,
+/obj/structure/showcase/mecha{
+	icon = 'icons/mecha/mech_construction.dmi';
+	icon_state = "fireripley4"
+	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos/office)
 "Vp" = (
@@ -9711,6 +9726,14 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white/textured,
 /area/station/command/bridge)
+"XR" = (
+/obj/item/clothing/mask/gas/tiki_mask,
+/obj/item/flashlight/flare/torch{
+	pixel_x = 11
+	},
+/obj/effect/decal/remains/human,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "XS" = (
 /turf/closed/wall/r_wall,
 /area/station/security/execution/education)
@@ -10008,6 +10031,14 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"Zc" = (
+/obj/structure/bonfire,
+/obj/item/toy/plush/carpplushie{
+	pixel_y = 9
+	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
 "Zd" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
@@ -15979,8 +16010,8 @@ Xf
 yn
 Xf
 Xf
-Va
-xn
+XR
+CC
 Va
 Va
 Va
@@ -16080,10 +16111,10 @@ Ke
 Xf
 Jc
 Xf
-Va
-Va
-oE
-Va
+XR
+Zc
+CC
+CC
 xn
 Va
 Va
@@ -16183,9 +16214,9 @@ Xf
 vQ
 Xf
 vR
-Va
-Va
-Va
+xn
+lH
+PQ
 Va
 Va
 oE
@@ -17127,7 +17158,7 @@ rC
 zx
 kQ
 Lp
-GW
+eW
 BM
 PM
 Oe
@@ -17229,7 +17260,7 @@ rC
 om
 wl
 Jp
-GW
+eW
 Tf
 BR
 Ix
@@ -17433,7 +17464,7 @@ rC
 om
 FW
 Jd
-GW
+eW
 jT
 mJ
 wt
@@ -17535,7 +17566,7 @@ rC
 CN
 Vn
 Jp
-GW
+eW
 lm
 Lm
 xV
