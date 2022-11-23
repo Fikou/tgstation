@@ -33,7 +33,7 @@
 		refresh_trim_access()
 		return
 
-	var/list/access_changes = job_changes[job.title]
+	var/list/access_changes = job_changes[job.job_tag]
 
 	if(!length(access_changes))
 		refresh_trim_access()

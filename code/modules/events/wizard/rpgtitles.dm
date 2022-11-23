@@ -30,13 +30,11 @@ GLOBAL_DATUM(rpgtitle_controller, /datum/rpgtitle_controller)
 	if(isliving(new_login))
 		var/mob/living/living_login = new_login
 		if(living_login.stat != DEAD && !living_login.maptext)
-			on_crewmember_join(source, living_login, living_login.mind.assigned_role.title)
+			on_crewmember_join(source, living_login, living_login.mind.assigned_role)
 
 ///signal sent by a crewmember joining
-/datum/rpgtitle_controller/proc/on_crewmember_join(datum/source, mob/living/new_crewmember, rank)
+/datum/rpgtitle_controller/proc/on_crewmember_join(datum/source, mob/living/new_crewmember, datum/job/job)
 	SIGNAL_HANDLER
-
-	var/datum/job/job = SSjob.GetJob(rank)
 
 	//we must prepare for the mother of all strings
 	new_crewmember.maptext_height = 32
@@ -114,4 +112,4 @@ GLOBAL_DATUM(rpgtitle_controller, /datum/rpgtitle_controller)
  */
 /datum/rpgtitle_controller/proc/handle_current_jobs()
 	for(var/mob/living/player as anything in GLOB.alive_player_list)
-		on_crewmember_join(SSdcs, player, player.mind?.assigned_role.title)
+		on_crewmember_join(SSdcs, player, player.mind?.assigned_role)

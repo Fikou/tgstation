@@ -1,6 +1,9 @@
 /datum/job
-	/// The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
-	var/title = "NOPE"
+	/// The name of the job.
+	var/title = "Joblet"
+	/// String key to track any variables we want to avoid using the job title for. We CAPITALIZE it in order to ensure it's unique and resistant to trivial formatting changes.
+	/// You'll probably break someone's config if you change this, so it's best to not to.
+	var/job_tag = ""
 
 	/// The description of the job, used for preferences menu.
 	/// Keep it short and useful. Avoid in-jokes, these are for new players.
@@ -123,9 +126,6 @@
 	/// Does this job ignore human authority?
 	var/ignore_human_authority = FALSE
 
-	/// String key to track any variables we want to tie to this job in config, so we can avoid using the job title. We CAPITALIZE it in order to ensure it's unique and resistant to trivial formatting changes.
-	/// You'll probably break someone's config if you change this, so it's best to not to.
-	var/config_tag = ""
 
 	/// custom ringtone for this job
 	var/job_tone
@@ -134,10 +134,10 @@
 /datum/job/New()
 	. = ..()
 	var/list/job_changes = SSmapping.config.job_changes
-	if(!job_changes[title])
+	if(!job_changes[job_tag])
 		return TRUE
 
-	var/list/job_positions_edits = job_changes[title]
+	var/list/job_positions_edits = job_changes[job_tag]
 	if(!job_positions_edits)
 		return TRUE
 
@@ -252,10 +252,10 @@
  */
 /datum/job/proc/map_check()
 	var/list/job_changes = SSmapping.config.job_changes
-	if(!job_changes[title]) //no edits made
+	if(!job_changes[job_tag]) //no edits made
 		return TRUE
 
-	var/list/job_positions_edits = job_changes[title]
+	var/list/job_positions_edits = job_changes[job_tag]
 	if(!job_positions_edits)
 		return TRUE
 
@@ -418,8 +418,8 @@
 				hangover_landmark.used = TRUE
 				break
 			return hangover_spawn_point || get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
+	if(length(GLOB.jobspawn_overrides[job_tag]))
+		return pick(GLOB.jobspawn_overrides[job_tag])
 	var/obj/effect/landmark/start/spawn_point = get_default_roundstart_spawn_point()
 	if(!spawn_point) //if there isn't a spawnpoint send them to latejoin, if there's no latejoin go yell at your mapper
 		return get_latejoin_spawn_point()
@@ -429,7 +429,7 @@
 /// Handles finding and picking a valid roundstart effect landmark spawn point, in case no uncommon different spawning events occur.
 /datum/job/proc/get_default_roundstart_spawn_point()
 	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != title)
+		if(spawn_point.name != job_tag)
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
@@ -437,13 +437,13 @@
 		spawn_point.used = TRUE
 		break
 	if(!.)
-		log_world("Couldn't find a round start spawn point for [title]")
+		log_world("Couldn't find a round start spawn point for [job_tag]")
 
 
 /// Finds a valid latejoin spawn point, checking for events and special conditions.
 /datum/job/proc/get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title])) //We're doing something special today.
-		return pick(GLOB.jobspawn_overrides[title])
+	if(length(GLOB.jobspawn_overrides[job_tag])) //We're doing something special today.
+		return pick(GLOB.jobspawn_overrides[job_tag])
 	if(length(SSjob.latejoin_trackers))
 		return pick(SSjob.latejoin_trackers)
 	return SSjob.get_last_resort_spawn_points()

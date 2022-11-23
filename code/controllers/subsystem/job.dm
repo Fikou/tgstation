@@ -227,7 +227,7 @@ SUBSYSTEM_DEF(job)
 			JobDebug("FOC player client no longer exists, Player: [player]")
 			continue
 		// Initial screening check. Does the player even have the job enabled, if they do - Is it at the correct priority level?
-		var/player_job_level = player.client?.prefs.job_preferences[job.title]
+		var/player_job_level = player.client?.prefs.job_preferences[job.job_tag]
 		if(isnull(player_job_level))
 			JobDebug("FOC player job not enabled, Player: [player]")
 			continue
@@ -441,7 +441,7 @@ SUBSYSTEM_DEF(job)
 					continue
 
 				// Filter any job that doesn't fit the current level.
-				var/player_job_level = player.client?.prefs.job_preferences[job.title]
+				var/player_job_level = player.client?.prefs.job_preferences[job.job_tag]
 				if(isnull(player_job_level))
 					JobDebug("FOC player job not enabled, Player: [player]")
 					continue
@@ -618,7 +618,7 @@ SUBSYSTEM_DEF(job)
 
 		for(var/datum/job/occupation as anything in joinable_occupations)
 			var/job_title = occupation.title
-			var/job_key = occupation.config_tag
+			var/job_key = occupation.job_tag
 			if(!job_config[job_key]) // Job isn't listed, skip it.
 				message_admins(span_notice("[job_title] (with config key [job_key]) is missing from jobconfig.toml! Using codebase defaults.")) // List both job_title and job_key in case they de-sync over time.
 				continue
@@ -670,7 +670,7 @@ SUBSYSTEM_DEF(job)
 		jobstext = file2text(file(jobstext)) // walter i'm dying (get the file from the string, then parse it into a larger text string)
 		config_documentation += "\n\n## This TOML was migrated from jobs.txt. All variables are COMMENTED and will not load by default! Please verify to ensure that they are correct, and uncomment the key as you want, comparing it to the old config.\n\n" // small warning
 		for(var/datum/job/occupation as anything in joinable_occupations)
-			var/job_key = occupation.config_tag
+			var/job_key = occupation.job_tag
 			var/regex/parser = new("[occupation.title]=(-1|\\d+),(-1|\\d+)") // TXT system used the occupation's name, we convert it to the new config_key system here.
 			parser.Find(jobstext)
 
@@ -693,7 +693,7 @@ SUBSYSTEM_DEF(job)
 	else // Generate the new TOML format, using codebase defaults.
 		to_chat(user, span_notice("Generating new jobconfig.toml, using codebase defaults."))
 		for(var/datum/job/occupation as anything in joinable_occupations)
-			var/job_key = occupation.config_tag
+			var/job_key = occupation.job_tag
 			// Remember, every time we write the TOML from scratch, we want to have it commented out by default to ensure that the server operator is knows that they override codebase defaults when they remove the comment.
 			// Having comments mean that we allow server operators to defer to codebase standards when they deem acceptable. They must uncomment to override the codebase default.
 			if(is_assistant_job(occupation)) // there's a concession made in jobs.txt that we should just rapidly account for here I KNOW I KNOW.
@@ -727,7 +727,7 @@ SUBSYSTEM_DEF(job)
 	var/job_config = rustg_read_toml_file(toml_file)
 	for(var/datum/job/occupation as anything in joinable_occupations)
 		var/job_name = occupation.title
-		var/job_key = occupation.config_tag
+		var/job_key = occupation.job_tag
 
 		// When we regenerate, we want to make sure commented stuff stays commented, but we also want to migrate information that remains uncommented. So, let's make sure we keep that pattern.
 		if(job_config["[job_key]"]) // Let's see if any data for this job exists.

@@ -126,7 +126,7 @@
 	var/implant = FALSE
 
 	var/uplink_spawn_location = traitor_mob.client?.prefs?.read_preference(/datum/preference/choiced/uplink_location)
-	var/cant_speak = (HAS_TRAIT(traitor_mob, TRAIT_MUTE) || traitor_mob.mind?.assigned_role.title == JOB_MIME)
+	var/cant_speak = (HAS_TRAIT(traitor_mob, TRAIT_MUTE) || istype(traitor_mob.mind?.assigned_role, /datum/job/mime))
 	if(uplink_spawn_location == UPLINK_RADIO && cant_speak)
 		if(!silent)
 			to_chat(traitor_mob, span_warning("You have been deemed ineligible for a radio uplink. Supplying standard uplink instead."))
@@ -166,7 +166,7 @@
 		CRASH("Uplink creation failed.")
 	new_uplink.setup_unlock_code()
 	new_uplink.uplink_handler.owner = traitor_mob.mind
-	new_uplink.uplink_handler.assigned_role = traitor_mob.mind.assigned_role.title
+	new_uplink.uplink_handler.assigned_role = traitor_mob.mind.assigned_role.job_tag
 	new_uplink.uplink_handler.assigned_species = traitor_mob.dna.species.id
 	if(uplink_loc == R)
 		unlock_text = "Your Uplink is cunningly disguised as your [R.name]. Simply speak \"[new_uplink.unlock_code]\" into frequency [RADIO_TOKEN_UPLINK] to unlock its hidden features."

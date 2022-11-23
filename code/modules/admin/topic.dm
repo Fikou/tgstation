@@ -787,7 +787,7 @@
 
 		//Job + antagonist
 		if(subject.mind)
-			special_role_description = "Role: <b>[subject.mind.assigned_role.title]</b>; Antagonist: <font color='red'><b>"
+			special_role_description = "Role: <b>[subject.mind.assigned_role.title]/[subject.mind.assigned_role.job_tag]</b>; Antagonist: <font color='red'><b>"
 
 			if(subject.mind.antag_datums)
 				var/iterable = 0
@@ -849,7 +849,7 @@
 		var/Add = href_list["addjobslot"]
 
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
-			if(job.title == Add)
+			if(job.job_tag == Add)
 				job.total_positions += 1
 				log_job_debug("[key_name(usr)] added a slot to [job.title]")
 				break
@@ -864,7 +864,7 @@
 		var/Add = href_list["customjobslot"]
 
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
-			if(job.title == Add)
+			if(job.job_tag == Add)
 				var/newtime = null
 				newtime = input(usr, "How many jebs do you want?", "Add wanted posters", "[newtime]") as num|null
 				if(!newtime)
@@ -883,7 +883,7 @@
 		var/Remove = href_list["removejobslot"]
 
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
-			if(job.title == Remove && job.total_positions - job.current_positions > 0)
+			if(job.job_tag == Remove && job.total_positions - job.current_positions > 0)
 				job.total_positions -= 1
 				log_job_debug("[key_name(usr)] removed a slot from [job.title]")
 				break
@@ -897,7 +897,7 @@
 		var/Unlimit = href_list["unlimitjobslot"]
 
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
-			if(job.title == Unlimit)
+			if(job.job_tag == Unlimit)
 				job.total_positions = -1
 				log_job_debug("[key_name(usr)] removed the limit from [job.title]")
 				break
@@ -911,7 +911,7 @@
 		var/Limit = href_list["limitjobslot"]
 
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
-			if(job.title == Limit)
+			if(job.job_tag == Limit)
 				job.total_positions = job.current_positions
 				log_job_debug("[key_name(usr)] set the limit for [job.title] to [job.total_positions]")
 				break

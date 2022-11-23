@@ -41,7 +41,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 
 
 /datum/computer_file/program/job_management/proc/can_edit_job(datum/job/job)
-	if(!job || !(job.job_flags & JOB_CREW_MEMBER) || (job.title in blacklisted))
+	if(!job || !(job.job_flags & JOB_CREW_MEMBER) || (job.job_tag in blacklisted))
 		return FALSE
 	return TRUE
 
@@ -51,7 +51,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		return FALSE
 	if((job.total_positions <= length(GLOB.player_list) * (max_relative_positions / 100)))
 		var/delta = (world.time / 10) - GLOB.time_last_changed_position
-		if((change_position_cooldown < delta) || (opened_positions[job.title] < 0))
+		if((change_position_cooldown < delta) || (opened_positions[job.job_tag] < 0))
 			return TRUE
 	return FALSE
 
@@ -61,7 +61,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		return FALSE
 	if(job.total_positions > length(GLOB.player_list) * (max_relative_positions / 100))
 		var/delta = (world.time / 10) - GLOB.time_last_changed_position
-		if((change_position_cooldown < delta) || (opened_positions[job.title] > 0))
+		if((change_position_cooldown < delta) || (opened_positions[job.job_tag] > 0))
 			return TRUE
 	return FALSE
 
@@ -132,10 +132,10 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 	var/list/pos = list()
 	var/list/priority = list()
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
-		if(job.title in blacklisted)
+		if(job.job_tag in blacklisted)
 			continue
 		if(job in SSjob.prioritized_jobs)
-			priority += job.title
+			priority += job.job_tag
 
 		pos += list(list(
 			"title" = job.title,

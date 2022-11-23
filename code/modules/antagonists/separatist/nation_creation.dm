@@ -37,7 +37,7 @@
 	for(var/datum/job/job as anything in department.department_jobs)
 		if(job.departments_list.len > 1 && job.departments_list[1] != department.type) //their loyalty is in other departments
 			continue
-		jobs_to_revolt += job.title
+		jobs_to_revolt += job.job_tag
 
 	//setup team datum
 	var/datum/team/nation/nation = new(null, jobs_to_revolt, department)
@@ -52,7 +52,7 @@
 		if(!possible_separatist.mind)
 			continue
 		var/datum/mind/separatist_mind = possible_separatist.mind
-		if(!(separatist_mind.assigned_role.title in jobs_to_revolt))
+		if(!(separatist_mind.assigned_role.job_tag in jobs_to_revolt))
 			continue
 		citizens += possible_separatist
 		separatist_mind.add_antag_datum(/datum/antagonist/separatist, nation, department)

@@ -69,13 +69,13 @@
 			trimmed_list.Remove(M)
 			continue
 		if (M.mind)
-			if (restrict_ghost_roles && (M.mind.assigned_role.title in GLOB.exp_specialmap[EXP_TYPE_SPECIAL])) // Are they playing a ghost role?
+			if (restrict_ghost_roles && (M.mind.assigned_role.job_tag in GLOB.exp_specialmap[EXP_TYPE_SPECIAL])) // Are they playing a ghost role?
 				trimmed_list.Remove(M)
 				continue
-			if (M.mind.assigned_role.title in restricted_roles) // Does their job allow it?
+			if (M.mind.assigned_role.job_tag in restricted_roles) // Does their job allow it?
 				trimmed_list.Remove(M)
 				continue
-			if ((exclusive_roles.len > 0) && !(M.mind.assigned_role.title in exclusive_roles)) // Is the rule exclusive to their job?
+			if ((exclusive_roles.len > 0) && !(M.mind.assigned_role.job_tag in exclusive_roles)) // Is the rule exclusive to their job?
 				trimmed_list.Remove(M)
 				continue
 	return trimmed_list
@@ -94,7 +94,7 @@
 		for (var/mob/M in GLOB.alive_player_list)
 			if (M.stat == DEAD || !M.client)
 				continue // Dead/disconnected players cannot count as opponents
-			if (M.mind && (M.mind.assigned_role.title in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role.title in restricted_roles)))
+			if (M.mind && (M.mind.assigned_role.job_tag in enemy_roles) && (!(M in candidates) || (M.mind.assigned_role.job_tag in restricted_roles)))
 				job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that rule, or have a job that restricts them from it
 
 	var/threat = round(mode.threat_level/10)

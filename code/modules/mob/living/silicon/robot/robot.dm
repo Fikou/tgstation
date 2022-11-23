@@ -995,7 +995,7 @@
 
 	var/datum/job/cyborg/cyborg_job_ref = SSjob.GetJobType(/datum/job/cyborg)
 
-	.[cyborg_job_ref.title] = minutes
+	.[cyborg_job_ref.job_tag] = minutes
 
 /mob/living/silicon/robot/proc/untip_roleplay()
 	to_chat(src, span_notice("Your frustration has empowered you! You can now right yourself faster!"))

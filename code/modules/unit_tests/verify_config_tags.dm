@@ -1,7 +1,7 @@
 /// Unit Test to ensure that all config tags that we associate to all jobs in SSjob.joinable_occupations are valid.
-/datum/unit_test/verify_config_tags
+/datum/unit_test/verify_job_tags
 
-/datum/unit_test/verify_config_tags/Run()
+/datum/unit_test/verify_job_tags/Run()
 	var/job_tag
 	var/list/collected_tags = list()
 	var/number_of_jobs = length(SSjob.joinable_occupations)
@@ -14,11 +14,11 @@
 	var/regex/tag_regex_lowercase = new("\[a-z\]+")
 
 	for(var/datum/job/occupation as anything in SSjob.joinable_occupations)
-		job_tag = occupation.config_tag
+		job_tag = occupation.job_tag
 
-		TEST_ASSERT_NOTEQUAL(job_tag, "", "Job [occupation.title] has no config_tag!") // The base job datum has an empty string, so it's likely that we forgot to give it a unique config tag in the first place.
+		TEST_ASSERT_NOTEQUAL(job_tag, "", "Job [occupation.title] has no job_tag!") // The base job datum has an empty string, so it's likely that we forgot to give it a unique config tag in the first place.
 		if(tag_regex_whitespace.Find(job_tag)) // regex Find() passes 0 and not null, so we can't do TEST_ASSERT_NOTNULL
-			TEST_FAIL("Error for [occupation]: Job [occupation.title] has a config_tag [job_tag] with whitespace in it! Please remove the whitespace (use SCREAMING_SNAKE_CASE rules).")
+			TEST_FAIL("Error for [occupation]: Job [occupation.title] has a job_tag [job_tag] with whitespace in it! Please remove the whitespace (use SCREAMING_SNAKE_CASE rules).")
 		if(tag_regex_lowercase.Find(job_tag)) // Lint for anything undercased.
 			TEST_FAIL("Error for [occupation]: The config tag [job_tag], for the job [occupation.title] contains lowercase characters. Please change it to SCREAMING_SNAKE_CASE.")
 

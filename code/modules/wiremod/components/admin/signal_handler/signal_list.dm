@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(integrated_circuit_global_signal_ids, generate_global_circuit_s
 		COMSIG_GLOB_CLIENT_CONNECT = list(client_ent),
 
 		COMSIG_GLOB_JOB_AFTER_LATEJOIN_SPAWN = list(circuit_signal_param("Job Subsystem", PORT_TYPE_ATOM), entity, client_ent),
-		COMSIG_GLOB_CREWMEMBER_JOINED = list(circuit_signal_param("Crewmember", PORT_TYPE_ATOM), circuit_signal_param("Rank", PORT_TYPE_STRING))
+		COMSIG_GLOB_CREWMEMBER_JOINED = list(circuit_signal_param("Crewmember", PORT_TYPE_ATOM), circuit_signal_param("Rank", PORT_TYPE_DATUM))
 	)
 
 /obj/item/circuit_component/signal_handler/ui_state(mob/user)

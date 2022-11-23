@@ -25,12 +25,12 @@
  * Arguments:
  * source: global signal, so this is SSdcs.
  * crewmember: new onboarding crewmember.
- * rank: new crewmember's rank.
+ * job: new crewmember's job.
  */
-/datum/team/nation/proc/new_possible_separatist(datum/source, mob/living/crewmember, rank)
+/datum/team/nation/proc/new_possible_separatist(datum/source, mob/living/crewmember, datum/job/job)
 	SIGNAL_HANDLER
 
-	if(rank in potential_recruits)
+	if(job.job_tag in potential_recruits)
 		//surely we can trust the player who just joined the game to have a mind.
 		crewmember.mind.add_antag_datum(/datum/antagonist/separatist,src)
 

@@ -399,20 +399,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if (level == JP_HIGH)
 		var/datum/job/overflow_role = SSjob.overflow_role
-		var/overflow_role_title = initial(overflow_role.title)
+		var/overflow_role_tag = initial(overflow_role.job_tag)
 
 		for(var/other_job in job_preferences)
 			if(job_preferences[other_job] == JP_HIGH)
 				// Overflow role needs to go to NEVER, not medium!
-				if(other_job == overflow_role_title)
+				if(other_job == overflow_role_tag)
 					job_preferences[other_job] = null
 				else
 					job_preferences[other_job] = JP_MEDIUM
 
 	if(level == null)
-		job_preferences -= job.title
+		job_preferences -= job.job_tag
 	else
-		job_preferences[job.title] = level
+		job_preferences[job.job_tag] = level
 
 	return TRUE
 

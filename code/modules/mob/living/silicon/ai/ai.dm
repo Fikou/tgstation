@@ -1115,7 +1115,7 @@
 
 	var/datum/job/ai/ai_job_ref = SSjob.GetJobType(/datum/job/ai)
 
-	.[ai_job_ref.title] = minutes
+	.[ai_job_ref.job_tag] = minutes
 
 
 /mob/living/silicon/ai/GetVoice()

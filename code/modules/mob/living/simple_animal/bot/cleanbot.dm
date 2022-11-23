@@ -205,8 +205,8 @@
 		return
 
 	var/mob/living/carbon/stabbed_carbon = AM
-	if(!(stabbed_carbon.mind.assigned_role.title in stolen_valor))
-		stolen_valor += stabbed_carbon.mind.assigned_role.title
+	if(!(stabbed_carbon.mind.assigned_role.job_tage in stolen_valor))
+		stolen_valor += stabbed_carbon.mind.assigned_role.job_tag
 		update_titles()
 
 	zone_selected = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)

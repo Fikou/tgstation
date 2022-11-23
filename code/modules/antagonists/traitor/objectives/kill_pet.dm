@@ -64,15 +64,15 @@
 /datum/traitor_objective/kill_pet/generate_objective(datum/mind/generating_for, list/possible_duplicates)
 	var/datum/job/role = generating_for.assigned_role
 	for(var/datum/traitor_objective/kill_pet/objective as anything in possible_duplicates)
-		possible_heads -= objective.target.title
+		possible_heads -= objective.target.job_tag
 	if(limited_to_department_head)
 		possible_heads = possible_heads & role.department_head
-	possible_heads -= role.title
+	possible_heads -= role.job_tag
 
 	if(!length(possible_heads))
 		return FALSE
 	target = SSjob.name_occupations[pick(possible_heads)]
-	var/pet_type = possible_heads[target.title]
+	var/pet_type = possible_heads[target.job_tag]
 	if(islist(pet_type))
 		for(var/type in pet_type)
 			target_pet = locate(type) in GLOB.mob_living_list

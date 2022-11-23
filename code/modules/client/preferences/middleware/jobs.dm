@@ -46,10 +46,10 @@
 			var/datum/job/department_head_type = initial(department_type.department_head)
 
 			departments[department_name] = list(
-				"head" = department_head_type && initial(department_head_type.title),
+				"head" = department_head_type && initial(department_head_type.job_tag),
 			)
 
-		jobs[job.title] = list(
+		jobs[job.job_tag] = list(
 			"description" = job.description,
 			"department" = department_name,
 		)
@@ -88,7 +88,7 @@
 	for (var/datum/job/job as anything in SSjob.all_occupations)
 		var/required_playtime_remaining = job.required_playtime_remaining(user.client)
 		if (required_playtime_remaining)
-			job_required_experience[job.title] = list(
+			job_required_experience[job.job_tag] = list(
 				"experience_type" = job.get_exp_req_type(),
 				"required_playtime" = required_playtime_remaining,
 			)
@@ -96,7 +96,7 @@
 			continue
 
 		if (!job.player_old_enough(user.client))
-			job_days_left[job.title] = job.available_in_days(user.client)
+			job_days_left[job.job_tag] = job.available_in_days(user.client)
 
 	if (job_days_left.len)
 		data["job_days_left"] = job_days_left
@@ -110,7 +110,7 @@
 	var/list/data = list()
 
 	for (var/datum/job/job as anything in SSjob.all_occupations)
-		if (is_banned_from(user.client?.ckey, job.title))
-			data += job.title
+		if (is_banned_from(user.client?.ckey, job.job_tag))
+			data += job.job_tag
 
 	return data

@@ -286,7 +286,7 @@ GLOBAL_LIST_INIT(summoned_magic_objectives, list(
 
 /// Signal proc from [COMSIG_GLOB_CREWMEMBER_JOINED].
 /// Calls give_proc_path on latejoiners a number of times (based on num_to_give_to_latejoiners)
-/datum/summon_things_controller/proc/gear_up_new_crew(datum/source, mob/living/new_crewmember, rank)
+/datum/summon_things_controller/proc/gear_up_new_crew(datum/source, mob/living/new_crewmember, datum/job/job)
 	SIGNAL_HANDLER
 
 	if(!ishuman(new_crewmember))

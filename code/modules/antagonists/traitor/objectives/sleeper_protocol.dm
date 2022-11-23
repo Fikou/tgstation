@@ -51,9 +51,9 @@
 
 /datum/traitor_objective/sleeper_protocol/can_generate_objective(datum/mind/generating_for, list/possible_duplicates)
 	var/datum/job/job = generating_for.assigned_role
-	if(!(job.title in limited_to) && !inverted_limitation)
+	if(!(job.job_tag in limited_to) && !inverted_limitation)
 		return FALSE
-	if((job.title in limited_to) && inverted_limitation)
+	if((job.job_tag in limited_to) && inverted_limitation)
 		return FALSE
 	if(length(possible_duplicates) > 0)
 		return FALSE

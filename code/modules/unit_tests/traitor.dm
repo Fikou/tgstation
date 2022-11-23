@@ -5,10 +5,10 @@
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		if(!(job.job_flags & JOB_CREW_MEMBER))
 			continue
-		var/rank = job.title
-		if(rank in restricted_roles)
+		var/tag = job.job_tag
+		if(tag in restricted_roles)
 			continue
-		possible_jobs += rank
+		possible_jobs += tag
 
 	for(var/job_name in possible_jobs)
 		var/datum/job/job = SSjob.GetJob(job_name)
