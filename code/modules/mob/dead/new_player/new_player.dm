@@ -194,11 +194,11 @@
 		return JOB_UNAVAILABLE_GENERIC
 	return JOB_AVAILABLE
 
-/mob/dead/new_player/proc/AttemptLateSpawn(rank)
-	var/datum/job/spawning_rank = GetJob(rank)
-	var/error = IsJobUnavailable(spawning_rank.job_tag)
+/mob/dead/new_player/proc/AttemptLateSpawn(tag)
+	var/error = IsJobUnavailable(tag)
+	var/datum/job/job = SSjob.GetJobTag(tag)
 	if(error != JOB_AVAILABLE)
-		tgui_alert(usr, get_job_unavailable_error_message(error, rank))
+		tgui_alert(usr, get_job_unavailable_error_message(error, job.title))
 		return FALSE
 
 	if(SSshuttle.arrivals)
@@ -213,8 +213,6 @@
 	//Remove the player from the join queue if he was in one and reset the timer
 	SSticker.queued_players -= src
 	SSticker.queue_delay = 4
-
-	var/datum/job/job = SSjob.GetJob(rank)
 
 	if(!SSjob.AssignRole(src, job, TRUE))
 		tgui_alert(usr, "There was an unexpected error putting you into your requested job. If you cannot join with any job, you should contact an admin.")
@@ -240,7 +238,7 @@
 	if(is_captain_job(job))
 		is_captain = IS_FULL_CAPTAIN
 	// If we don't have an assigned cap yet, check if this person qualifies for some from of captaincy.
-	else if(!SSjob.assigned_captain && ishuman(character) && SSjob.chain_of_command[rank] && !is_banned_from(ckey, list(JOB_CAPTAIN)))
+	else if(!SSjob.assigned_captain && ishuman(character) && SSjob.chain_of_command[job.title] && !is_banned_from(ckey, list(JOB_CAPTAIN)))
 		is_captain = IS_ACTING_CAPTAIN
 	if(is_captain != IS_NOT_CAPTAIN)
 		minor_announce(job.get_captaincy_announcement(character))
@@ -258,9 +256,9 @@
 	if(humanc) //These procs all expect humans
 		GLOB.data_core.manifest_inject(humanc)
 		if(SSshuttle.arrivals)
-			SSshuttle.arrivals.QueueAnnounce(humanc, rank)
+			SSshuttle.arrivals.QueueAnnounce(humanc, job.title)
 		else
-			announce_arrival(humanc, rank)
+			announce_arrival(humanc, job.title)
 		AddEmploymentContract(humanc)
 
 		humanc.increment_scar_slot()

@@ -876,7 +876,7 @@ SUBSYSTEM_DEF(job)
 		INVOKE_ASYNC(src, PROC_REF(RecoverJob), job)
 
 /datum/controller/subsystem/job/proc/RecoverJob(datum/job/J)
-	var/datum/job/newjob = GetJobTag(J.job_tag)
+	var/datum/job/newjob = SSjob.GetJobTag(J.job_tag)
 	if (!istype(newjob))
 		return
 	newjob.total_positions = J.total_positions
