@@ -71,6 +71,7 @@ export type Department = {
 };
 
 export type Job = {
+  name: string;
   description: string;
   department: string;
 };

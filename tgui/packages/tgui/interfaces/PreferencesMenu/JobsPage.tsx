@@ -46,12 +46,12 @@ type CreateSetPriority = (priority: JobPriority | null) => () => void;
 
 const createSetPriorityCache: Record<string, CreateSetPriority> = {};
 
-const createCreateSetPriorityFromName = (
+const createCreateSetPriorityFromTag = (
   context,
-  jobName: string
+  jobTag: string
 ): CreateSetPriority => {
-  if (createSetPriorityCache[jobName] !== undefined) {
-    return createSetPriorityCache[jobName];
+  if (createSetPriorityCache[jobTag] !== undefined) {
+    return createSetPriorityCache[jobTag];
   }
 
   const perPriorityCache: Map<JobPriority | null, () => void> = new Map();
@@ -66,7 +66,7 @@ const createCreateSetPriorityFromName = (
       const { act } = useBackend<PreferencesMenuData>(context);
 
       act('set_job_preference', {
-        job: jobName,
+        job: jobTag,
         level: priority,
       });
     };
@@ -75,7 +75,7 @@ const createCreateSetPriorityFromName = (
     return setPriority;
   };
 
-  createSetPriorityCache[jobName] = createSetPriority;
+  createSetPriorityCache[jobTag] = createSetPriority;
 
   return createSetPriority;
 };
@@ -170,21 +170,21 @@ const JobRow = (
   props: {
     className?: string;
     job: Job;
-    name: string;
+    tag: string;
   },
   context
 ) => {
   const { data } = useBackend<PreferencesMenuData>(context);
-  const { className, job, name } = props;
+  const { className, job, tag } = props;
 
-  const isOverflow = data.overflow_role === name;
-  const priority = data.job_preferences[name];
+  const isOverflow = data.overflow_role === tag;
+  const priority = data.job_preferences[tag];
 
-  const createSetPriority = createCreateSetPriorityFromName(context, name);
+  const createSetPriority = createCreateSetPriorityFromTag(context, tag);
 
   const experienceNeeded =
-    data.job_required_experience && data.job_required_experience[name];
-  const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
+    data.job_required_experience && data.job_required_experience[tag];
+  const daysLeft = data.job_days_left ? data.job_days_left[tag] : 0;
 
   let rightSide: InfernoNode;
 
@@ -207,7 +207,7 @@ const JobRow = (
         </Stack.Item>
       </Stack>
     );
-  } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
+  } else if (data.job_bans && data.job_bans.indexOf(tag) !== -1) {
     rightSide = (
       <Stack align="center" height="100%" pr={1}>
         <Stack.Item grow textAlign="right">
@@ -240,7 +240,7 @@ const JobRow = (
             style={{
               'padding-left': '0.3em',
             }}>
-            {name}
+            {job.name}
           </Stack.Item>
         </Tooltip>
 
@@ -282,16 +282,16 @@ const Department: SFC<{ department: string }> = (props) => {
         return (
           <Box>
             <Stack vertical fill>
-              {jobsForDepartment.map(([name, job]) => {
+              {jobsForDepartment.map(([tag, job]) => {
                 return (
                   <JobRow
                     className={classes([
                       className,
-                      name === department.head && 'head',
+                      tag === department.head && 'head',
                     ])}
-                    key={name}
+                    key={tag}
                     job={job}
-                    name={name}
+                    tag={tag}
                   />
                 );
               })}
