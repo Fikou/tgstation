@@ -9,6 +9,8 @@ SUBSYSTEM_DEF(job)
 	var/list/datum/job/joinable_occupations = list()
 	/// Dictionary of all jobs, keys are titles.
 	var/list/name_occupations = list()
+	/// Dictionary of all jobs, keys are tags.
+	var/list/tag_occupations = list()
 	/// Dictionary of all jobs, keys are types.
 	var/list/datum/job/type_occupations = list()
 
@@ -109,6 +111,7 @@ SUBSYSTEM_DEF(job)
 
 /datum/controller/subsystem/job/proc/SetupOccupations()
 	name_occupations = list()
+	tag_occupations = list()
 	type_occupations = list()
 
 	var/list/all_jobs = subtypesof(/datum/job)
@@ -136,6 +139,7 @@ SUBSYSTEM_DEF(job)
 			continue
 		new_all_occupations += job
 		name_occupations[job.title] = job
+		tag_occupations[job.job_tag] = job
 		type_occupations[job_type] = job
 		if(job.job_flags & JOB_NEW_PLAYER_JOINABLE)
 			new_joinable_occupations += job
@@ -180,6 +184,11 @@ SUBSYSTEM_DEF(job)
 	if(!length(all_occupations))
 		SetupOccupations()
 	return name_occupations[rank]
+
+/datum/controller/subsystem/job/proc/GetJobTag(tag)
+	if(!length(all_occupations))
+		SetupOccupations()
+	return tag_occupations[tag]
 
 /datum/controller/subsystem/job/proc/GetJobType(jobtype)
 	RETURN_TYPE(/datum/job)
@@ -547,7 +556,7 @@ SUBSYSTEM_DEF(job)
 		if(CONFIG_GET(number/minimal_access_threshold))
 			to_chat(player_client, span_notice("<B>As this station was initially staffed with a [CONFIG_GET(flag/jobs_have_minimal_access) ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] have been added to your ID card.</B>"))
 
-		var/related_policy = get_policy(job.title)
+		var/related_policy = get_policy(job.job_tag)
 		if(related_policy)
 			to_chat(player_client, related_policy)
 
@@ -823,7 +832,7 @@ SUBSYSTEM_DEF(job)
 			if(job.required_playtime_remaining(player.client))
 				young++
 				continue
-			switch(player.client.prefs.job_preferences[job.title])
+			switch(player.client.prefs.job_preferences[job.job_tag])
 				if(JP_HIGH)
 					high++
 				if(JP_MEDIUM)
@@ -832,12 +841,12 @@ SUBSYSTEM_DEF(job)
 					low++
 				else
 					never++
-		SSblackbox.record_feedback("nested tally", "job_preferences", high, list("[job.title]", "high"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", medium, list("[job.title]", "medium"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", low, list("[job.title]", "low"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", never, list("[job.title]", "never"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", banned, list("[job.title]", "banned"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", young, list("[job.title]", "young"))
+		SSblackbox.record_feedback("nested tally", "job_preferences", high, list("[job.job_tag]", "high"))
+		SSblackbox.record_feedback("nested tally", "job_preferences", medium, list("[job.job_tag]", "medium"))
+		SSblackbox.record_feedback("nested tally", "job_preferences", low, list("[job.job_tag]", "low"))
+		SSblackbox.record_feedback("nested tally", "job_preferences", never, list("[job.job_tag]", "never"))
+		SSblackbox.record_feedback("nested tally", "job_preferences", banned, list("[job.job_tag]", "banned"))
+		SSblackbox.record_feedback("nested tally", "job_preferences", young, list("[job.job_tag]", "young"))
 
 /datum/controller/subsystem/job/proc/PopcapReached()
 	var/hpc = CONFIG_GET(number/hard_popcap)
@@ -867,7 +876,7 @@ SUBSYSTEM_DEF(job)
 		INVOKE_ASYNC(src, PROC_REF(RecoverJob), job)
 
 /datum/controller/subsystem/job/proc/RecoverJob(datum/job/J)
-	var/datum/job/newjob = GetJob(J.title)
+	var/datum/job/newjob = GetJobTag(J.job_tag)
 	if (!istype(newjob))
 		return
 	newjob.total_positions = J.total_positions
@@ -886,8 +895,8 @@ SUBSYSTEM_DEF(job)
 
 /datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
 	var/atom/destination
-	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.title])) //We're doing something special today.
-		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.title])
+	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.job_tag])) //We're doing something special today.
+		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.job_tag])
 		destination.JoinPlayerHere(M, FALSE)
 		return TRUE
 
@@ -1070,22 +1079,22 @@ SUBSYSTEM_DEF(job)
 		JobDebug("[debug_prefix] player has no mind, Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_GENERIC
 
-	if(possible_job.title in player.mind.restricted_roles)
-		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ANTAG_INCOMPAT, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+	if(possible_job.job_tag in player.mind.restricted_roles)
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ANTAG_INCOMPAT, possible_job.job_tag)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_ANTAG_INCOMPAT
 
 	if(!possible_job.player_old_enough(player.client))
-		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ACCOUNTAGE, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_ACCOUNTAGE, possible_job.job_tag)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_ACCOUNTAGE
 
 	var/required_playtime_remaining = possible_job.required_playtime_remaining(player.client)
 	if(required_playtime_remaining)
-		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_PLAYTIME, possible_job.title)], Player: [player], MissingTime: [required_playtime_remaining][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_PLAYTIME, possible_job.job_tag)], Player: [player], MissingTime: [required_playtime_remaining][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_PLAYTIME
 
 	// Run the banned check last since it should be the rarest check to fail and can access the database.
 	if(is_banned_from(player.ckey, possible_job.title))
-		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_BANNED, possible_job.title)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
+		JobDebug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_BANNED, possible_job.job_tag)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_BANNED
 
 	// Need to recheck the player exists after is_banned_from since it can query the DB which may sleep.

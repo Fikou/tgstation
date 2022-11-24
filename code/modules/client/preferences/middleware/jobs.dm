@@ -4,13 +4,13 @@
 	)
 
 /datum/preference_middleware/jobs/proc/set_job_preference(list/params, mob/user)
-	var/job_title = params["job"]
+	var/job_tag = params["job"]
 	var/level = params["level"]
 
 	if (level != null && level != JP_LOW && level != JP_MEDIUM && level != JP_HIGH)
 		return FALSE
 
-	var/datum/job/job = SSjob.GetJob(job_title)
+	var/datum/job/job = SSjob.GetJobTag(job_tag)
 
 	if (isnull(job))
 		return FALSE
@@ -50,6 +50,7 @@
 			)
 
 		jobs[job.job_tag] = list(
+			"title" = job.title,
 			"description" = job.description,
 			"department" = department_name,
 		)
