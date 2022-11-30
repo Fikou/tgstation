@@ -1472,6 +1472,7 @@
 #include "code\game\machinery\dna_infuser\dna_infuser.dm"
 #include "code\game\machinery\dna_infuser\infuser_book.dm"
 #include "code\game\machinery\dna_infuser\infuser_entries.dm"
+#include "code\game\machinery\dna_infuser\organ_sets\bat_organs.dm"
 #include "code\game\machinery\dna_infuser\organ_sets\carp_organs.dm"
 #include "code\game\machinery\dna_infuser\organ_sets\fly_organs.dm"
 #include "code\game\machinery\dna_infuser\organ_sets\fox_organs.dm"

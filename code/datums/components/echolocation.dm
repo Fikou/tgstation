@@ -12,7 +12,7 @@
 	/// Are images static? If yes, spawns them on the turf and makes them not change location. Otherwise they change location and pixel shift with the original.
 	var/images_are_static = TRUE
 	/// With mobs that have this echo group in their echolocation receiver trait, we share echo images.
-	var/echo_group = null
+	var/echo_group
 	/// Ref of the client color we give to the echolocator.
 	var/client_color
 	/// Associative list of world.time when created to a list of the images.
@@ -51,11 +51,10 @@
 		src.fade_out_time = fade_out_time
 	if(!isnull(images_are_static))
 		src.images_are_static = images_are_static
-	if(!isnull(echo_group))
-		src.echo_group = echo_group
-	if(!isnull(color_path))
+	if(ispath(color_path))
 		client_color = echolocator.add_client_colour(color_path)
-	ADD_TRAIT(echolocator, TRAIT_ECHOLOCATION_RECEIVER, echo_group || REF(src))
+	src.echo_group = echo_group || REF(src)
+	ADD_TRAIT(echolocator, TRAIT_ECHOLOCATION_RECEIVER, echo_group)
 	echolocator.become_blind(ECHOLOCATION_TRAIT)
 	echolocator.overlay_fullscreen("echo", /atom/movable/screen/fullscreen/echo, echo_icon)
 	START_PROCESSING(SSfastprocess, src)
@@ -64,7 +63,7 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	var/mob/living/echolocator = parent
 	QDEL_NULL(client_color)
-	REMOVE_TRAIT(echolocator, TRAIT_ECHOLOCATION_RECEIVER, echo_group || REF(src))
+	REMOVE_TRAIT(echolocator, TRAIT_ECHOLOCATION_RECEIVER, echo_group)
 	echolocator.cure_blind(ECHOLOCATION_TRAIT)
 	echolocator.clear_fullscreen("echo")
 	for(var/timeframe in images)

@@ -108,6 +108,20 @@
 	open_sound_volume = 25
 	close_sound_volume = 50
 	can_install_electronics = FALSE
+	var/spawn_bat = FALSE
+
+/obj/structure/closet/crate/coffin/Initialize(mapload)
+	. = ..()
+	if(!spawn_bat && mapload && prob(10))
+		spawn_bat = TRUE
+
+/obj/structure/closet/crate/coffin/PopulateContents()
+	. = ..()
+	if(spawn_bat)
+		new /mob/living/simple_animal/hostile/retaliate/bat(src)
+
+/obj/structure/closet/crate/coffin/bat
+	spawn_bat = TRUE
 
 /obj/structure/closet/crate/maint
 
