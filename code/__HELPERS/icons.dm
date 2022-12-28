@@ -1454,8 +1454,11 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 	var/shiftx = rand(-pixelshiftx,pixelshiftx)
 	var/shifty = rand(-pixelshifty,pixelshifty)
 	animate(src, pixel_x = pixel_x + shiftx, pixel_y = pixel_y + shifty, time = 0.2, loop = duration)
-	pixel_x = initialpixelx
-	pixel_y = initialpixely
+	addtimer(CALLBACK(src, PROC_REF(end_shake), initialpixelx, initialpixely), 0.2*duration)
+
+/atom/proc/end_shake(x, y)
+	pixel_x = x
+	pixel_y = y
 
 ///Checks if the given iconstate exists in the given file, caching the result. Setting scream to TRUE will print a stack trace ONCE.
 /proc/icon_exists(file, state, scream)
