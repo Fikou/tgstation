@@ -69,7 +69,7 @@
 	visuals.vis_flags = VIS_INHERIT_PLANE
 	visuals.emissive = emissive
 	Draw()
-	visuals.animate = TRUE //if we drew at least once, we can now animate our draws
+	visuals.animated = TRUE //if we drew at least once, we can now animate our draws
 	RegisterSignal(origin, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing))
 	RegisterSignal(origin, COMSIG_PARENT_QDELETING, PROC_REF(delete_self))
@@ -180,28 +180,27 @@
 	appearance_flags = PIXEL_SCALE|LONG_GLIDE
 	var/base_icon
 	var/emissive = TRUE
-	var/animate = FALSE
+	var/animated = FALSE
 	var/list/cached_visuals = list()
 
 /obj/effect/ebeam_visual/proc/update_visual(angle, length, x_offset = 0, y_offset = 0, origin_px = 0, origin_py = 0)
 	pixel_y = -16*((length-32)/32)
 	var/matrix/new_matrix = matrix().Turn(angle)
 	new_matrix = new_matrix.Translate(round(x_offset / 2)+origin_px, round(y_offset/2)+origin_py)
-	if(animate)
-		var/glide_rate = round(32 / glide_size * world.tick_lag, world.tick_lag)
-		animate(src, glide_rate, transform = new_matrix)
-	else
-		transform = new_matrix
 	if(cached_visuals["[length]"])
 		icon = cached_visuals["[length]"]
-		update_appearance(UPDATE_OVERLAYS)
-		return
-	var/icon/new_icon = icon('icons/blanks/32x32.dmi', "nothing")
-	new_icon.Scale(world.icon_size, length)
-	for(var/i in 1 to length step 32)
-		new_icon.Blend(icon(base_icon, icon_state), ICON_OVERLAY, y = i)
-	cached_visuals["[length]"] = new_icon
-	icon = new_icon
+	else
+		var/icon/new_icon = icon('icons/blanks/32x32.dmi', "nothing")
+		new_icon.Scale(world.icon_size, length)
+		for(var/i in 1 to length step 32)
+			new_icon.Blend(icon(base_icon, icon_state), ICON_OVERLAY, y = i)
+		cached_visuals["[length]"] = new_icon
+		icon = new_icon
+	if(animated)
+		var/glide_rate = round(32 / glide_size * world.tick_lag, world.tick_lag)
+		animate(src, glide_rate, transform = new_matrix, flags = ANIMATION_END_NOW)
+	else
+		transform = new_matrix
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/effect/ebeam_visual/update_overlays()
