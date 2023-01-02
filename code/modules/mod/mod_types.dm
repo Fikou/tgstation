@@ -319,7 +319,7 @@
 	)
 	default_pins = list(
 		/obj/item/mod/module/tether,
-		/obj/item/mod/module/anomaly_locked/kinesis/prebuilt/prototype,
+		/obj/item/mod/module/anomaly_locked/kinesis/prototype,
 	)
 
 /obj/item/mod/control/pre_equipped/responsory
@@ -468,7 +468,7 @@
 		/obj/item/mod/module/quick_carry/advanced,
 		/obj/item/mod/module/magboot/advanced,
 		/obj/item/mod/module/jetpack/advanced,
-		/obj/item/mod/module/anomaly_locked/kinesis/plus,
+		/obj/item/mod/module/anomaly_locked/kinesis/admin,
 	)
 
 //these exist for the prefs menu
