@@ -189,7 +189,13 @@
 	if(sacrifice.mind?.assigned_role?.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND)
 		heretic_datum.knowledge_points++
 		heretic_datum.high_value_sacrifices++
-
+	if(IS_CULTIST(sacrifice))
+		heretic_datum.knowledge_points++
+		var/datum/heretic_knowledge/cog_start/cog_path = heretic_datum.researched_knowledge[/datum/heretic_knowledge/cog_start]
+		if(!cog_path)
+			heretic_datum.researchable_knowledge |= /datum/heretic_knowledge/cog_start
+		else
+			cog_path.cultist_sacrifices++
 	heretic_datum.total_sacrifices++
 	heretic_datum.knowledge_points += 2
 

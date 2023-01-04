@@ -43,7 +43,7 @@
 		These shots function as normal, albiet weak high caliber mutitions when fired from \
 		close range or at inanimate objects. You can aim the rifle at distant foes, \
 		causing the shot to deal massively increased damage and hone in on them."
-	gain_text = "I met an old man in an anique shop who wielded a very unusual weapon. \
+	gain_text = "I met an old man in an antique shop who wielded a very unusual weapon. \
 		I could not purchase it at the time, but they showed me how they made it ages ago."
 	next_knowledge = list(
 		/datum/heretic_knowledge/spell/furious_steel,

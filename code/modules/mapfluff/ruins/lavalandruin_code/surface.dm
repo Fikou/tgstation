@@ -17,6 +17,7 @@
 	plane = ABOVE_GAME_PLANE
 	anchored = TRUE
 	density = TRUE
+	move_resist = INFINITY //im a god, how can you move a god
 	bound_width = 416
 	bound_height = 64
 	pixel_y = -10

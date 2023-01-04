@@ -319,11 +319,11 @@
 	user.client?.give_award(/datum/award/achievement/misc/flesh_ascension, user)
 
 	var/datum/antagonist/heretic/heretic_datum = IS_HERETIC(user)
-	var/datum/heretic_knowledge/limited_amount/flesh_grasp/grasp_ghoul = heretic_datum.get_knowledge(/datum/heretic_knowledge/limited_amount/flesh_grasp)
+	var/datum/heretic_knowledge/limited_amount/flesh_grasp/grasp_ghoul = heretic_datum.researched_knowledge[/datum/heretic_knowledge/limited_amount/flesh_grasp]
 	grasp_ghoul.limit *= 3
-	var/datum/heretic_knowledge/limited_amount/flesh_ghoul/ritual_ghoul = heretic_datum.get_knowledge(/datum/heretic_knowledge/limited_amount/flesh_ghoul)
+	var/datum/heretic_knowledge/limited_amount/flesh_ghoul/ritual_ghoul = heretic_datum.researched_knowledge[/datum/heretic_knowledge/limited_amount/flesh_ghoul]
 	ritual_ghoul.limit *= 3
-	var/datum/heretic_knowledge/limited_amount/starting/base_flesh/blade_ritual = heretic_datum.get_knowledge(/datum/heretic_knowledge/limited_amount/starting/base_flesh)
+	var/datum/heretic_knowledge/limited_amount/starting/base_flesh/blade_ritual = heretic_datum.researched_knowledge[/datum/heretic_knowledge/limited_amount/starting/base_flesh]
 	blade_ritual.limit = 999
 
 #undef GHOUL_MAX_HEALTH

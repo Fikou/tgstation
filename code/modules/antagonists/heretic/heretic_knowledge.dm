@@ -58,6 +58,10 @@
 
 	if(gain_text)
 		to_chat(user, span_warning("[gain_text]"))
+	our_heretic.researched_knowledge[type] = src
+	our_heretic.researchable_knowledge += next_knowledge
+	our_heretic.researchable_knowledge -= type
+	our_heretic.banned_knowledge += banned_knowledge + type
 	on_gain(user, our_heretic)
 
 /**
@@ -91,6 +95,13 @@
  */
 /datum/heretic_knowledge/proc/can_be_invoked(datum/antagonist/heretic/invoker)
 	return !!LAZYLEN(required_atoms)
+
+/**
+ * Determines if a heretic can research this.
+ * By default returns TRUE if they have more knowledge points than our cost.
+ */
+/datum/heretic_knowledge/proc/can_research(datum/antagonist/heretic/our_heretic)
+	return our_heretic.knowledge_points >= cost
 
 /**
  * Special check for rituals.

@@ -24,10 +24,14 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	spell_to_add = /datum/action/cooldown/spell/touch/mansus_grasp
 	cost = 0
 	route = PATH_START
+	/// "Starting" paths that we don't actually start with.
+	var/static/list/non_starting_paths = list(
+		/datum/heretic_knowledge/limited_amount/starting/cog,
+	)
 
 /datum/heretic_knowledge/spell/basic/New()
 	. = ..()
-	next_knowledge = subtypesof(/datum/heretic_knowledge/limited_amount/starting)
+	next_knowledge = subtypesof(/datum/heretic_knowledge/limited_amount/starting) - non_starting_paths
 
 /**
  * The Living Heart heretic knowledge.
@@ -53,44 +57,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 /datum/heretic_knowledge/living_heart/on_research(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
-
-	var/obj/item/organ/where_to_put_our_heart = user.getorganslot(our_heretic.living_heart_organ_slot)
-	// Our heart slot is not valid to put a heart
-	if(!is_valid_heart(where_to_put_our_heart))
-		where_to_put_our_heart = null
-
-	// If a heretic is made from a species without a heart, we need to find a backup.
-	if(!where_to_put_our_heart)
-		var/static/list/backup_organs = list(
-			ORGAN_SLOT_LUNGS = /obj/item/organ/internal/lungs,
-			ORGAN_SLOT_LIVER = /obj/item/organ/internal/liver,
-			ORGAN_SLOT_STOMACH = /obj/item/organ/internal/stomach,
-		)
-
-		for(var/backup_slot in backup_organs)
-			var/obj/item/organ/look_for_backup = user.getorganslot(backup_slot)
-			// This backup slot is not a valid slot to put a heart
-			if(!is_valid_heart(look_for_backup))
-				continue
-
-			// We found a replacement place to put our heart
-			where_to_put_our_heart = look_for_backup
-			our_heretic.living_heart_organ_slot = backup_slot
-			required_organ_type = backup_organs[backup_slot]
-			to_chat(user, span_boldnotice("As your species does not have a heart, your Living Heart is located in your [look_for_backup.name]."))
-			break
-
-	if(where_to_put_our_heart)
-		where_to_put_our_heart.AddComponent(/datum/component/living_heart)
-		desc = "Grants you a Living Heart, tied to your [where_to_put_our_heart.name], \
-			allowing you to track sacrifice targets. \
-			Should you lose your [where_to_put_our_heart.name], you can transmute a poppy and a pool of blood \
-			to awaken your replacement [where_to_put_our_heart.name] into a Living Heart. \
-			If your [where_to_put_our_heart.name] is cybernetic, \
-			you will additionally require a usable organic [where_to_put_our_heart.name] in the transmutation."
-
-	else
-		to_chat(user, span_boldnotice("You don't have a heart, or any chest organs for that matter. You didn't get a Living Heart because of it."))
+	modify_heart(user, our_heretic)
 
 /datum/heretic_knowledge/living_heart/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
 	var/obj/item/organ/our_living_heart = user.getorganslot(our_heretic.living_heart_organ_slot)
@@ -176,6 +143,47 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	to_chat(user, span_warning("You feel your [our_new_heart.name] begin pulse faster and faster as it awakens!"))
 	playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
 	return TRUE
+
+
+/datum/heretic_knowledge/living_heart/proc/modify_heart(mob/living/user, datum/antagonist/heretic/our_heretic)
+	var/obj/item/organ/where_to_put_our_heart = user.getorganslot(our_heretic.living_heart_organ_slot)
+	// Our heart slot is not valid to put a heart
+	if(!is_valid_heart(where_to_put_our_heart))
+		where_to_put_our_heart = null
+
+	// If a heretic is made from a species without a heart, we need to find a backup.
+	if(!where_to_put_our_heart)
+		var/static/list/backup_organs = list(
+			ORGAN_SLOT_LUNGS = /obj/item/organ/internal/lungs,
+			ORGAN_SLOT_LIVER = /obj/item/organ/internal/liver,
+			ORGAN_SLOT_STOMACH = /obj/item/organ/internal/stomach,
+		)
+
+		for(var/backup_slot in backup_organs)
+			var/obj/item/organ/look_for_backup = user.getorganslot(backup_slot)
+			// This backup slot is not a valid slot to put a heart
+			if(!is_valid_heart(look_for_backup))
+				continue
+
+			// We found a replacement place to put our heart
+			where_to_put_our_heart = look_for_backup
+			our_heretic.living_heart_organ_slot = backup_slot
+			required_organ_type = backup_organs[backup_slot]
+			to_chat(user, span_boldnotice("As your species does not have a heart, your Living Heart is located in your [look_for_backup.name]."))
+			break
+
+	if(where_to_put_our_heart)
+		where_to_put_our_heart.AddComponent(/datum/component/living_heart)
+		desc = "Grants you a Living Heart, tied to your [where_to_put_our_heart.name], \
+			allowing you to track sacrifice targets. \
+			Should you lose your [where_to_put_our_heart.name], you can transmute a poppy and a pool of blood \
+			to awaken your replacement [where_to_put_our_heart.name] into a Living Heart. \
+			If your [where_to_put_our_heart.name] is cybernetic, \
+			you will additionally require a usable organic [where_to_put_our_heart.name] in the transmutation."
+
+	else
+		to_chat(user, span_boldnotice("You don't have a heart, or any chest organs for that matter. You didn't get a Living Heart because of it."))
+
 
 /// Checks if the passed heart is a valid heart to become a living heart
 /datum/heretic_knowledge/living_heart/proc/is_valid_heart(obj/item/organ/new_heart)

@@ -35,6 +35,10 @@
 	var/passive_gain_timer = 20 MINUTES
 	/// Assoc list of [typepath] = [knowledge instance]. A list of all knowledge this heretic's reserached.
 	var/list/researched_knowledge = list()
+	/// List of paths of research we can... Research!
+	var/list/researchable_knowledge = list()
+	/// List of paths of research we specifically cannot research.
+	var/list/banned_knowledge = list()
 	/// The organ slot we place our Living Heart in.
 	var/living_heart_organ_slot = ORGAN_SLOT_HEART
 	/// A list of TOTAL how many sacrifices completed. (Includes high value sacrifices)
@@ -58,6 +62,7 @@
 		PATH_ASH = "white",
 		PATH_VOID = "blue",
 		PATH_BLADE = "label", // my favorite color is label
+		PATH_COG = "average", // same, same
 	)
 
 /datum/antagonist/heretic/Destroy()
@@ -74,7 +79,7 @@
 	// This should be cached in some way, but the fact that final knowledge
 	// has to update its disabled state based on whether all objectives are complete,
 	// makes this very difficult. I'll figure it out one day maybe
-	for(var/datum/heretic_knowledge/knowledge as anything in get_researchable_knowledge())
+	for(var/datum/heretic_knowledge/knowledge as anything in researchable_knowledge - banned_knowledge)
 		var/list/knowledge_data = list()
 		knowledge_data["path"] = knowledge
 		knowledge_data["name"] = initial(knowledge.name)
@@ -124,8 +129,6 @@
 			if(!ispath(researched_path))
 				CRASH("Heretic attempted to learn non-heretic_knowledge path! (Got: [researched_path])")
 
-			if(initial(researched_path.cost) > knowledge_points)
-				return TRUE
 			if(!gain_knowledge(researched_path))
 				return TRUE
 
@@ -348,8 +351,8 @@
 /datum/antagonist/heretic/proc/after_fully_healed(mob/living/source, admin_revive)
 	SIGNAL_HANDLER
 
-	var/datum/heretic_knowledge/living_heart/heart_knowledge = get_knowledge(/datum/heretic_knowledge/living_heart)
-	heart_knowledge.on_research(source)
+	var/datum/heretic_knowledge/living_heart/heart_knowledge = researched_knowledge[/datum/heretic_knowledge/living_heart]
+	heart_knowledge.modify_heart(source, src)
 
 /// Signal proc for [COMSIG_LIVING_CULT_SACRIFICED] to reward cultists for sacrificing a heretic
 /datum/antagonist/heretic/proc/on_cult_sacrificed(mob/living/source, list/invokers)
@@ -487,12 +490,12 @@
 		to_chat(admin, span_warning("You shouldn't be using this!"))
 		return
 
-	var/datum/heretic_knowledge/living_heart/heart_knowledge = get_knowledge(/datum/heretic_knowledge/living_heart)
+	var/datum/heretic_knowledge/living_heart/heart_knowledge = researched_knowledge[/datum/heretic_knowledge/living_heart]
 	if(!heart_knowledge)
 		to_chat(admin, span_warning("The heretic doesn't have a living heart knowledge for some reason. What?"))
 		return
 
-	heart_knowledge.on_research(owner.current, src)
+	heart_knowledge.modify_heart(owner.current, src)
 
 /**
  * Admin proc for adding a marked mob to a heretic's sac list.
@@ -588,33 +591,20 @@
 	if(!ispath(knowledge_type))
 		stack_trace("[type] gain_knowledge was given an invalid path! (Got: [knowledge_type])")
 		return FALSE
-	if(get_knowledge(knowledge_type))
+	if(knowledge_type in banned_knowledge)
+		stack_trace("[type] gain_knowledge was given a banned path! (Got: [knowledge_type])")
+		return FALSE
+	if(!(knowledge_type in researchable_knowledge))
+		stack_trace("[type] gain_knowledge was path that was not researchable! (Got: [knowledge_type])")
+		return FALSE
+	if(researched_knowledge[knowledge_type])
 		return FALSE
 	var/datum/heretic_knowledge/initialized_knowledge = new knowledge_type()
-	researched_knowledge[knowledge_type] = initialized_knowledge
+	if(!initialized_knowledge.can_research(src))
+		return FALSE
 	initialized_knowledge.on_research(owner.current, src)
 	update_static_data(owner.current)
 	return TRUE
-
-/**
- * Get a list of all knowledge TYPEPATHS that we can currently research.
- */
-/datum/antagonist/heretic/proc/get_researchable_knowledge()
-	var/list/researchable_knowledge = list()
-	var/list/banned_knowledge = list()
-	for(var/knowledge_index in researched_knowledge)
-		var/datum/heretic_knowledge/knowledge = researched_knowledge[knowledge_index]
-		researchable_knowledge |= knowledge.next_knowledge
-		banned_knowledge |= knowledge.banned_knowledge
-		banned_knowledge |= knowledge.type
-	researchable_knowledge -= banned_knowledge
-	return researchable_knowledge
-
-/**
- * Check if the wanted type-path is in the list of research knowledge.
- */
-/datum/antagonist/heretic/proc/get_knowledge(wanted)
-	return researched_knowledge[wanted]
 
 /**
  * Get a list of all rituals this heretic can invoke on a rune.
