@@ -21,9 +21,9 @@
 		var/datum/heretic_knowledge/knowledge_datum = our_heretic.researched_knowledge[knowledge]
 		if(knowledge_datum.route == PATH_START || knowledge_datum.route == PATH_COG)
 			continue
-		if(istype(knowledge_datum, /datum/heretic_knowledge/limited_amount))
-			var/datum/heretic_knowledge/limited_amount/item_creator = knowledge_datum
-			for(var/datum/weakref/ref as anything in item_creator.created_items)
+		if(istype(knowledge_datum, /datum/heretic_knowledge/limited_amount/starting))
+			var/datum/heretic_knowledge/limited_amount/blade_creator = knowledge_datum
+			for(var/datum/weakref/ref as anything in blade_creator.created_items)
 				var/atom/created_item = ref.resolve()
 				qdel(created_item)
 		knowledge_datum.on_lose()
