@@ -180,6 +180,7 @@
 	owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/ecult_op.ogg', 100, FALSE, pressure_affected = FALSE, use_reverb = FALSE)//subject to change
 
 	for(var/starting_knowledge in GLOB.heretic_start_knowledge)
+		researchable_knowledge += starting_knowledge
 		gain_knowledge(starting_knowledge)
 
 	GLOB.reality_smash_track.add_tracked_mind(owner)

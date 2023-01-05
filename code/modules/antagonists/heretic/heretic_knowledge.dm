@@ -669,6 +669,9 @@
 		They have [length(our_heretic.researched_knowledge)] knowledge nodes researched, totalling [total_points] points \
 		and have sacrificed [our_heretic.total_sacrifices] people ([our_heretic.high_value_sacrifices] of which were high value)")
 
+/datum/heretic_knowledge/ultimate/can_research(datum/antagonist/heretic/our_heretic)
+	return ..() && our_heretic.can_ascend()
+
 /datum/heretic_knowledge/ultimate/can_be_invoked(datum/antagonist/heretic/invoker)
 	if(invoker.ascended)
 		return FALSE

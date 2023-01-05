@@ -149,7 +149,7 @@
 
 	// Now grab completely random targets until we'll full
 	var/target_sanity = 0
-	while(length(final_targets) < num_targets_to_generate && length(valid_targets) > num_targets_to_generate && target_sanity < 25)
+	while(length(final_targets) < num_targets_to_generate && length(valid_targets) && target_sanity < 25)
 		final_targets += pick_n_take(valid_targets)
 		target_sanity++
 
@@ -189,6 +189,10 @@
 	if(sacrifice.mind?.assigned_role?.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND)
 		heretic_datum.knowledge_points++
 		heretic_datum.high_value_sacrifices++
+
+	heretic_datum.total_sacrifices++
+	heretic_datum.knowledge_points += 2
+
 	if(IS_CULTIST(sacrifice))
 		heretic_datum.knowledge_points++
 		var/datum/heretic_knowledge/cog_start/cog_path = heretic_datum.researched_knowledge[/datum/heretic_knowledge/cog_start]
@@ -196,8 +200,8 @@
 			heretic_datum.researchable_knowledge |= /datum/heretic_knowledge/cog_start
 		else
 			cog_path.cultist_sacrifices++
-	heretic_datum.total_sacrifices++
-	heretic_datum.knowledge_points += 2
+		sacrifice.do_jitter_animation(100)
+		addtimer(CALLBACK(src, PROC_REF(disembowel_target), sacrifice), 3 SECONDS)
 
 	if(!begin_sacrifice(sacrifice))
 		disembowel_target(sacrifice)

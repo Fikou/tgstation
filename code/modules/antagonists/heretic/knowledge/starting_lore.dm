@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	route = PATH_START
 	/// "Starting" paths that we don't actually start with.
 	var/static/list/non_starting_paths = list(
-		/datum/heretic_knowledge/limited_amount/starting/cog,
+		/datum/heretic_knowledge/limited_amount/starting/base_cog,
 	)
 
 /datum/heretic_knowledge/spell/basic/New()

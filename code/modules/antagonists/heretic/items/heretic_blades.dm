@@ -105,3 +105,7 @@
 	icon_state = "dark_blade"
 	inhand_icon_state = "dark_blade"
 	after_use_message = "The Torn Champion hears your call..."
+
+// Path of Cog's blade
+/obj/item/melee/sickly_blade/cog
+	name = "\improper bronze blade"

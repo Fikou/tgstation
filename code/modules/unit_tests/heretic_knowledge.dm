@@ -10,7 +10,8 @@
 	// First, we get a list of all knowledge types
 	// EXCLUDING types which have route unset / set to null.
 	// (Types without a route set are assumed to be abstract or purposefully unreachable)
-	var/list/all_possible_knowledge = typesof(/datum/heretic_knowledge)
+	var/list/outside_tree_knowledge = list(/datum/heretic_knowledge/cog_start)
+	var/list/all_possible_knowledge = typesof(/datum/heretic_knowledge) - outside_tree_knowledge
 	for(var/datum/heretic_knowledge/knowledge_type as anything in all_possible_knowledge)
 		if(isnull(initial(knowledge_type.route)))
 			all_possible_knowledge -= knowledge_type
