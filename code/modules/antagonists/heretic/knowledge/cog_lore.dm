@@ -7,7 +7,7 @@
 	)
 	priority = MAX_KNOWLEDGE_PRIORITY - 3
 	cost = 0
-	route = COG_PATH
+	route = PATH_COG
 	/// Tracker of cultists sacrificed, which is needed for other cog knowledges
 	var/cultist_sacrifices = 0
 
