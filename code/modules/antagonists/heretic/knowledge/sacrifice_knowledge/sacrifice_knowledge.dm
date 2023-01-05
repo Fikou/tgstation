@@ -202,6 +202,7 @@
 			cog_path.cultist_sacrifices++
 		sacrifice.do_jitter_animation(100)
 		addtimer(CALLBACK(src, PROC_REF(disembowel_target), sacrifice), 3 SECONDS)
+		return
 
 	if(!begin_sacrifice(sacrifice))
 		disembowel_target(sacrifice)
