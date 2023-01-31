@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"map_name": "NTO Pathfinder",
+	"map_path": "map_files/Pathfinder",
+	"map_file": "nto_pathfinder.dmm",
+	"space_ruin_levels": 0,
+	"space_empty_levels": 1,
+	"minetype": "none",
+}
