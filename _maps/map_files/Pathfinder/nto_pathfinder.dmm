@@ -13579,7 +13579,7 @@
 /obj/machinery/airalarm/mixingchamber{
 	dir = 4;
 	pixel_x = 25;
-	req_one_access = list("maintenance","shipping")
+	req_one_access = list("maint_tunnels","shipping")
 	},
 /obj/effect/mapping_helpers/burnt_floor,
 /obj/machinery/portable_atmospherics/canister,
@@ -17999,7 +17999,7 @@
 	id = "garbagedoor";
 	name = "Garbage Incinerator Control";
 	pixel_x = -6;
-	req_one_access = list("maintenance","shipping")
+	req_one_access = list("maint_tunnels","shipping")
 	},
 /obj/machinery/button/ignition/incinerator{
 	id = "garbageignite";
@@ -18010,7 +18010,7 @@
 	id = "garbagedoor";
 	name = "Garbage Incinerator Vent";
 	pixel_x = 6;
-	req_one_access = list("maintenance","shipping")
+	req_one_access = list("maint_tunnels","shipping")
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/disposal/incinerator)
