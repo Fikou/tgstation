@@ -1,13 +1,12 @@
 import { uniqBy } from 'common/collections';
 import { useBackend } from '../../backend';
 import { Box, Button, Collapsible, Stack, LabeledList, Section, Tabs } from '../../components';
-import { GeneticMakeupInfo } from './GeneticMakeupInfo';
 import { MutationInfo } from './MutationInfo';
-import { STORAGE_CONS_SUBMODE_CHROMOSOMES, STORAGE_CONS_SUBMODE_MUTATIONS, STORAGE_DISK_SUBMODE_ENZYMES, STORAGE_DISK_SUBMODE_MUTATIONS, STORAGE_MODE_ADVINJ, STORAGE_MODE_CONSOLE, STORAGE_MODE_DISK } from './constants';
+import { STORAGE_CONS_SUBMODE_CHROMOSOMES, STORAGE_CONS_SUBMODE_MUTATIONS, STORAGE_MODE_ADVINJ, STORAGE_MODE_CONSOLE, STORAGE_MODE_DISK } from './constants';
 
 export const DnaConsoleStorage = (props, context) => {
   const { data, act } = useBackend(context);
-  const { storageMode, storageConsSubMode, storageDiskSubMode } = data.view;
+  const { storageMode, storageConsSubMode } = data.view;
   const { diskMakeupBuffer, diskHasMakeup } = data;
   const mutations = data.storage[storageMode];
 
@@ -21,23 +20,9 @@ export const DnaConsoleStorage = (props, context) => {
         storageConsSubMode === STORAGE_CONS_SUBMODE_CHROMOSOMES && (
           <StorageChromosomes />
         )}
-      {storageMode === STORAGE_MODE_DISK &&
-        storageDiskSubMode === STORAGE_DISK_SUBMODE_MUTATIONS && (
-          <StorageMutations mutations={mutations} />
-        )}
-      {storageMode === STORAGE_MODE_DISK &&
-        storageDiskSubMode === STORAGE_DISK_SUBMODE_ENZYMES && (
-          <>
-            <GeneticMakeupInfo makeup={diskMakeupBuffer} />
-            <Button
-              icon="times"
-              color="red"
-              disabled={!diskHasMakeup}
-              content={'Delete'}
-              onClick={() => act('del_makeup_disk')}
-            />
-          </>
-        )}
+      {storageMode === STORAGE_MODE_DISK && (
+        <StorageMutations mutations={mutations} />
+      )}
       {storageMode === STORAGE_MODE_ADVINJ && <DnaConsoleAdvancedInjectors />}
     </Section>
   );
@@ -105,7 +90,7 @@ const DnaConsoleAdvancedInjectors = (props, context) => {
 const StorageButtons = (props, context) => {
   const { data, act } = useBackend(context);
   const { hasDisk } = data;
-  const { storageMode, storageConsSubMode, storageDiskSubMode } = data.view;
+  const { storageMode, storageConsSubMode } = data.view;
 
   return (
     <>
@@ -131,28 +116,6 @@ const StorageButtons = (props, context) => {
           />
         </>
       )}
-      {storageMode === STORAGE_MODE_DISK && (
-        <>
-          <Button
-            selected={storageDiskSubMode === STORAGE_CONS_SUBMODE_MUTATIONS}
-            content="Mutations"
-            onClick={() =>
-              act('set_view', {
-                storageDiskSubMode: STORAGE_CONS_SUBMODE_MUTATIONS,
-              })
-            }
-          />
-          <Button
-            selected={storageDiskSubMode === STORAGE_DISK_SUBMODE_ENZYMES}
-            content="Enzymes"
-            onClick={() =>
-              act('set_view', {
-                storageDiskSubMode: STORAGE_DISK_SUBMODE_ENZYMES,
-              })
-            }
-          />
-        </>
-      )}
       <Box inline mr={1} />
       <Button
         content="Console"
@@ -172,8 +135,6 @@ const StorageButtons = (props, context) => {
         onClick={() =>
           act('set_view', {
             storageMode: STORAGE_MODE_DISK,
-            storageDiskSubMode:
-              STORAGE_DISK_SUBMODE_MUTATIONS ?? storageDiskSubMode,
           })
         }
       />

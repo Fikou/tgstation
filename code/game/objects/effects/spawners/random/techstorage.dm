@@ -56,7 +56,7 @@
 		/obj/item/circuitboard/computer/teleporter,
 		/obj/item/circuitboard/machine/destructive_analyzer,
 		/obj/item/circuitboard/computer/rdconsole,
-		/obj/item/circuitboard/computer/scan_consolenew,
+		/obj/item/circuitboard/computer/scan_console,
 		/obj/item/circuitboard/machine/dnascanner,
 	)
 

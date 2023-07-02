@@ -1047,7 +1047,7 @@
 /obj/item/circuitboard/machine/dnascanner
 	name = "DNA Scanner"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
-	build_path = /obj/machinery/dna_scannernew
+	build_path = /obj/machinery/dna_scanner
 	req_components = list(
 		/datum/stock_part/scanning_module = 1,
 		/datum/stock_part/matter_bin = 1,

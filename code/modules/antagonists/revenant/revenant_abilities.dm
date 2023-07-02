@@ -297,7 +297,7 @@
 	for(var/obj/structure/bodycontainer/corpseholder in victim)
 		if(corpseholder.connected.loc == corpseholder)
 			corpseholder.open()
-	for(var/obj/machinery/dna_scannernew/dna in victim)
+	for(var/obj/machinery/dna_scanner/dna in victim)
 		dna.open_machine()
 	for(var/obj/structure/window/window in victim)
 		if(window.get_integrity() > REVENANT_DEFILE_MAX_DAMAGE)

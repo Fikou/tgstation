@@ -98,7 +98,7 @@
 		/obj/structure/displaycase,
 		/obj/structure/filingcabinet,
 		/obj/machinery/teleport,
-		/obj/machinery/dna_scannernew,
+		/obj/machinery/dna_scanner,
 		/obj/machinery/telecomms,
 		/obj/machinery/nuclearbomb,
 		/obj/machinery/recharge_station,

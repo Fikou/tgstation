@@ -250,7 +250,7 @@
 	required_atoms = list(
 		/obj/machinery/mecha_part_fabricator = 1,
 		/obj/machinery/rnd/experimentor = 1,
-		/obj/machinery/dna_scannernew = 1,
+		/obj/machinery/dna_scanner = 1,
 		/obj/machinery/microwave = 2,
 		/obj/machinery/deepfryer = 2,
 		/obj/machinery/chem_heater = 3,
@@ -279,7 +279,7 @@
 	description = "Despite the apparent lack of use of the scanning modules on our stations, we still expect you to run performance tests on them, just in case we come up with a ground-breaking way to fit 6 scanning modules in an exosuit."
 	required_points = 6
 	required_atoms = list(
-		/obj/machinery/dna_scannernew = 1,
+		/obj/machinery/dna_scanner = 1,
 		/obj/machinery/rnd/experimentor = 1,
 		/obj/machinery/medical_kiosk = 2,
 		/obj/machinery/piratepad/civilian = 2,

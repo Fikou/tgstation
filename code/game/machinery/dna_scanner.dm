@@ -1,4 +1,4 @@
-/obj/machinery/dna_scannernew
+/obj/machinery/dna_scanner
 	name = "\improper DNA scanner"
 	desc = "It scans DNA structures."
 	icon = 'icons/obj/machines/cloning.dmi'
@@ -14,9 +14,9 @@
 	var/precision_coeff
 	var/message_cooldown
 	var/breakout_time = 1200
-	var/obj/machinery/computer/scan_consolenew/linked_console = null
+	var/obj/machinery/computer/scan_console/linked_console = null
 
-/obj/machinery/dna_scannernew/RefreshParts()
+/obj/machinery/dna_scanner/RefreshParts()
 	. = ..()
 	scan_level = 0
 	damage_coeff = 0
@@ -28,12 +28,12 @@
 	for(var/datum/stock_part/micro_laser/micro_laser in component_parts)
 		damage_coeff = micro_laser.tier
 
-/obj/machinery/dna_scannernew/examine(mob/user)
+/obj/machinery/dna_scanner/examine(mob/user)
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
 		. += span_notice("The status display reads: Radiation pulse accuracy increased by factor <b>[precision_coeff**2]</b>.<br>Radiation pulse damage decreased by factor <b>[damage_coeff**2]</b>.")
 
-/obj/machinery/dna_scannernew/update_icon_state()
+/obj/machinery/dna_scanner/update_icon_state()
 	//no power or maintenance
 	if(machine_stat & (NOPOWER|BROKEN))
 		icon_state = "[base_icon_state][state_open ? "_open" : null]_unpowered"
@@ -52,7 +52,7 @@
 	icon_state = "[base_icon_state][state_open ? "_open" : null]"
 	return ..()
 
-/obj/machinery/dna_scannernew/proc/toggle_open(mob/user)
+/obj/machinery/dna_scanner/proc/toggle_open(mob/user)
 	if(panel_open)
 		to_chat(user, span_notice("Close the maintenance panel first."))
 		return
@@ -67,7 +67,7 @@
 
 	open_machine()
 
-/obj/machinery/dna_scannernew/container_resist_act(mob/living/user)
+/obj/machinery/dna_scanner/container_resist_act(mob/living/user)
 	if(!locked)
 		open_machine()
 		return
@@ -84,14 +84,14 @@
 			span_notice("You successfully break out of [src]!"))
 		open_machine()
 
-/obj/machinery/dna_scannernew/proc/locate_computer(type_)
+/obj/machinery/dna_scanner/proc/locate_computer(type_)
 	for(var/direction in GLOB.cardinals)
 		var/C = locate(type_, get_step(src, direction))
 		if(C)
 			return C
 	return null
 
-/obj/machinery/dna_scannernew/close_machine(mob/living/carbon/user, density_to_set = TRUE)
+/obj/machinery/dna_scanner/close_machine(mob/living/carbon/user, density_to_set = TRUE)
 	if(!state_open)
 		return FALSE
 
@@ -104,7 +104,7 @@
 
 	return TRUE
 
-/obj/machinery/dna_scannernew/open_machine(drop = TRUE, density_to_set = FALSE)
+/obj/machinery/dna_scanner/open_machine(drop = TRUE, density_to_set = FALSE)
 	if(state_open)
 		return FALSE
 
@@ -115,7 +115,7 @@
 
 	return TRUE
 
-/obj/machinery/dna_scannernew/relaymove(mob/living/user, direction)
+/obj/machinery/dna_scanner/relaymove(mob/living/user, direction)
 	if(user.stat || locked)
 		if(message_cooldown <= world.time)
 			message_cooldown = world.time + 50
@@ -123,7 +123,7 @@
 		return
 	open_machine()
 
-/obj/machinery/dna_scannernew/attackby(obj/item/I, mob/user, params)
+/obj/machinery/dna_scanner/attackby(obj/item/I, mob/user, params)
 
 	if(!occupant && default_deconstruction_screwdriver(user, icon_state, icon_state, I))//sent icon_state is irrelevant...
 		update_appearance()//..since we're updating the icon here, since the scanner can be unpowered when opened/closed
@@ -137,23 +137,23 @@
 
 	return ..()
 
-/obj/machinery/dna_scannernew/interact(mob/user)
+/obj/machinery/dna_scanner/interact(mob/user)
 	toggle_open(user)
 
-/obj/machinery/dna_scannernew/MouseDrop_T(mob/target, mob/user)
+/obj/machinery/dna_scanner/MouseDrop_T(mob/target, mob/user)
 	if(user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_UI_BLOCKED) || !Adjacent(user) || !user.Adjacent(target) || !iscarbon(target) || !ISADVANCEDTOOLUSER(user))
 		return
 	close_machine(target)
 
 //This is only called by the scanner. if you ever want to use this outside of that context you'll need to refactor things a bit
-/obj/machinery/dna_scannernew/proc/set_linked_console(new_console)
+/obj/machinery/dna_scanner/proc/set_linked_console(new_console)
 	if(linked_console)
 		UnregisterSignal(linked_console, COMSIG_QDELETING)
 	linked_console = new_console
 	if(linked_console)
 		RegisterSignal(linked_console, COMSIG_QDELETING, PROC_REF(react_to_console_del))
 
-/obj/machinery/dna_scannernew/proc/react_to_console_del(datum/source)
+/obj/machinery/dna_scanner/proc/react_to_console_del(datum/source)
 	SIGNAL_HANDLER
 	set_linked_console(null)
 

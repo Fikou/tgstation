@@ -1,15 +1,14 @@
 import { useBackend } from '../../backend';
 import { Box, Button, Dimmer, Icon, LabeledList, Section, Stack } from '../../components';
 import { Window } from '../../layouts';
-import { DnaConsoleEnzymes } from './DnaConsoleEnzymes';
 import { DnaConsoleSequencer } from './DnaConsoleSequencer';
 import { DnaConsoleStorage } from './DnaConsoleStorage';
 import { DnaScanner } from './DnaScanner';
-import { CONSOLE_MODE_ENZYMES, CONSOLE_MODE_FEATURES, CONSOLE_MODE_SEQUENCER, CONSOLE_MODE_STORAGE, STORAGE_MODE_CONSOLE } from './constants';
+import { CONSOLE_MODE_SEQUENCER, CONSOLE_MODE_STORAGE, STORAGE_MODE_CONSOLE } from './constants';
 
 export const DnaConsole = (props, context) => {
   const { data } = useBackend(context);
-  const { isPulsing, timeToPulse, subjectUNI, subjectUF } = data;
+  const { isPulsing, timeToPulse } = data;
   const { consoleMode } = data.view;
 
   return (
@@ -33,20 +32,6 @@ export const DnaConsole = (props, context) => {
           <Stack.Item grow>
             {consoleMode === CONSOLE_MODE_STORAGE && <DnaConsoleStorage />}
             {consoleMode === CONSOLE_MODE_SEQUENCER && <DnaConsoleSequencer />}
-            {consoleMode === CONSOLE_MODE_ENZYMES && (
-              <DnaConsoleEnzymes
-                subjectBlock={subjectUNI}
-                type="ui"
-                name="Enzymes"
-              />
-            )}
-            {consoleMode === CONSOLE_MODE_FEATURES && (
-              <DnaConsoleEnzymes
-                subjectBlock={subjectUF}
-                type="uf"
-                name="Features"
-              />
-            )}
           </Stack.Item>
         </Stack>
       </Window.Content>
@@ -87,24 +72,6 @@ const DnaConsoleCommands = (props, context) => {
             onClick={() =>
               act('set_view', {
                 consoleMode: CONSOLE_MODE_SEQUENCER,
-              })
-            }
-          />
-          <Button
-            content="Enzymes"
-            selected={consoleMode === CONSOLE_MODE_ENZYMES}
-            onClick={() =>
-              act('set_view', {
-                consoleMode: CONSOLE_MODE_ENZYMES,
-              })
-            }
-          />
-          <Button
-            content="Features"
-            selected={consoleMode === CONSOLE_MODE_FEATURES}
-            onClick={() =>
-              act('set_view', {
-                consoleMode: CONSOLE_MODE_FEATURES,
               })
             }
           />

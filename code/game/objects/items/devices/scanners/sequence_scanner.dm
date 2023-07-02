@@ -42,8 +42,8 @@
 	if(!istype(object) || !proximity)
 		return
 
-	if(istype(object, /obj/machinery/computer/scan_consolenew))
-		var/obj/machinery/computer/scan_consolenew/console = object
+	if(istype(object, /obj/machinery/computer/scan_console))
+		var/obj/machinery/computer/scan_console/console = object
 		if(console.stored_research)
 			to_chat(user, span_notice("[name] linked to central research database."))
 			discovered = console.stored_research.discovered_mutations
