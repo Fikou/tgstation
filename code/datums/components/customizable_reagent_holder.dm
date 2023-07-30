@@ -62,8 +62,8 @@
 
 /datum/component/customizable_reagent_holder/RegisterWithParent()
 	. = ..()
-	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, PROC_REF(customizable_attack))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(customizable_attack))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_PROCESSED, PROC_REF(on_processed))
 	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
 	ADD_TRAIT(parent, TRAIT_CUSTOMIZABLE_REAGENT_HOLDER, REF(src))
@@ -72,8 +72,8 @@
 /datum/component/customizable_reagent_holder/UnregisterFromParent()
 	. = ..()
 	UnregisterSignal(parent, list(
-		COMSIG_PARENT_ATTACKBY,
-		COMSIG_PARENT_EXAMINE,
+		COMSIG_ATOM_ATTACKBY,
+		COMSIG_ATOM_EXAMINE,
 		COMSIG_ATOM_PROCESSED,
 		COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM,
 	))
@@ -124,6 +124,9 @@
 	SIGNAL_HANDLER
 
 	if (!valid_ingredient(ingredient))
+		if (ingredient.is_drainable()) // For stuff like adding flour from a flour sack into a bowl, we handle the transfer of the reagent elsewhere, but we shouldn't regard it beyond some user feedback.
+			attacker.balloon_alert(attacker, "transferring...")
+			return
 		attacker.balloon_alert(attacker, "doesn't go on that!")
 		return
 

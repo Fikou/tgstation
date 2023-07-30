@@ -54,6 +54,9 @@
 		/obj/item/mod/module/flashlight,
 		/obj/item/mod/module/magboot,
 	)
+	default_pins = list(
+		/obj/item/mod/module/magboot,
+	)
 
 /obj/item/mod/control/pre_equipped/atmospheric
 	theme = /datum/mod_theme/atmospheric
@@ -63,6 +66,7 @@
 		/obj/item/mod/module/rad_protection,
 		/obj/item/mod/module/flashlight,
 		/obj/item/mod/module/t_ray,
+		/obj/item/mod/module/quick_carry,
 	)
 
 /obj/item/mod/control/pre_equipped/advanced
@@ -77,6 +81,7 @@
 	)
 	default_pins = list(
 		/obj/item/mod/module/jetpack,
+		/obj/item/mod/module/magboot/advanced,
 	)
 
 /obj/item/mod/control/pre_equipped/loader
@@ -102,8 +107,11 @@
 		/obj/item/mod/module/orebag,
 		/obj/item/mod/module/clamp,
 		/obj/item/mod/module/drill,
+		/obj/item/mod/module/mouthhole,
 	)
 	default_pins = list(
+		/obj/item/mod/module/gps,
+		/obj/item/mod/module/drill,
 		/obj/item/mod/module/sphere_transform,
 	)
 
@@ -235,6 +243,9 @@
 		/obj/item/mod/module/jetpack/advanced,
 	)
 
+/obj/item/mod/control/pre_equipped/nuclear/unrestricted
+	req_access = null
+
 /obj/item/mod/control/pre_equipped/elite
 	theme = /datum/mod_theme/elite
 	applied_cell = /obj/item/stock_parts/cell/bluespace
@@ -277,6 +288,20 @@
 		/obj/item/mod/module/visor/diaghud,
 	)
 
+
+/obj/item/mod/control/pre_equipped/interdyne
+	theme = /datum/mod_theme/interdyne
+	applied_cell = /obj/item/stock_parts/cell/super
+	applied_modules = list(
+		/obj/item/mod/module/defibrillator/combat,
+		/obj/item/mod/module/flashlight,
+		/obj/item/mod/module/health_analyzer,
+		/obj/item/mod/module/injector,
+		/obj/item/mod/module/surgical_processor/preloaded,
+		/obj/item/mod/module/storage/syndicate,
+		/obj/item/mod/module/tether
+	)
+
 /obj/item/mod/control/pre_equipped/enchanted
 	theme = /datum/mod_theme/enchanted
 	applied_core = /obj/item/mod/core/infinite
@@ -292,7 +317,7 @@
 	applied_modules = list(
 		/obj/item/mod/module/storage,
 		/obj/item/mod/module/noslip,
-		/obj/item/mod/module/status_readout,
+		/obj/item/mod/module/status_readout/ninja,
 		/obj/item/mod/module/stealth/ninja,
 		/obj/item/mod/module/dispenser/ninja,
 		/obj/item/mod/module/dna_lock/reinforced,
@@ -336,11 +361,13 @@
 	/// The insignia type, insignias show what sort of member of the ERT you're dealing with.
 	var/insignia_type = /obj/item/mod/module/insignia
 	/// Additional module we add, as a treat.
-	var/additional_module = /obj/item/mod/module
+	var/additional_module
 
 /obj/item/mod/control/pre_equipped/responsory/Initialize(mapload, new_theme, new_skin, new_core)
 	applied_modules.Insert(1, insignia_type)
-	applied_modules.Add(additional_module)
+	if(additional_module)
+		applied_modules += additional_module
+		default_pins += additional_module
 	return ..()
 
 /obj/item/mod/control/pre_equipped/responsory/commander
@@ -413,6 +440,16 @@
 		/obj/item/mod/module/jetpack,
 	)
 
+/obj/item/mod/control/pre_equipped/apocryphal/officer
+	applied_modules = list(
+		/obj/item/mod/module/storage/bluespace,
+		/obj/item/mod/module/hat_stabilizer,
+		/obj/item/mod/module/welding,
+		/obj/item/mod/module/emp_shield/advanced,
+		/obj/item/mod/module/magnetic_harness,
+		/obj/item/mod/module/jetpack,
+	)
+
 /obj/item/mod/control/pre_equipped/corporate
 	theme = /datum/mod_theme/corporate
 	applied_core = /obj/item/mod/core/infinite
@@ -469,6 +506,12 @@
 		/obj/item/mod/module/magboot/advanced,
 		/obj/item/mod/module/jetpack/advanced,
 		/obj/item/mod/module/anomaly_locked/kinesis/admin,
+	)
+	default_pins = list(
+		/obj/item/mod/module/stealth/ninja,
+		/obj/item/mod/module/magboot/advanced,
+		/obj/item/mod/module/jetpack/advanced,
+		/obj/item/mod/module/anomaly_locked/kinesis/plus,
 	)
 
 //these exist for the prefs menu

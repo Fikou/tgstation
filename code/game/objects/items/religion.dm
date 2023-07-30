@@ -24,7 +24,7 @@
 		. += span_notice("Activate it in your hand to inspire nearby allies of this banner's allegiance!")
 
 /obj/item/banner/attack_self(mob/living/carbon/human/user)
-	if(!inspiration_available)
+	if(!inspiration_available || flags_1 & HOLOGRAM_1)
 		return
 	if(morale_time > world.time)
 		to_chat(user, span_warning("You aren't feeling inspired enough to flourish [src] again yet."))
@@ -272,6 +272,7 @@
 	name = "Crusader's Hood"
 	desc = "A brownish hood."
 	icon = 'icons/obj/clothing/head/chaplain.dmi'
+	worn_icon = 'icons/mob/clothing/head/chaplain.dmi'
 	icon_state = "crusader"
 	inhand_icon_state = null
 	w_class = WEIGHT_CLASS_NORMAL
@@ -300,6 +301,7 @@
 	name = "Prophet's Hat"
 	desc = "A religious-looking hat."
 	icon_state = null
+	worn_icon = 'icons/mob/clothing/head/helmet.dmi'
 	inhand_icon_state = null
 	flags_1 = 0
 	armor_type = /datum/armor/crusader_prophet
@@ -327,6 +329,7 @@
 /obj/item/godstaff
 	name = "godstaff"
 	desc = "It's a stick..?"
+	icon = 'icons/obj/weapons/staff.dmi'
 	icon_state = "godstaff-red"
 	lefthand_file = 'icons/mob/inhands/weapons/staves_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/staves_righthand.dmi'
@@ -334,11 +337,11 @@
 	var/staffcooldown = 0
 	var/staffwait = 30
 
-
 /obj/item/godstaff/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	if(staffcooldown + staffwait > world.time)
 		return
+	. |= AFTERATTACK_PROCESSED_ITEM
 	user.visible_message(span_notice("[user] chants deeply and waves [user.p_their()] staff!"))
 	if(do_after(user, 2 SECONDS, src))
 		target.add_atom_colour(conversion_color, WASHABLE_COLOUR_PRIORITY) //wololo
@@ -353,7 +356,7 @@
 	conversion_color = "#0000ff"
 
 /obj/item/clothing/gloves/plate
-	name = "Plate Gauntlets"
+	name = "plate gauntlets"
 	icon_state = "crusader"
 	desc = "They're like gloves, but made of metal."
 	siemens_coefficient = 0
@@ -369,12 +372,12 @@
 	icon_state = "crusader-blue"
 
 /obj/item/clothing/shoes/plate
-	name = "Plate Boots"
+	name = "plate boots"
 	desc = "Metal boots, they look heavy."
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_NORMAL
 	armor_type = /datum/armor/shoes_plate
-	clothing_flags = NOSLIP
+	clothing_traits = list(TRAIT_NO_SLIP_WATER)
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
 	heat_protection = FEET
