@@ -61,8 +61,8 @@
 	var/silent = FALSE
 	/// same as above but only for the user, useful to cut on chat spam without removing feedback for other players
 	var/silent_for_user = FALSE
-	/// play a rustling sound when interacting with the bag
-	var/rustle_sound = TRUE
+	/// what sound to play when item is inserted
+	var/rustle_sound = SFX_RUSTLE
 
 	/// alt click takes an item out instead of opening up storage
 	var/quickdraw = FALSE
@@ -495,7 +495,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 
 	if(rustle_sound)
-		playsound(resolve_parent, SFX_RUSTLE, 50, TRUE, -5)
+		playsound(resolve_parent, rustle_sound, 50, TRUE, -5)
 
 	if(!silent_for_user)
 		to_chat(user, span_notice("You put [thing] [insert_preposition]to [resolve_parent]."))
@@ -531,7 +531,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		thing.forceMove(newLoc)
 
 		if(rustle_sound && !silent)
-			playsound(resolve_parent, SFX_RUSTLE, 50, TRUE, -5)
+			playsound(resolve_parent, rustle_sound, 50, TRUE, -5)
 	else
 		thing.moveToNullspace()
 
@@ -786,7 +786,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		to_chat(user, span_notice("You dump the contents of [resolve_parent] into [dest_object]."))
 
 		if(rustle_sound)
-			playsound(resolve_parent, SFX_RUSTLE, 50, TRUE, -5)
+			playsound(resolve_parent, rustle_sound, 50, TRUE, -5)
 
 		for(var/obj/item/to_dump in resolve_location)
 			if(to_dump.loc != resolve_location)
@@ -1031,7 +1031,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		animate_parent()
 
 	if(rustle_sound)
-		playsound(resolve_parent, SFX_RUSTLE, 50, TRUE, -5)
+		playsound(resolve_parent, rustle_sound, 50, TRUE, -5)
 
 	return TRUE
 

@@ -65,7 +65,7 @@
 		/mob/living/simple_animal/hostile/mining_drone,
 		/obj/item/weldingtool/hugetank,
 		/obj/item/clothing/head/utility/welding,
-		/obj/item/borg/upgrade/modkit/minebot_passthrough,
+		/obj/item/pka_modkit/minebot_passthrough,
 		)
 
 /datum/voucher_set/conscription_kit

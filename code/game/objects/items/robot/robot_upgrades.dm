@@ -104,39 +104,6 @@
 	if (.)
 		R.ionpulse = FALSE
 
-/obj/item/borg/upgrade/ddrill
-	name = "mining cyborg diamond drill"
-	desc = "A diamond drill replacement for the mining model's standard drill."
-	icon_state = "cyborg_upgrade3"
-	require_model = TRUE
-	model_type = list(/obj/item/robot_model/miner)
-	model_flags = BORG_MODEL_MINER
-
-/obj/item/borg/upgrade/ddrill/action(mob/living/silicon/robot/R, user = usr)
-	. = ..()
-	if(.)
-		for(var/obj/item/pickaxe/drill/cyborg/D in R.model)
-			R.model.remove_module(D, TRUE)
-		for(var/obj/item/shovel/S in R.model)
-			R.model.remove_module(S, TRUE)
-
-		var/obj/item/pickaxe/drill/cyborg/diamond/DD = new /obj/item/pickaxe/drill/cyborg/diamond(R.model)
-		R.model.basic_modules += DD
-		R.model.add_module(DD, FALSE, TRUE)
-
-/obj/item/borg/upgrade/ddrill/deactivate(mob/living/silicon/robot/R, user = usr)
-	. = ..()
-	if (.)
-		for(var/obj/item/pickaxe/drill/cyborg/diamond/DD in R.model)
-			R.model.remove_module(DD, TRUE)
-
-		var/obj/item/pickaxe/drill/cyborg/D = new (R.model)
-		R.model.basic_modules += D
-		R.model.add_module(D, FALSE, TRUE)
-		var/obj/item/shovel/S = new (R.model)
-		R.model.basic_modules += S
-		R.model.add_module(S, FALSE, TRUE)
-
 /obj/item/borg/upgrade/soh
 	name = "mining cyborg satchel of holding"
 	desc = "A satchel of holding replacement for mining cyborg's ore satchel module."
@@ -145,25 +112,17 @@
 	model_type = list(/obj/item/robot_model/miner)
 	model_flags = BORG_MODEL_MINER
 
-/obj/item/borg/upgrade/soh/action(mob/living/silicon/robot/R)
+/obj/item/borg/upgrade/soh/action(mob/living/silicon/robot/borg, user)
 	. = ..()
 	if(.)
-		for(var/obj/item/storage/bag/ore/cyborg/S in R.model)
-			R.model.remove_module(S, TRUE)
+		var/obj/item/robot_model/miner/model = borg.model
+		model.set_bag(/obj/item/storage/bag/ore/holding)
 
-		var/obj/item/storage/bag/ore/holding/H = new /obj/item/storage/bag/ore/holding(R.model)
-		R.model.basic_modules += H
-		R.model.add_module(H, FALSE, TRUE)
-
-/obj/item/borg/upgrade/soh/deactivate(mob/living/silicon/robot/R, user = usr)
+/obj/item/borg/upgrade/soh/deactivate(mob/living/silicon/robot/borg, user)
 	. = ..()
-	if (.)
-		for(var/obj/item/storage/bag/ore/holding/H in R.model)
-			R.model.remove_module(H, TRUE)
-
-		var/obj/item/storage/bag/ore/cyborg/S = new (R.model)
-		R.model.basic_modules += S
-		R.model.add_module(S, FALSE, TRUE)
+	if(.)
+		var/obj/item/robot_model/miner/model = borg.model
+		model.set_bag(/obj/item/storage/bag/ore)
 
 /obj/item/borg/upgrade/tboh
 	name = "janitor cyborg trash bag of holding"
@@ -274,15 +233,15 @@
 	model_type = list(/obj/item/robot_model/miner)
 	model_flags = BORG_MODEL_MINER
 
-/obj/item/borg/upgrade/lavaproof/action(mob/living/silicon/robot/R, user = usr)
+/obj/item/borg/upgrade/lavaproof/action(mob/living/silicon/robot/borg, user)
 	. = ..()
 	if(.)
-		R.add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
+		borg.add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
 
-/obj/item/borg/upgrade/lavaproof/deactivate(mob/living/silicon/robot/R, user = usr)
+/obj/item/borg/upgrade/lavaproof/deactivate(mob/living/silicon/robot/borg, user)
 	. = ..()
 	if (.)
-		R.remove_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
+		borg.remove_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
 
 /obj/item/borg/upgrade/selfrepair
 	name = "self-repair module"

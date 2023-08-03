@@ -264,6 +264,14 @@
 	SIGNAL_HANDLER
 	queueAlarm("--- [alarm_type] alarm in [source_area.name] has been cleared.", alarm_type, FALSE)
 
+/mob/living/silicon/robot/remove_sensors()
+	. = ..()
+	model.remove_sensors()
+
+/mob/living/silicon/robot/add_sensors()
+	. = ..()
+	model.add_sensors()
+
 /mob/living/silicon/robot/can_interact_with(atom/A)
 	if (A == modularInterface)
 		return TRUE //bypass for borg tablets

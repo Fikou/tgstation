@@ -143,7 +143,7 @@
 		/datum/material/gold =HALF_SHEET_MATERIAL_AMOUNT * 1.5,
 		/datum/material/uranium =HALF_SHEET_MATERIAL_AMOUNT,
 	)
-	build_path = /obj/item/borg/upgrade/modkit/trigger_guard
+	build_path = /obj/item/pka_modkit/trigger_guard
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_PKA_MODS
 	)
@@ -160,7 +160,7 @@
 		/datum/material/gold =HALF_SHEET_MATERIAL_AMOUNT * 1.5,
 		/datum/material/uranium =HALF_SHEET_MATERIAL_AMOUNT,
 	)
-	build_path = /obj/item/borg/upgrade/modkit/damage
+	build_path = /obj/item/pka_modkit/damage
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_PKA_MODS
 	)
@@ -180,7 +180,7 @@
 	id = "cooldownmod"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/gold =HALF_SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/uranium =HALF_SHEET_MATERIAL_AMOUNT)
-	build_path = /obj/item/borg/upgrade/modkit/cooldown
+	build_path = /obj/item/pka_modkit/cooldown
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_PKA_MODS
 	)
@@ -200,7 +200,7 @@
 	id = "rangemod"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/gold =HALF_SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/uranium =HALF_SHEET_MATERIAL_AMOUNT)
-	build_path = /obj/item/borg/upgrade/modkit/range
+	build_path = /obj/item/pka_modkit/range
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_PKA_MODS
 	)
@@ -226,7 +226,7 @@
 		/datum/material/gold =SHEET_MATERIAL_AMOUNT,
 		/datum/material/diamond =SHEET_MATERIAL_AMOUNT,
 	)
-	build_path = /obj/item/borg/upgrade/modkit/aoe/turfs
+	build_path = /obj/item/pka_modkit/aoe/turfs
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_PKA_MODS
 	)

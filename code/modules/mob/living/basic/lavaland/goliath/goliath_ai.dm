@@ -18,6 +18,7 @@
 
 /datum/targetting_datum/basic/allow_items/goliath
 	stat_attack = HARD_CRIT
+	ignored_traits = list(TRAIT_PHEROMONED)
 
 /datum/ai_planning_subtree/basic_melee_attack_subtree/goliath
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/goliath

@@ -24,7 +24,7 @@
 		/obj/item/soulstone/anybody/mining,
 		/obj/item/clothing/gloves/gauntlets,
 		/obj/item/jacobs_ladder,
-		/obj/item/borg/upgrade/modkit/lifesteal,
+		/obj/item/pka_modkit/lifesteal,
 	)
 
 /datum/export/lavaland/major //valuable chest/ruin loot, minor megafauna loot

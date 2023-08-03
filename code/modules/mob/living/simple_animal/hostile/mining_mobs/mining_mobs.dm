@@ -47,6 +47,12 @@
 
 	RegisterSignals(src, list(COMSIG_PROJECTILE_PREHIT, COMSIG_ATOM_PREHITBY), PROC_REF(Aggro))
 
+/mob/living/simple_animal/hostile/asteroid/ListTargets() // we do this to clear pheromoned mobs from passive actions of looking, but not when they attack us
+	. = ..()
+	for(var/atom/target as anything in .)
+		if(HAS_TRAIT(target, TRAIT_PHEROMONED))
+			. -= target
+
 /mob/living/simple_animal/hostile/asteroid/Aggro()
 	..()
 	if(vision_range == aggro_vision_range && icon_aggro)

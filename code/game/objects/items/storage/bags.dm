@@ -182,7 +182,6 @@
 					spam_protection = TRUE
 					continue
 	if(show_message)
-		playsound(user, SFX_RUSTLE, 50, TRUE)
 		if(!COOLDOWN_FINISHED(src, ore_bag_balloon_cooldown))
 			return
 
@@ -201,9 +200,6 @@
 			)
 
 	spam_protection = FALSE
-
-/obj/item/storage/bag/ore/cyborg
-	name = "cyborg mining satchel"
 
 /obj/item/storage/bag/ore/holding //miners, your messiah has arrived
 	name = "mining satchel of holding"

@@ -267,13 +267,13 @@
 
 /obj/item/storage/box/miner_modkits/Initialize(mapload)
 	. = ..()
-	atom_storage.set_holdable(list(/obj/item/borg/upgrade/modkit, /obj/item/crusher_trophy))
+	atom_storage.set_holdable(list(/obj/item/pka_modkit, /obj/item/crusher_trophy))
 	atom_storage.numerical_stacking = TRUE
 
 /obj/item/storage/box/miner_modkits/PopulateContents()
 	for(var/trophy in subtypesof(/obj/item/crusher_trophy))
 		new trophy(src)
-	for(var/modkit in subtypesof(/obj/item/borg/upgrade/modkit))
+	for(var/modkit in subtypesof(/obj/item/pka_modkit))
 		for(var/i in 1 to 10) //minimum cost ucrrently is 20, and 2 pkas, so lets go with that
 			new modkit(src)
 

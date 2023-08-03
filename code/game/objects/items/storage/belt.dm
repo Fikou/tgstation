@@ -795,7 +795,7 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 
 	atom_storage.max_slots = 1
-	atom_storage.rustle_sound = FALSE
+	atom_storage.rustle_sound = null
 	atom_storage.max_specific_storage = WEIGHT_CLASS_BULKY
 	atom_storage.set_holdable(
 		list(

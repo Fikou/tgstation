@@ -22,7 +22,7 @@
 	cost_per_order = 400
 
 /datum/orderable_item/toys_drones/drone_pka
-	item_path = /obj/item/borg/upgrade/modkit/cooldown/minebot
+	item_path = /obj/item/pka_modkit/cooldown/minebot
 	cost_per_order = 600
 
 /datum/orderable_item/toys_drones/drone_sentience

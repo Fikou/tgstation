@@ -9,6 +9,7 @@
 	ai_movement = /datum/ai_movement/basic_avoidance
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 	planning_subtrees = list(
+		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/random_speech/insect,
 		/datum/ai_planning_subtree/hoard_fingers,
 		/datum/ai_planning_subtree/simple_find_target,
@@ -21,6 +22,7 @@
 
 /datum/targetting_datum/basic/lobster
 	stat_attack = HARD_CRIT
+	ignored_traits = list(TRAIT_PHEROMONED)
 
 /datum/ai_planning_subtree/basic_melee_attack_subtree/lobster
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/lobster

@@ -200,7 +200,7 @@
 	desc = "A modification kit which allows Kinetic Accelerators to do greatly increased damage while indoors. \
 			Occupies 35% mod capacity."
 	progression_minimum = 30 MINUTES
-	item = /obj/item/borg/upgrade/modkit/indoors
+	item = /obj/item/pka_modkit/indoors
 	cost = 5 //you need two for full damage, so total of 10 for maximum damage
 	limited_stock = 2 //you can't use more than two!
 	restricted_roles = list("Shaft Miner")

@@ -303,6 +303,70 @@
 
 		to_chat(user, span_notice("You stop charging [target]."))
 
+/obj/item/borg/pheromone_spray
+	name = "synthetic pheromone spray"
+	desc = "This device generates synthetic pheromones similar to the fauna of Indecipheres and Freyja, and as such can be used \
+		to avoid them becoming hostile to you, as long as you don't attack them. Its secondary function is the ability to \"purify\" legions, \
+		cleaning the body of the brood quickly."
+	icon_state = "pheromone_spray_off"
+	item_flags = NOBLUDGEON
+	var/active = FALSE
+
+/obj/item/borg/pheromone_spray/attack(mob/living/target_mob, mob/living/user, params)
+	if(active)
+		if(istype(target_mob, /mob/living/simple_animal/hostile/asteroid/hivelord/legion))
+			target_mob.death()
+			balloon_alert(user, "cleansed")
+			return
+		if(istype(target_mob, /mob/living/simple_animal/hostile/asteroid/hivelord/legion))
+			var/mob/living/simple_animal/legion = target_mob
+			balloon_alert(user, "purifying...")
+			if(!use_tool(legion, user, 2.5 SECONDS))
+				balloon_alert(user, "interrupted!")
+				return
+			balloon_alert(user, "purified")
+			legion.loot.Cut() //no core
+			legion.death()
+			return
+	return ..()
+
+/obj/item/borg/pheromone_spray/update_icon_state()
+	. = ..()
+	icon_state = "pheromone_spray_[active ? "on" : "off"]"
+
+/obj/item/borg/pheromone_spray/cyborg_unequip(mob/user)
+	turn_off(user)
+	return ..()
+
+/obj/item/borg/pheromone_spray/dropped(mob/user, silent)
+	turn_off(user)
+	return ..()
+
+/obj/item/borg/pheromone_spray/attack_self(mob/user, modifiers)
+	. = ..()
+	if(active)
+		turn_off(user)
+		return
+	balloon_alert(user, "activating...")
+	if(!do_after(user, 2.5 SECONDS, src))
+		balloon_alert(user, "interrupted!")
+		return
+	turn_on(user)
+
+/obj/item/borg/pheromone_spray/proc/turn_on(mob/living/user)
+	if(active)
+		return
+	active = TRUE
+	ADD_TRAIT(user, TRAIT_PHEROMONED, REF(src))
+	update_icon_state()
+
+/obj/item/borg/pheromone_spray/proc/turn_off(mob/living/user)
+	if(!active)
+		return
+	active = FALSE
+	REMOVE_TRAIT(user, TRAIT_PHEROMONED, REF(src))
+	update_icon_state()
+
 /obj/item/harmalarm
 	name = "\improper Sonic Harm Prevention Tool"
 	desc = "Releases a harmless blast that confuses most organics. For when the harm is JUST TOO MUCH."

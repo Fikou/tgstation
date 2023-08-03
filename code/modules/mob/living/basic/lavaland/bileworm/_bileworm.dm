@@ -44,6 +44,7 @@
 	if(ispath(evolve_path))
 		AddComponent(/datum/component/evolutionary_leap, 30 MINUTES, evolve_path)
 	AddElement(/datum/element/content_barfer)
+	AddElement(/datum/element/ai_retaliate)
 
 	//setup mob abilities
 

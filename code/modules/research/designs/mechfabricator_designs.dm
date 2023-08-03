@@ -1005,17 +1005,6 @@
 		RND_CATEGORY_MECHFAB_CYBORG_MODULES + RND_SUBCATEGORY_MECHFAB_CYBORG_MODULES_SECURITY
 	)
 
-/datum/design/borg_upgrade_diamonddrill
-	name = "Diamond Drill"
-	id = "borg_upgrade_diamonddrill"
-	build_type = MECHFAB
-	build_path = /obj/item/borg/upgrade/ddrill
-	materials = list(/datum/material/iron=SHEET_MATERIAL_AMOUNT*5, /datum/material/glass =SHEET_MATERIAL_AMOUNT*3, /datum/material/diamond =SHEET_MATERIAL_AMOUNT)
-	construction_time = 80
-	category = list(
-		RND_CATEGORY_MECHFAB_CYBORG_MODULES + RND_SUBCATEGORY_MECHFAB_CYBORG_MODULES_MINING
-	)
-
 /datum/design/borg_upgrade_holding
 	name = "Ore Satchel of Holding"
 	id = "borg_upgrade_holding"

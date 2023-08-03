@@ -11,6 +11,8 @@
  * Parent proc - triggers when an item/module is unequipped from a cyborg.
  */
 /obj/item/proc/cyborg_unequip(mob/user)
+	for(var/datum/action/action_item_has as anything in actions)
+		action_item_has.Remove(user)
 	return
 
 /**

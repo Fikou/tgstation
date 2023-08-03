@@ -26,7 +26,7 @@
 	cost_per_order = 1000
 
 /datum/orderable_item/golem/trigger_guard
-	item_path = /obj/item/borg/upgrade/modkit/trigger_guard
+	item_path = /obj/item/pka_modkit/trigger_guard
 	cost_per_order = 1700
 
 /datum/orderable_item/golem/rnd_boards

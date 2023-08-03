@@ -1,5 +1,7 @@
 ///Datum for basic mobs to define what they can attack.
 /datum/targetting_datum
+	/// Ignores mobs with these traits in targetting.
+	var/list/ignored_traits = list()
 
 ///Returns true or false depending on if the target can be attacked by the mob
 /datum/targetting_datum/proc/can_attack(mob/living/living_mob, atom/target)

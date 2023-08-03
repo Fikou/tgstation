@@ -31,7 +31,10 @@
 
 	var/list/filtered_targets = list()
 
-	for(var/atom/pot_target in potential_targets)
+	for(var/atom/pot_target as anything in potential_targets)
+		for(var/trait in targetting_datum.ignored_traits)
+			if(HAS_TRAIT(pot_target, trait))
+				continue
 		if(targetting_datum.can_attack(living_mob, pot_target))//Can we attack it?
 			filtered_targets += pot_target
 			continue

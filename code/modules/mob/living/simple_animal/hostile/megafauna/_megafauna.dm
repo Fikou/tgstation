@@ -112,6 +112,12 @@
 	else
 		..()
 
+/mob/living/simple_animal/hostile/megafauna/ListTargets() // we do this to clear pheromoned mobs from passive actions of looking, but not when they attack us
+	. = ..()
+	for(var/atom/target as anything in .)
+		if(HAS_TRAIT(target, TRAIT_PHEROMONED))
+			. -= target
+
 /mob/living/simple_animal/hostile/megafauna/AttackingTarget()
 	if(recovery_time >= world.time)
 		return

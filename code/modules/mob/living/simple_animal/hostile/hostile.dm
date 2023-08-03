@@ -211,20 +211,6 @@
 	GiveTarget(found_target)
 	return found_target //We now have a target
 
-
-/mob/living/simple_animal/hostile/proc/PossibleThreats()
-	. = list()
-	for(var/pos_targ in ListTargets())
-		var/atom/A = pos_targ
-		if(Found(A))
-			. = list(A)
-			break
-		if(CanAttack(A))
-			. += A
-			continue
-
-
-
 /mob/living/simple_animal/hostile/proc/Found(atom/A)//This is here as a potential override to pick a specific target if available
 	if(QDELETED(A))
 		return FALSE

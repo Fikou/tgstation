@@ -6,37 +6,37 @@
 	cost_per_order = 750
 
 /datum/orderable_item/accelerator/range
-	item_path = /obj/item/borg/upgrade/modkit/range
+	item_path = /obj/item/pka_modkit/range
 	cost_per_order = 1000
 
 /datum/orderable_item/accelerator/damage
-	item_path = /obj/item/borg/upgrade/modkit/damage
+	item_path = /obj/item/pka_modkit/damage
 	cost_per_order = 1000
 
 /datum/orderable_item/accelerator/cooldown
-	item_path = /obj/item/borg/upgrade/modkit/cooldown
+	item_path = /obj/item/pka_modkit/cooldown
 	cost_per_order = 1000
 
 /datum/orderable_item/accelerator/chasis
-	item_path = /obj/item/borg/upgrade/modkit/chassis_mod
+	item_path = /obj/item/pka_modkit/chassis_mod
 	cost_per_order = 250
 
 /datum/orderable_item/accelerator/chasis_orange
-	item_path = /obj/item/borg/upgrade/modkit/chassis_mod/orange
+	item_path = /obj/item/pka_modkit/chassis_mod/orange
 	cost_per_order = 300
 
 /datum/orderable_item/accelerator/tracer
-	item_path = /obj/item/borg/upgrade/modkit/tracer
+	item_path = /obj/item/pka_modkit/tracer
 	cost_per_order = 100
 
 /datum/orderable_item/accelerator/adjustable_tracer
-	item_path = /obj/item/borg/upgrade/modkit/tracer/adjustable
+	item_path = /obj/item/pka_modkit/tracer/adjustable
 	cost_per_order = 150
 
 /datum/orderable_item/accelerator/aoe_mobs
-	item_path = /obj/item/borg/upgrade/modkit/aoe/mobs
+	item_path = /obj/item/pka_modkit/aoe/mobs
 	cost_per_order = 2000
 
 /datum/orderable_item/accelerator/minebot_passthrough
-	item_path = /obj/item/borg/upgrade/modkit/minebot_passthrough
+	item_path = /obj/item/pka_modkit/minebot_passthrough
 	cost_per_order = 1000

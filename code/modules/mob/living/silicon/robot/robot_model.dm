@@ -73,6 +73,12 @@
 	storages.Cut()
 	return ..()
 
+/obj/item/robot_model/proc/add_sensors()
+	return
+
+/obj/item/robot_model/proc/remove_sensors()
+	return
+
 /obj/item/robot_model/proc/get_usable_modules()
 	. = modules.Copy()
 
@@ -218,6 +224,8 @@
 		return
 	cyborg.model = new_model
 	cyborg.update_module_innate()
+	if(cyborg.sensors_on)
+		new_model.add_sensors()
 	new_model.rebuild_modules()
 	cyborg.radio.recalculateChannels()
 	cyborg.set_modularInterface_theme()
@@ -353,7 +361,6 @@
 	name = "Engineering"
 	basic_modules = list(
 		/obj/item/assembly/flash/cyborg,
-		/obj/item/borg/sight/meson,
 		/obj/item/construction/rcd/borg,
 		/obj/item/pipe_dispenser,
 		/obj/item/extinguisher,
@@ -687,15 +694,12 @@
 	name = "Miner"
 	basic_modules = list(
 		/obj/item/assembly/flash/cyborg,
-		/obj/item/borg/sight/meson,
-		/obj/item/storage/bag/ore/cyborg,
+		/obj/item/reagent_containers/borghypo/miner,
 		/obj/item/pickaxe/drill/cyborg,
-		/obj/item/shovel,
 		/obj/item/crowbar/cyborg,
 		/obj/item/weldingtool/mini,
-		/obj/item/extinguisher/mini,
+		/obj/item/extinguisher,
 		/obj/item/storage/bag/sheetsnatcher/borg,
-		/obj/item/gun/energy/recharge/kinetic_accelerator/cyborg,
 		/obj/item/gps/cyborg,
 		/obj/item/stack/marker_beacon,
 	)
@@ -712,15 +716,43 @@
 		"Lavaland Miner" = list(SKIN_ICON_STATE = "miner"),
 	)
 	var/obj/item/t_scanner/adv_mining_scanner/cyborg/mining_scanner //built in memes. //fuck you
+	var/obj/item/storage/bag/ore/ore_bag
 
-/obj/item/robot_model/miner/rebuild_modules()
+/obj/item/robot_model/miner/be_transformed_to(obj/item/robot_model/old_model, forced)
 	. = ..()
-	if(!mining_scanner)
-		mining_scanner = new(src)
+	if(!.)
+		return
+	mining_scanner = new(src)
+	set_bag(/obj/item/storage/bag/ore)
 
 /obj/item/robot_model/miner/Destroy()
 	QDEL_NULL(mining_scanner)
+	QDEL_NULL(ore_bag)
 	return ..()
+
+/obj/item/robot_model/miner/add_sensors()
+	robot.sight_mode |= BORGMESON
+	robot.update_sight()
+
+/obj/item/robot_model/miner/remove_sensors()
+	robot.sight_mode &= ~BORGMESON
+	robot.update_sight()
+
+/obj/item/robot_model/miner/proc/set_bag(obj/item/storage/bag/ore/bag_type)
+	var/obj/item/old_bag = ore_bag
+	ore_bag = new bag_type(src)
+	ore_bag.atom_storage.rustle_sound = 'sound/weapons/gun/general/mag_bullet_insert.ogg' //more robot sound
+	if(old_bag)
+		old_bag.atom_storage.remove_all(ore_bag)
+		qdel(old_bag)
+	ore_bag.RegisterSignal(robot, COMSIG_MOVABLE_MOVED, TYPE_PROC_REF(/obj/item/storage/bag/ore, pickup_ores))
+	ore_bag.add_item_action(/datum/action/item_action/drop_ore)
+	ore_bag.atom_storage.update_actions()
+	for(var/datum/action/action as anything in ore_bag.actions)
+		action.Grant(robot)
+
+/datum/action/item_action/drop_ore
+	name = "Drop Ore"
 
 /obj/item/robot_model/peacekeeper
 	name = "Peacekeeper"
@@ -742,8 +774,10 @@
 	model_traits = list(TRAIT_PUSHIMMUNE)
 	hat_offset = -2
 
-/obj/item/robot_model/peacekeeper/do_transform_animation()
-	..()
+/obj/item/robot_model/peacekeeper/be_transformed_to(obj/item/robot_model/old_model, forced)
+	. = ..()
+	if(!.)
+		return
 	to_chat(loc, "<span class='userdanger'>Under ASIMOV, you are an enforcer of the PEACE and preventer of HUMAN HARM. \
 	You are not a security member and you are expected to follow orders and prevent harm above all else. Space law means nothing to you.</span>")
 
@@ -766,8 +800,10 @@
 	model_traits = list(TRAIT_PUSHIMMUNE)
 	hat_offset = 3
 
-/obj/item/robot_model/security/do_transform_animation()
-	..()
+/obj/item/robot_model/security/be_transformed_to(obj/item/robot_model/old_model, forced)
+	. = ..()
+	if(!.)
+		return
 	to_chat(loc, "<span class='userdanger'>While you have picked the security model, you still have to follow your laws, NOT Space Law. \
 	For Asimov, this means you must follow criminals' orders unless there is a law 1 reason not to.</span>")
 
@@ -933,6 +969,8 @@
 
 /obj/item/robot_model/syndicate/kiltborg/be_transformed_to(obj/item/robot_model/old_model)
 	. = ..()
+	if(!.)
+		return
 	qdel(robot.radio)
 	robot.radio = new /obj/item/radio/borg/syndicate(robot)
 	robot.scrambledcodes = TRUE
