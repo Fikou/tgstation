@@ -310,21 +310,26 @@
 		cleaning the body of the brood quickly."
 	icon_state = "pheromone_spray_off"
 	item_flags = NOBLUDGEON
+	usesound = 'sound/effects/spray.ogg'
 	var/active = FALSE
+	var/obj/effect/abstract/particle_holder/particle_effect
 
 /obj/item/borg/pheromone_spray/attack(mob/living/target_mob, mob/living/user, params)
 	if(active)
-		if(istype(target_mob, /mob/living/simple_animal/hostile/asteroid/hivelord/legion))
+		if(istype(target_mob, /mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion))
+			new /obj/effect/temp_visual/pheromone(get_turf(target_mob))
 			target_mob.death()
 			balloon_alert(user, "cleansed")
+			play_tool_sound(src, 50)
 			return
 		if(istype(target_mob, /mob/living/simple_animal/hostile/asteroid/hivelord/legion))
 			var/mob/living/simple_animal/legion = target_mob
 			balloon_alert(user, "purifying...")
-			if(!use_tool(legion, user, 2.5 SECONDS))
+			if(!use_tool(legion, user, 2.5 SECONDS, volume = 50))
 				balloon_alert(user, "interrupted!")
 				return
 			balloon_alert(user, "purified")
+			new /obj/effect/temp_visual/pheromone(get_turf(legion))
 			legion.loot.Cut() //no core
 			legion.death()
 			return
@@ -358,14 +363,18 @@
 		return
 	active = TRUE
 	ADD_TRAIT(user, TRAIT_PHEROMONED, REF(src))
+	particle_effect = new(user, /particles/pollen, PARTICLE_ATTACH_MOB)
 	update_icon_state()
+	flick("pheromone_spray_turning_on", src)
 
 /obj/item/borg/pheromone_spray/proc/turn_off(mob/living/user)
 	if(!active)
 		return
 	active = FALSE
 	REMOVE_TRAIT(user, TRAIT_PHEROMONED, REF(src))
+	QDEL_NULL(particle_effect)
 	update_icon_state()
+	flick("pheromone_spray_turning_off", src)
 
 /obj/item/harmalarm
 	name = "\improper Sonic Harm Prevention Tool"

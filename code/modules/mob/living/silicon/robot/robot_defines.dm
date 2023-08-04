@@ -246,5 +246,6 @@
 	set_model = /obj/item/robot_model/saboteur
 
 /mob/living/silicon/robot/model/syndicate/kiltborg
-	set_model = /obj/item/robot_model/syndicate/kiltborg
-	icon_state = "peace"
+	set_model = /obj/item/robot_model/kiltborg
+	icon_state = "kilt"
+	playstyle_string = "<span class='big bold'>SLAUGHTER THEM ALL!</span>"

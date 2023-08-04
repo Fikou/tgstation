@@ -296,7 +296,12 @@
 /// Minerborg hypospray
 /obj/item/reagent_containers/borghypo/miner
 	name = "emergency hypospray"
+	desc = "Administers emergency medicals, epinephrine to stabilize critical condition and formaldehyde to stop organ decay."
 	default_reagent_types = BASE_MINER_REAGENTS
+
+/obj/item/reagent_containers/borghypo/miner/examine(mob/user)
+	. = ..()
+	. += span_warning("NOTICE: Epinephrine explodes when combined with Penthrite, contained in a miner's Luxury medipen. Be cautious.")
 
 /// Clownborg hypospray
 /obj/item/reagent_containers/borghypo/clown

@@ -234,6 +234,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "modkit"
 	w_class = WEIGHT_CLASS_SMALL
+	item_flags = NOBLUDGEON
 	var/denied_type = null
 	var/maximum_of_type = 1
 	var/cost = 30

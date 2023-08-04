@@ -742,6 +742,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	qdel(src)
 
 /obj/item/lighter/cyborg_unequip(mob/user)
+	. = ..()
 	if(!lit)
 		return
 	set_lit(FALSE)

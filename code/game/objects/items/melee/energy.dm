@@ -211,6 +211,7 @@
 	return ..()
 
 /obj/item/melee/energy/sword/cyborg/cyborg_unequip(mob/user)
+	. = ..()
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		return
 	attack_self(user)

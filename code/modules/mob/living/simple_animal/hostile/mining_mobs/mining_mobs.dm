@@ -49,9 +49,15 @@
 
 /mob/living/simple_animal/hostile/asteroid/ListTargets() // we do this to clear pheromoned mobs from passive actions of looking, but not when they attack us
 	. = ..()
-	for(var/atom/target as anything in .)
-		if(HAS_TRAIT(target, TRAIT_PHEROMONED))
-			. -= target
+	for(var/atom/potential_target as anything in .)
+		if(HAS_TRAIT(potential_target, TRAIT_PHEROMONED) && potential_target != target)
+			. -= potential_target
+
+/mob/living/simple_animal/hostile/asteroid/ListTargetsLazy(_Z)
+	. = ..()
+	for(var/atom/potential_target as anything in .)
+		if(HAS_TRAIT(potential_target, TRAIT_PHEROMONED) && potential_target != target)
+			. -= potential_target
 
 /mob/living/simple_animal/hostile/asteroid/Aggro()
 	..()

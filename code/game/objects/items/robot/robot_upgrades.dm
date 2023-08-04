@@ -236,12 +236,12 @@
 /obj/item/borg/upgrade/lavaproof/action(mob/living/silicon/robot/borg, user)
 	. = ..()
 	if(.)
-		borg.add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
+		borg.add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
 
 /obj/item/borg/upgrade/lavaproof/deactivate(mob/living/silicon/robot/borg, user)
 	. = ..()
 	if (.)
-		borg.remove_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
+		borg.remove_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), type)
 
 /obj/item/borg/upgrade/selfrepair
 	name = "self-repair module"

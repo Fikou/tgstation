@@ -13,7 +13,6 @@
 /obj/item/proc/cyborg_unequip(mob/user)
 	for(var/datum/action/action_item_has as anything in actions)
 		action_item_has.Remove(user)
-	return
 
 /**
  * Finds the first available slot and attemps to put item item_module in it.

@@ -28,11 +28,6 @@
 /obj/item/t_scanner/attack_self(mob/user)
 	toggle_on()
 
-/obj/item/t_scanner/cyborg_unequip(mob/user)
-	if(!on)
-		return
-	toggle_on()
-
 /obj/item/t_scanner/process()
 	if(!on)
 		STOP_PROCESSING(SSobj, src)

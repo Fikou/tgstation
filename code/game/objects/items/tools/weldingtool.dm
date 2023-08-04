@@ -354,10 +354,10 @@
 	toolspeed = 0.5
 
 /obj/item/weldingtool/largetank/cyborg/cyborg_unequip(mob/user)
+	. = ..()
 	if(!isOn())
 		return
 	switched_on(user)
-
 
 /obj/item/weldingtool/mini
 	name = "emergency welding tool"
