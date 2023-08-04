@@ -32,8 +32,8 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/action/wash_toggle = new /datum/action/toggle_buffer(loc)
-	wash_toggle.Grant(loc)
+	var/datum/action/wash_toggle = new /datum/action/toggle_buffer(robot)
+	wash_toggle.Grant(robot)
 	wash_toggle_ref = WEAKREF(wash_toggle)
 
 /obj/item/robot_model/janitor/Destroy()
