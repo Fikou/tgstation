@@ -9,10 +9,7 @@ type MODsuitData = {
   ui_theme: string;
   control: string;
   complexity_max: number;
-  helmet: string;
-  chestplate: string;
-  gauntlets: string;
-  boots: string;
+  parts: string[];
   // Dynamic
   suit_status: SuitStatus;
   user_status: UserStatus;
@@ -439,7 +436,7 @@ const SuitStatusSection = (props, context) => {
 
 const HardwareSection = (props, context) => {
   const { act, data } = useBackend<MODsuitData>(context);
-  const { control, helmet, chestplate, gauntlets, boots } = data;
+  const { control } = data;
   const { ai_name, core_name } = data.suit_status;
   return (
     <Section title="Hardware" style={{ 'text-transform': 'capitalize' }}>
@@ -451,16 +448,25 @@ const HardwareSection = (props, context) => {
           {core_name || 'No Core Detected'}
         </LabeledList.Item>
         <LabeledList.Item label="Control Unit">{control}</LabeledList.Item>
-        <LabeledList.Item label="Helmet">{helmet || 'None'}</LabeledList.Item>
-        <LabeledList.Item label="Chestplate">
-          {chestplate || 'None'}
-        </LabeledList.Item>
-        <LabeledList.Item label="Gauntlets">
-          {gauntlets || 'None'}
-        </LabeledList.Item>
-        <LabeledList.Item label="Boots">{boots || 'None'}</LabeledList.Item>
+        <ModParts />
       </LabeledList>
     </Section>
+  );
+};
+
+const ModParts = (props, context) => {
+  const { act, data } = useBackend<MODsuitData>(context);
+  const { parts } = data;
+  return (
+    <LabeledList.Item label="Parts">
+      {parts.map((part) => {
+        return (
+          <Box key={part} mb={1}>
+            {part}
+          </Box>
+        );
+      })}
+    </LabeledList.Item>
   );
 };
 
