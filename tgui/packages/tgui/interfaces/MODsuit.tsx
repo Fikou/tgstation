@@ -9,12 +9,19 @@ type MODsuitData = {
   ui_theme: string;
   control: string;
   complexity_max: number;
-  parts: string[];
+  parts: SuitParts;
   // Dynamic
   suit_status: SuitStatus;
   user_status: UserStatus;
   module_custom_status: ModuleCustomStatus;
   module_info: Module[];
+};
+
+type SuitParts = {
+  helmet: string;
+  chestplate: string;
+  gauntlets: string;
+  boots: string;
 };
 
 type SuitStatus = {
@@ -458,15 +465,13 @@ const ModParts = (props, context) => {
   const { act, data } = useBackend<MODsuitData>(context);
   const { parts } = data;
   return (
-    <LabeledList.Item label="Parts">
-      {parts.map((part) => {
-        return (
-          <Box key={part} mb={1}>
-            {part}
-          </Box>
-        );
-      })}
-    </LabeledList.Item>
+    <>
+      {Object.keys(parts).map((slot) => (
+        <LabeledList.Item label={slot} key="id">
+          {parts[slot]}
+        </LabeledList.Item>
+      ))}
+    </>
   );
 };
 
