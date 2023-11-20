@@ -23,7 +23,7 @@
 	/// Speed that we actually added.
 	var/actual_speed_added = 0
 	/// Armor values added to the suit parts.
-	var/list/armor_mod = /datum/armor/mod_module_armor_boost
+	var/datum/armor/armor_mod = /datum/armor/mod_module_armor_boost
 	/// List of parts of the suit that are spaceproofed, for giving them back the pressure protection.
 	var/list/spaceproofed = list()
 
@@ -34,23 +34,19 @@
 	energy = 15
 
 /obj/item/mod/module/armor_booster/on_suit_activation()
-	mod.helmet.flash_protect = FLASH_PROTECTION_WELDER
+//	mod.helmet.flash_protect = FLASH_PROTECTION_WELDER
 
 /obj/item/mod/module/armor_booster/on_suit_deactivation(deleting = FALSE)
 	if(deleting)
 		return
-	mod.helmet.flash_protect = initial(mod.helmet.flash_protect)
+//	mod.helmet.flash_protect = initial(mod.helmet.flash_protect)
 
 /obj/item/mod/module/armor_booster/on_activation()
-	. = ..()
-	if(!.)
-		return
 	playsound(src, 'sound/mecha/mechmove03.ogg', 25, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	actual_speed_added = max(0, min(mod.slowdown_active, speed_added))
 	mod.slowdown -= actual_speed_added
 	mod.wearer.update_equipment_speed_mods()
-	var/list/parts = mod.mod_parts + mod
-	for(var/obj/item/part as anything in parts)
+	for(var/obj/item/part as anything in mod.get_parts(all = TRUE))
 		part.set_armor(part.get_armor().add_other_armor(armor_mod))
 		if(!remove_pressure_protection || !isclothing(part))
 			continue
@@ -60,15 +56,11 @@
 			spaceproofed[clothing_part] = TRUE
 
 /obj/item/mod/module/armor_booster/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
 	if(!deleting)
 		playsound(src, 'sound/mecha/mechmove03.ogg', 25, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	mod.slowdown += actual_speed_added
 	mod.wearer.update_equipment_speed_mods()
-	var/list/parts = mod.mod_parts + mod
-	for(var/obj/item/part as anything in parts)
+	for(var/obj/item/part as anything in mod.get_parts(all = TRUE))
 		part.set_armor(part.get_armor().subtract_other_armor(armor_mod))
 		if(!remove_pressure_protection || !isclothing(part))
 			continue
@@ -88,7 +80,7 @@
 	desc = "A personal, protective forcefield typically seen in military applications. \
 		This advanced deflector shield is essentially a scaled down version of those seen on starships, \
 		and the power cost can be an easy indicator of this. However, it is capable of blocking nearly any incoming attack, \
-		though with its' low amount of separate charges, the user remains mortal."
+		though with its low amount of separate charges, the user remains mortal."
 	icon_state = "energy_shield"
 	complexity = 3
 	idle_power_cost = DEFAULT_CHARGE_DRAIN * 0.5
@@ -262,10 +254,10 @@
 	use_power_cost = initial(the_dna_lock_behind_the_slaughter.use_power_cost)
 
 /obj/item/mod/module/springlock/bite_of_87/on_install()
-	mod.activation_step_time *= 0.1
+	// mod.activation_time *= 0.1
 
 /obj/item/mod/module/springlock/bite_of_87/on_uninstall(deleting = FALSE)
-	mod.activation_step_time *= 10
+	// mod.activation_time *= 10
 
 /obj/item/mod/module/springlock/bite_of_87/on_suit_activation()
 	..()
@@ -387,13 +379,13 @@
 		return_look()
 	possible_disguises = null
 
-/obj/item/mod/module/chameleon/on_use()
+/obj/item/mod/module/chameleon/used()
 	if(mod.active || mod.activating)
 		balloon_alert(mod.wearer, "suit active!")
-		return
-	. = ..()
-	if(!.)
-		return
+		return FALSE
+	return ..()
+
+/obj/item/mod/module/chameleon/on_use()
 	if(current_disguise)
 		return_look()
 		return
@@ -421,10 +413,9 @@
 	mod.name = "[mod.theme.name] [initial(mod.name)]"
 	mod.desc = "[initial(mod.desc)] [mod.theme.desc]"
 	mod.icon_state = "[mod.skin]-[initial(mod.icon_state)]"
-	var/list/mod_skin = mod.theme.skins[mod.skin]
+	var/list/mod_skin = mod.theme.variants[mod.skin]
 	mod.icon = mod_skin[MOD_ICON_OVERRIDE] || 'icons/obj/clothing/modsuit/mod_clothing.dmi'
 	mod.worn_icon = mod_skin[MOD_WORN_ICON_OVERRIDE] || 'icons/mob/clothing/modsuit/mod_clothing.dmi'
-	mod.alternate_worn_layer = mod_skin[CONTROL_LAYER]
 	mod.lefthand_file = initial(mod.lefthand_file)
 	mod.righthand_file = initial(mod.righthand_file)
 	mod.worn_icon_state = null
@@ -496,13 +487,19 @@
 
 /obj/item/mod/module/infiltrator/on_suit_activation()
 	mod.wearer.add_traits(list(TRAIT_SILENT_FOOTSTEPS, TRAIT_UNKNOWN), MOD_TRAIT)
-	mod.helmet.flash_protect = FLASH_PROTECTION_WELDER
+	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
+	if(!istype(helmet))
+		return
+	helmet.flash_protect = FLASH_PROTECTION_WELDER
 
 /obj/item/mod/module/infiltrator/on_suit_deactivation(deleting = FALSE)
 	mod.wearer.remove_traits(list(TRAIT_SILENT_FOOTSTEPS, TRAIT_UNKNOWN), MOD_TRAIT)
 	if(deleting)
 		return
-	mod.helmet.flash_protect = initial(mod.helmet.flash_protect)
+	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
+	if(!istype(helmet))
+		return
+	helmet.flash_protect = FLASH_PROTECTION_WELDER
 
 ///Medbeam - Medbeam but built into a modsuit
 /obj/item/mod/module/medbeam

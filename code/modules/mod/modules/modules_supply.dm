@@ -19,9 +19,6 @@
 	AddComponent(/datum/component/gps/item, "MOD0", state = GLOB.deep_inventory_state, overlay_state = FALSE)
 
 /obj/item/mod/module/gps/on_use()
-	. = ..()
-	if(!.)
-		return
 	attack_self(mod.wearer)
 
 ///Hydraulic Clamp - Lets you pick up and drop crates.
@@ -125,15 +122,9 @@
 	overlay_state_active = "module_drill"
 
 /obj/item/mod/module/drill/on_activation()
-	. = ..()
-	if(!.)
-		return
 	RegisterSignal(mod.wearer, COMSIG_MOVABLE_BUMP, PROC_REF(bump_mine))
 
 /obj/item/mod/module/drill/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
 	UnregisterSignal(mod.wearer, COMSIG_MOVABLE_BUMP)
 
 /obj/item/mod/module/drill/on_select_use(atom/target)
@@ -208,9 +199,6 @@
 	ores += ore
 
 /obj/item/mod/module/orebag/on_use()
-	. = ..()
-	if(!.)
-		return
 	for(var/obj/item/ore as anything in ores)
 		ore.forceMove(drop_location())
 		ores -= ore
@@ -340,9 +328,6 @@
 		callback = CALLBACK(src, PROC_REF(check_locker), locker))
 
 /obj/item/mod/module/magnet/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
 	if(istype(mod.wearer.pulling, /obj/structure/closet))
 		mod.wearer.stop_pulling()
 
@@ -423,9 +408,8 @@
 	UnregisterSignal(mod.wearer, COMSIG_MOVABLE_MOVED)
 	if(!traveled_tiles)
 		return
-	var/list/parts = mod.mod_parts + mod
 	var/datum/armor/to_remove = get_armor_by_type(armor_mod)
-	for(var/obj/item/part as anything in parts)
+	for(var/obj/item/part as anything in mod.get_parts(all = TRUE))
 		part.set_armor(part.get_armor().subtract_other_armor(to_remove.generate_new_with_multipliers(list(ARMOR_ALL = traveled_tiles))))
 	if(traveled_tiles == max_traveled_tiles)
 		mod.slowdown += speed_added
@@ -445,8 +429,7 @@
 		if(traveled_tiles >= max_traveled_tiles)
 			return
 		traveled_tiles++
-		var/list/parts = mod.mod_parts + mod
-		for(var/obj/item/part as anything in parts)
+		for(var/obj/item/part as anything in mod.get_parts(all = TRUE))
 			part.set_armor(part.get_armor().add_other_armor(armor_mod))
 		if(traveled_tiles >= max_traveled_tiles)
 			balloon_alert(mod.wearer, "fully ash covered")
@@ -465,8 +448,7 @@
 			mod.slowdown += actual_speed_added
 			mod.wearer.update_equipment_speed_mods()
 		traveled_tiles--
-		var/list/parts = mod.mod_parts + mod
-		for(var/obj/item/part as anything in parts)
+		for(var/obj/item/part as anything in mod.get_parts(all = TRUE))
 			part.set_armor(part.get_armor().subtract_other_armor(armor_mod))
 		if(traveled_tiles <= 0)
 			balloon_alert(mod.wearer, "ran out of ash!")
@@ -492,13 +474,13 @@
 		TRAIT_NO_SLIP_ALL,
 	)
 
-/obj/item/mod/module/sphere_transform/on_activation()
+/obj/item/mod/module/sphere_transform/activate()
 	if(!mod.wearer.has_gravity())
 		balloon_alert(mod.wearer, "no gravity!")
 		return FALSE
-	. = ..()
-	if(!.)
-		return
+	return ..()
+
+/obj/item/mod/module/sphere_transform/on_activation()
 	playsound(src, 'sound/items/modsuit/ballin.ogg', 100, TRUE)
 	mod.wearer.add_filter("mod_ball", 1, alpha_mask_filter(icon = icon('icons/mob/clothing/modsuit/mod_modules.dmi', "ball_mask"), flags = MASK_INVERSE))
 	mod.wearer.add_filter("mod_blur", 2, angular_blur_filter(size = 15))
@@ -513,9 +495,6 @@
 	RegisterSignal(mod.wearer, COMSIG_MOB_STATCHANGE, PROC_REF(on_statchange))
 
 /obj/item/mod/module/sphere_transform/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
 	if(!deleting)
 		playsound(src, 'sound/items/modsuit/ballin.ogg', 100, TRUE, frequency = -1)
 	mod.wearer.base_pixel_y += 4
@@ -528,7 +507,7 @@
 	mod.wearer.remove_movespeed_modifier(/datum/movespeed_modifier/sphere)
 	UnregisterSignal(mod.wearer, COMSIG_MOB_STATCHANGE)
 
-/obj/item/mod/module/sphere_transform/on_use()
+/obj/item/mod/module/sphere_transform/used()
 	if(!lavaland_equipment_pressure_check(get_turf(src)))
 		balloon_alert(mod.wearer, "too much pressure!")
 		playsound(src, 'sound/weapons/gun/general/dry_fire.ogg', 25, TRUE)
@@ -550,14 +529,14 @@
 	animate(mod.wearer) //stop the animation
 	mod.wearer.SpinAnimation(1.5) //start it back again
 	if(!mod.wearer.has_gravity())
-		on_deactivation() //deactivate in no grav
+		deactivate() //deactivate in no grav
 
 /obj/item/mod/module/sphere_transform/proc/on_statchange(datum/source)
 	SIGNAL_HANDLER
 
 	if(!mod.wearer.stat)
 		return
-	on_deactivation()
+	deactivate()
 
 /obj/projectile/bullet/mining_bomb
 	name = "mining bomb"

@@ -64,10 +64,9 @@
 	data["ui_theme"] = ui_theme
 	data["control"] = name
 	data["complexity_max"] = complexity_max
-	data["helmet"] = helmet?.name
-	data["chestplate"] = chestplate?.name
-	data["gauntlets"] = gauntlets?.name
-	data["boots"] = boots?.name
+	data["parts"] = list()
+	for(var/obj/item/part as anything in get_parts())
+		data["parts"] += list(part.name)
 	return data
 
 /obj/item/mod/control/ui_state(mob/user)

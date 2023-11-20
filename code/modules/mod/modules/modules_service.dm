@@ -13,9 +13,6 @@
 	cooldown_time = 1 SECONDS
 
 /obj/item/mod/module/bikehorn/on_use()
-	. = ..()
-	if(!.)
-		return
 	playsound(src, 'sound/items/bikehorn.ogg', 100, FALSE)
 	drain_power(use_power_cost)
 
@@ -59,7 +56,7 @@
 /obj/item/mod/module/waddle
 	name = "MOD waddle module"
 	desc = "Some of the most primitive technology in use by Honk Co. This module works off an automatic intention system, \
-		utilizing its' sensitivity to the pilot's often-limited brainwaves to directly read their next step, \
+		utilizing its sensitivity to the pilot's often-limited brainwaves to directly read their next step, \
 		affecting the boots they're installed in. Employing a twin-linked gravitonic drive to create \
 		miniaturized etheric blasts of space-time beneath the user's feet, this enables them to... \
 		to waddle around, bouncing to and fro with a pep in their step."
@@ -69,14 +66,14 @@
 	incompatible_modules = list(/obj/item/mod/module/waddle)
 
 /obj/item/mod/module/waddle/on_suit_activation()
-	mod.boots.AddComponent(/datum/component/squeak, list('sound/effects/footstep/clownstep1.ogg'=1,'sound/effects/footstep/clownstep2.ogg'=1), 50, falloff_exponent = 20) //die off quick please
+//	mod.boots.AddComponent(/datum/component/squeak, list('sound/effects/footstep/clownstep1.ogg'=1,'sound/effects/footstep/clownstep2.ogg'=1), 50, falloff_exponent = 20) //die off quick please
 	mod.wearer.AddElement(/datum/element/waddling)
 	if(is_clown_job(mod.wearer.mind?.assigned_role))
 		mod.wearer.add_mood_event("clownshoes", /datum/mood_event/clownshoes)
 
 /obj/item/mod/module/waddle/on_suit_deactivation(deleting = FALSE)
-	if(!deleting)
-		qdel(mod.boots.GetComponent(/datum/component/squeak))
+	// if(!deleting)
+	// 	qdel(mod.boots.GetComponent(/datum/component/squeak))
 	mod.wearer.RemoveElement(/datum/element/waddling)
 	if(is_clown_job(mod.wearer.mind?.assigned_role))
 		mod.wearer.clear_mood_event("clownshoes")

@@ -19,9 +19,6 @@
 	var/stealth_alpha = 50
 
 /obj/item/mod/module/stealth/on_activation()
-	. = ..()
-	if(!.)
-		return
 	if(bumpoff)
 		RegisterSignal(mod.wearer, COMSIG_LIVING_MOB_BUMP, PROC_REF(unstealth))
 	RegisterSignal(mod.wearer, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_unarmed_attack))
@@ -31,9 +28,6 @@
 	drain_power(use_power_cost)
 
 /obj/item/mod/module/stealth/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
 	if(bumpoff)
 		UnregisterSignal(mod.wearer, COMSIG_LIVING_MOB_BUMP)
 	UnregisterSignal(mod.wearer, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_MOB_ITEM_ATTACK, COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_BULLET_ACT, COMSIG_ATOM_HITBY, COMSIG_ATOM_HULK_ATTACK, COMSIG_ATOM_ATTACK_PAW, COMSIG_CARBON_CUFF_ATTEMPTED))
@@ -45,7 +39,7 @@
 	to_chat(mod.wearer, span_warning("[src] gets discharged from contact!"))
 	do_sparks(2, TRUE, src)
 	drain_power(use_power_cost)
-	on_deactivation(display_message = TRUE, deleting = FALSE)
+	deactivate()
 
 /obj/item/mod/module/stealth/proc/on_unarmed_attack(datum/source, atom/target)
 	SIGNAL_HANDLER
@@ -189,9 +183,6 @@
 	REMOVE_TRAIT(mod.wearer, TRAIT_NOGUNS, MOD_TRAIT)
 
 /obj/item/mod/module/weapon_recall/on_use()
-	. = ..()
-	if(!.)
-		return
 	if(!linked_weapon)
 		var/obj/item/weapon_to_link = mod.wearer.is_holding_item_of_type(accepted_type)
 		if(!weapon_to_link)
@@ -292,9 +283,6 @@
 	cooldown_time = 8 SECONDS
 
 /obj/item/mod/module/emp_shield/pulse/on_use()
-	. = ..()
-	if(!.)
-		return
 	playsound(src, 'sound/effects/empulse.ogg', 60, TRUE)
 	empulse(src, heavy_range = 4, light_range = 6)
 	drain_power(use_power_cost)
@@ -418,13 +406,13 @@
 	create_reagents(reagent_required_amount)
 	reagents.add_reagent(reagent_required, reagent_required_amount)
 
-/obj/item/mod/module/adrenaline_boost/on_use()
+/obj/item/mod/module/adrenaline_boost/used()
 	if(!reagents.has_reagent(reagent_required, reagent_required_amount))
 		balloon_alert(mod.wearer, "no charge!")
-		return
-	. = ..()
-	if(!.)
-		return
+		return FALSE
+	return ..()
+
+/obj/item/mod/module/adrenaline_boost/on_use()
 	if(IS_SPACE_NINJA(mod.wearer))
 		mod.wearer.say(pick_list_replacements(NINJA_FILE, "lines"), forced = type)
 	to_chat(mod.wearer, span_notice("You have used the adrenaline boost."))
@@ -442,7 +430,7 @@
 /obj/item/mod/module/adrenaline_boost/on_install()
 	RegisterSignal(mod, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 
-/obj/item/mod/module/adrenaline_boost/on_uninstall(deleting)
+/obj/item/mod/module/adrenaline_boost/on_uninstall(deleting = FALSE)
 	UnregisterSignal(mod, COMSIG_ATOM_ATTACKBY)
 
 /obj/item/mod/module/adrenaline_boost/attackby(obj/item/attacking_item, mob/user, params)

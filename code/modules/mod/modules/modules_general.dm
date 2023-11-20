@@ -28,7 +28,7 @@
 	modstorage.set_real_location(src)
 	modstorage.allow_big_nesting = big_nesting
 	atom_storage.locked = STORAGE_NOT_LOCKED
-	RegisterSignal(mod.chestplate, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(on_chestplate_unequip))
+//	RegisterSignal(mod.chestplate, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(on_chestplate_unequip))
 
 /obj/item/mod/module/storage/on_uninstall(deleting = FALSE)
 	var/datum/storage/modstorage = mod.atom_storage
@@ -36,7 +36,7 @@
 	qdel(modstorage)
 	if(!deleting)
 		atom_storage.remove_all(get_turf(src))
-	UnregisterSignal(mod.chestplate, COMSIG_ITEM_PRE_UNEQUIP)
+//	UnregisterSignal(mod.chestplate, COMSIG_ITEM_PRE_UNEQUIP)
 
 /obj/item/mod/module/storage/proc/on_chestplate_unequip(obj/item/source, force, atom/newloc, no_move, invdrop, silent)
 	if(QDELETED(source) || !mod.wearer || newloc == mod.wearer || !mod.wearer.s_store)
@@ -139,14 +139,10 @@
 	)
 
 /obj/item/mod/module/jetpack/on_activation()
-	. = ..()
-	if(!.)
-		return
 	if(full_speed)
 		mod.wearer.add_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
 /obj/item/mod/module/jetpack/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
 	if(full_speed)
 		mod.wearer.remove_movespeed_modifier(/datum/movespeed_modifier/jetpack/fullspeed)
 
@@ -312,16 +308,16 @@
 	var/former_visor_flags = NONE
 
 /obj/item/mod/module/mouthhole/on_install()
-	former_flags = mod.helmet.flags_cover
-	former_visor_flags = mod.helmet.visor_flags_cover
-	mod.helmet.flags_cover &= ~(HEADCOVERSMOUTH|PEPPERPROOF)
-	mod.helmet.visor_flags_cover &= ~(HEADCOVERSMOUTH|PEPPERPROOF)
+//	former_flags = mod.helmet.flags_cover
+//	former_visor_flags = mod.helmet.visor_flags_cover
+//	mod.helmet.flags_cover &= ~(HEADCOVERSMOUTH|PEPPERPROOF)
+//	mod.helmet.visor_flags_cover &= ~(HEADCOVERSMOUTH|PEPPERPROOF)
 
 /obj/item/mod/module/mouthhole/on_uninstall(deleting = FALSE)
 	if(deleting)
 		return
-	mod.helmet.flags_cover |= former_flags
-	mod.helmet.visor_flags_cover |= former_visor_flags
+//	mod.helmet.flags_cover |= former_flags
+//	mod.helmet.visor_flags_cover |= former_visor_flags
 
 ///EMP Shield - Protects the suit from EMPs.
 /obj/item/mod/module/emp_shield
@@ -350,7 +346,7 @@
 /obj/item/mod/module/emp_shield/advanced/on_suit_activation()
 	mod.wearer.AddElement(/datum/element/empprotection, EMP_PROTECT_SELF|EMP_PROTECT_CONTENTS)
 
-/obj/item/mod/module/emp_shield/advanced/on_suit_deactivation(deleting)
+/obj/item/mod/module/emp_shield/advanced/on_suit_deactivation(deleting = FALSE)
 	mod.wearer.RemoveElement(/datum/element/empprotection, EMP_PROTECT_SELF|EMP_PROTECT_CONTENTS)
 
 ///Flashlight - Gives the suit a customizable flashlight.
@@ -379,17 +375,11 @@
 	var/max_range = 5
 
 /obj/item/mod/module/flashlight/on_activation()
-	. = ..()
-	if(!.)
-		return
 	set_light_flags(light_flags | LIGHT_ATTACHED)
 	set_light_on(active)
 	active_power_cost = base_power * light_range
 
 /obj/item/mod/module/flashlight/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
 	set_light_flags(light_flags & ~LIGHT_ATTACHED)
 	set_light_on(active)
 
@@ -444,9 +434,6 @@
 	var/dispense_time = 0 SECONDS
 
 /obj/item/mod/module/dispenser/on_use()
-	. = ..()
-	if(!.)
-		return
 	if(dispense_time && !do_after(mod.wearer, dispense_time, target = mod))
 		balloon_alert(mod.wearer, "interrupted!")
 		return FALSE
@@ -542,9 +529,6 @@
 	UnregisterSignal(mod, COMSIG_ATOM_EMAG_ACT)
 
 /obj/item/mod/module/dna_lock/on_use()
-	. = ..()
-	if(!.)
-		return
 	dna = mod.wearer.dna.unique_enzymes
 	balloon_alert(mod.wearer, "dna updated")
 	drain_power(use_power_cost)
@@ -635,18 +619,18 @@
 	var/former_visor_flags
 
 /obj/item/mod/module/hat_stabilizer/on_suit_activation()
-	RegisterSignal(mod.helmet, COMSIG_ATOM_EXAMINE, PROC_REF(add_examine))
-	RegisterSignal(mod.helmet, COMSIG_ATOM_ATTACKBY, PROC_REF(place_hat))
-	RegisterSignal(mod.helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(remove_hat))
+	// RegisterSignal(mod.helmet, COMSIG_ATOM_EXAMINE, PROC_REF(add_examine))
+	// RegisterSignal(mod.helmet, COMSIG_ATOM_ATTACKBY, PROC_REF(place_hat))
+	// RegisterSignal(mod.helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(remove_hat))
 
 /obj/item/mod/module/hat_stabilizer/on_suit_deactivation(deleting = FALSE)
 	if(deleting)
 		return
 	if(attached_hat)	//knock off the helmet if its on their head. Or, technically, auto-rightclick it for them; that way it saves us code, AND gives them the bubble
 		remove_hat(src, mod.wearer)
-	UnregisterSignal(mod.helmet, COMSIG_ATOM_EXAMINE)
-	UnregisterSignal(mod.helmet, COMSIG_ATOM_ATTACKBY)
-	UnregisterSignal(mod.helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
+	// UnregisterSignal(mod.helmet, COMSIG_ATOM_EXAMINE)
+	// UnregisterSignal(mod.helmet, COMSIG_ATOM_ATTACKBY)
+	// UnregisterSignal(mod.helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
 
 /obj/item/mod/module/hat_stabilizer/proc/add_examine(datum/source, mob/user, list/base_examine)
 	SIGNAL_HANDLER
@@ -671,10 +655,10 @@
 		return
 	if(mod.wearer.transferItemToLoc(hitting_item, src, force = FALSE, silent = TRUE))
 		attached_hat = hat
-		former_flags = mod.helmet.flags_cover
-		former_visor_flags = mod.helmet.visor_flags_cover
-		mod.helmet.flags_cover |= attached_hat.flags_cover
-		mod.helmet.visor_flags_cover |= attached_hat.visor_flags_cover
+		// former_flags = mod.helmet.flags_cover
+		// former_visor_flags = mod.helmet.visor_flags_cover
+		// mod.helmet.flags_cover |= attached_hat.flags_cover
+		// mod.helmet.visor_flags_cover |= attached_hat.visor_flags_cover
 		balloon_alert(user, "hat attached, right-click to remove")
 		mod.wearer.update_clothing(mod.slot_flags)
 
@@ -694,8 +678,8 @@
 	else
 		balloon_alert_to_viewers("the hat falls to the floor!")
 	attached_hat = null
-	mod.helmet.flags_cover = former_flags
-	mod.helmet.visor_flags_cover = former_visor_flags
+	// mod.helmet.flags_cover = former_flags
+	// mod.helmet.visor_flags_cover = former_visor_flags
 	mod.wearer.update_clothing(mod.slot_flags)
 
 ///Sign Language Translator - allows people to sign over comms using the modsuit's gloves.
