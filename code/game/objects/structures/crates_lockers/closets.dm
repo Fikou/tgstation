@@ -98,6 +98,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	var/x_shake_pixel_shift = 2
 	/// how many pixels the closet can shift on the y axes when shaking
 	var/y_shake_pixel_shift = 1
+	/// Flags used for can_perform_action with this closet
+	var/can_perform_flags = NONE
 
 /datum/armor/structure_closet
 	melee = 20
@@ -452,12 +454,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	if (!contents_initialized)
 		contents_initialized = TRUE
 		PopulateContents()
-
-	var/atom/L = drop_location()
-	for(var/atom/movable/AM in src)
-		AM.forceMove(L)
-		if(throwing) // you keep some momentum when getting out of a thrown closet
-			step(AM, dir)
+	for(var/atom/movable/contained in src)
+		dump_atom(contained)
 	if(throwing)
 		throwing.finalize(FALSE)
 
@@ -473,6 +471,11 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	for(var/i in reverse_range(location.get_all_contents()))
 		var/atom/movable/thing = i
 		thing.atom_storage?.close_all()
+
+/obj/structure/closet/proc/dump_atom(atom/movable/dumped)
+	dumped.forceMove(drop_location())
+	if(throwing) // you keep some momentum when getting out of a thrown closet
+		step(dumped, dir)
 
 ///Proc to write checks before opening a door
 /obj/structure/closet/proc/before_open(mob/living/user, force)
@@ -513,7 +516,11 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	if(SEND_SIGNAL(src, COMSIG_CLOSET_INSERT, inserted) & COMPONENT_CLOSET_INSERT_INTERRUPT)
 		return TRUE
 	inserted.forceMove(src)
+	after_insert(inserted)
 	return TRUE
+
+/obj/structure/closet/proc/after_insert(atom/movable/inserted)
+	return
 
 /obj/structure/closet/proc/insertion_allowed(atom/movable/AM)
 	if(ismob(AM))
@@ -966,7 +973,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	. = ..()
 	if(.)
 		return
-	if(user.body_position == LYING_DOWN && get_dist(src, user) > 0)
+	if(!user.can_perform_action(src, can_perform_flags) || !isturf(loc))
 		return
 
 	if(toggle(user))
@@ -998,7 +1005,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	set category = "Object"
 	set name = "Toggle Open"
 
-	if(!usr.can_perform_action(src) || !isturf(loc))
+	if(!usr.can_perform_action(src, can_perform_flags) || !isturf(loc))
 		return
 
 	if(iscarbon(usr) || issilicon(usr) || isdrone(usr))
@@ -1081,8 +1088,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 /obj/structure/closet/attack_hand_secondary(mob/user, modifiers)
 	. = ..()
 
-	if(!user.can_perform_action(src) || !isturf(loc))
-		return
+	if(!user.can_perform_action(src, can_perform_flags) || !isturf(loc))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(!opened && secure)
 		togglelock(user)

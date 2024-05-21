@@ -127,8 +127,6 @@
 
 ///Clears var and updates icon. In the case of ballistic weapons, also updates the gun's weight.
 /obj/item/gun/proc/clear_suppressor()
-	if(!can_unsuppress)
-		return
 	suppressed = null
 	update_appearance()
 

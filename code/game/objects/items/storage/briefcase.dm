@@ -16,7 +16,10 @@
 	attack_verb_simple = list("bash", "batter", "bludgeon", "thrash", "whack")
 	resistance_flags = FLAMMABLE
 	max_integrity = 150
-	var/folder_path = /obj/item/folder //this is the path of the folder that gets spawned in New()
+	/// The path of the spawned pen.
+	var/pen_path
+	/// The path of the spawned folder.
+	var/folder_path = /obj/item/folder
 
 /obj/item/storage/briefcase/Initialize(mapload)
 	. = ..()
@@ -24,17 +27,19 @@
 	atom_storage.max_total_storage = 21
 
 /obj/item/storage/briefcase/PopulateContents()
-	new /obj/item/pen(src)
-	var/obj/item/folder/folder = new folder_path(src)
-	for(var/i in 1 to 6)
-		new /obj/item/paper(folder)
+	if(pen_path)
+		new pen_path(src)
+	if(folder_path)
+		var/obj/item/folder/folder = new folder_path(src)
+		for(var/i in 1 to 6)
+			new /obj/item/paper(folder)
 
 /obj/item/storage/briefcase/lawyer
 	folder_path = /obj/item/folder/blue
 
 /obj/item/storage/briefcase/lawyer/PopulateContents()
 	new /obj/item/stamp/law(src)
-	..()
+	return ..()
 
 /obj/item/storage/briefcase/suicide_act(mob/living/user)
 	var/list/papers_found = list()
@@ -60,19 +65,6 @@
 	user.visible_message(span_suicide("[user] looks overwhelmed with paperwork! It looks like [user.p_theyre()] trying to commit suicide!"))
 	return OXYLOSS
 
-/obj/item/storage/briefcase/sniper
-	desc = "Its label reads \"genuine hardened Captain leather\", but suspiciously has no other tags or branding. Smells like L'Air du Temps."
-	force = 10
-
-/obj/item/storage/briefcase/sniper/PopulateContents()
-	..() // in case you need any paperwork done after your rampage
-	new /obj/item/gun/ballistic/rifle/sniper_rifle/syndicate(src)
-	new /obj/item/clothing/neck/tie/red/hitman(src)
-	new /obj/item/clothing/under/syndicate/sniper(src)
-	new /obj/item/ammo_box/magazine/sniper_rounds(src)
-	new /obj/item/ammo_box/magazine/sniper_rounds(src)
-	new /obj/item/ammo_box/magazine/sniper_rounds/disruptor(src)
-
 /**
  * Secure briefcase
  * Uses the lockable storage component to give it a lock.
@@ -94,7 +86,25 @@
 /obj/item/storage/briefcase/secure/syndie
 	force = 15
 
-/obj/item/storage/briefcase/secure/syndie/PopulateContents()
+/obj/item/storage/briefcase/secure/syndie/sniper
+	desc = "A large briefcase with a digital locking system. Smells like L'Air du Temps."
+
+/obj/item/storage/briefcase/secure/syndie/sniper/PopulateContents()
+	. = ..() // in case you need any paperwork done after your rampage
+	new /obj/item/gun/ballistic/rifle/sniper_rifle/buildabear(src)
+	new /obj/item/rifle_part/stock(src)
+	new /obj/item/rifle_part/barrel(src)
+	new /obj/item/firing_pin/implant/pindicate(src)
+	new /obj/item/bodybag/sniper(src)
+	new /obj/item/clothing/glasses/thermal/xray(src)
+	new /obj/item/implanter/weapons_auth(src)
+	new /obj/item/ammo_box/magazine/sniper_rounds(src)
+	new /obj/item/ammo_box/magazine/sniper_rounds(src)
+	new /obj/item/ammo_box/magazine/sniper_rounds/disruptor(src)
+
+/obj/item/storage/briefcase/secure/syndie/money
+
+/obj/item/storage/briefcase/secure/syndie/money/PopulateContents()
 	. = ..()
 	for(var/iterator in 1 to 5)
 		new /obj/item/stack/spacecash/c1000(src)

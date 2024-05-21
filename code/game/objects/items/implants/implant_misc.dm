@@ -11,6 +11,10 @@
 		<b>Implant Details:</b> <BR> \
 		<b>Function:</b> Allows operation of implant-locked weaponry, preventing equipment from falling into enemy hands."
 
+/obj/item/implanter/weapons_auth
+	name = "implanter (firearm authentication)"
+	imp_type = /obj/item/implant/weapons_auth
+
 /obj/item/implant/emp
 	name = "emp implant"
 	desc = "Triggers an EMP."

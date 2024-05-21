@@ -16,7 +16,7 @@
 	tac_reloads = FALSE
 
 /obj/item/gun/ballistic/rifle/rack(mob/user = null)
-	if (bolt_locked == FALSE)
+	if (!bolt_locked)
 		balloon_alert(user, "bolt opened")
 		playsound(src, rack_sound, rack_sound_volume, rack_sound_vary)
 		process_chamber(FALSE, FALSE, FALSE)
@@ -185,7 +185,6 @@
 	bolt_type = BOLT_TYPE_LOCKING
 	semi_auto = FALSE
 	internal_magazine = TRUE
-	can_modify_ammo = FALSE
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_SUITSTORE
 	bolt_wording = "bowstring"
 	magazine_wording = "rod"
@@ -248,7 +247,7 @@
 	inhand_icon_state = "rebarxbowsyndie"
 	worn_icon_state = "rebarxbowsyndie"
 	w_class = WEIGHT_CLASS_NORMAL
-	can_modify_ammo = TRUE
+	can_modify_gun = TRUE
 	initial_caliber = CALIBER_REBAR_SYNDIE
 	alternative_caliber = CALIBER_REBAR_SYNDIE_NORMAL
 	alternative_ammo_misfires = FALSE
@@ -395,7 +394,7 @@
 	recoil = 2
 	accepted_magazine_type = /obj/item/ammo_box/magazine/sniper_rounds
 	internal_magazine = FALSE
-	w_class = WEIGHT_CLASS_NORMAL
+	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = ITEM_SLOT_BACK
 	mag_display = TRUE
 	tac_reloads = TRUE
@@ -420,9 +419,102 @@
 	else
 		playsound(src, 'sound/machines/eject.ogg', 50, TRUE)
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/syndicate
-	desc = "A boltaction anti-materiel rifle, utilizing .50 BMG cartridges. While technically outdated in modern arms markets, it still works exceptionally well as \
-		an anti-personnel rifle. In particular, the employment of modern armored MODsuits utilizing advanced armor plating has given this weapon a new home on the battlefield. \
-		It is also able to be suppressed....somehow. This one seems to have a little picture of someone in a blood-red MODsuit stenciled on it, pointing at a green floppy disk. \
-		Who knows what that might mean."
-	pin = /obj/item/firing_pin/implant/pindicate
+/obj/item/gun/ballistic/rifle/sniper_rifle/install_suppressor(obj/item/suppressor/suppressor) //we are already HUGE
+	suppressed = suppressor
+	update_appearance()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/clear_suppressor()
+	suppressed = null
+	update_appearance()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear
+	w_class = WEIGHT_CLASS_NORMAL
+	pin = null
+	can_suppress = FALSE
+	can_modify_gun = TRUE
+	var/obj/item/rifle_part/stock/rifle_stock
+	var/obj/item/rifle_part/barrel/rifle_barrel
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/Destroy()
+	QDEL_NULL(rifle_stock)
+	QDEL_NULL(rifle_barrel)
+	return ..()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(gone == rifle_barrel)
+		rifle_barrel = null
+		if(ismovable(suppressed))
+			var/atom/movable/suppressor = suppressed
+			suppressor.forceMove(rifle_barrel.loc)
+		update_weight_class(w_class - 1)
+	if(gone == rifle_stock)
+		rifle_stock = null
+		update_weight_class(w_class - 1)
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/examine(mob/user)
+	. = ..()
+	if(!rifle_stock)
+		. += span_warning("It is missing the trigger, preventing firing.")
+	else
+		. += span_warning("The stock is installed, it can be removed with a wrench.")
+	if(!rifle_barrel)
+		. += span_warning("It is missing the barrel, preventing firing.")
+	else
+		. += span_warning("The barrel is installed, it can be removed with a wrench.")
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/can_shoot()
+	return rifle_stock && rifle_barrel && ..()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/attackby(obj/item/attacking_item, mob/user, params)
+	. = ..()
+	if (.)
+		return
+	if(istype(attacking_item, /obj/item/rifle_part/stock))
+		if(rifle_stock)
+			balloon_alert(user, "already has stock!")
+		if(!user.transferItemToLoc(attacking_item, src))
+			return
+		rifle_stock = attacking_item
+		update_weight_class(w_class + 1)
+	else if(istype(attacking_item, /obj/item/rifle_part/barrel))
+		if(rifle_barrel)
+			balloon_alert(user, "already has barrel!")
+		if(!user.transferItemToLoc(attacking_item, src))
+			return
+		rifle_barrel = attacking_item
+		can_suppress = TRUE
+		update_weight_class(w_class + 1)
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/wrench_act(mob/living/user, obj/item/I)
+	if(!rifle_stock && !rifle_barrel)
+		balloon_alert(user, "nothing to detach!")
+		return
+	if(!rifle_stock && suppressed)
+		balloon_alert(user, "remove suppressor first!")
+		return
+	return ..()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/modify_gun(mob/living/user)
+	if(rifle_barrel && !suppressed)
+		rifle_barrel.forceMove(drop_location())
+		balloon_alert(user, "barrel detached")
+		return
+	if(rifle_stock)
+		rifle_stock.forceMove(drop_location())
+		balloon_alert(user, "stock detached")
+
+/obj/item/rifle_part
+	name = "sniper rifle part"
+	desc = "You shouldn't see this."
+	icon = 'icons/obj/weapons/guns/ballistic.dmi'
+
+/obj/item/rifle_part/stock
+	name = "sniper rifle stock"
+	desc = "The combined stock, grip and trigger part of an anti-materiel sniper rifle."
+	icon_state = "cshotgun"
+
+/obj/item/rifle_part/barrel
+	name = "sniper rifle barrel"
+	desc = "The barrel of an anti-materiel sniper rifle."
+	icon_state = "c20r"

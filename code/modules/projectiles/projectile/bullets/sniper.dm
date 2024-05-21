@@ -1,14 +1,15 @@
 // .50 BMG (Sniper)
 
 /obj/projectile/bullet/p50
-	name =".50 BMG bullet"
+	name = ".50 BMG bullet"
 	speed = 0.4
 	range = 400 // Enough to travel from one corner of the Z to the opposite corner and then some.
 	damage = 70
-	paralyze = 100
+	paralyze = 10 SECONDS
 	dismemberment = 50
 	catastropic_dismemberment = TRUE
-	armour_penetration = 50
+	projectile_phasing = PASSDOORS
+	armour_penetration = 30
 	///Determines object damage.
 	var/object_damage = 80
 	///Determines how much additional damage the round does to mechs.
@@ -25,17 +26,18 @@
 	return ..()
 
 /obj/projectile/bullet/p50/surplus
-	name =".50 BMG surplus bullet"
+	name = ".50 BMG surplus bullet"
 	armour_penetration = 0
 	paralyze = 0
 	dismemberment = 0
 	catastropic_dismemberment = FALSE
 
 /obj/projectile/bullet/p50/disruptor
-	name =".50 BMG disruptor bullet"
+	name = ".50 BMG disruptor bullet"
 	damage_type = STAMINA
 	paralyze = 0
 	dismemberment = 0
+	projectile_phasing = NONE
 	catastropic_dismemberment = FALSE
 	object_damage = 0
 	mecha_damage = 100
@@ -52,7 +54,7 @@
 	empulse(target, emp_radius, emp_radius)
 
 /obj/projectile/bullet/p50/incendiary
-	name =".50 BMG incendiary bullet"
+	name = ".50 BMG incendiary bullet"
 	damage_type = BURN
 	paralyze = 0
 	dismemberment = 0
@@ -79,6 +81,7 @@
 	phasing_ignore_direct_target = TRUE
 	dismemberment = 0 //It goes through you cleanly.
 	catastropic_dismemberment = FALSE
+	armour_penetration = 100
 	paralyze = 0
 	object_damage = 0
 
@@ -88,12 +91,15 @@
 	damage = 25
 	speed = 0.3
 	range = 16
+	armour_penetration = 50
 
 /obj/projectile/bullet/p50/marksman
 	name = ".50 BMG marksman round"
 	damage = 50
 	range = 50
 	paralyze = 0
+	armour_penetration = 50
+	projectile_phasing = NONE
 	tracer_type = /obj/effect/projectile/tracer/sniper
 	impact_type = /obj/effect/projectile/impact/sniper
 	muzzle_type = /obj/effect/projectile/muzzle/sniper

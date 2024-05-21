@@ -9,16 +9,14 @@
 	var/unfoldedbag_path = /obj/structure/closet/body_bag
 
 /obj/item/bodybag/attack_self(mob/user)
-	if(user.is_holding(src))
-		deploy_bodybag(user, get_turf(user))
-	else
-		deploy_bodybag(user, get_turf(src))
+	deploy_bodybag(user, get_turf(src))
 
 /obj/item/bodybag/interact_with_atom(atom/interacting_with, mob/living/user, flags)
 	if(isopenturf(interacting_with))
 		deploy_bodybag(user, interacting_with)
 		return ITEM_INTERACT_SUCCESS
 	return NONE
+
 /obj/item/bodybag/attempt_pickup(mob/user)
 	// can't pick ourselves up if we are inside of the bodybag, else very weird things may happen
 	if(contains(user))
@@ -53,10 +51,8 @@
 /obj/item/bodybag/bluespace
 	name = "bluespace body bag"
 	desc = "A folded bluespace body bag designed for the storage and transportation of cadavers."
-	icon = 'icons/obj/medical/bodybag.dmi'
 	icon_state = "bluebodybag_folded"
 	unfoldedbag_path = /obj/structure/closet/body_bag/bluespace
-	w_class = WEIGHT_CLASS_SMALL
 	item_flags = NO_MAT_REDEMPTION
 
 /obj/item/bodybag/bluespace/examine(mob/user)
@@ -105,7 +101,6 @@
 /obj/item/bodybag/environmental
 	name = "environmental protection bag"
 	desc = "A folded, reinforced bag designed to protect against exoplanetary environmental storms."
-	icon = 'icons/obj/medical/bodybag.dmi'
 	icon_state = "envirobag_folded"
 	unfoldedbag_path = /obj/structure/closet/body_bag/environmental
 	w_class = WEIGHT_CLASS_NORMAL //It's reinforced and insulated, like a beefed-up sleeping bag, so it has a higher bulkiness than regular bodybag
@@ -132,7 +127,16 @@
 /obj/item/bodybag/environmental/prisoner/syndicate
 	name = "syndicate prisoner transport bag"
 	desc = "An alteration of Nanotrasen's environmental protection bag which has been used in several high-profile kidnappings. Designed to keep a victim unconscious, alive, and secured until they are transported to a required location."
-	icon = 'icons/obj/medical/bodybag.dmi'
 	icon_state = "syndieenvirobag_folded"
 	unfoldedbag_path = /obj/structure/closet/body_bag/environmental/prisoner/pressurized/syndicate
 	resistance_flags = ACID_PROOF | FIRE_PROOF | FREEZE_PROOF | LAVA_PROOF
+
+/obj/item/bodybag/sniper
+	name = "\improper HCS-2 tarp"
+	desc = "A folded holographic camouflage tarp, used by field snipers for ease of hiding in any area. Allows firing rifles out of it, though it disrupts the camouflage."
+	icon = 'icons/obj/medical/bodybag.dmi'
+	icon_state = "snipertarp_folded"
+	worn_icon_state = "snipertarp"
+	unfoldedbag_path = /obj/structure/closet/body_bag/sniper
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_NECK

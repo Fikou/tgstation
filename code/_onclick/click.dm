@@ -148,7 +148,7 @@
 		return
 
 	//Can't reach anything else in lockers or other weirdness
-	if(!loc.AllowClick())
+	if(!loc.AllowClick(src, A))
 		return
 
 	// In a storage item with a disassociated storage parent
@@ -243,10 +243,10 @@
 /mob/living/DirectAccess(atom/target)
 	return ..() + get_all_contents()
 
-/atom/proc/AllowClick()
+/atom/proc/AllowClick(mob/user, atom/clicked_on)
 	return FALSE
 
-/turf/AllowClick()
+/turf/AllowClick(mob/user, atom/clicked_on)
 	return TRUE
 
 /proc/CheckToolReach(atom/movable/here, atom/movable/there, reach)

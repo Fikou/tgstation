@@ -24,21 +24,23 @@
 	var/obj/item/bodybag/foldedbag_instance = null
 	/// The tagged name of the bodybag, also used to check if the bodybag IS tagged.
 	var/tag_name
+	var/taggable = TRUE
 
 
 /obj/structure/closet/body_bag/Initialize(mapload)
 	. = ..()
-	var/static/list/tool_behaviors = list(
-		TOOL_WIRECUTTER = list(
-			SCREENTIP_CONTEXT_RMB = "Remove Tag",
-		),
-	)
-	AddElement(/datum/element/contextual_screentip_tools, tool_behaviors)
+	if(taggable)
+		var/static/list/tool_behaviors = list(
+			TOOL_WIRECUTTER = list(
+				SCREENTIP_CONTEXT_RMB = "Remove Tag",
+			),
+		)
+		AddElement(/datum/element/contextual_screentip_tools, tool_behaviors)
+		AddElement(/datum/element/contextual_screentip_sharpness, lmb_text = "Remove Tag")
 	AddElement( \
 		/datum/element/contextual_screentip_bare_hands, \
 		rmb_text = "Fold up", \
 	)
-	AddElement(/datum/element/contextual_screentip_sharpness, lmb_text = "Remove Tag")
 
 /obj/structure/closet/body_bag/Destroy()
 	// If we have a stored bag, and it's in nullspace (not in someone's hand), delete it.
@@ -47,7 +49,9 @@
 	return ..()
 
 /obj/structure/closet/body_bag/attackby(obj/item/interact_tool, mob/user, params)
-	if (istype(interact_tool, /obj/item/pen) || istype(interact_tool, /obj/item/toy/crayon))
+	if(!taggable)
+		return
+	if(istype(interact_tool, /obj/item/pen) || istype(interact_tool, /obj/item/toy/crayon))
 		if(!user.can_write(interact_tool))
 			return
 		var/t = tgui_input_text(user, "What would you like the label to be?", name, max_length = 53)
@@ -65,6 +69,8 @@
 
 ///Handles renaming of the bodybag's examine tag.
 /obj/structure/closet/body_bag/proc/handle_tag(new_name)
+	if(!taggable)
+		return
 	tag_name = new_name
 	name = tag_name ? "[initial(name)] - [tag_name]" : initial(name)
 	update_appearance()
@@ -313,7 +319,7 @@
 	open()
 
 /obj/structure/closet/body_bag/environmental/prisoner/attack_hand_secondary(mob/user, modifiers)
-	if(!user.can_perform_action(src) || !isturf(loc))
+	if(!user.can_perform_action(src, can_perform_flags) || !isturf(loc))
 		return
 	togglelock(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -364,25 +370,70 @@
 	air_contents.gases[/datum/gas/nitrous_oxide][MOLES] = (ONE_ATMOSPHERE*50)/(R_IDEAL_GAS_EQUATION*T20C) * N2STANDARD
 
 /obj/structure/closet/body_bag/environmental/hardlight
-	name = "hardlight bodybag"
+	name = "hardlight body bag"
 	desc = "A hardlight bag for storing bodies. Resistant to space."
 	icon_state = "holobag_med"
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	foldedbag_path = null
 	weather_protection = list(TRAIT_VOIDSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE)
+	taggable = FALSE
 
 /obj/structure/closet/body_bag/environmental/hardlight/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type in list(BRUTE, BURN))
 		playsound(src, 'sound/weapons/egloves.ogg', 80, TRUE)
 
 /obj/structure/closet/body_bag/environmental/prisoner/hardlight
-	name = "hardlight prisoner bodybag"
+	name = "hardlight prisoner body bag"
 	desc = "A hardlight bag for storing bodies. Resistant to space, can be sinched to prevent escape."
 	icon_state = "holobag_sec"
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	foldedbag_path = null
 	weather_protection = list(TRAIT_VOIDSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE)
+	taggable = FALSE
 
 /obj/structure/closet/body_bag/environmental/prisoner/hardlight/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type in list(BRUTE, BURN))
 		playsound(src, 'sound/weapons/egloves.ogg', 80, TRUE)
+
+/obj/structure/closet/body_bag/sniper
+	name = "inconspicuous tarp"
+	desc = "Nothing to see here."
+	icon = 'icons/obj/medical/bodybag.dmi'
+	icon_state = "snipertarp"
+	foldedbag_path = /obj/item/bodybag/sniper
+	mob_storage_capacity = 1
+	storage_capacity = 15
+	can_perform_flags = ALLOW_RESTING
+	/// How much time to become fully invisible.
+	var/invis_time = 2 SECONDS
+
+/obj/structure/closet/body_bag/sniper/insertion_allowed(atom/movable/AM)
+	if(!ismob(AM))
+		return FALSE
+	return ..()
+
+/obj/structure/closet/body_bag/sniper/after_close(mob/living/user)
+	. = ..()
+	if(locate(/mob) in src)
+		animate(src, alpha = 25, time = invis_time)
+
+/obj/structure/closet/body_bag/sniper/after_open(mob/living/user, force)
+	. = ..()
+	alpha = 255
+
+/obj/structure/closet/body_bag/sniper/after_insert(atom/movable/inserted)
+	RegisterSignal(inserted, COMSIG_MOB_FIRED_GUN, PROC_REF(on_gun_fire))
+
+/obj/structure/closet/body_bag/sniper/dump_atom(atom/movable/dumped)
+	UnregisterSignal(dumped, COMSIG_MOB_FIRED_GUN)
+
+/obj/structure/closet/body_bag/sniper/AllowClick(mob/user, atom/clicked_on)
+	return istype(user.get_active_held_item(), /obj/item/gun/ballistic/rifle)
+
+/obj/structure/closet/body_bag/sniper/proc/on_gun_fire(mob/user, obj/item/gun/ballistic/gun_fired, target, params, zone_override, list/bonus_spread_values)
+	if(!istype(gun_fired))
+		return
+	if(gun_fired.bolt_locked || !gun_fired.chambered)
+		return
+	alpha = 150
+	animate(src, alpha = 25, time = invis_time * (150/255)) //starting earlier, so lets finish earlier

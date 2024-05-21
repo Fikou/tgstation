@@ -485,8 +485,8 @@
 		if(hit_mob.stat != DEAD)
 			give_blood(15)
 
-/obj/item/soulscythe/AllowClick()
-	return TRUE
+/obj/item/soulscythe/AllowClick(mob/user, atom/clicked_on)
+	return user == soul
 
 /obj/item/soulscythe/proc/use_blood(amount = 0, message = TRUE)
 	if(amount > soul.blood_level)

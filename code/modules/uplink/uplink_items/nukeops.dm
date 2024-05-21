@@ -323,7 +323,7 @@
 	desc = "An outdated, but still extremely powerful anti-material sniper rifle. Fires .50 BMG cartridges from a 6 round magazine. \
 		Can be fitted with a suppressor. If anyone asks how that even works, tell them it's Nanotrasen's fault. Comes with \
 		3 spare magazines; 2 regular magazines and 1 disruptor magazine. Also comes with a suit and tie."
-	item = /obj/item/storage/briefcase/sniper
+	item = /obj/item/storage/briefcase/secure/syndie/sniper
 
 /datum/uplink_item/ammo_nuclear/basic/sniper
 	name = ".50 BMG Magazine (AMSR)"

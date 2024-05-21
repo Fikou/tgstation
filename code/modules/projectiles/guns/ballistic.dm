@@ -106,8 +106,8 @@
 
 	// Gun internal magazine modification and misfiring
 
-	///Can we modify our ammo type in this gun's internal magazine?
-	var/can_modify_ammo = FALSE
+	///Can we modify our gun (by default, change ammo type in this gun's internal magazine)?
+	var/can_modify_gun = FALSE
 	///our initial ammo type. Should match initial caliber, but a bit of redundency doesn't hurt.
 	var/initial_caliber
 	///our alternative ammo type.
@@ -477,9 +477,9 @@
 	return ..()
 
 ///Installs a new suppressor, assumes that the suppressor is already in the contents of src
-/obj/item/gun/ballistic/proc/install_suppressor(obj/item/suppressor/S)
-	suppressed = S
-	update_weight_class(w_class + S.w_class) //so pistols do not fit in pockets when suppressed
+/obj/item/gun/ballistic/proc/install_suppressor(obj/item/suppressor/suppressor)
+	suppressed = suppressor
+	update_weight_class(w_class + suppressor.w_class) //so pistols do not fit in pockets when suppressed
 	update_appearance()
 
 /obj/item/gun/ballistic/clear_suppressor()
@@ -685,7 +685,7 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 		return TRUE
 
 /obj/item/gun/ballistic/wrench_act(mob/living/user, obj/item/I)
-	if(!can_modify_ammo)
+	if(!can_modify_gun)
 		return
 
 	if(!user.is_holding(src))
@@ -705,6 +705,9 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 	if(!I.use_tool(src, user, 3 SECONDS))
 		return TRUE
 
+	modify_gun(user)
+
+/obj/item/gun/ballistic/proc/modify_gun(user)
 	if(magazine.caliber == initial_caliber)
 		magazine.caliber = alternative_caliber
 		if(alternative_ammo_misfires)
