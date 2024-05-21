@@ -97,7 +97,6 @@
 	new /obj/item/firing_pin/implant/pindicate(src)
 	new /obj/item/bodybag/sniper(src)
 	new /obj/item/clothing/glasses/thermal/xray(src)
-	new /obj/item/implanter/weapons_auth(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds/disruptor(src)

@@ -405,12 +405,7 @@
 	storage_capacity = 15
 	can_perform_flags = ALLOW_RESTING
 	/// How much time to become fully invisible.
-	var/invis_time = 2 SECONDS
-
-/obj/structure/closet/body_bag/sniper/insertion_allowed(atom/movable/AM)
-	if(!ismob(AM))
-		return FALSE
-	return ..()
+	var/invis_time = 3.5 SECONDS
 
 /obj/structure/closet/body_bag/sniper/after_close(mob/living/user)
 	. = ..()
@@ -422,9 +417,11 @@
 	alpha = 255
 
 /obj/structure/closet/body_bag/sniper/after_insert(atom/movable/inserted)
+	. = ..()
 	RegisterSignal(inserted, COMSIG_MOB_FIRED_GUN, PROC_REF(on_gun_fire))
 
 /obj/structure/closet/body_bag/sniper/dump_atom(atom/movable/dumped)
+	. = ..()
 	UnregisterSignal(dumped, COMSIG_MOB_FIRED_GUN)
 
 /obj/structure/closet/body_bag/sniper/AllowClick(mob/user, atom/clicked_on)

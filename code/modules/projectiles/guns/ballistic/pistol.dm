@@ -25,7 +25,7 @@
 	suppressor_y_offset = -1
 
 /obj/item/gun/ballistic/automatic/pistol/no_mag
-	spawnwithmagazine = FALSE
+	spawn_with_magazine = FALSE
 
 /obj/item/gun/ballistic/automatic/pistol/fire_mag
 	spawn_magazine_type = /obj/item/ammo_box/magazine/m9mm/fire
@@ -129,7 +129,7 @@
 
 
 /obj/item/gun/ballistic/automatic/pistol/m1911/no_mag
-	spawnwithmagazine = FALSE
+	spawn_with_magazine = FALSE
 
 /obj/item/gun/ballistic/automatic/pistol/deagle
 	name = "\improper Desert Eagle"

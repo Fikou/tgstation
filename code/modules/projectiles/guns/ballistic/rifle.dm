@@ -404,10 +404,6 @@
 	suppressor_x_offset = 3
 	suppressor_y_offset = 3
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/examine(mob/user)
-	. = ..()
-	. += span_warning("<b>It seems to have a warning label:</b> Do NOT, under any circumstances, attempt to 'quickscope' with this rifle.")
-
 /obj/item/gun/ballistic/rifle/sniper_rifle/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 4) //enough range to at least make extremely good use of the penetrator rounds
@@ -432,6 +428,7 @@
 	pin = null
 	can_suppress = FALSE
 	can_modify_gun = TRUE
+	spawn_with_magazine = FALSE
 	var/obj/item/rifle_part/stock/rifle_stock
 	var/obj/item/rifle_part/barrel/rifle_barrel
 
@@ -444,7 +441,7 @@
 	. = ..()
 	if(gone == rifle_barrel)
 		rifle_barrel = null
-		if(ismovable(suppressed))
+		if(ismovable(suppressed) && !QDELING(src))
 			var/atom/movable/suppressor = suppressed
 			suppressor.forceMove(rifle_barrel.loc)
 		update_weight_class(w_class - 1)
@@ -477,6 +474,8 @@
 			return
 		rifle_stock = attacking_item
 		update_weight_class(w_class + 1)
+		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+		balloon_alert(user, "stock attached")
 	else if(istype(attacking_item, /obj/item/rifle_part/barrel))
 		if(rifle_barrel)
 			balloon_alert(user, "already has barrel!")
@@ -485,6 +484,8 @@
 		rifle_barrel = attacking_item
 		can_suppress = TRUE
 		update_weight_class(w_class + 1)
+		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+		balloon_alert(user, "barrel attached")
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/wrench_act(mob/living/user, obj/item/I)
 	if(!rifle_stock && !rifle_barrel)
