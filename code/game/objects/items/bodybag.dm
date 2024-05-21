@@ -134,9 +134,8 @@
 /obj/item/bodybag/sniper
 	name = "\improper HCS-2 tarp"
 	desc = "A folded holographic camouflage tarp, used by field snipers for ease of hiding in any area. Allows firing rifles out of it, though it disrupts the camouflage."
-	icon = 'icons/obj/medical/bodybag.dmi'
 	icon_state = "snipertarp_folded"
 	worn_icon_state = "snipertarp"
 	unfoldedbag_path = /obj/structure/closet/body_bag/sniper
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_NECK

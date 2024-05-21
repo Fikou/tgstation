@@ -443,6 +443,7 @@
 			return
 		if(user.transferItemToLoc(A, src))
 			balloon_alert(user, "[S.name] attached")
+			playsound(src, 'sound/machines/click.ogg', 20, TRUE)
 			install_suppressor(A)
 			return
 	if (can_be_sawn_off)

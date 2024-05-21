@@ -550,6 +550,8 @@
 /obj/machinery/disposal/bin/get_remote_view_fullscreens(mob/user)
 	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))
 		user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 2)
+	else
+		user.clear_fullscreen("remote_view", 0)
 
 /obj/machinery/disposal/bin/tagger/Initialize(mapload, obj/structure/disposalconstruct/make_from)
 	mounted_tagger = new /obj/item/dest_tagger(null)

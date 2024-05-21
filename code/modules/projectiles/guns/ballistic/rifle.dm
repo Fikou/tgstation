@@ -374,9 +374,9 @@
 
 /obj/item/gun/ballistic/rifle/sniper_rifle
 	name = "anti-materiel sniper rifle"
-	desc = "A boltaction anti-materiel rifle, utilizing .50 BMG cartridges. While technically outdated in modern arms markets, it still works exceptionally well as \
+	desc = "A bolt-action anti-materiel rifle, utilizing .50 BMG cartridges. While technically outdated in modern arms markets, it still works exceptionally well as \
 		an anti-personnel rifle. In particular, the employment of modern armored MODsuits utilizing advanced armor plating has given this weapon a new home on the battlefield. \
-		It is also able to be suppressed....somehow."
+		It is also able to be suppressed... somehow."
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	icon_state = "sniper"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
@@ -385,6 +385,7 @@
 	inhand_y_dimension = 32
 	weapon_weight = WEAPON_HEAVY
 	inhand_icon_state = "sniper"
+	base_icon_state = "sniper"
 	worn_icon_state = null
 	fire_sound = 'sound/weapons/gun/sniper/shot.ogg'
 	fire_sound_volume = 90
@@ -394,19 +395,71 @@
 	recoil = 2
 	accepted_magazine_type = /obj/item/ammo_box/magazine/sniper_rounds
 	internal_magazine = FALSE
-	w_class = WEIGHT_CLASS_HUGE
+	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_BACK
 	mag_display = TRUE
 	tac_reloads = TRUE
 	rack_delay = 1 SECONDS
-	can_suppress = TRUE
 	can_unsuppress = TRUE
+	can_modify_gun = TRUE
 	suppressor_x_offset = 3
 	suppressor_y_offset = 3
+	/// Do we spawn with the stock and barrel?
+	var/spawn_parts = TRUE
+	/// The stock instance inside us.
+	var/obj/item/rifle_part/stock/rifle_stock
+	/// The barrel isntance inside us.
+	var/obj/item/rifle_part/barrel/rifle_barrel
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 4) //enough range to at least make extremely good use of the penetrator rounds
+	if(spawn_parts)
+		new /obj/item/rifle_part/stock(src)
+		new /obj/item/rifle_part/barrel(src)
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/Destroy()
+	QDEL_NULL(rifle_stock)
+	QDEL_NULL(rifle_barrel)
+	return ..()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(gone == rifle_stock)
+		rifle_stock = null
+		update_weight_class(w_class - 1)
+		update_appearance(UPDATE_OVERLAYS)
+	if(gone == rifle_barrel)
+		rifle_barrel = null
+		update_weight_class(w_class - 1)
+		can_suppress = FALSE
+		if(ismovable(suppressed) && !QDELING(src))
+			var/atom/movable/suppressor = suppressed
+			suppressor.forceMove(rifle_barrel.loc)
+		update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if(istype(arrived, /obj/item/rifle_part/stock) && !rifle_stock)
+		rifle_stock = arrived
+		update_weight_class(w_class + 1)
+		update_appearance(UPDATE_OVERLAYS)
+	if(istype(arrived, /obj/item/rifle_part/barrel) && !rifle_barrel)
+		rifle_barrel = arrived
+		update_weight_class(w_class + 1)
+		can_suppress = TRUE
+		update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/examine(mob/user)
+	. = ..()
+	if(!rifle_stock)
+		. += span_warning("It is missing the trigger, preventing firing.")
+	else
+		. += span_notice("The stock is installed, it can be removed with a wrench.")
+	if(!rifle_barrel)
+		. += span_warning("It is missing the barrel, preventing firing.")
+	else
+		. += span_notice("The barrel is installed, it can be removed with a wrench.")
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/reset_semicd()
 	. = ..()
@@ -423,71 +476,58 @@
 	suppressed = null
 	update_appearance()
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear
-	w_class = WEIGHT_CLASS_NORMAL
-	pin = null
-	can_suppress = FALSE
-	can_modify_gun = TRUE
-	spawn_with_magazine = FALSE
-	var/obj/item/rifle_part/stock/rifle_stock
-	var/obj/item/rifle_part/barrel/rifle_barrel
+/obj/item/gun/ballistic/rifle/sniper_rifle/update_overlays()
+	. = ..()
+	if(rifle_stock)
+		var/mutable_appearance/stock_overlay = mutable_appearance(icon, "sniper_stock", layer = FLOAT_LAYER-0.1)
+		stock_overlay.pixel_x = -8
+		stock_overlay.pixel_y = -8
+		. += stock_overlay
+	if(rifle_barrel)
+		var/mutable_appearance/barrel_overlay = mutable_appearance(icon, "sniper_barrel", layer = FLOAT_LAYER-0.1)
+		barrel_overlay.pixel_x = 8
+		barrel_overlay.pixel_y = 8
+		. += barrel_overlay
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/Destroy()
-	QDEL_NULL(rifle_stock)
-	QDEL_NULL(rifle_barrel)
+/obj/item/gun/ballistic/rifle/sniper_rifle/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+	. = ..()
+
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/can_shoot()
+	return rifle_barrel && ..()
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/can_trigger_gun(mob/living/user, akimbo_usage)
+	if(!rifle_stock)
+		balloon_alert(user, "has no trigger!")
+		return FALSE
 	return ..()
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/Exited(atom/movable/gone, direction)
+/obj/item/gun/ballistic/rifle/sniper_rifle/attackby(obj/item/attacking_item, mob/user, params)
 	. = ..()
-	if(gone == rifle_barrel)
-		rifle_barrel = null
-		if(ismovable(suppressed) && !QDELING(src))
-			var/atom/movable/suppressor = suppressed
-			suppressor.forceMove(rifle_barrel.loc)
-		update_weight_class(w_class - 1)
-	if(gone == rifle_stock)
-		rifle_stock = null
-		update_weight_class(w_class - 1)
-
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/examine(mob/user)
-	. = ..()
-	if(!rifle_stock)
-		. += span_warning("It is missing the trigger, preventing firing.")
-	else
-		. += span_warning("The stock is installed, it can be removed with a wrench.")
-	if(!rifle_barrel)
-		. += span_warning("It is missing the barrel, preventing firing.")
-	else
-		. += span_warning("The barrel is installed, it can be removed with a wrench.")
-
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/can_shoot()
-	return rifle_stock && rifle_barrel && ..()
-
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/attackby(obj/item/attacking_item, mob/user, params)
-	. = ..()
-	if (.)
+	if(.)
 		return
 	if(istype(attacking_item, /obj/item/rifle_part/stock))
-		if(rifle_stock)
-			balloon_alert(user, "already has stock!")
-		if(!user.transferItemToLoc(attacking_item, src))
-			return
-		rifle_stock = attacking_item
-		update_weight_class(w_class + 1)
-		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
-		balloon_alert(user, "stock attached")
+		try_attach_stock(attacking_item, user)
 	else if(istype(attacking_item, /obj/item/rifle_part/barrel))
-		if(rifle_barrel)
-			balloon_alert(user, "already has barrel!")
-		if(!user.transferItemToLoc(attacking_item, src))
-			return
-		rifle_barrel = attacking_item
-		can_suppress = TRUE
-		update_weight_class(w_class + 1)
-		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
-		balloon_alert(user, "barrel attached")
+		try_attach_barrel(attacking_item, user)
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/wrench_act(mob/living/user, obj/item/I)
+/obj/item/gun/ballistic/rifle/sniper_rifle/proc/try_attach_stock(obj/item/stock, mob/user)
+	if(rifle_stock)
+		balloon_alert(user, "already has stock!")
+	if(!user.transferItemToLoc(stock, src))
+		return
+	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+	balloon_alert(user, "stock attached")
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/proc/try_attach_barrel(obj/item/barrel, mob/user)
+	if(rifle_barrel)
+		balloon_alert(user, "already has barrel!")
+	if(!user.transferItemToLoc(barrel, src))
+		return
+	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+	balloon_alert(user, "barrel attached")
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/wrench_act(mob/living/user, obj/item/I)
 	if(!rifle_stock && !rifle_barrel)
 		balloon_alert(user, "nothing to detach!")
 		return
@@ -496,7 +536,7 @@
 		return
 	return ..()
 
-/obj/item/gun/ballistic/rifle/sniper_rifle/buildabear/modify_gun(mob/living/user)
+/obj/item/gun/ballistic/rifle/sniper_rifle/modify_gun(mob/living/user)
 	if(rifle_barrel && !suppressed)
 		rifle_barrel.forceMove(drop_location())
 		balloon_alert(user, "barrel detached")
@@ -504,6 +544,11 @@
 	if(rifle_stock)
 		rifle_stock.forceMove(drop_location())
 		balloon_alert(user, "stock detached")
+
+/obj/item/gun/ballistic/rifle/sniper_rifle/empty
+	pin = null
+	spawn_with_magazine = FALSE
+	spawn_parts = FALSE
 
 /obj/item/rifle_part
 	name = "sniper rifle part"
@@ -513,9 +558,25 @@
 /obj/item/rifle_part/stock
 	name = "sniper rifle stock"
 	desc = "The combined stock, grip and trigger part of an anti-materiel sniper rifle."
-	icon_state = "cshotgun"
+	icon_state = "sniper_stock"
+
+/obj/item/rifle_part/stock/attackby(obj/item/attacking_item, mob/user, params)
+	. = ..()
+	if(.)
+		return
+	if(istype(attacking_item, /obj/item/gun/ballistic/rifle/sniper_rifle))
+		var/obj/item/gun/ballistic/rifle/sniper_rifle/attacking_rifle = attacking_item
+		attacking_rifle.try_attach_stock(src, user)
 
 /obj/item/rifle_part/barrel
 	name = "sniper rifle barrel"
 	desc = "The barrel of an anti-materiel sniper rifle."
-	icon_state = "c20r"
+	icon_state = "sniper_barrel"
+
+/obj/item/rifle_part/barrel/attackby(obj/item/attacking_item, mob/user, params)
+	. = ..()
+	if(.)
+		return
+	if(istype(attacking_item, /obj/item/gun/ballistic/rifle/sniper_rifle))
+		var/obj/item/gun/ballistic/rifle/sniper_rifle/attacking_rifle = attacking_item
+		attacking_rifle.try_attach_barrel(src, user)

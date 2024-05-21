@@ -131,6 +131,8 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 /obj/structure/bodycontainer/get_remote_view_fullscreens(mob/user)
 	if(user.stat == DEAD || !(user.sight & (SEEOBJS|SEEMOBS)))
 		user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 2)
+	else
+		user.clear_fullscreen("remote_view", 0)
 
 /obj/structure/bodycontainer/proc/open()
 	if(!COOLDOWN_FINISHED(src, open_close_cd))

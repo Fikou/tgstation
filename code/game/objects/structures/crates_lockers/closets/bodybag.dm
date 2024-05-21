@@ -404,6 +404,7 @@
 	mob_storage_capacity = 1
 	storage_capacity = 15
 	can_perform_flags = ALLOW_RESTING
+	taggable = FALSE
 	/// How much time to become fully invisible.
 	var/invis_time = 3.5 SECONDS
 

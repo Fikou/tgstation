@@ -17,7 +17,7 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 150
 	/// The path of the spawned pen.
-	var/pen_path
+	var/pen_path = /obj/item/pen
 	/// The path of the spawned folder.
 	var/folder_path = /obj/item/folder
 
@@ -87,16 +87,23 @@
 	force = 15
 
 /obj/item/storage/briefcase/secure/syndie/sniper
-	desc = "A large briefcase with a digital locking system. Smells like L'Air du Temps."
+	desc = "A large briefcase with a digital locking system. This one seems heavier. Smells like L'Air du Temps."
+	pen_path = null
+
+/obj/item/storage/briefcase/secure/syndie/sniper/Initialize(mapload)
+	. = ..()
+	atom_storage.max_slots = 14 //briefcases should probably hold more items by default? but dont wanna touch that in an unrelated pr
 
 /obj/item/storage/briefcase/secure/syndie/sniper/PopulateContents()
 	. = ..() // in case you need any paperwork done after your rampage
-	new /obj/item/gun/ballistic/rifle/sniper_rifle/buildabear(src)
+	new /obj/item/gun/ballistic/rifle/sniper_rifle/empty(src)
 	new /obj/item/rifle_part/stock(src)
 	new /obj/item/rifle_part/barrel(src)
 	new /obj/item/firing_pin/implant/pindicate(src)
 	new /obj/item/bodybag/sniper(src)
+	new /obj/item/wrench/combat(src)
 	new /obj/item/clothing/glasses/thermal/xray(src)
+	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds/disruptor(src)

@@ -47,6 +47,7 @@
 						balloon_alert(user, "swapped firing pin")
 					else
 						balloon_alert(user, "inserted firing pin")
+					playsound(targeted_gun, 'sound/machines/click.ogg', 50, TRUE)
 			else
 				to_chat(user, span_notice("This firearm already has a firing pin installed."))
 

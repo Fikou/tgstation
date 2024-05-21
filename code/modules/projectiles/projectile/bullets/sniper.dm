@@ -8,7 +8,7 @@
 	paralyze = 10 SECONDS
 	dismemberment = 50
 	catastropic_dismemberment = TRUE
-	projectile_phasing = PASSDOORS
+	projectile_piercing = PASSDOORS
 	armour_penetration = 30
 	///Determines object damage.
 	var/object_damage = 80
@@ -37,7 +37,7 @@
 	damage_type = STAMINA
 	paralyze = 0
 	dismemberment = 0
-	projectile_phasing = NONE
+	projectile_piercing = NONE
 	catastropic_dismemberment = FALSE
 	object_damage = 0
 	mecha_damage = 100
@@ -99,7 +99,7 @@
 	range = 50
 	paralyze = 0
 	armour_penetration = 50
-	projectile_phasing = NONE
+	projectile_piercing = NONE
 	tracer_type = /obj/effect/projectile/tracer/sniper
 	impact_type = /obj/effect/projectile/impact/sniper
 	muzzle_type = /obj/effect/projectile/muzzle/sniper
