@@ -89,6 +89,7 @@
 /obj/item/storage/briefcase/secure/syndie/sniper
 	desc = "A large briefcase with a digital locking system. This one seems heavier. Smells like L'Air du Temps."
 	pen_path = null
+	folder_path = /obj/item/folder/red
 
 /obj/item/storage/briefcase/secure/syndie/sniper/Initialize(mapload)
 	. = ..()
@@ -102,7 +103,7 @@
 	new /obj/item/firing_pin/implant/pindicate(src)
 	new /obj/item/bodybag/sniper(src)
 	new /obj/item/wrench/combat(src)
-	new /obj/item/clothing/glasses/thermal/xray(src)
+	new /obj/item/clothing/glasses/hud/health/night/xray(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)
 	new /obj/item/ammo_box/magazine/sniper_rounds(src)

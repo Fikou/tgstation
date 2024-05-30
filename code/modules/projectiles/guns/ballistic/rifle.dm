@@ -415,8 +415,10 @@
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 4) //enough range to at least make extremely good use of the penetrator rounds
 	if(spawn_parts)
-		new /obj/item/rifle_part/stock(src)
-		new /obj/item/rifle_part/barrel(src)
+		var/atom/movable/stock = new /obj/item/rifle_part/stock()
+		stock.forceMove(src) //can't create inside, as it doesn't run entered. for some reason.
+		var/atom/movable/barrel = new /obj/item/rifle_part/barrel()
+		barrel.forceMove(src)
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/Destroy()
 	QDEL_NULL(rifle_stock)
@@ -514,16 +516,22 @@
 /obj/item/gun/ballistic/rifle/sniper_rifle/proc/try_attach_stock(obj/item/stock, mob/user)
 	if(rifle_stock)
 		balloon_alert(user, "already has stock!")
-	if(!user.transferItemToLoc(stock, src))
-		return
+	if(stock in user)
+		if(!user.transferItemToLoc(stock, src))
+			return
+	else
+		stock.forceMove(src)
 	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 	balloon_alert(user, "stock attached")
 
 /obj/item/gun/ballistic/rifle/sniper_rifle/proc/try_attach_barrel(obj/item/barrel, mob/user)
 	if(rifle_barrel)
 		balloon_alert(user, "already has barrel!")
-	if(!user.transferItemToLoc(barrel, src))
-		return
+	if(barrel in user)
+		if(!user.transferItemToLoc(barrel, src))
+			return
+	else
+		barrel.forceMove(src)
 	playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 	balloon_alert(user, "barrel attached")
 

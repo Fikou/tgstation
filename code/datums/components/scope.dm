@@ -104,7 +104,7 @@
 
 	if(!tracker?.given_turf || target == get_target(tracker.given_turf))
 		return NONE
-	INVOKE_ASYNC(source, TYPE_PROC_REF(/obj/item/gun, fire_gun), get_target(tracker.given_turf), user)
+	INVOKE_ASYNC(source, TYPE_PROC_REF(/obj/item/gun, fire_gun), get_target(tracker.given_turf), user, FALSE, list2params(tracker.given_params))
 	return COMPONENT_CANCEL_GUN_FIRE
 
 /datum/component/scope/proc/on_examine(datum/source, mob/user, list/examine_list)
@@ -225,8 +225,10 @@
 
 /atom/movable/screen/fullscreen/cursor_catcher/scope
 	icon_state = "scope"
-	/// Multiplier for given_X an given_y.
+	/// Multiplier for given_X and given_y.
 	var/range_modifier = 1
+	/// Mouse params for where exactly your click would be, since bullets can vary even within one tile
+	var/given_params
 
 /atom/movable/screen/fullscreen/cursor_catcher/scope/assign_to_mob(mob/new_owner, range_modifier)
 	src.range_modifier = range_modifier
@@ -251,5 +253,6 @@
 			icon_y = view_list[2]*world.icon_size/2
 	given_x = round(range_modifier * (icon_x - view_list[1]*world.icon_size/2))
 	given_y = round(range_modifier * (icon_y - view_list[2]*world.icon_size/2))
+	given_params = list(ICON_X = (given_x + view_list[1]*world.icon_size/2) % world.icon_size, ICON_Y = (given_y + view_list[2]*world.icon_size/2) % world.icon_size)
 	var/turf/owner_turf = get_turf(owner)
 	given_turf = locate(owner_turf.x+round(given_x/world.icon_size, 1),owner_turf.y+round(given_y/world.icon_size, 1),owner_turf.z)
