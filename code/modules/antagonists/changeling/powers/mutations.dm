@@ -224,7 +224,13 @@
 	effectiveness = 80, \
 	)
 
-/obj/item/melee/arm_blade/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+/obj/item/melee/arm_blade/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(!proximity)
+		return
+	if(fake)
+		return
+
 	if(istype(target, /obj/structure/table))
 		var/obj/smash = target
 		smash.deconstruct(FALSE)

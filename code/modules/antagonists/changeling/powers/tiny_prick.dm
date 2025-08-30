@@ -175,11 +175,22 @@
 		to_chat(user, span_notice("Our genes cry out as we sting [target.name]!"))
 
 	var/obj/item/melee/arm_blade/false/blade = new(target,1)
+
+	if(IS_FANATIC(target))
+		var/datum/antagonist/fanatic/fanatic = target.mind.has_antag_datum(/datum/antagonist/fanatic)
+		blade.desc = "A grotesque mass of flesh that used to be your arm. Its slender form resembles a machete."
+		blade.force = 15
+		blade.block_chance = 30
+		blade.icon_state = "arm_blade_proto"
+		blade.update_appearance(UPDATE_ICON_STATE)
+
+		fanatic.receive_blessing()
+
 	target.put_in_hands(blade)
 	target.visible_message(span_warning("A grotesque blade forms around [target.name]\'s arm!"), span_userdanger("Your arm twists and mutates, transforming into a horrific monstrosity!"), span_hear("You hear organic matter ripping and tearing!"))
 	playsound(target, 'sound/effects/blob/blobattack.ogg', 30, TRUE)
 
-	addtimer(CALLBACK(src, PROC_REF(remove_fake), target, blade), 1 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(remove_fake), target, blade), 600)
 	return TRUE
 
 /datum/action/changeling/sting/false_armblade/proc/remove_fake(mob/target, obj/item/melee/arm_blade/false/blade)
@@ -206,7 +217,10 @@
 /datum/action/changeling/sting/extract_dna/sting_action(mob/user, mob/living/carbon/human/target)
 	..()
 	log_combat(user, target, "stung", "extraction sting")
-	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
+	var/datum/antagonist/changeling/changeling = user.mind.has_antag_datum(/datum/antagonist/changeling)
+	if(IS_FANATIC(target))
+		to_chat(user, span_bold("[target.name]'s DNA is exquisite, as if tailor made for us, they must be a worshiper of the hive. We would have to absorb them to fully the richness of their DNA, but their loyalty may prove useful."))
+		return FALSE
 	if(!changeling.has_profile_with_dna(target.dna))
 		changeling.add_new_profile(target)
 	return TRUE
@@ -264,6 +278,11 @@
 	..()
 	log_combat(user, target, "stung", "LSD sting")
 	addtimer(CALLBACK(src, PROC_REF(hallucination_time), target), rand(30 SECONDS, 60 SECONDS))
+	if(target.reagents && IS_FANATIC(target))
+		var/datum/antagonist/fanatic/fanatic = target.mind.has_antag_datum(/datum/antagonist/fanatic)
+		target.reagents.add_reagent(/datum/reagent/medicine/changelingadrenaline, 4)
+		target.reagents.add_reagent(/datum/reagent/medicine/changelinghaste, 3)
+		fanatic.receive_blessing()
 	return TRUE
 
 /datum/action/changeling/sting/lsd/proc/hallucination_time(mob/living/carbon/target)
@@ -283,5 +302,10 @@
 	..()
 	log_combat(user, target, "stung", "cryo sting")
 	if(target.reagents)
+		if(IS_FANATIC(target))
+			var/datum/antagonist/fanatic/fanatic = target.mind.has_antag_datum(/datum/antagonist/fanatic)
+			target.reagents.add_reagent(/datum/reagent/medicine/omnizine, 15) //cryoxadone might have been more thematic, but the frost oil fon't get us cold quick enough
+			fanatic.receive_blessing()
+
 		target.reagents.add_reagent(/datum/reagent/consumable/frostoil, 30)
 	return TRUE

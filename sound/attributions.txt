@@ -115,6 +115,9 @@ https://freesound.org/people/junggle/sounds/28917/
 https://freesound.org/people/inferno/sounds/18397/
 https://freesound.org/people/humanoide9000/sounds/330293/
 
+tiger_greeting.ogg taken from Low chant.wav, which is public domain (CC 0):
+https://freesound.org/people/adharca/sounds/319253/
+
 reel1.ogg, reel2.ogg, reel3.ogg, reel4.ogg and reel5.ogg adapted from pixabay. Free for use under the Pixabay Content License (https://pixabay.com/service/license-summary/):
 https://pixabay.com/sound-effects/reel-78063/
 

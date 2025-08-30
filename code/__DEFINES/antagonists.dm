@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	"Tiger Cooperative Fanatic",
+	"Tiger Cooperative",
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
 ))
@@ -195,7 +195,7 @@ GLOBAL_LIST_INIT(hijack_employers, list(
 	"Animal Rights Consortium",
 	"Bee Liberation Front",
 	"Gone Postal",
-	"Tiger Cooperative Fanatic",
+	"Tiger Cooperative",
 	"Waffle Corporation Terrorist",
 ))
 
@@ -269,6 +269,9 @@ GLOBAL_LIST_INIT(ai_employers, list(
 
 /// Checks if the given mob is a changeling
 #define IS_CHANGELING(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/changeling))
+
+/// Checks if the mob is a fanatic
+#define IS_FANATIC(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/fanatic))
 
 /// Checks if the given mob is a nuclear operative
 #define IS_NUKE_OP(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/nukeop))

@@ -1001,6 +1001,65 @@
 /datum/dynamic_ruleset/midround/from_ghosts/slaughter_demon/assign_role(datum/mind/candidate)
 	return // handled by new() entirely
 
+/// Midround Fanatic Ruleset (From Ghosts)
+/datum/dynamic_ruleset/midround/from_ghosts/fanatic
+	name = "Fanatic"
+	config_tag = "Fanatic"
+	preview_antag_datum = /datum/antagonist/fanatic
+	midround_type = LIGHT_MIDROUND
+	pref_flag = ROLE_FANATIC
+	ruleset_flags = RULESET_INVADER
+	weight = 3
+	min_pop = 20
+	min_antag_cap = 1
+	max_antag_cap = 1
+	repeatable = TRUE
+	signup_atom_appearance = /obj/item/reagent_containers/cup/glass/flask/ritual_wine
+
+/datum/dynamic_ruleset/midround/from_ghosts/fanatic/can_be_selected()
+	return ..() && !isnull(find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE))
+
+/datum/dynamic_ruleset/midround/from_ghosts/fanatic/create_ruleset_body()
+	return new /mob/living/carbon/human()
+
+/datum/dynamic_ruleset/midround/from_ghosts/fanatic/assign_role(datum/mind/candidate)
+
+	var/datum/antagonist/fanatic/fanatic = candidate.add_antag_datum(/datum/antagonist/fanatic)
+
+	var/mob/living/carbon/human/tiger = candidate.current
+
+	var/obj/item/storage/toolbox/mechanical/tbox = new /obj/item/storage/toolbox/mechanical()
+
+	message_admins("[ADMIN_LOOKUPFLW(tiger)] has been made into a Fanatic by the midround ruleset.")
+	tiger.log_message("was spawned as a Fanatic of [key_name(tiger)] by the midround ruleset.", LOG_GAME)
+
+	tiger.equipOutfit(/datum/outfit/tiger_fanatic)
+	var/obj/item/storage/backpack/satchel/flat/empty/stash = new(tiger.loc)
+	new /obj/item/knife/combat(stash)
+	new /obj/item/gun/ballistic/automatic/pistol(stash)
+	new /obj/item/ammo_box/magazine/m9mm(stash)
+	new /obj/item/grenade/chem_grenade/bioterrorfoam(stash)
+	new /obj/item/card/emag/doorjack(stash)
+	new /obj/item/reagent_containers/cup/glass/flask/ritual_wine(stash)
+	new /obj/item/storage/box/stickers/fanatic(stash)
+
+	// Creates 3 lil triangulation devices
+	for(var/i in 1 to 3)
+		var/obj/item/triangulation_device/device = new /obj/item/triangulation_device(stash)
+		device.triangulation = fanatic.triang
+
+	tiger.put_in_hands(stash)
+	tiger.put_in_hands(tbox)
+
+	var/turf/tile_spawn = find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = FALSE)
+	podspawn(list(
+		"target" = tile_spawn,
+		"style" = /datum/pod_style/fanatic,
+		"spawn" = tiger,
+	))
+
+	return
+
 /datum/dynamic_ruleset/midround/from_living
 	min_antag_cap = 1
 	max_antag_cap = 1

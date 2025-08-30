@@ -125,6 +125,11 @@
 	mood_change = 10 //maybe being a heretic isnt that bad after all
 	hidden = TRUE
 
+/datum/mood_event/changeling_enjoyer
+	description = "I have been blessed by the hive!"
+	mood_change = 10
+	timeout = 3 MINUTES
+
 /datum/mood_event/rift_fishing
 	description = "THE MORE I FISH, THE HIGHER I RISE."
 	mood_change = 7
